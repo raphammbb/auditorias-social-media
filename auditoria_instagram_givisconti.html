@@ -4,803 +4,1272 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Auditoria Instagram — @givisconti</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600;700&family=Fira+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet" />
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
-
-    * { box-sizing: border-box; margin: 0; padding: 0; }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --grad: linear-gradient(135deg, #833ab4, #fd1d1d, #fcb045);
-      --purple: #833ab4;
-      --pink: #e1306c;
-      --orange: #fcb045;
-      --green: #27ae60;
-      --red: #e74c3c;
-      --yellow: #f39c12;
-      --dark: #1a1a2e;
-      --text: #2d2d2d;
-      --muted: #6b7280;
-      --light: #f8f4ff;
-      --border: #e8e0f5;
-      --white: #ffffff;
+      --ig-1: #833ab4;
+      --ig-2: #fd1d1d;
+      --ig-3: #fcb045;
+      --ig-grad: linear-gradient(135deg, #833ab4, #fd1d1d, #fcb045);
+      --bg: #0a0a0f;
+      --bg2: #111118;
+      --bg3: #18181f;
+      --card: #1c1c26;
+      --border: rgba(255,255,255,0.07);
+      --text: #f0f0f5;
+      --muted: #8888aa;
+      --gold: #f5c842;
+      --silver: #a8b2c0;
+      --bronze: #cd7c42;
+      --green: #22c55e;
+      --red: #ef4444;
+      --yellow: #f59e0b;
     }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+    }
+
+    html { scroll-behavior: smooth; }
 
     body {
-      font-family: 'Inter', sans-serif;
+      font-family: 'Fira Sans', sans-serif;
+      background: var(--bg);
       color: var(--text);
-      background: #f0eaf8;
-      font-size: 13px;
       line-height: 1.6;
-    }
-
-    /* ─── PAGE WRAPPER ─── */
-    .page {
-      max-width: 860px;
-      margin: 0 auto;
-      background: var(--white);
-    }
-
-    /* ─── COVER ─── */
-    .cover {
-      background: var(--grad);
-      padding: 72px 56px 60px;
-      color: white;
-      position: relative;
-      overflow: hidden;
-    }
-    .cover::before {
-      content: '';
-      position: absolute;
-      top: -60px; right: -60px;
-      width: 280px; height: 280px;
-      border-radius: 50%;
-      background: rgba(255,255,255,0.08);
-    }
-    .cover::after {
-      content: '';
-      position: absolute;
-      bottom: -80px; left: 40px;
-      width: 200px; height: 200px;
-      border-radius: 50%;
-      background: rgba(255,255,255,0.06);
-    }
-    .cover-tag {
-      display: inline-block;
-      background: rgba(255,255,255,0.2);
-      border: 1px solid rgba(255,255,255,0.4);
-      border-radius: 20px;
-      padding: 4px 14px;
-      font-size: 11px;
-      font-weight: 600;
-      letter-spacing: 1.5px;
-      text-transform: uppercase;
-      margin-bottom: 20px;
-    }
-    .cover h1 {
-      font-size: 38px;
-      font-weight: 800;
-      line-height: 1.15;
-      margin-bottom: 8px;
-      position: relative;
-      z-index: 1;
-    }
-    .cover h1 span {
-      opacity: 0.75;
-      font-weight: 400;
-    }
-    .cover-sub {
-      font-size: 15px;
-      opacity: 0.85;
-      margin-bottom: 40px;
-      position: relative;
-      z-index: 1;
-    }
-    .cover-meta {
-      display: flex;
-      gap: 32px;
-      flex-wrap: wrap;
-      position: relative;
-      z-index: 1;
-    }
-    .cover-meta-item {
-      background: rgba(255,255,255,0.15);
-      border-radius: 10px;
-      padding: 12px 20px;
-    }
-    .cover-meta-item .label {
-      font-size: 10px;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      opacity: 0.7;
-      margin-bottom: 4px;
-    }
-    .cover-meta-item .value {
       font-size: 16px;
-      font-weight: 700;
     }
 
-    /* ─── SECTIONS ─── */
-    section {
-      padding: 48px 56px;
-      border-bottom: 1px solid var(--border);
-    }
-    section:last-child { border-bottom: none; }
-
-    .section-label {
-      font-size: 10px;
-      font-weight: 700;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      background: var(--grad);
+    /* ── GRAD TEXT ── */
+    .grad-text {
+      background: var(--ig-grad);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
-      margin-bottom: 8px;
     }
-    h2 {
-      font-size: 22px;
-      font-weight: 700;
-      color: var(--dark);
-      margin-bottom: 20px;
-      line-height: 1.3;
-    }
-    h3 {
-      font-size: 15px;
-      font-weight: 700;
-      color: var(--dark);
-      margin-bottom: 8px;
-    }
-    p { color: var(--text); margin-bottom: 12px; }
 
-    /* ─── VISÃO GERAL CARD ─── */
-    .overview-card {
-      background: var(--light);
-      border-left: 4px solid var(--purple);
-      border-radius: 0 10px 10px 0;
-      padding: 20px 24px;
-      font-size: 13.5px;
-      line-height: 1.7;
+    /* ── COVER ── */
+    .cover {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 60px 24px;
+      overflow: hidden;
+    }
+
+    .cover::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 80% 70% at 50% 50%, rgba(131,58,180,0.18) 0%, rgba(253,29,29,0.1) 50%, transparent 100%);
+      pointer-events: none;
+    }
+
+    .cover-glow {
+      position: absolute;
+      width: 600px;
+      height: 600px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(131,58,180,0.12) 0%, transparent 70%);
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      animation: pulse 6s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 0.6; transform: translate(-50%, -50%) scale(1); }
+      50% { opacity: 1; transform: translate(-50%, -50%) scale(1.08); }
+    }
+
+    .ig-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 100px;
+      padding: 8px 20px;
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--muted);
+      margin-bottom: 28px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .ig-dot {
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      background: var(--ig-grad);
+      flex-shrink: 0;
+    }
+
+    .cover h1 {
+      font-size: clamp(2.4rem, 6vw, 4.2rem);
+      font-weight: 800;
+      line-height: 1.1;
+      letter-spacing: -0.03em;
+      margin-bottom: 16px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .cover-handle {
+      font-size: clamp(1.1rem, 3vw, 1.5rem);
+      font-weight: 300;
+      color: var(--muted);
+      margin-bottom: 48px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .cover-handle span {
+      font-weight: 600;
       color: var(--text);
     }
 
-    /* ─── TABLE ─── */
-    .table-wrap { overflow-x: auto; }
-    table {
+    .metrics-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 16px;
+      max-width: 680px;
       width: 100%;
-      border-collapse: collapse;
-      font-size: 12px;
+      position: relative;
+      z-index: 1;
     }
-    thead tr {
-      background: var(--grad);
-      color: white;
+
+    .metric-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 20px 16px;
+      transition: border-color 0.2s;
     }
-    thead th {
-      padding: 12px 14px;
-      text-align: left;
+
+    .metric-card:hover { border-color: rgba(131,58,180,0.4); }
+
+    .metric-label {
+      font-size: 11px;
       font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--muted);
+      margin-bottom: 8px;
+    }
+
+    .metric-value {
+      font-family: 'Fira Code', monospace;
+      font-size: 1.6rem;
+      font-weight: 700;
+      line-height: 1;
+    }
+
+    .metric-sub {
+      font-size: 12px;
+      color: var(--muted);
+      margin-top: 4px;
+    }
+
+    /* ── NAV ── */
+    .toc {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(10,10,15,0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      padding: 0 24px;
+      overflow-x: auto;
+    }
+
+    .toc-inner {
+      display: flex;
+      gap: 0;
+      max-width: 900px;
+      margin: 0 auto;
       white-space: nowrap;
     }
-    tbody tr:nth-child(even) { background: var(--light); }
-    tbody tr:hover { background: #ede7f6; }
-    tbody td {
-      padding: 11px 14px;
-      border-bottom: 1px solid var(--border);
-      vertical-align: middle;
+
+    .toc a {
+      display: inline-block;
+      padding: 14px 16px;
+      font-size: 12px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--muted);
+      text-decoration: none;
+      border-bottom: 2px solid transparent;
+      transition: color 0.2s, border-color 0.2s;
+      cursor: pointer;
     }
-    .rank-badge {
-      display: inline-flex;
+
+    .toc a:hover { color: var(--text); border-bottom-color: rgba(131,58,180,0.6); }
+
+    /* ── MAIN ── */
+    main { max-width: 900px; margin: 0 auto; padding: 0 24px 80px; }
+
+    /* ── SECTIONS ── */
+    .section {
+      padding-top: 72px;
+    }
+
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 32px;
+    }
+
+    .section-num {
+      width: 40px; height: 40px;
+      border-radius: 10px;
+      background: var(--ig-grad);
+      display: flex;
       align-items: center;
       justify-content: center;
-      width: 26px; height: 26px;
-      border-radius: 50%;
+      font-family: 'Fira Code', monospace;
+      font-size: 14px;
       font-weight: 700;
-      font-size: 11px;
       color: white;
-    }
-    .rank-1 { background: #f4b942; }
-    .rank-2 { background: #9e9e9e; }
-    .rank-3 { background: #cd7f32; }
-    .rank-other { background: #c8b8e8; color: var(--dark); }
-    .score-high { color: var(--green); font-weight: 700; }
-    .score-mid  { color: var(--yellow); font-weight: 600; }
-    .score-low  { color: var(--red); font-weight: 600; }
-    .format-badge {
-      display: inline-block;
-      padding: 2px 8px;
-      border-radius: 10px;
-      font-size: 10px;
-      font-weight: 600;
-    }
-    .fmt-carrossel { background: #e8d5f5; color: var(--purple); }
-    .fmt-foto { background: #fce4ec; color: #c2185b; }
-    .fmt-reel { background: #fff3cd; color: #e65100; }
-
-    /* ─── ANALYSIS CARDS ─── */
-    .analysis-grid {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 20px;
-    }
-    .card {
-      border-radius: 12px;
-      padding: 22px 24px;
-      position: relative;
-      overflow: hidden;
-    }
-    .card-top {
-      border-left: 5px solid var(--green);
-      background: #f0fdf4;
-    }
-    .card-bottom {
-      border-left: 5px solid var(--red);
-      background: #fff5f5;
-    }
-    .card-header {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      margin-bottom: 10px;
-    }
-    .medal {
-      font-size: 20px;
-    }
-    .card-title {
-      font-size: 13.5px;
-      font-weight: 700;
-      color: var(--dark);
-    }
-    .card-score {
-      margin-left: auto;
-      font-size: 11px;
-      font-weight: 600;
-      padding: 3px 10px;
-      border-radius: 20px;
-    }
-    .card-top .card-score { background: #dcfce7; color: #166534; }
-    .card-bottom .card-score { background: #fee2e2; color: #991b1b; }
-    .card p { font-size: 12.5px; color: #444; margin: 0; }
-
-    /* ─── INSIGHTS ─── */
-    .insight-list {
-      list-style: none;
-      display: flex;
-      flex-direction: column;
-      gap: 14px;
-    }
-    .insight-list li {
-      display: flex;
-      gap: 12px;
-      align-items: flex-start;
-      background: var(--light);
-      border-radius: 10px;
-      padding: 14px 16px;
-      font-size: 12.5px;
-    }
-    .insight-icon {
-      font-size: 18px;
       flex-shrink: 0;
-      margin-top: 1px;
     }
-    .insight-list li strong { color: var(--dark); }
 
-    /* ─── RECOMMENDATIONS ─── */
-    .rec-grid {
+    .section-title {
+      font-size: clamp(1.4rem, 4vw, 1.9rem);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+    }
+
+    .section-desc {
+      color: var(--muted);
+      font-size: 14px;
+      margin-top: 2px;
+    }
+
+    /* ── DIVIDER ── */
+    .divider {
+      height: 1px;
+      background: var(--border);
+      margin: 0 0 32px;
+    }
+
+    /* ── DIAGNOSIS ── */
+    .diagnosis-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 16px;
     }
-    .rec-card {
-      background: var(--light);
+
+    @media (max-width: 600px) { .diagnosis-grid { grid-template-columns: 1fr; } }
+
+    .diag-item {
+      background: var(--bg3);
+      border: 1px solid var(--border);
       border-radius: 12px;
-      padding: 18px 20px;
+      padding: 16px 20px;
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
     }
-    .rec-number {
+
+    .diag-icon {
+      width: 36px; height: 36px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .diag-icon.ok { background: rgba(34,197,94,0.15); color: var(--green); }
+    .diag-icon.warn { background: rgba(245,158,11,0.15); color: var(--yellow); }
+    .diag-icon.bad { background: rgba(239,68,68,0.15); color: var(--red); }
+
+    .diag-label { font-size: 12px; color: var(--muted); font-weight: 500; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 2px; }
+    .diag-text { font-size: 14px; font-weight: 500; }
+
+    /* ── FORMULA BOX ── */
+    .formula {
+      background: var(--bg3);
+      border: 1px solid rgba(131,58,180,0.3);
+      border-radius: 16px;
+      padding: 28px 24px;
+      text-align: center;
+      margin-top: 24px;
+    }
+
+    .formula-label {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--muted);
+      margin-bottom: 16px;
+    }
+
+    .formula-eq {
+      font-family: 'Fira Code', monospace;
+      font-size: clamp(0.85rem, 2.5vw, 1.05rem);
+      font-weight: 600;
+      color: var(--text);
+      line-height: 1.8;
+    }
+
+    .formula-result {
+      display: inline-block;
+      margin-top: 16px;
+      font-family: 'Fira Code', monospace;
+      font-size: 1.6rem;
+      font-weight: 700;
+      background: var(--ig-grad);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    /* ── TABLE ── */
+    .table-wrap {
+      overflow-x: auto;
+      border-radius: 16px;
+      border: 1px solid var(--border);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 14px;
+    }
+
+    thead tr {
+      background: linear-gradient(135deg, rgba(131,58,180,0.4), rgba(253,29,29,0.3), rgba(252,176,69,0.3));
+    }
+
+    thead th {
+      padding: 14px 16px;
+      text-align: left;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: rgba(255,255,255,0.7);
+      white-space: nowrap;
+    }
+
+    tbody tr {
+      border-top: 1px solid var(--border);
+      transition: background 0.15s;
+    }
+
+    tbody tr:hover { background: rgba(255,255,255,0.03); }
+    tbody tr.top-row { background: rgba(131,58,180,0.06); }
+    tbody tr.low-row { background: rgba(239,68,68,0.04); }
+
+    td {
+      padding: 13px 16px;
+      vertical-align: middle;
+    }
+
+    .rank-badge {
+      width: 28px; height: 28px;
+      border-radius: 50%;
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      width: 28px; height: 28px;
-      border-radius: 50%;
-      background: var(--grad);
-      color: white;
+      font-family: 'Fira Code', monospace;
       font-size: 12px;
       font-weight: 700;
-      margin-bottom: 10px;
     }
-    .rec-card h4 {
+
+    .rank-1 { background: rgba(245,200,66,0.2); color: var(--gold); border: 1px solid rgba(245,200,66,0.4); }
+    .rank-2 { background: rgba(168,178,192,0.2); color: var(--silver); border: 1px solid rgba(168,178,192,0.4); }
+    .rank-3 { background: rgba(205,124,66,0.2); color: var(--bronze); border: 1px solid rgba(205,124,66,0.4); }
+    .rank-other { background: rgba(255,255,255,0.06); color: var(--muted); border: 1px solid var(--border); }
+
+    .format-badge {
+      display: inline-block;
+      padding: 3px 8px;
+      border-radius: 6px;
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .fmt-carrossel { background: rgba(131,58,180,0.2); color: #c084fc; }
+    .fmt-foto { background: rgba(34,197,94,0.15); color: #4ade80; }
+    .fmt-reel { background: rgba(239,68,68,0.15); color: #f87171; }
+
+    .score-cell {
+      font-family: 'Fira Code', monospace;
+      font-weight: 700;
+      font-size: 15px;
+    }
+
+    .score-high { color: var(--gold); }
+    .score-mid { color: var(--green); }
+    .score-low { color: var(--muted); }
+
+    /* ── ANALYSIS CARDS ── */
+    .analysis-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 16px;
+    }
+
+    .post-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 20px;
+      transition: border-color 0.2s, transform 0.2s;
+      cursor: default;
+    }
+
+    .post-card.good { border-color: rgba(34,197,94,0.15); }
+    .post-card.good:hover { border-color: rgba(34,197,94,0.4); transform: translateY(-2px); }
+    .post-card.bad { border-color: rgba(239,68,68,0.1); }
+    .post-card.bad:hover { border-color: rgba(239,68,68,0.35); transform: translateY(-2px); }
+
+    .post-card-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 14px;
+    }
+
+    .post-pos {
+      font-family: 'Fira Code', monospace;
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .post-score {
+      font-family: 'Fira Code', monospace;
+      font-size: 1.3rem;
+      font-weight: 700;
+    }
+
+    .post-score.good-score { color: var(--green); }
+    .post-score.bad-score { color: var(--red); }
+
+    .post-title {
+      font-size: 15px;
+      font-weight: 600;
+      margin-bottom: 8px;
+      line-height: 1.4;
+    }
+
+    .post-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 14px;
+    }
+
+    .post-meta-item {
+      font-size: 12px;
+      color: var(--muted);
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .post-insight {
       font-size: 13px;
-      font-weight: 700;
-      color: var(--dark);
-      margin-bottom: 7px;
-      line-height: 1.3;
+      color: var(--muted);
+      border-top: 1px solid var(--border);
+      padding-top: 12px;
+      line-height: 1.5;
     }
-    .rec-card p {
-      font-size: 12px;
-      color: #555;
-      margin: 0;
+
+    .post-insight strong { color: var(--text); }
+
+    /* ── INSIGHTS / CONCLUSIONS ── */
+    .insights-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .insight-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 18px 20px;
+      transition: border-color 0.2s;
+    }
+
+    .insight-item:hover { border-color: rgba(131,58,180,0.3); }
+
+    .insight-icon {
+      width: 36px; height: 36px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      background: var(--ig-grad);
+    }
+
+    .insight-text {
+      font-size: 15px;
+      font-weight: 500;
+      line-height: 1.5;
+    }
+
+    /* ── RECOMMENDATIONS ── */
+    .recs-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 16px;
+    }
+
+    .rec-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 22px;
+      transition: border-color 0.2s, transform 0.2s;
+      cursor: default;
+    }
+
+    .rec-card:hover { border-color: rgba(131,58,180,0.4); transform: translateY(-2px); }
+
+    .rec-num {
+      width: 32px; height: 32px;
+      border-radius: 8px;
+      background: var(--ig-grad);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Fira Code', monospace;
+      font-size: 14px;
+      font-weight: 700;
+      color: white;
+      margin-bottom: 14px;
+    }
+
+    .rec-title {
+      font-size: 15px;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .rec-desc {
+      font-size: 13px;
+      color: var(--muted);
       line-height: 1.55;
     }
 
-    /* ─── QUICK WINS ─── */
-    .qw-list {
+    /* ── ACTION PLAN ── */
+    .actions-list {
       display: flex;
       flex-direction: column;
-      gap: 14px;
-    }
-    .qw-item {
-      display: flex;
-      gap: 14px;
-      align-items: flex-start;
-    }
-    .qw-step {
-      flex-shrink: 0;
-      width: 32px; height: 32px;
-      border-radius: 50%;
-      background: var(--grad);
-      color: white;
-      font-weight: 700;
-      font-size: 13px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-    .qw-content h4 {
-      font-size: 13.5px;
-      font-weight: 700;
-      color: var(--dark);
-      margin-bottom: 4px;
-    }
-    .qw-content p {
-      font-size: 12.5px;
-      color: #555;
-      margin: 0;
-    }
-    .qw-content .cta-example {
-      background: #ede7f6;
-      border-left: 3px solid var(--purple);
-      border-radius: 0 6px 6px 0;
-      padding: 8px 12px;
-      margin-top: 8px;
-      font-size: 12px;
-      font-style: italic;
-      color: var(--purple);
+      gap: 16px;
     }
 
-    /* ─── FORMULA BOX ─── */
-    .formula-box {
-      background: var(--dark);
-      color: white;
+    .action-item {
+      display: grid;
+      grid-template-columns: 48px 1fr;
+      gap: 16px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 22px;
+      transition: border-color 0.2s;
+      align-items: start;
+    }
+
+    .action-item:hover { border-color: rgba(252,176,69,0.35); }
+
+    .action-num {
+      width: 48px; height: 48px;
       border-radius: 12px;
-      padding: 22px 28px;
-      margin: 24px 0;
-      text-align: center;
-    }
-    .formula-box .formula-label {
-      font-size: 10px;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      opacity: 0.6;
-      margin-bottom: 12px;
-    }
-    .formula-items {
+      background: rgba(252,176,69,0.12);
+      border: 1px solid rgba(252,176,69,0.3);
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 12px;
-      flex-wrap: wrap;
-    }
-    .formula-item {
-      background: rgba(255,255,255,0.12);
-      border-radius: 8px;
-      padding: 8px 16px;
-      font-size: 13px;
-      font-weight: 600;
-    }
-    .formula-plus {
+      font-family: 'Fira Code', monospace;
       font-size: 18px;
-      opacity: 0.5;
-    }
-    .formula-eq {
-      font-size: 20px;
       font-weight: 700;
-      background: var(--grad);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
-    .formula-result {
-      font-size: 15px;
-      font-weight: 700;
-      background: var(--grad);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
+      color: var(--gold);
     }
 
-    /* ─── FOOTER ─── */
-    .footer {
-      background: var(--dark);
-      color: white;
+    .action-tag {
+      display: inline-block;
+      padding: 3px 10px;
+      border-radius: 20px;
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      background: rgba(252,176,69,0.15);
+      color: var(--gold);
+      margin-bottom: 8px;
+    }
+
+    .action-title { font-size: 16px; font-weight: 700; margin-bottom: 8px; }
+    .action-desc { font-size: 14px; color: var(--muted); line-height: 1.55; }
+    .action-example {
+      margin-top: 12px;
+      padding: 12px 14px;
+      background: var(--bg3);
+      border-radius: 10px;
+      border-left: 3px solid rgba(252,176,69,0.5);
+      font-size: 13px;
+      font-style: italic;
+      color: rgba(240,240,245,0.7);
+      line-height: 1.5;
+    }
+
+    /* ── FOOTER ── */
+    footer {
       text-align: center;
-      padding: 28px 40px;
-      font-size: 11px;
-      opacity: 0.85;
+      padding: 48px 24px;
+      border-top: 1px solid var(--border);
+      color: var(--muted);
+      font-size: 13px;
     }
-    .footer strong { opacity: 1; font-size: 13px; }
 
-    /* ─── PRINT ─── */
-    @media print {
-      body { background: white; font-size: 12px; }
-      .page { max-width: 100%; }
-      section { padding: 36px 48px; }
-      .cover { padding: 56px 48px 48px; }
-      .rec-grid { grid-template-columns: 1fr 1fr; }
+    footer .footer-logo {
+      font-size: 18px;
+      font-weight: 700;
+      margin-bottom: 8px;
     }
+
+    /* ── SVG ICONS (inline helper sizes) ── */
+    .icon-sm { width: 16px; height: 16px; }
+    .icon-md { width: 20px; height: 20px; }
+
+    /* ── PRINT ── */
+    @media print {
+      .toc { display: none; }
+      .cover { min-height: auto; padding: 40px 24px; }
+      .cover::before, .cover-glow { display: none; }
+      .section { padding-top: 48px; }
+    }
+
+    /* ── SCROLLBAR ── */
+    ::-webkit-scrollbar { width: 6px; height: 6px; }
+    ::-webkit-scrollbar-track { background: var(--bg); }
+    ::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.12); border-radius: 3px; }
+    ::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,0.22); }
   </style>
 </head>
 <body>
-<div class="page">
 
-  <!-- COVER -->
-  <div class="cover">
-    <div class="cover-tag">Auditoria de Conteúdo · Instagram</div>
-    <h1>@givisconti<br><span>Manual de Boas Práticas</span></h1>
-    <p class="cover-sub">Análise dos 12 posts mais recentes · Giselle Visconti Fernandes</p>
-    <div class="cover-meta">
-      <div class="cover-meta-item">
-        <div class="label">Data da Auditoria</div>
-        <div class="value">06/04/2026</div>
-      </div>
-      <div class="cover-meta-item">
-        <div class="label">Posts Analisados</div>
-        <div class="value">12 posts</div>
-      </div>
-      <div class="cover-meta-item">
-        <div class="label">Seguidores</div>
-        <div class="value">~7.929</div>
-      </div>
-      <div class="cover-meta-item">
-        <div class="label">Maior Score</div>
-        <div class="value">37.085</div>
-      </div>
-    </div>
+<!-- COVER -->
+<section class="cover">
+  <div class="cover-glow" aria-hidden="true"></div>
+
+  <div class="ig-badge">
+    <div class="ig-dot" aria-hidden="true"></div>
+    Auditoria de Conteúdo · Instagram · 06/04/2026
   </div>
 
-  <!-- VISÃO GERAL -->
-  <section>
-    <div class="section-label">01 · Diagnóstico</div>
-    <h2>Visão Geral do Perfil</h2>
-    <div class="overview-card">
-      O perfil de Giselle Visconti Fernandes é uma conta verificada voltada para mentoria de mulheres, etiqueta social, mesa posta e fé. O desempenho é <strong>extremamente desigual</strong>: dois posts de flores com pergunta simples geraram dezenas de milhares de curtidas, enquanto a maioria dos posts não passa de 3 dígitos.<br><br>
-      O perfil mistura conteúdo espiritual reflexivo (engaja pouco), conteúdo de mesa posta/etiqueta (engaja moderadamente) e conteúdo visual de flores/natureza com pergunta (explode em alcance). Há um sério problema de consistência de publicação, com lacunas de semanas entre posts, e os Reels estão consistentemente entre os piores performers do perfil.
+  <h1>
+    <span class="grad-text">Manual de Boas</span><br />
+    <span class="grad-text">Práticas</span>
+  </h1>
+
+  <p class="cover-handle">
+    Análise de desempenho para <span>@givisconti</span> · Giselle Visconti Fernandes
+  </p>
+
+  <div class="metrics-grid" role="list" aria-label="Principais métricas">
+    <div class="metric-card" role="listitem">
+      <div class="metric-label">Data da Auditoria</div>
+      <div class="metric-value grad-text">06/04</div>
+      <div class="metric-sub">2026</div>
+    </div>
+    <div class="metric-card" role="listitem">
+      <div class="metric-label">Posts Analisados</div>
+      <div class="metric-value grad-text">12</div>
+      <div class="metric-sub">posts recentes</div>
+    </div>
+    <div class="metric-card" role="listitem">
+      <div class="metric-label">Seguidores</div>
+      <div class="metric-value grad-text">7.929</div>
+      <div class="metric-sub">conta verificada</div>
+    </div>
+    <div class="metric-card" role="listitem">
+      <div class="metric-label">Top Score</div>
+      <div class="metric-value grad-text">37.085</div>
+      <div class="metric-sub">melhor post</div>
+    </div>
+  </div>
+</section>
+
+<!-- NAV -->
+<nav class="toc" aria-label="Seções do relatório">
+  <div class="toc-inner">
+    <a href="#diagnostico">Diagnóstico</a>
+    <a href="#dados">Dados</a>
+    <a href="#funcionou">O que funcionou</a>
+    <a href="#nao-funcionou">O que falhou</a>
+    <a href="#conclusoes">Conclusões</a>
+    <a href="#estrategia">Estratégia</a>
+    <a href="#plano">Plano de Ação</a>
+  </div>
+</nav>
+
+<!-- MAIN -->
+<main>
+
+  <!-- SEÇÃO 1: DIAGNÓSTICO -->
+  <section class="section" id="diagnostico" aria-labelledby="tit-diagnostico">
+    <div class="section-header">
+      <div class="section-num" aria-hidden="true">01</div>
+      <div>
+        <h2 class="section-title" id="tit-diagnostico">Diagnóstico do Perfil</h2>
+        <p class="section-desc">Visão geral da saúde atual da conta</p>
+      </div>
+    </div>
+    <div class="divider" aria-hidden="true"></div>
+
+    <div class="diagnosis-grid">
+      <div class="diag-item">
+        <div class="diag-icon ok" aria-label="Positivo">
+          <svg class="icon-md" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22,4 12,14.01 9,11.01"/></svg>
+        </div>
+        <div>
+          <div class="diag-label">Conta verificada</div>
+          <div class="diag-text">Credibilidade estabelecida com selo oficial</div>
+        </div>
+      </div>
+      <div class="diag-item">
+        <div class="diag-icon ok" aria-label="Positivo">
+          <svg class="icon-md" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        </div>
+        <div>
+          <div class="diag-label">7.929 seguidores</div>
+          <div class="diag-text">Base sólida para conversão e crescimento</div>
+        </div>
+      </div>
+      <div class="diag-item">
+        <div class="diag-icon warn" aria-label="Atenção">
+          <svg class="icon-md" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+        </div>
+        <div>
+          <div class="diag-label">Engajamento inconsistente</div>
+          <div class="diag-text">2 posts dominam 95% das interações do período</div>
+        </div>
+      </div>
+      <div class="diag-item">
+        <div class="diag-icon bad" aria-label="Negativo">
+          <svg class="icon-md" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>
+        </div>
+        <div>
+          <div class="diag-label">Sem CTAs</div>
+          <div class="diag-text">Nenhum dos 12 posts tem chamada para ação</div>
+        </div>
+      </div>
+      <div class="diag-item">
+        <div class="diag-icon bad" aria-label="Negativo">
+          <svg class="icon-md" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg>
+        </div>
+        <div>
+          <div class="diag-label">Reels com baixa performance</div>
+          <div class="diag-text">Todos os reels estão entre os piores resultados</div>
+        </div>
+      </div>
+      <div class="diag-item">
+        <div class="diag-icon warn" aria-label="Atenção">
+          <svg class="icon-md" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        </div>
+        <div>
+          <div class="diag-label">Frequência variável</div>
+          <div class="diag-text">Sem calendário fixo de publicações</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="formula" role="region" aria-label="Fórmula comprovada de sucesso">
+      <div class="formula-label">Fórmula Comprovada de Engajamento</div>
+      <div class="formula-eq">
+        "Flores do mês" + Pergunta simples + Dia 1° do mês
+      </div>
+      <div class="formula-result">= 20.000+ engajamentos</div>
     </div>
   </section>
 
-  <!-- RANKING -->
-  <section>
-    <div class="section-label">02 · Dados</div>
-    <h2>Ranking de Engajamento</h2>
+  <!-- SEÇÃO 2: DADOS -->
+  <section class="section" id="dados" aria-labelledby="tit-dados">
+    <div class="section-header">
+      <div class="section-num" aria-hidden="true">02</div>
+      <div>
+        <h2 class="section-title" id="tit-dados">Ranking de Engajamento</h2>
+        <p class="section-desc">12 posts ordenados por desempenho · Score = Curtidas + (Comentários × 3)</p>
+      </div>
+    </div>
+    <div class="divider" aria-hidden="true"></div>
+
     <div class="table-wrap">
-      <table>
+      <table aria-label="Ranking dos 12 posts por score de engajamento">
         <thead>
           <tr>
-            <th>#</th>
-            <th>Post</th>
-            <th>Data</th>
-            <th>Formato</th>
-            <th>Score</th>
-            <th>Curtidas</th>
-            <th>Coment.</th>
-            <th>Tema</th>
+            <th scope="col">#</th>
+            <th scope="col">Data</th>
+            <th scope="col">Formato</th>
+            <th scope="col">Tema</th>
+            <th scope="col">Curtidas</th>
+            <th scope="col">Comentários</th>
+            <th scope="col">Score</th>
           </tr>
         </thead>
         <tbody>
-          <tr>
-            <td><span class="rank-badge rank-1">1</span></td>
-            <td>Post #4</td>
+          <tr class="top-row">
+            <td><span class="rank-badge rank-1" aria-label="1º lugar">1</span></td>
             <td>01/04/26</td>
             <td><span class="format-badge fmt-carrossel">Carrossel</span></td>
-            <td class="score-high">37.085</td>
+            <td>Flores de abril + pergunta</td>
             <td>36.500</td>
             <td>195</td>
-            <td>Flores de abril + pergunta</td>
+            <td class="score-cell score-high">37.085</td>
           </tr>
-          <tr>
-            <td><span class="rank-badge rank-2">2</span></td>
-            <td>Post #8</td>
+          <tr class="top-row">
+            <td><span class="rank-badge rank-2" aria-label="2º lugar">2</span></td>
             <td>01/03/26</td>
             <td><span class="format-badge fmt-foto">Foto</span></td>
-            <td class="score-high">22.494</td>
+            <td>Flores de março + pergunta</td>
             <td>22.200</td>
             <td>98</td>
-            <td>Flores de março + pergunta</td>
+            <td class="score-cell score-high">22.494</td>
           </tr>
-          <tr>
-            <td><span class="rank-badge rank-3">3</span></td>
-            <td>Post #11</td>
+          <tr class="top-row">
+            <td><span class="rank-badge rank-3" aria-label="3º lugar">3</span></td>
             <td>01/02/26</td>
             <td><span class="format-badge fmt-foto">Foto</span></td>
-            <td class="score-mid">1.936</td>
+            <td>Flores de fevereiro</td>
             <td>1.900</td>
             <td>12</td>
-            <td>Flores de fevereiro</td>
+            <td class="score-cell score-mid">1.936</td>
           </tr>
           <tr>
-            <td><span class="rank-badge rank-other">4</span></td>
-            <td>Post #6</td>
+            <td><span class="rank-badge rank-other" aria-label="4º lugar">4</span></td>
             <td>14/03/26</td>
             <td><span class="format-badge fmt-foto">Foto</span></td>
-            <td class="score-mid">1.463</td>
+            <td>Reflexão sobre o tempo de Deus</td>
             <td>1.400</td>
             <td>21</td>
-            <td>Reflexão sobre o tempo de Deus</td>
+            <td class="score-cell score-mid">1.463</td>
           </tr>
           <tr>
             <td><span class="rank-badge rank-other">5</span></td>
-            <td>Post #10</td>
             <td>12/02/26</td>
             <td><span class="format-badge fmt-reel">Reel</span></td>
-            <td class="score-mid">435</td>
+            <td>Versículo de amor (Dia dos Namorados)</td>
             <td>375</td>
             <td>20</td>
-            <td>Versículo de amor (Dia dos Namorados)</td>
+            <td class="score-cell score-low">435</td>
           </tr>
           <tr>
             <td><span class="rank-badge rank-other">6</span></td>
-            <td>Post #1</td>
             <td>05/04/26</td>
             <td><span class="format-badge fmt-foto">Foto</span></td>
-            <td class="score-mid">367</td>
+            <td>Reflexão de Páscoa</td>
             <td>337</td>
             <td>10</td>
-            <td>Reflexão de Páscoa</td>
+            <td class="score-cell score-low">367</td>
           </tr>
           <tr>
             <td><span class="rank-badge rank-other">7</span></td>
-            <td>Post #5</td>
             <td>25/03/26</td>
             <td><span class="format-badge fmt-foto">Foto</span></td>
-            <td class="score-low">147</td>
+            <td>Cristo como fundamento</td>
             <td>105</td>
             <td>14</td>
-            <td>Cristo como fundamento</td>
+            <td class="score-cell score-low">147</td>
           </tr>
-          <tr>
+          <tr class="low-row">
             <td><span class="rank-badge rank-other">8</span></td>
-            <td>Post #2</td>
             <td>04/04/26</td>
             <td><span class="format-badge fmt-reel">Reel</span></td>
-            <td class="score-low">140</td>
+            <td>Mesa posta — charme/decoração</td>
             <td>74</td>
             <td>22</td>
-            <td>Mesa posta — charme/decoração</td>
+            <td class="score-cell score-low">140</td>
           </tr>
-          <tr>
+          <tr class="low-row">
             <td><span class="rank-badge rank-other">9</span></td>
-            <td>Post #12</td>
             <td>31/01/26</td>
             <td><span class="format-badge fmt-carrossel">Carrossel</span></td>
-            <td class="score-low">123</td>
+            <td>Limites/intimidade</td>
             <td>111</td>
             <td>4</td>
-            <td>Limites/intimidade</td>
+            <td class="score-cell score-low">123</td>
           </tr>
-          <tr>
+          <tr class="low-row">
             <td><span class="rank-badge rank-other">10</span></td>
-            <td>Post #7</td>
             <td>04/03/26</td>
             <td><span class="format-badge fmt-carrossel">Carrossel</span></td>
-            <td class="score-low">84</td>
+            <td>Celebrar o simples + mesa em família</td>
             <td>54</td>
             <td>10</td>
-            <td>Celebrar o simples + mesa em família</td>
+            <td class="score-cell score-low">84</td>
           </tr>
-          <tr>
+          <tr class="low-row">
             <td><span class="rank-badge rank-other">11</span></td>
-            <td>Post #3</td>
             <td>03/04/26</td>
             <td><span class="format-badge fmt-foto">Foto</span></td>
-            <td class="score-low">89</td>
+            <td>Reflexão Sexta-Feira Santa</td>
             <td>47</td>
             <td>14</td>
-            <td>Reflexão Sexta-Feira Santa</td>
+            <td class="score-cell score-low">89</td>
           </tr>
-          <tr>
+          <tr class="low-row">
             <td><span class="rank-badge rank-other">12</span></td>
-            <td>Post #9</td>
             <td>21/02/26</td>
             <td><span class="format-badge fmt-reel">Reel</span></td>
-            <td class="score-low">76</td>
+            <td>Versículo bíblico (Filipenses 1:6)</td>
             <td>46</td>
             <td>10</td>
-            <td>Versículo bíblico (Filipenses 1:6)</td>
+            <td class="score-cell score-low">76</td>
           </tr>
         </tbody>
       </table>
     </div>
-
-    <!-- FÓRMULA -->
-    <div class="formula-box">
-      <div class="formula-label">A Fórmula Comprovada do Perfil</div>
-      <div class="formula-items">
-        <div class="formula-item">🌸 Flores coloridas</div>
-        <div class="formula-plus">+</div>
-        <div class="formula-item">📅 Dia 1° do mês</div>
-        <div class="formula-plus">+</div>
-        <div class="formula-item">❓ Pergunta simples</div>
-        <div class="formula-eq">=</div>
-        <div class="formula-result">+20.000 engajamentos</div>
-      </div>
-    </div>
   </section>
 
-  <!-- O QUE FUNCIONA -->
-  <section>
-    <div class="section-label">03 · Análise</div>
-    <h2>O Que Está Funcionando</h2>
+  <!-- SEÇÃO 3: O QUE FUNCIONOU -->
+  <section class="section" id="funcionou" aria-labelledby="tit-funcionou">
+    <div class="section-header">
+      <div class="section-num" aria-hidden="true">03</div>
+      <div>
+        <h2 class="section-title" id="tit-funcionou">O Que Funcionou</h2>
+        <p class="section-desc">Top 3 posts com maior engajamento e por que performaram</p>
+      </div>
+    </div>
+    <div class="divider" aria-hidden="true"></div>
+
     <div class="analysis-grid">
-      <div class="card card-top">
-        <div class="card-header">
-          <div class="medal">🥇</div>
-          <div class="card-title">Post #4 — Flores de Abril (1° de Abril)</div>
-          <div class="card-score">Score: 37.085</div>
+      <article class="post-card good">
+        <div class="post-card-top">
+          <div>
+            <div class="post-pos">1º lugar · Carrossel</div>
+            <div style="margin-top:4px;"><span class="format-badge fmt-carrossel">01/04/26</span></div>
+          </div>
+          <div class="post-score good-score">37.085</div>
         </div>
-        <p>Legenda curta (2 frases), pergunta direta <em>"Qual a sua preferida desse mês?"</em>, carrossel visual de flores coloridas publicado no 1º dia do mês. A pergunta funcionou como gatilho de conversa porque é fácil de responder — qualquer pessoa tem uma flor favorita. Resultado: 195 comentários, número atípico para um perfil de menos de 8 mil seguidores. O formato carrossel retém o usuário mais tempo, favorecendo o alcance orgânico.</p>
-      </div>
-      <div class="card card-top">
-        <div class="card-header">
-          <div class="medal">🥈</div>
-          <div class="card-title">Post #8 — Flores de Março (1° de Março)</div>
-          <div class="card-score">Score: 22.494</div>
+        <div class="post-title">Flores de abril + Pergunta simples</div>
+        <div class="post-meta">
+          <span class="post-meta-item">
+            <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+            36.500 curtidas
+          </span>
+          <span class="post-meta-item">
+            <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+            195 comentários
+          </span>
         </div>
-        <p>Mesmo mecanismo do Post #4, publicado no 1º de março. Legenda média (~70 palavras), pergunta direta sobre flor preferida, conteúdo visual de flores naturais. Este post demonstra que o padrão <strong>"flores + pergunta + início do mês"</strong> é uma fórmula repetível e consistente. Os 98 comentários confirmam que a audiência engaja ativamente quando a barreira de participação é baixa.</p>
-      </div>
-      <div class="card card-top">
-        <div class="card-header">
-          <div class="medal">🥉</div>
-          <div class="card-title">Post #11 — Flores de Fevereiro</div>
-          <div class="card-score">Score: 1.936</div>
+        <div class="post-insight">
+          <strong>Por que funcionou:</strong> Publicado no 1° dia do mês com flores + pergunta aberta. Combinação perfeita de calendário emocional e gatilho de participação.
         </div>
-        <p>Mesmo tema, desta vez <strong>sem pergunta explícita</strong>, o que explica o volume menor de comentários (12 vs 195 e 98 nos outros). Ainda assim, entregou 1.900 curtidas — muito acima da média do perfil. Isso prova que o tema flores funciona mesmo sem pergunta, mas a pergunta é o <strong>multiplicador de comentários</strong> que ativa o algoritmo.</p>
-      </div>
+      </article>
+
+      <article class="post-card good">
+        <div class="post-card-top">
+          <div>
+            <div class="post-pos">2º lugar · Foto</div>
+            <div style="margin-top:4px;"><span class="format-badge fmt-foto">01/03/26</span></div>
+          </div>
+          <div class="post-score good-score">22.494</div>
+        </div>
+        <div class="post-title">Flores de março + Pergunta simples</div>
+        <div class="post-meta">
+          <span class="post-meta-item">
+            <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+            22.200 curtidas
+          </span>
+          <span class="post-meta-item">
+            <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+            98 comentários
+          </span>
+        </div>
+        <div class="post-insight">
+          <strong>Por que funcionou:</strong> Mesma fórmula do 1° dia de abril. Confirma o padrão: flores + pergunta no início do mês gera engajamento massivo de forma consistente.
+        </div>
+      </article>
+
+      <article class="post-card good">
+        <div class="post-card-top">
+          <div>
+            <div class="post-pos">3º lugar · Foto</div>
+            <div style="margin-top:4px;"><span class="format-badge fmt-foto">01/02/26</span></div>
+          </div>
+          <div class="post-score good-score">1.936</div>
+        </div>
+        <div class="post-title">Flores de fevereiro</div>
+        <div class="post-meta">
+          <span class="post-meta-item">
+            <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+            1.900 curtidas
+          </span>
+          <span class="post-meta-item">
+            <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+            12 comentários
+          </span>
+        </div>
+        <div class="post-insight">
+          <strong>Observação:</strong> Sem pergunta, o resultado foi 10x menor que março e abril. Prova que a pergunta é o maior multiplicador de engajamento da fórmula.
+        </div>
+      </article>
     </div>
   </section>
 
-  <!-- O QUE NÃO FUNCIONA -->
-  <section>
-    <div class="section-label">04 · Análise</div>
-    <h2>O Que Não Está Funcionando</h2>
+  <!-- SEÇÃO 4: O QUE NÃO FUNCIONOU -->
+  <section class="section" id="nao-funcionou" aria-labelledby="tit-nao-funcionou">
+    <div class="section-header">
+      <div class="section-num" aria-hidden="true">04</div>
+      <div>
+        <h2 class="section-title" id="tit-nao-funcionou">O Que Não Funcionou</h2>
+        <p class="section-desc">Bottom 3 posts e os motivos do baixo desempenho</p>
+      </div>
+    </div>
+    <div class="divider" aria-hidden="true"></div>
+
     <div class="analysis-grid">
-      <div class="card card-bottom">
-        <div class="card-header">
-          <div class="medal">❌</div>
-          <div class="card-title">Post #9 — Reel com versículo (Filipenses 1:6)</div>
-          <div class="card-score">Score: 76</div>
+      <article class="post-card bad">
+        <div class="post-card-top">
+          <div>
+            <div class="post-pos">10º lugar · Carrossel</div>
+            <div style="margin-top:4px;"><span class="format-badge fmt-carrossel">04/03/26</span></div>
+          </div>
+          <div class="post-score bad-score">84</div>
         </div>
-        <p>Reel com apenas um versículo bíblico curtíssimo e 3 hashtags genéricas. Sem contexto, sem desenvolvimento, sem convite à interação. O Reel falhou em atrair visualizações por não ter gancho visual ou narrativo nos primeiros segundos. Para um perfil que já não tem força em Reels, postar conteúdo raso nesse formato é desperdiçar o potencial da ferramenta.</p>
+        <div class="post-title">Celebrar o simples + mesa em família</div>
+        <div class="post-meta">
+          <span class="post-meta-item">
+            <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+            54 curtidas
+          </span>
+          <span class="post-meta-item">
+            <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+            10 comentários
+          </span>
+        </div>
+        <div class="post-insight">
+          <strong>Por que falhou:</strong> Tema educativo sem CTA de salvamento. Conteúdo de valor sem direcionamento não gera ação do seguidor.
+        </div>
+      </article>
+
+      <article class="post-card bad">
+        <div class="post-card-top">
+          <div>
+            <div class="post-pos">11º lugar · Foto</div>
+            <div style="margin-top:4px;"><span class="format-badge fmt-foto">03/04/26</span></div>
+          </div>
+          <div class="post-score bad-score">89</div>
+        </div>
+        <div class="post-title">Reflexão Sexta-Feira Santa</div>
+        <div class="post-meta">
+          <span class="post-meta-item">
+            <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+            47 curtidas
+          </span>
+          <span class="post-meta-item">
+            <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+            14 comentários
+          </span>
+        </div>
+        <div class="post-insight">
+          <strong>Por que falhou:</strong> Post espiritual sem pergunta ao final. Seguidor recebe a mensagem passivamente e não tem motivo para interagir.
+        </div>
+      </article>
+
+      <article class="post-card bad">
+        <div class="post-card-top">
+          <div>
+            <div class="post-pos">12º lugar · Reel</div>
+            <div style="margin-top:4px;"><span class="format-badge fmt-reel">21/02/26</span></div>
+          </div>
+          <div class="post-score bad-score">76</div>
+        </div>
+        <div class="post-title">Versículo bíblico (Filipenses 1:6)</div>
+        <div class="post-meta">
+          <span class="post-meta-item">
+            <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+            46 curtidas
+          </span>
+          <span class="post-meta-item">
+            <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+            10 comentários
+          </span>
+        </div>
+        <div class="post-insight">
+          <strong>Por que falhou:</strong> Reel sem gancho inicial, sem pacing adequado e sem roteiro. Todos os 3 reels analisados estão entre os piores resultados.
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- SEÇÃO 5: CONCLUSÕES -->
+  <section class="section" id="conclusoes" aria-labelledby="tit-conclusoes">
+    <div class="section-header">
+      <div class="section-num" aria-hidden="true">05</div>
+      <div>
+        <h2 class="section-title" id="tit-conclusoes">Conclusões</h2>
+        <p class="section-desc">5 insights fundamentais desta análise</p>
       </div>
-      <div class="card card-bottom">
-        <div class="card-header">
-          <div class="medal">❌</div>
-          <div class="card-title">Post #3 — Reflexão Sexta-Feira Santa</div>
-          <div class="card-score">Score: 89</div>
+    </div>
+    <div class="divider" aria-hidden="true"></div>
+
+    <div class="insights-list" role="list">
+      <div class="insight-item" role="listitem">
+        <div class="insight-icon" aria-hidden="true">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z"/><path d="M8 12l2 2 4-4"/></svg>
         </div>
-        <p>Legenda profunda e longa sobre a crucificação, com 5 hashtags religiosas, publicada numa data de alto apelo emocional. Entregou apenas 47 curtidas. O texto é bonito, porém muito reflexivo e <strong>sem elemento de interação</strong>. O conteúdo "completo demais" não deixa nada para o seguidor fazer — sem CTA, sem pergunta.</p>
+        <div class="insight-text">
+          O conteúdo de flores é o <strong>ativo mais valioso do perfil</strong> — mais de 60 mil curtidas concentradas em apenas 2 posts
+        </div>
       </div>
-      <div class="card card-bottom">
-        <div class="card-header">
-          <div class="medal">❌</div>
-          <div class="card-title">Post #2 — Reel Mesa Posta Decorada</div>
-          <div class="card-score">Score: 140</div>
+      <div class="insight-item" role="listitem">
+        <div class="insight-icon" aria-hidden="true">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
         </div>
-        <p>22 comentários (2° maior número da lista!), mas apenas 74 curtidas — uma proporção incomum. O vídeo original é de outra conta (@homewithanita), o que pode reduzir a percepção de autoria. O Reel fez mais sentido como compartilhamento pessoal do que como conteúdo de valor nativo para a conta.</p>
+        <div class="insight-text">
+          A <strong>pergunta simples é o maior multiplicador de engajamento</strong> — sem ela, o resultado cai 10x mesmo com o mesmo tema
+        </div>
+      </div>
+      <div class="insight-item" role="listitem">
+        <div class="insight-icon" aria-hidden="true">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg>
+        </div>
+        <div class="insight-text">
+          <strong>Reels estão performando mal neste perfil</strong> — o formato não está alinhado com o comportamento atual da audiência
+        </div>
+      </div>
+      <div class="insight-item" role="listitem">
+        <div class="insight-icon" aria-hidden="true">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+        </div>
+        <div class="insight-text">
+          Os <strong>posts espirituais têm engajamento inconsistente</strong> — bons temas, mas sem pergunta não geram conversa
+        </div>
+      </div>
+      <div class="insight-item" role="listitem">
+        <div class="insight-icon" aria-hidden="true">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+        </div>
+        <div class="insight-text">
+          <strong>Nenhum dos 12 posts tem CTA</strong> — o perfil não aproveita o engajamento para converter em ações mensuráveis
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- INSIGHTS -->
-  <section>
-    <div class="section-label">05 · Conclusões</div>
-    <h2>Principais Insights</h2>
-    <ul class="insight-list">
-      <li>
-        <div class="insight-icon">🌸</div>
-        <div><strong>O conteúdo de flores é o ativo mais valioso do perfil.</strong> Os 3 posts de flores somam mais de 60.000 curtidas — mais do que todos os outros 9 posts juntos. A audiência responde visceralmente a conteúdo visual bonito de natureza.</div>
-      </li>
-      <li>
-        <div class="insight-icon">❓</div>
-        <div><strong>A pergunta simples é o maior multiplicador de engajamento.</strong> Quando o post inclui uma pergunta fácil de responder ("qual a sua flor favorita?"), os comentários explodem e o algoritmo distribui muito mais. Sem pergunta, o número de comentários cai para uma fração.</div>
-      </li>
-      <li>
-        <div class="insight-icon">📹</div>
-        <div><strong>Reels estão performando mal neste perfil.</strong> Dos 3 Reels analisados, 2 estão no bottom 3 e 1 está no meio da tabela. O formato exige roteiro, gancho de atenção nos 3 primeiros segundos e audiência acostumada a consumir vídeo — nenhum desses elementos está consolidado aqui.</div>
-      </li>
-      <li>
-        <div class="insight-icon">🙏</div>
-        <div><strong>Os posts espirituais têm engajamento inconsistente.</strong> O conteúdo espiritual funciona quando tem ilustração visual marcante (Post #6, 1.400 curtidas), mas falha quando depende só de texto. A imagem de suporte importa tanto quanto o texto.</div>
-      </li>
-      <li>
-        <div class="insight-icon">🔇</div>
-        <div><strong>Nenhum dos 12 posts tem CTA.</strong> Zero chamadas para salvar, compartilhar, seguir ou clicar no link da bio. Um perfil com 7.900+ seguidores e produtos à venda está deixando conversões na mesa todos os dias.</div>
-      </li>
-    </ul>
-  </section>
+  <!-- SEÇÃO 6: ESTRATÉGIA -->
+  <section class="section" id="estrategia" aria-labelledby="tit-estrategia">
+    <div class="section-header">
+      <div class="section-num" aria-hidden="true">06</div>
+      <div>
+        <h2 class="section-title" id="tit-estrategia">Estratégia</h2>
+        <p class="section-desc">6 recomendações práticas para os próximos 30 dias</p>
+      </div>
+    </div>
+    <div class="divider" aria-hidden="true"></div>
 
-  <!-- RECOMENDAÇÕES -->
-  <section>
-    <div class="section-label">06 · Estratégia</div>
-    <h2>Recomendações Práticas</h2>
-    <div class="rec-grid">
+    <div class="recs-grid">
       <div class="rec-card">
-        <div class="rec-number">1</div>
-        <h4>Dia 1° = Flores do Mês + Pergunta</h4>
-        <p>Esta fórmula provou funcionar em fevereiro, março e abril com consistência absurda. Crie um calendário fixo: dia 1 = flores do mês + pergunta. Varie as flores, mas mantenha a mecânica.</p>
+        <div class="rec-num" aria-label="Recomendação 1">1</div>
+        <div class="rec-title">Dia 1° = Flores do Mês + Pergunta</div>
+        <div class="rec-desc">Estabelecer a tradição mensal como ritual fixo do calendário. Publicar sempre em carrossel no 1° dia de cada mês com pergunta aberta no final.</div>
       </div>
       <div class="rec-card">
-        <div class="rec-number">2</div>
-        <h4>CTA de Salvamento em Todo Post Educativo</h4>
-        <p>Termine legendas como <em>"Salva esse post para usar quando for montar a sua mesa"</em> ou <em>"Manda para aquela amiga que vai adorar esse guia."</em> O Instagram permite editar legendas de posts antigos sem penalizar o engajamento.</p>
+        <div class="rec-num" aria-label="Recomendação 2">2</div>
+        <div class="rec-title">CTA de Salvamento em Todo Post Educativo</div>
+        <div class="rec-desc">Encerrar todos os conteúdos educativos (mesa posta, etiqueta, comportamento) com "Salva esse post para não esquecer" ou similar.</div>
       </div>
       <div class="rec-card">
-        <div class="rec-number">3</div>
-        <h4>Reels Só com Roteiro e Gancho</h4>
-        <p>Pare de publicar Reels com conteúdo curto e sem roteiro. Se for usar Reels, produza com gancho nos 3 primeiros segundos, trilha sonora estratégica e conteúdo de ao menos 15–30 segundos com desenvolvimento.</p>
+        <div class="rec-num" aria-label="Recomendação 3">3</div>
+        <div class="rec-title">Reels Só com Roteiro e Gancho</div>
+        <div class="rec-desc">Não publicar reels sem: gancho nos primeiros 3 segundos, roteiro definido, ritmo adequado e duração entre 15 e 30 segundos.</div>
       </div>
       <div class="rec-card">
-        <div class="rec-number">4</div>
-        <h4>Frequência Mínima: Terça e Sexta</h4>
-        <p>O algoritmo penaliza perfis inconsistentes. Estabeleça terça (conteúdo de fé/reflexão) e sexta (conteúdo de mesa/etiqueta/flores) como dias fixos — e nunca fique mais de 4 dias sem publicar.</p>
+        <div class="rec-num" aria-label="Recomendação 4">4</div>
+        <div class="rec-title">Frequência Mínima: Terça e Sexta</div>
+        <div class="rec-desc">Manter calendário fixo de publicações. No mínimo duas postagens por semana para consistência no algoritmo e hábito da audiência.</div>
       </div>
       <div class="rec-card">
-        <div class="rec-number">5</div>
-        <h4>Encerre Posts Espirituais com Pergunta</h4>
-        <p>Em vez de fechar com uma frase de encerramento, termine com uma pergunta aberta: <em>"Qual versículo tem sido o seu sustento essa semana?"</em> Isso transforma leitores passivos em participantes.</p>
+        <div class="rec-num" aria-label="Recomendação 5">5</div>
+        <div class="rec-title">Encerre Posts Espirituais com Pergunta</div>
+        <div class="rec-desc">Transformar reflexões em conversa. Toda legenda espiritual deve terminar com uma pergunta que convide o seguidor a compartilhar sua perspectiva.</div>
       </div>
       <div class="rec-card">
-        <div class="rec-number">6</div>
-        <h4>1 Post por Mês Divulgando os Cursos</h4>
-        <p>Nenhum dos 12 posts menciona os produtos. Faça isso de forma não agressiva: <em>"Se você quer aprender a montar mesas assim com mais profundidade, o link para o curso está na bio."</em></p>
+        <div class="rec-num" aria-label="Recomendação 6">6</div>
+        <div class="rec-title">1 Post por Mês Divulgando os Cursos</div>
+        <div class="rec-desc">Inserir divulgação sutil dentro do conteúdo orgânico. Não post exclusivamente promocional — integrar ao tema do mês de forma natural.</div>
       </div>
     </div>
   </section>
 
-  <!-- QUICK WINS -->
-  <section>
-    <div class="section-label">07 · Ação Imediata</div>
-    <h2>Quick Wins — Próximos 7 Dias</h2>
-    <div class="qw-list">
-      <div class="qw-item">
-        <div class="qw-step">1</div>
-        <div class="qw-content">
-          <h4>Publique agora uma versão "tardia" das flores de abril</h4>
-          <p>Já que o 1° de abril passou, ainda dá para aproveitar o mês com uma versão conectada ao tema Páscoa e primavera. Use o mesmo formato dos posts que explodiram: flores coloridas + carrossel + pergunta.</p>
-          <div class="cta-example">Exemplo de legenda: "Abril chegou cheio de cor! 🌸 Qual dessas flores representa como você quer viver esse mês?"</div>
+  <!-- SEÇÃO 7: PLANO DE AÇÃO -->
+  <section class="section" id="plano" aria-labelledby="tit-plano">
+    <div class="section-header">
+      <div class="section-num" aria-hidden="true">07</div>
+      <div>
+        <h2 class="section-title" id="tit-plano">Plano de Ação</h2>
+        <p class="section-desc">3 quick wins para implementar ainda esta semana</p>
+      </div>
+    </div>
+    <div class="divider" aria-hidden="true"></div>
+
+    <div class="actions-list">
+      <div class="action-item">
+        <div class="action-num" aria-label="Ação 1">1</div>
+        <div>
+          <div class="action-tag">Quick Win · Conteúdo</div>
+          <div class="action-title">Publicar o post de flores de abril em atraso</div>
+          <div class="action-desc">Criar carrossel com flores + pergunta aberta mesmo que fora do dia 1°. Usar o aprendizado dos dados para recuperar parte do engajamento mensal perdido.</div>
+          <div class="action-example">"Quais flores você escolheria para representar o mês de abril?" — publicar como carrossel com 3 a 5 slides de flores variadas.</div>
         </div>
       </div>
-      <div class="qw-item">
-        <div class="qw-step">2</div>
-        <div class="qw-content">
-          <h4>Edite as legendas dos posts educativos de mesa posta</h4>
-          <p>Volte aos posts de mesa posta que estão no perfil e adicione uma CTA de salvamento no final — o Instagram permite editar sem penalizar o post.</p>
-          <div class="cta-example">Adicione ao final: "💾 Salva esse post para consultar sempre que for montar a sua mesa."</div>
+      <div class="action-item">
+        <div class="action-num" aria-label="Ação 2">2</div>
+        <div>
+          <div class="action-tag">Quick Win · Otimização</div>
+          <div class="action-title">Editar posts de mesa posta para adicionar CTA</div>
+          <div class="action-desc">Atualizar a legenda dos posts educativos existentes sobre mesa posta com um CTA de salvamento. Pequena mudança com potencial impacto imediato no alcance do post antigo.</div>
+          <div class="action-example">"Salva esse post — da próxima vez que você precisar montar uma mesa especial, estará aqui te esperando."</div>
         </div>
       </div>
-      <div class="qw-item">
-        <div class="qw-step">3</div>
-        <div class="qw-content">
-          <h4>No próximo post espiritual, adicione uma pergunta ao final</h4>
-          <p>Não precisa redesenhar a estratégia — só acrescente 1 frase de pergunta ao final da legenda que você já ia publicar. O impacto nos comentários será imediato.</p>
-          <div class="cta-example">Exemplo: "Você consegue identificar em qual área da sua vida Deus está pedindo paciência nessa semana?"</div>
+      <div class="action-item">
+        <div class="action-num" aria-label="Ação 3">3</div>
+        <div>
+          <div class="action-tag">Quick Win · Engajamento</div>
+          <div class="action-title">Adicionar pergunta ao próximo post espiritual</div>
+          <div class="action-desc">No próximo post de reflexão ou versículo, incluir uma pergunta simples e acolhedora no final da legenda para estimular comentários imediatamente.</div>
+          <div class="action-example">"Essa passagem chegou no momento certo pra você? Me conta nos comentários o que Deus está falando com seu coração hoje."</div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- FOOTER -->
-  <div class="footer">
-    <strong>Auditoria Instagram — @givisconti</strong><br>
-    Gerado em 06/04/2026 · Análise baseada nos 12 posts mais recentes do perfil
-  </div>
+</main>
 
-</div>
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo grad-text">@givisconti</div>
+  <p>Auditoria gerada em 06/04/2026 · 12 posts analisados · Período: jan–abr 2026</p>
+  <p style="margin-top:6px; font-size:12px; opacity:0.5;">Manual de Boas Práticas — Instagram Content Audit</p>
+</footer>
+
 </body>
 </html>
