@@ -1,0 +1,1345 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Auditoria Instagram — @sosowhitaker_</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600;700&family=Fira+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --ig-1: #833ab4;
+      --ig-2: #fd1d1d;
+      --ig-3: #fcb045;
+      --ig-grad: linear-gradient(135deg, #833ab4, #fd1d1d, #fcb045);
+      --bg: #0a0a0f;
+      --bg2: #111118;
+      --bg3: #18181f;
+      --card: #1c1c26;
+      --border: rgba(255,255,255,0.07);
+      --text: #f0f0f5;
+      --muted: #8888aa;
+      --gold: #f5c842;
+      --silver: #a8b2c0;
+      --bronze: #cd7c42;
+      --green: #22c55e;
+      --red: #ef4444;
+      --yellow: #f59e0b;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Fira Sans', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      font-size: 16px;
+    }
+
+    .grad-text {
+      background: var(--ig-grad);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .cover {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 60px 24px;
+      overflow: hidden;
+    }
+
+    .cover::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 80% 70% at 50% 50%, rgba(131,58,180,0.18) 0%, rgba(253,29,29,0.1) 50%, transparent 100%);
+      pointer-events: none;
+    }
+
+    .cover-glow {
+      position: absolute;
+      width: 600px;
+      height: 600px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(131,58,180,0.12) 0%, transparent 70%);
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      animation: pulse 6s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 0.6; transform: translate(-50%, -50%) scale(1); }
+      50% { opacity: 1; transform: translate(-50%, -50%) scale(1.08); }
+    }
+
+    .ig-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 100px;
+      padding: 8px 20px;
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--muted);
+      margin-bottom: 28px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .ig-dot {
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      background: var(--ig-grad);
+      flex-shrink: 0;
+    }
+
+    .cover h1 {
+      font-size: clamp(2.4rem, 6vw, 4.2rem);
+      font-weight: 800;
+      line-height: 1.1;
+      letter-spacing: -0.03em;
+      margin-bottom: 16px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .cover-handle {
+      font-size: clamp(1.1rem, 3vw, 1.5rem);
+      font-weight: 300;
+      color: var(--muted);
+      margin-bottom: 48px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .cover-handle span { font-weight: 600; color: var(--text); }
+
+    .cover-note {
+      max-width: 620px;
+      background: rgba(245,158,11,0.08);
+      border: 1px solid rgba(245,158,11,0.25);
+      border-radius: 12px;
+      padding: 14px 20px;
+      font-size: 13px;
+      color: rgba(240,240,245,0.7);
+      line-height: 1.6;
+      margin-bottom: 36px;
+      position: relative;
+      z-index: 1;
+      text-align: left;
+    }
+
+    .cover-note strong { color: var(--yellow); }
+
+    .metrics-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 16px;
+      max-width: 680px;
+      width: 100%;
+      position: relative;
+      z-index: 1;
+    }
+
+    .metric-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 20px 16px;
+      transition: border-color 0.2s;
+    }
+
+    .metric-card:hover { border-color: rgba(131,58,180,0.4); }
+
+    .metric-label {
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--muted);
+      margin-bottom: 8px;
+    }
+
+    .metric-value {
+      font-family: 'Fira Code', monospace;
+      font-size: 1.6rem;
+      font-weight: 700;
+      line-height: 1;
+    }
+
+    .metric-sub {
+      font-size: 12px;
+      color: var(--muted);
+      margin-top: 4px;
+    }
+
+    .toc {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(10,10,15,0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      padding: 0 24px;
+      overflow-x: auto;
+    }
+
+    .toc-inner {
+      display: flex;
+      gap: 0;
+      max-width: 900px;
+      margin: 0 auto;
+      white-space: nowrap;
+    }
+
+    .toc a {
+      display: inline-block;
+      padding: 14px 16px;
+      font-size: 12px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--muted);
+      text-decoration: none;
+      border-bottom: 2px solid transparent;
+      transition: color 0.2s, border-color 0.2s;
+      cursor: pointer;
+    }
+
+    .toc a:hover { color: var(--text); border-bottom-color: rgba(131,58,180,0.6); }
+
+    main { max-width: 900px; margin: 0 auto; padding: 0 24px 80px; }
+
+    .section { padding-top: 72px; }
+
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 32px;
+    }
+
+    .section-num {
+      width: 40px; height: 40px;
+      border-radius: 10px;
+      background: var(--ig-grad);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Fira Code', monospace;
+      font-size: 14px;
+      font-weight: 700;
+      color: white;
+      flex-shrink: 0;
+    }
+
+    .section-title {
+      font-size: clamp(1.4rem, 4vw, 1.9rem);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+    }
+
+    .section-desc {
+      color: var(--muted);
+      font-size: 14px;
+      margin-top: 2px;
+    }
+
+    .divider {
+      height: 1px;
+      background: var(--border);
+      margin: 0 0 32px;
+    }
+
+    .diagnosis-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    @media (max-width: 600px) { .diagnosis-grid { grid-template-columns: 1fr; } }
+
+    .diag-item {
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 16px 20px;
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+    }
+
+    .diag-icon {
+      width: 36px; height: 36px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .diag-icon.ok { background: rgba(34,197,94,0.15); color: var(--green); }
+    .diag-icon.warn { background: rgba(245,158,11,0.15); color: var(--yellow); }
+    .diag-icon.bad { background: rgba(239,68,68,0.15); color: var(--red); }
+
+    .diag-label { font-size: 12px; color: var(--muted); font-weight: 500; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 2px; }
+    .diag-text { font-size: 14px; font-weight: 500; }
+
+    .formula {
+      background: var(--bg3);
+      border: 1px solid rgba(131,58,180,0.3);
+      border-radius: 16px;
+      padding: 28px 24px;
+      text-align: center;
+      margin-top: 24px;
+    }
+
+    .formula-label {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--muted);
+      margin-bottom: 16px;
+    }
+
+    .formula-eq {
+      font-family: 'Fira Code', monospace;
+      font-size: clamp(0.85rem, 2.5vw, 1.05rem);
+      font-weight: 600;
+      color: var(--text);
+      line-height: 1.8;
+    }
+
+    .formula-result {
+      display: inline-block;
+      margin-top: 16px;
+      font-family: 'Fira Code', monospace;
+      font-size: 1.6rem;
+      font-weight: 700;
+      background: var(--ig-grad);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .table-wrap {
+      overflow-x: auto;
+      border-radius: 16px;
+      border: 1px solid var(--border);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 14px;
+    }
+
+    thead tr {
+      background: linear-gradient(135deg, rgba(131,58,180,0.4), rgba(253,29,29,0.3), rgba(252,176,69,0.3));
+    }
+
+    thead th {
+      padding: 14px 16px;
+      text-align: left;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: rgba(255,255,255,0.7);
+      white-space: nowrap;
+    }
+
+    tbody tr {
+      border-top: 1px solid var(--border);
+      transition: background 0.15s;
+    }
+
+    tbody tr:hover { background: rgba(255,255,255,0.03); }
+    tbody tr.top-row { background: rgba(131,58,180,0.06); }
+    tbody tr.low-row { background: rgba(239,68,68,0.04); }
+    tbody tr.excluded-row { background: rgba(255,255,255,0.02); opacity: 0.6; }
+
+    td { padding: 13px 16px; vertical-align: middle; }
+
+    .rank-badge {
+      width: 28px; height: 28px;
+      border-radius: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Fira Code', monospace;
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .rank-1 { background: rgba(245,200,66,0.2); color: var(--gold); border: 1px solid rgba(245,200,66,0.4); }
+    .rank-2 { background: rgba(168,178,192,0.2); color: var(--silver); border: 1px solid rgba(168,178,192,0.4); }
+    .rank-3 { background: rgba(205,124,66,0.2); color: var(--bronze); border: 1px solid rgba(205,124,66,0.4); }
+    .rank-other { background: rgba(255,255,255,0.06); color: var(--muted); border: 1px solid var(--border); }
+
+    .format-badge {
+      display: inline-block;
+      padding: 3px 8px;
+      border-radius: 6px;
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .fmt-carrossel { background: rgba(131,58,180,0.2); color: #c084fc; }
+    .fmt-foto { background: rgba(34,197,94,0.15); color: #4ade80; }
+    .fmt-reel { background: rgba(239,68,68,0.15); color: #f87171; }
+    .fmt-excluido { background: rgba(255,255,255,0.06); color: var(--muted); }
+
+    .score-cell {
+      font-family: 'Fira Code', monospace;
+      font-weight: 700;
+      font-size: 15px;
+    }
+
+    .score-high { color: var(--gold); }
+    .score-mid { color: var(--green); }
+    .score-low { color: var(--muted); }
+
+    .analysis-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 16px;
+    }
+
+    .post-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 20px;
+      transition: border-color 0.2s, transform 0.2s;
+      cursor: default;
+    }
+
+    .post-card.good { border-color: rgba(34,197,94,0.15); }
+    .post-card.good:hover { border-color: rgba(34,197,94,0.4); transform: translateY(-2px); }
+    .post-card.bad { border-color: rgba(239,68,68,0.1); }
+    .post-card.bad:hover { border-color: rgba(239,68,68,0.35); transform: translateY(-2px); }
+
+    .post-card-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 14px;
+    }
+
+    .post-pos {
+      font-family: 'Fira Code', monospace;
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .post-score {
+      font-family: 'Fira Code', monospace;
+      font-size: 1.3rem;
+      font-weight: 700;
+    }
+
+    .post-score.good-score { color: var(--green); }
+    .post-score.bad-score { color: var(--red); }
+
+    .post-title {
+      font-size: 15px;
+      font-weight: 600;
+      margin-bottom: 8px;
+      line-height: 1.4;
+    }
+
+    .post-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 14px;
+    }
+
+    .post-meta-item {
+      font-size: 12px;
+      color: var(--muted);
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .post-insight {
+      font-size: 13px;
+      color: var(--muted);
+      border-top: 1px solid var(--border);
+      padding-top: 12px;
+      line-height: 1.5;
+    }
+
+    .post-insight strong { color: var(--text); }
+
+    .insights-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .insight-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 18px 20px;
+      transition: border-color 0.2s;
+    }
+
+    .insight-item:hover { border-color: rgba(131,58,180,0.3); }
+
+    .insight-icon {
+      width: 36px; height: 36px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      background: var(--ig-grad);
+    }
+
+    .insight-text {
+      font-size: 15px;
+      font-weight: 500;
+      line-height: 1.5;
+    }
+
+    .recs-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 16px;
+    }
+
+    .rec-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 22px;
+      transition: border-color 0.2s, transform 0.2s;
+      cursor: default;
+    }
+
+    .rec-card:hover { border-color: rgba(131,58,180,0.4); transform: translateY(-2px); }
+
+    .rec-num {
+      width: 32px; height: 32px;
+      border-radius: 8px;
+      background: var(--ig-grad);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Fira Code', monospace;
+      font-size: 14px;
+      font-weight: 700;
+      color: white;
+      margin-bottom: 14px;
+    }
+
+    .rec-title { font-size: 15px; font-weight: 700; margin-bottom: 8px; }
+    .rec-desc { font-size: 13px; color: var(--muted); line-height: 1.55; }
+
+    .actions-list {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .action-item {
+      display: grid;
+      grid-template-columns: 48px 1fr;
+      gap: 16px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 22px;
+      transition: border-color 0.2s;
+      align-items: start;
+    }
+
+    .action-item:hover { border-color: rgba(252,176,69,0.35); }
+
+    .action-num {
+      width: 48px; height: 48px;
+      border-radius: 12px;
+      background: rgba(252,176,69,0.12);
+      border: 1px solid rgba(252,176,69,0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Fira Code', monospace;
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--gold);
+    }
+
+    .action-tag {
+      display: inline-block;
+      padding: 3px 10px;
+      border-radius: 20px;
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      background: rgba(252,176,69,0.15);
+      color: var(--gold);
+      margin-bottom: 8px;
+    }
+
+    .action-title { font-size: 16px; font-weight: 700; margin-bottom: 8px; }
+    .action-desc { font-size: 14px; color: var(--muted); line-height: 1.55; }
+    .action-example {
+      margin-top: 12px;
+      padding: 12px 14px;
+      background: var(--bg3);
+      border-radius: 10px;
+      border-left: 3px solid rgba(252,176,69,0.5);
+      font-size: 13px;
+      font-style: italic;
+      color: rgba(240,240,245,0.7);
+      line-height: 1.5;
+    }
+
+    /* HIGHLIGHTS TABLE */
+    .highlight-table-wrap {
+      overflow-x: auto;
+      border-radius: 16px;
+      border: 1px solid var(--border);
+      margin-bottom: 24px;
+    }
+
+    .highlight-analysis {
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 20px 24px;
+      font-size: 14px;
+      color: var(--muted);
+      line-height: 1.7;
+    }
+
+    .highlight-analysis strong { color: var(--text); }
+    .highlight-analysis p + p { margin-top: 12px; }
+
+    footer {
+      text-align: center;
+      padding: 48px 24px;
+      border-top: 1px solid var(--border);
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    footer .footer-logo {
+      font-size: 18px;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .icon-sm { width: 16px; height: 16px; }
+    .icon-md { width: 20px; height: 20px; }
+
+    @media print {
+      .toc { display: none; }
+      .cover { min-height: auto; padding: 40px 24px; }
+      .cover::before, .cover-glow { display: none; }
+      .section { padding-top: 48px; }
+    }
+
+    ::-webkit-scrollbar { width: 6px; height: 6px; }
+    ::-webkit-scrollbar-track { background: var(--bg); }
+    ::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.12); border-radius: 3px; }
+    ::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,0.22); }
+  </style>
+</head>
+<body>
+
+<!-- COVER -->
+<section class="cover">
+  <div class="cover-glow" aria-hidden="true"></div>
+
+  <div class="ig-badge">
+    <div class="ig-dot" aria-hidden="true"></div>
+    Auditoria de Conteúdo · Instagram · 06/04/2026
+  </div>
+
+  <h1>
+    <span class="grad-text">Álbum Afetivo</span><br />
+    <span class="grad-text">sem Cadência</span>
+  </h1>
+
+  <p class="cover-handle">
+    Análise de desempenho para <span>@sosowhitaker_</span> · Sophia Whitaker
+  </p>
+
+  <div class="cover-note">
+    <strong>⚠️ Nota:</strong> O perfil possui apenas 7 posts no total — a auditoria foi conduzida sobre a integralidade da conta. O Post #7 teve as curtidas ocultas e foi excluído do cálculo de score, mas incluído na coleta de dados.
+  </div>
+
+  <div class="metrics-grid" role="list" aria-label="Principais métricas">
+    <div class="metric-card" role="listitem">
+      <div class="metric-label">Data da Auditoria</div>
+      <div class="metric-value grad-text">06/04</div>
+      <div class="metric-sub">2026</div>
+    </div>
+    <div class="metric-card" role="listitem">
+      <div class="metric-label">Posts Analisados</div>
+      <div class="metric-value grad-text">7</div>
+      <div class="metric-sub">totalidade do perfil</div>
+    </div>
+    <div class="metric-card" role="listitem">
+      <div class="metric-label">Seguidores</div>
+      <div class="metric-value grad-text">327</div>
+      <div class="metric-sub">conta pessoal</div>
+    </div>
+    <div class="metric-card" role="listitem">
+      <div class="metric-label">Top Score</div>
+      <div class="metric-value grad-text">257</div>
+      <div class="metric-sub">melhor post</div>
+    </div>
+  </div>
+</section>
+
+<!-- NAV -->
+<nav class="toc" aria-label="Seções do relatório">
+  <div class="toc-inner">
+    <a href="#diagnostico">Diagnóstico</a>
+    <a href="#dados">Dados</a>
+    <a href="#funcionou">O que funcionou</a>
+    <a href="#nao-funcionou">O que falhou</a>
+    <a href="#conclusoes">Conclusões</a>
+    <a href="#estrategia">Estratégia</a>
+    <a href="#plano">Plano de Ação</a>
+    <a href="#highlights">Highlights</a>
+  </div>
+</nav>
+
+<!-- MAIN -->
+<main>
+
+  <!-- SEÇÃO 1: DIAGNÓSTICO -->
+  <section class="section" id="diagnostico" aria-labelledby="tit-diagnostico">
+    <div class="section-header">
+      <div class="section-num" aria-hidden="true">01</div>
+      <div>
+        <h2 class="section-title" id="tit-diagnostico">Diagnóstico do Perfil</h2>
+        <p class="section-desc">Visão geral da saúde atual da conta</p>
+      </div>
+    </div>
+    <div class="divider" aria-hidden="true"></div>
+
+    <div class="diagnosis-grid">
+      <div class="diag-item">
+        <div class="diag-icon ok" aria-label="Positivo">
+          <svg class="icon-md" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22,4 12,14.01 9,11.01"/></svg>
+        </div>
+        <div>
+          <div class="diag-label">Engajamento relativo alto</div>
+          <div class="diag-text">Post #1 atingiu ~65% de taxa bruta de engajamento (215 curtidas / 327 seguidores)</div>
+        </div>
+      </div>
+      <div class="diag-item">
+        <div class="diag-icon ok" aria-label="Positivo">
+          <svg class="icon-md" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+        </div>
+        <div>
+          <div class="diag-label">Base genuinamente conectada</div>
+          <div class="diag-text">Seguidores afetivos — comentários de família, amigos próximos e do namorado</div>
+        </div>
+      </div>
+      <div class="diag-item">
+        <div class="diag-icon warn" aria-label="Atenção">
+          <svg class="icon-md" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+        </div>
+        <div>
+          <div class="diag-label">Zero hashtags</div>
+          <div class="diag-text">Nenhum dos 7 posts usa hashtag — descoberta orgânica matematicamente impossível</div>
+        </div>
+      </div>
+      <div class="diag-item">
+        <div class="diag-icon warn" aria-label="Atenção">
+          <svg class="icon-md" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        </div>
+        <div>
+          <div class="diag-label">Consistência inexistente</div>
+          <div class="diag-text">28 meses de conta, intervalos de até 11 meses entre posts — algoritmo desativado</div>
+        </div>
+      </div>
+      <div class="diag-item">
+        <div class="diag-icon bad" aria-label="Negativo">
+          <svg class="icon-md" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>
+        </div>
+        <div>
+          <div class="diag-label">Sem CTAs</div>
+          <div class="diag-text">Nenhum dos 7 posts tem chamada para ação — potencial de engajamento desperdiçado</div>
+        </div>
+      </div>
+      <div class="diag-item">
+        <div class="diag-icon bad" aria-label="Negativo">
+          <svg class="icon-md" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+        </div>
+        <div>
+          <div class="diag-label">Highlights sem identidade visual</div>
+          <div class="diag-text">7 Highlights, todos com círculo cinza padrão — nenhuma capa personalizada</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="formula" role="region" aria-label="Fórmula comprovada de sucesso">
+      <div class="formula-label">Fórmula Comprovada de Engajamento</div>
+      <div class="formula-eq">
+        Relacionamento romântico + Legenda poética + Carrossel íntimo
+      </div>
+      <div class="formula-result">= Score máximo do perfil (257)</div>
+    </div>
+  </section>
+
+  <!-- SEÇÃO 2: DADOS -->
+  <section class="section" id="dados" aria-labelledby="tit-dados">
+    <div class="section-header">
+      <div class="section-num" aria-hidden="true">02</div>
+      <div>
+        <h2 class="section-title" id="tit-dados">Ranking de Engajamento</h2>
+        <p class="section-desc">7 posts ordenados por desempenho · Score = Curtidas + (Comentários × 3)</p>
+      </div>
+    </div>
+    <div class="divider" aria-hidden="true"></div>
+
+    <div class="table-wrap">
+      <table aria-label="Ranking dos 7 posts por score de engajamento">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Data</th>
+            <th scope="col">Formato</th>
+            <th scope="col">Tema</th>
+            <th scope="col">Curtidas</th>
+            <th scope="col">Comentários</th>
+            <th scope="col">Score</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="top-row">
+            <td><span class="rank-badge rank-1" aria-label="1º lugar">1</span></td>
+            <td>05/04/26</td>
+            <td><span class="format-badge fmt-carrossel">Carrossel</span></td>
+            <td>Relacionamento romântico (casal)</td>
+            <td>~215</td>
+            <td>~14</td>
+            <td class="score-cell score-high">257</td>
+          </tr>
+          <tr class="top-row">
+            <td><span class="rank-badge rank-2" aria-label="2º lugar">2</span></td>
+            <td>18/05/25</td>
+            <td><span class="format-badge fmt-foto">Foto</span></td>
+            <td>Evento festivo (vestido rosa)</td>
+            <td>~96</td>
+            <td>~50</td>
+            <td class="score-cell score-high">246</td>
+          </tr>
+          <tr class="top-row">
+            <td><span class="rank-badge rank-3" aria-label="3º lugar">3</span></td>
+            <td>27/04/25</td>
+            <td><span class="format-badge fmt-carrossel">Carrossel</span></td>
+            <td>Domingo especial (jardim, azul claro)</td>
+            <td>~100</td>
+            <td>~20</td>
+            <td class="score-cell score-mid">160</td>
+          </tr>
+          <tr>
+            <td><span class="rank-badge rank-other" aria-label="4º lugar">4</span></td>
+            <td>02/06/24</td>
+            <td><span class="format-badge fmt-carrossel">Carrossel</span></td>
+            <td>Estilo pessoal (look branco, luz natural)</td>
+            <td>~73</td>
+            <td>~20</td>
+            <td class="score-cell score-low">133</td>
+          </tr>
+          <tr class="low-row">
+            <td><span class="rank-badge rank-other">5</span></td>
+            <td>30/08/24</td>
+            <td><span class="format-badge fmt-foto">Foto</span></td>
+            <td>Moda/estilo em Lisboa (vestido azul)</td>
+            <td>~61</td>
+            <td>~20</td>
+            <td class="score-cell score-low">121</td>
+          </tr>
+          <tr class="low-row">
+            <td><span class="rank-badge rank-other">6</span></td>
+            <td>15/11/24</td>
+            <td><span class="format-badge fmt-carrossel">Carrossel</span></td>
+            <td>Viagem (pôr do sol em Punta del Este)</td>
+            <td>~54</td>
+            <td>~20</td>
+            <td class="score-cell score-low">114</td>
+          </tr>
+          <tr class="excluded-row">
+            <td><span class="rank-badge rank-other">—</span></td>
+            <td>29/12/23</td>
+            <td><span class="format-badge fmt-excluido">Carrossel</span></td>
+            <td>Praia/surf (oceano ao pôr do sol)</td>
+            <td>oculto</td>
+            <td>~20</td>
+            <td class="score-cell score-low">—*</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p style="font-size:12px; color: var(--muted); margin-top: 10px; padding: 0 4px;">*Post excluído do ranking por curtidas ocultas.</p>
+  </section>
+
+  <!-- SEÇÃO 3: O QUE FUNCIONOU -->
+  <section class="section" id="funcionou" aria-labelledby="tit-funcionou">
+    <div class="section-header">
+      <div class="section-num" aria-hidden="true">03</div>
+      <div>
+        <h2 class="section-title" id="tit-funcionou">O Que Funcionou</h2>
+        <p class="section-desc">Top 3 posts com maior engajamento e por que performaram</p>
+      </div>
+    </div>
+    <div class="divider" aria-hidden="true"></div>
+
+    <div class="analysis-grid">
+      <article class="post-card good">
+        <div class="post-card-top">
+          <div>
+            <div class="post-pos">1º lugar · Carrossel</div>
+            <div style="margin-top:4px;"><span class="format-badge fmt-carrossel">05/04/26</span></div>
+          </div>
+          <div class="post-score good-score">257</div>
+        </div>
+        <div class="post-title">"I fall in love with you a little bit more 🩵"</div>
+        <div class="post-meta">
+          <span class="post-meta-item">
+            <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+            ~215 curtidas
+          </span>
+          <span class="post-meta-item">
+            <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+            ~14 comentários
+          </span>
+        </div>
+        <div class="post-insight">
+          <strong>Por que funcionou:</strong> O post apresenta o relacionamento com fotos íntimas e genuínas num jardim. A legenda minimalista e poética complementa a emoção das imagens sem explicá-la. Publicado há menos de 24h da coleta, já havia gerado ~65% de taxa de engajamento bruta — extraordinário para 327 seguidores. Comentários de avó, amigos e do próprio namorado confirmam intensidade emocional genuína.
+        </div>
+      </article>
+
+      <article class="post-card good">
+        <div class="post-card-top">
+          <div>
+            <div class="post-pos">2º lugar · Foto</div>
+            <div style="margin-top:4px;"><span class="format-badge fmt-foto">18/05/25</span></div>
+          </div>
+          <div class="post-score good-score">246</div>
+        </div>
+        <div class="post-title">"💕"</div>
+        <div class="post-meta">
+          <span class="post-meta-item">
+            <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+            ~96 curtidas
+          </span>
+          <span class="post-meta-item">
+            <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+            ~50 comentários
+          </span>
+        </div>
+        <div class="post-insight">
+          <strong>Por que funcionou:</strong> Maior volume de comentários do perfil — mais de 50. A legenda é apenas um emoji, mas o visual foi poderoso o suficiente para dispensar palavras. Sophia num vestido rosa de gala acionou um gatilho afetivo genuíno, com comentários emocionalmente ricos ("PRINCESA LINDAAAAA", "que saiu direto dos contos de fadas"). O tema "Sophia em look de gala" é um dos maiores ativadores de engajamento do perfil.
+        </div>
+      </article>
+
+      <article class="post-card good">
+        <div class="post-card-top">
+          <div>
+            <div class="post-pos">3º lugar · Carrossel</div>
+            <div style="margin-top:4px;"><span class="format-badge fmt-carrossel">27/04/25</span></div>
+          </div>
+          <div class="post-score good-score">160</div>
+        </div>
+        <div class="post-title">"special sunday ✨"</div>
+        <div class="post-meta">
+          <span class="post-meta-item">
+            <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+            ~100 curtidas
+          </span>
+          <span class="post-meta-item">
+            <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+            ~20 comentários
+          </span>
+        </div>
+        <div class="post-insight">
+          <strong>Por que funcionou:</strong> Repete o padrão vencedor: Sophia em roupa bonita num cenário esteticamente cuidado. A legenda simples e evocativa funciona bem — "special sunday" sugere intimidade sem ser genérica. O post foi editado após publicação (raro em perfis pessoais), o que demonstra atenção. O comentário "Live action da Rapunzel?" ilustra o poder visual da imagem.
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- SEÇÃO 4: O QUE NÃO FUNCIONOU -->
+  <section class="section" id="nao-funcionou" aria-labelledby="tit-nao-funcionou">
+    <div class="section-header">
+      <div class="section-num" aria-hidden="true">04</div>
+      <div>
+        <h2 class="section-title" id="tit-nao-funcionou">O Que Não Funcionou</h2>
+        <p class="section-desc">Bottom 3 posts e os motivos do baixo desempenho</p>
+      </div>
+    </div>
+    <div class="divider" aria-hidden="true"></div>
+
+    <div class="analysis-grid">
+      <article class="post-card bad">
+        <div class="post-card-top">
+          <div>
+            <div class="post-pos">4º lugar · Carrossel</div>
+            <div style="margin-top:4px;"><span class="format-badge fmt-carrossel">02/06/24</span></div>
+          </div>
+          <div class="post-score bad-score">133</div>
+        </div>
+        <div class="post-title">"☀️"</div>
+        <div class="post-meta">
+          <span class="post-meta-item">
+            <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+            ~73 curtidas
+          </span>
+          <span class="post-meta-item">
+            <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+            ~20 comentários
+          </span>
+        </div>
+        <div class="post-insight">
+          <strong>Por que falhou:</strong> Legenda de apenas um emoji de sol não oferece nenhum gancho emocional ou contextual. Não sabemos onde está, com quem foi, o que aquele momento significa. Comparado ao Post #1, a ausência de narrativa reduz o engajamento. Os comentários são mecanicamente genéricos — nenhum da intensidade emocional dos posts top.
+        </div>
+      </article>
+
+      <article class="post-card bad">
+        <div class="post-card-top">
+          <div>
+            <div class="post-pos">5º lugar · Foto</div>
+            <div style="margin-top:4px;"><span class="format-badge fmt-foto">30/08/24</span></div>
+          </div>
+          <div class="post-score bad-score">121</div>
+        </div>
+        <div class="post-title">"all blue!"</div>
+        <div class="post-meta">
+          <span class="post-meta-item">
+            <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+            ~61 curtidas
+          </span>
+          <span class="post-meta-item">
+            <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+            ~20 comentários
+          </span>
+        </div>
+        <div class="post-insight">
+          <strong>Por que falhou:</strong> Foto única de Lisboa com legenda de duas palavras. Ausência total de contexto: não sabemos o que estava acontecendo, se era ocasião especial. Foto solitária (não carrossel) não convida à exploração. Os comentários existem mas são quase todos variações de "linda" — nenhuma conversa, nenhuma história. Um carrossel de Lisboa ou uma frase sobre a viagem teria mudado o resultado.
+        </div>
+      </article>
+
+      <article class="post-card bad">
+        <div class="post-card-top">
+          <div>
+            <div class="post-pos">6º lugar · Carrossel</div>
+            <div style="margin-top:4px;"><span class="format-badge fmt-carrossel">15/11/24</span></div>
+          </div>
+          <div class="post-score bad-score">114</div>
+        </div>
+        <div class="post-title">"sunset time"</div>
+        <div class="post-meta">
+          <span class="post-meta-item">
+            <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+            ~54 curtidas
+          </span>
+          <span class="post-meta-item">
+            <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+            ~20 comentários
+          </span>
+        </div>
+        <div class="post-insight">
+          <strong>Por que falhou:</strong> O pior post com curtidas visíveis. A legenda "sunset time" é genérica ao ponto de ser intercambiável com qualquer conta do mundo. Publicado num período de 6 meses de hiato, o que penaliza o alcance pelo algoritmo. Até a avó perguntou nos comentários "Você foi com quem, amor?" — sinal de que nem as pessoas mais próximas sabiam o contexto. Uma frase mínima teria dobrado o resultado.
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- SEÇÃO 5: CONCLUSÕES -->
+  <section class="section" id="conclusoes" aria-labelledby="tit-conclusoes">
+    <div class="section-header">
+      <div class="section-num" aria-hidden="true">05</div>
+      <div>
+        <h2 class="section-title" id="tit-conclusoes">Conclusões</h2>
+        <p class="section-desc">5 insights fundamentais desta análise</p>
+      </div>
+    </div>
+    <div class="divider" aria-hidden="true"></div>
+
+    <div class="insights-list" role="list">
+      <div class="insight-item" role="listitem">
+        <div class="insight-icon" aria-hidden="true">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+        </div>
+        <div class="insight-text">
+          <strong>Relacionamentos e momentos emocionais vencem sempre.</strong> O post com o namorado (#1, score 257) e o de evento festivo (#2, score 246) lideram com folga. O público responde intensamente a conteúdo com carga afetiva visível — looks especiais e casal.
+        </div>
+      </div>
+      <div class="insight-item" role="listitem">
+        <div class="insight-icon" aria-hidden="true">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        </div>
+        <div class="insight-text">
+          <strong>Zero hashtags em 100% dos posts é um problema invisível.</strong> Nenhum post usa qualquer hashtag — sem possibilidade de descoberta orgânica. O engajamento interno é forte, mas o crescimento da conta é matematicamente impossível sem alcance externo.
+        </div>
+      </div>
+      <div class="insight-item" role="listitem">
+        <div class="insight-icon" aria-hidden="true">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        </div>
+        <div class="insight-text">
+          <strong>A consistência inexistente está matando o alcance.</strong> Intervalos de 3 a 11 meses entre posts. Nenhum padrão, nenhuma cadência, nenhum sinal ao algoritmo de que o perfil é ativo — o que limita o alcance até para seguidores existentes.
+        </div>
+      </div>
+      <div class="insight-item" role="listitem">
+        <div class="insight-icon" aria-hidden="true">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"><path d="M14.5 10c-.83 0-1.5-.67-1.5-1.5v-5c0-.83.67-1.5 1.5-1.5s1.5.67 1.5 1.5v5c0 .83-.67 1.5-1.5 1.5z"/><path d="M20.5 10H19V8.5c0-.83.67-1.5 1.5-1.5s1.5.67 1.5 1.5-.67 1.5-1.5 1.5z"/><path d="M9.5 14c.83 0 1.5.67 1.5 1.5v5c0 .83-.67 1.5-1.5 1.5S8 21.33 8 20.5v-5c0-.83.67-1.5 1.5-1.5z"/><path d="M3.5 14H5v1.5c0 .83-.67 1.5-1.5 1.5S2 16.33 2 15.5 2.67 14 3.5 14z"/><path d="M14 14.5c0-.83.67-1.5 1.5-1.5h5c.83 0 1.5.67 1.5 1.5s-.67 1.5-1.5 1.5h-5c-.83 0-1.5-.67-1.5-1.5z"/><path d="M15.5 19H14v1.5c0 .83.67 1.5 1.5 1.5s1.5-.67 1.5-1.5-.67-1.5-1.5-1.5z"/><path d="M10 9.5C10 8.67 9.33 8 8.5 8h-5C2.67 8 2 8.67 2 9.5S2.67 11 3.5 11h5c.83 0 1.5-.67 1.5-1.5z"/><path d="M8.5 5H10V3.5C10 2.67 9.33 2 8.5 2S7 2.67 7 3.5 7.67 5 8.5 5z"/></svg>
+        </div>
+        <div class="insight-text">
+          <strong>O gap entre Highlights e feed é enorme.</strong> Os Highlights revelam uma vida rica — viagens a Portugal, Uruguai, EUA, Brasil, fé cristã, relacionamentos afetivos. O feed não conta nenhuma dessas histórias. O perfil tem identidade clara, mas não comunica nada além de "sou linda e viajada".
+        </div>
+      </div>
+      <div class="insight-item" role="listitem">
+        <div class="insight-icon" aria-hidden="true">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+        </div>
+        <div class="insight-text">
+          <strong>A legenda faz toda a diferença.</strong> "sunset time" (score 114) vs "I fall in love with you a little bit more" (score 257). Uma conta história, a outra descreve uma foto. Sophia tem sensibilidade para frases poéticas — explorar isso nas legendas é a mudança de maior impacto com menor esforço.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SEÇÃO 6: ESTRATÉGIA -->
+  <section class="section" id="estrategia" aria-labelledby="tit-estrategia">
+    <div class="section-header">
+      <div class="section-num" aria-hidden="true">06</div>
+      <div>
+        <h2 class="section-title" id="tit-estrategia">Estratégia</h2>
+        <p class="section-desc">6 recomendações práticas para os próximos 30 dias</p>
+      </div>
+    </div>
+    <div class="divider" aria-hidden="true"></div>
+
+    <div class="recs-grid">
+      <div class="rec-card">
+        <div class="rec-num" aria-label="Recomendação 1">1</div>
+        <div class="rec-title">Um post por semana aos domingos</div>
+        <div class="rec-desc">O Post #3 ("special sunday") usou o framing certo. A audiência é engajada e afetiva — não precisa de volume, mas precisa de cadência. Comece com um compromisso de 4 domingos seguidos e meça o resultado.</div>
+      </div>
+      <div class="rec-card">
+        <div class="rec-num" aria-label="Recomendação 2">2</div>
+        <div class="rec-title">Use 3–5 hashtags em todo post novo</div>
+        <div class="rec-desc">Misture nicho e volume médio: #cristianismo, #vidasimples, #feministacristã e hashtags de localização (#saopaulo, #lisboa). Entre 50K e 500K posts — competitivos o suficiente para gerar descoberta, pequenos o suficiente para aparecer.</div>
+      </div>
+      <div class="rec-card">
+        <div class="rec-num" aria-label="Recomendação 3">3</div>
+        <div class="rec-title">Conte o contexto na legenda, não o visual</div>
+        <div class="rec-desc">Em cada post, adicione uma frase que conte a emoção ou o contexto do momento. Não descreva a foto — conte o que aquele momento significou. É a mudança de maior impacto com menor esforço.</div>
+      </div>
+      <div class="rec-card">
+        <div class="rec-num" aria-label="Recomendação 4">4</div>
+        <div class="rec-title">Um Reel por mês com clips dos Highlights</div>
+        <div class="rec-desc">Reels têm alcance 3–5x maior que fotos para contas pequenas. Um Reel simples com clips de Portugal + música gospel brasileira + uma frase da bio já seria suficiente para multiplicar o alcance sem criar conteúdo do zero.</div>
+      </div>
+      <div class="rec-card">
+        <div class="rec-num" aria-label="Recomendação 5">5</div>
+        <div class="rec-title">Stories semanais para manter a conta "viva"</div>
+        <div class="rec-desc">Stories simples (uma foto do dia, um versículo) sinalizam ao algoritmo que o perfil é ativo e mantêm o engajamento quente entre posts do feed. Isso melhora diretamente o alcance das publicações futuras.</div>
+      </div>
+      <div class="rec-card">
+        <div class="rec-num" aria-label="Recomendação 6">6</div>
+        <div class="rec-title">Próximo post de casal: adicione uma pergunta</div>
+        <div class="rec-desc">O Post #1 gerou 14 comentários sem CTA nenhum. Uma pergunta simples como "o que vocês fazem no domingo?" poderia facilmente dobrar os comentários. Para contas pessoais, perguntas de baixo risco e alta afetividade funcionam melhor que qualquer outro CTA.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SEÇÃO 7: PLANO DE AÇÃO -->
+  <section class="section" id="plano" aria-labelledby="tit-plano">
+    <div class="section-header">
+      <div class="section-num" aria-hidden="true">07</div>
+      <div>
+        <h2 class="section-title" id="tit-plano">Plano de Ação</h2>
+        <p class="section-desc">3 quick wins para implementar ainda esta semana</p>
+      </div>
+    </div>
+    <div class="divider" aria-hidden="true"></div>
+
+    <div class="actions-list">
+      <div class="action-item">
+        <div class="action-num" aria-label="Ação 1">1</div>
+        <div>
+          <div class="action-tag">Quick Win · Alcance</div>
+          <div class="action-title">Adicionar hashtags retroativamente aos 7 posts existentes</div>
+          <div class="action-desc">O Instagram permite editar legendas. Adicionar 3–5 hashtags relevantes aos posts já existentes — especialmente os de maior engajamento (#1 e #2) — pode reativar o alcance deles sem nenhum trabalho novo.</div>
+          <div class="action-example">Sugestão de mix: #somosnós #relacionamento #cristã #momentosespeciais + hashtag de localização (ex: #saopaulo, #lisboa, #uruguai)</div>
+        </div>
+      </div>
+      <div class="action-item">
+        <div class="action-num" aria-label="Ação 2">2</div>
+        <div>
+          <div class="action-tag">Quick Win · Visual</div>
+          <div class="action-title">Padronizar as capas dos 7 Highlights no Canva</div>
+          <div class="action-desc">Criar ícones simples (cruz para "God", coração para "&co", bandeiras estilizadas para os destinos) com fundo de cor uniforme — fundo branco ou bege com ícones em preto ou dourado. Menos de 1 hora de trabalho no Canva. Transforma completamente a percepção do perfil.</div>
+          <div class="action-example">Canva tem templates gratuitos de "capas de Highlight do Instagram". Buscar "highlight cover minimalist" e adaptar com as cores da estética da conta.</div>
+        </div>
+      </div>
+      <div class="action-item">
+        <div class="action-num" aria-label="Ação 3">3</div>
+        <div>
+          <div class="action-tag">Quick Win · Engajamento</div>
+          <div class="action-title">Publicar um carrossel de relacionamento com 1 frase emocional e 3 hashtags</div>
+          <div class="action-desc">O dado é definitivo: o público de Sophia reage com muito mais intensidade a conteúdo de casal do que a qualquer outra categoria. Qualquer foto com o @rapha_mmbb — mesmo algo casual do dia a dia — publicada com uma legenda com 1 frase emocional e 3 hashtags vai performar no top do perfil.</div>
+          <div class="action-example">"Não precisa ser uma data especial pra ser um dia que eu vou lembrar pra sempre." + #relacionamento #momentosespeciais #nós</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SEÇÃO 8: HIGHLIGHTS -->
+  <section class="section" id="highlights" aria-labelledby="tit-highlights">
+    <div class="section-header">
+      <div class="section-num" aria-hidden="true">08</div>
+      <div>
+        <h2 class="section-title" id="tit-highlights">Stories em Destaque</h2>
+        <p class="section-desc">7 Highlights analisados · Estrutura, conteúdo e oportunidades</p>
+      </div>
+    </div>
+    <div class="divider" aria-hidden="true"></div>
+
+    <div class="highlight-table-wrap">
+      <table aria-label="Análise dos Highlights do perfil">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Nome</th>
+            <th scope="col">Tema</th>
+            <th scope="col">Capa</th>
+            <th scope="col">Observação</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="rank-badge rank-other">1</span></td>
+            <td style="font-weight:600;">God</td>
+            <td>Fé cristã, cultos, adoração</td>
+            <td><span style="color:var(--red); font-size:12px; font-weight:600;">Padrão</span></td>
+            <td style="font-size:13px; color:var(--muted);">Conteúdo genuíno e coerente com a bio; tem profundidade emocional</td>
+          </tr>
+          <tr>
+            <td><span class="rank-badge rank-other">2</span></td>
+            <td style="font-weight:600;">&co</td>
+            <td>Vida cotidiana, amizades, família</td>
+            <td><span style="color:var(--red); font-size:12px; font-weight:600;">Padrão</span></td>
+            <td style="font-size:13px; color:var(--muted);">Título criativo mas ambíguo; mistura conteúdos muito diferentes</td>
+          </tr>
+          <tr>
+            <td><span class="rank-badge rank-other">3</span></td>
+            <td style="font-weight:600;">🇧🇷</td>
+            <td>Viagens e momentos no Brasil</td>
+            <td><span style="color:var(--red); font-size:12px; font-weight:600;">Padrão</span></td>
+            <td style="font-size:13px; color:var(--muted);"><strong style="color:var(--yellow);">CRÍTICO:</strong> +50 slides — ingerenciável. Precisa ser dividido em submódulos</td>
+          </tr>
+          <tr>
+            <td><span class="rank-badge rank-other">4</span></td>
+            <td style="font-weight:600;">SW</td>
+            <td>Estilo pessoal, selfies</td>
+            <td><span style="color:var(--red); font-size:12px; font-weight:600;">Padrão</span></td>
+            <td style="font-size:13px; color:var(--muted);">Iniciais enigmáticas; conteúdo mais coeso esteticamente</td>
+          </tr>
+          <tr>
+            <td><span class="rank-badge rank-other">5</span></td>
+            <td style="font-weight:600;">🇵🇹</td>
+            <td>Viagem a Portugal (Lisboa)</td>
+            <td><span style="color:var(--red); font-size:12px; font-weight:600;">Padrão</span></td>
+            <td style="font-size:13px; color:var(--muted);">Belas imagens; ~20 slides — tamanho razoável</td>
+          </tr>
+          <tr>
+            <td><span class="rank-badge rank-other">6</span></td>
+            <td style="font-weight:600;">🇺🇾</td>
+            <td>Viagem ao Uruguai</td>
+            <td><span style="color:var(--red); font-size:12px; font-weight:600;">Padrão</span></td>
+            <td style="font-size:13px; color:var(--muted);">Bom tamanho (~15 slides); visualmente consistente</td>
+          </tr>
+          <tr>
+            <td><span class="rank-badge rank-other">7</span></td>
+            <td style="font-weight:600;">🇺🇸</td>
+            <td>Viagem aos EUA (Universal)</td>
+            <td><span style="color:var(--red); font-size:12px; font-weight:600;">Padrão</span></td>
+            <td style="font-size:13px; color:var(--muted);"><strong style="color:var(--yellow);">343 semanas de idade (~6,5 anos)</strong> — conteúdo mais antigo do perfil</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="highlight-analysis">
+      <p><strong>O que está funcionando:</strong> Os títulos temáticos são coerentes com a persona da criadora, e o Highlight "God" é autêntico e diferenciador para o nicho de jovens cristãs. A estrutura geral comunica bem os dois pilares — fé e viagens.</p>
+      <p><strong>O problema principal:</strong> Nenhum dos 7 Highlights tem capa personalizada — todos exibem o círculo cinza padrão. Isso cria uma fila anonimizada que não convida ao clique e contradiz o cuidado estético evidente no feed. O Highlight "🇧🇷" com mais de 50 slides é ingerenciável — um Highlight desse tamanho não é consumido, é ignorado.</p>
+      <p><strong>A lacuna mais óbvia:</strong> Não existe Highlight dedicado a relacionamento — o maior ativo de engajamento do perfil. Um Highlight "Nós" ou "❤️" com os melhores stories de casal converteria o maior pico de engajamento em identidade de marca pessoal permanente.</p>
+    </div>
+
+    <div style="margin-top: 24px;">
+      <div class="recs-grid">
+        <div class="rec-card">
+          <div class="rec-num" aria-label="Ação de Highlight 1">A</div>
+          <div class="rec-title">Criar Highlight "Nós" ou "❤️"</div>
+          <div class="rec-desc">Dedicado ao relacionamento com o @rapha_mmbb. O Post #1 é o melhor da conta — dar visibilidade permanente a esse tema no perfil é a vitrine mais estratégica disponível agora.</div>
+        </div>
+        <div class="rec-card">
+          <div class="rec-num" aria-label="Ação de Highlight 2">B</div>
+          <div class="rec-title">Padronizar capas dos 7 Highlights</div>
+          <div class="rec-desc">Ícones minimalistas com fundo único (branco ou bege, ícones pretos ou dourados). Uma hora de trabalho no Canva. Transforma completamente a percepção de profissionalismo do perfil.</div>
+        </div>
+        <div class="rec-card">
+          <div class="rec-num" aria-label="Ação de Highlight 3">C</div>
+          <div class="rec-title">Dividir o "🇧🇷" em submódulos</div>
+          <div class="rec-desc">Separar em "☀️ praia", "🏙️ cidade", "🎊 festas" — ou simplesmente reduzir às melhores 15–20 fotos. Curadoria é a diferença entre um arquivo e uma vitrine que gera cliques.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo grad-text">@sosowhitaker_</div>
+  <p>Auditoria gerada em 06/04/2026 · 7 posts analisados · Perfil completo</p>
+  <p style="margin-top:6px; font-size:12px; opacity:0.5;">Instagram Content Audit · Álbum Afetivo sem Cadência</p>
+</footer>
+
+</body>
+</html>
