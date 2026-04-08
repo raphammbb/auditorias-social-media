@@ -1,0 +1,845 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Auditoria Instagram — Lincoln Music School</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            serif: ['Playfair Display', 'Georgia', 'serif'],
+            sans: ['Inter', 'system-ui', 'sans-serif'],
+          },
+          colors: {
+            navy: {
+              950: '#060D18',
+              900: '#0F1B2D',
+              800: '#162438',
+              700: '#1E3050',
+            },
+            gold: {
+              400: '#DEB96A',
+              500: '#C9A84C',
+              600: '#A88A36',
+            },
+            cream: {
+              50: '#FAF7F2',
+              100: '#F5F0E8',
+              200: '#EDE4D3',
+              400: '#C8B89A',
+            },
+          },
+          backgroundImage: {
+            'staff-lines': "repeating-linear-gradient(180deg, transparent, transparent 18px, rgba(201,168,76,0.07) 18px, rgba(201,168,76,0.07) 20px)",
+          },
+        },
+      },
+    }
+  </script>
+  <style>
+    * { box-sizing: border-box; }
+
+    body {
+      background-color: #0F1B2D;
+      font-family: 'Inter', system-ui, sans-serif;
+      color: #F5F0E8;
+      min-height: 100vh;
+    }
+
+    .font-serif { font-family: 'Playfair Display', Georgia, serif; }
+
+    /* Staff lines background */
+    .staff-bg {
+      background-image: repeating-linear-gradient(
+        180deg,
+        transparent,
+        transparent 22px,
+        rgba(201, 168, 76, 0.06) 22px,
+        rgba(201, 168, 76, 0.06) 24px
+      );
+    }
+
+    /* Gold gradient text */
+    .text-gold-gradient {
+      background: linear-gradient(135deg, #DEB96A 0%, #C9A84C 50%, #A88A36 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    /* Card styles */
+    .card {
+      background: rgba(22, 36, 56, 0.8);
+      border: 1px solid rgba(201, 168, 76, 0.15);
+      border-radius: 12px;
+      transition: border-color 200ms ease, box-shadow 200ms ease;
+    }
+    .card:hover {
+      border-color: rgba(201, 168, 76, 0.3);
+      box-shadow: 0 4px 24px rgba(201, 168, 76, 0.08);
+    }
+
+    /* Metric card */
+    .metric-card {
+      background: linear-gradient(135deg, rgba(30, 48, 80, 0.9) 0%, rgba(22, 36, 56, 0.9) 100%);
+      border: 1px solid rgba(201, 168, 76, 0.2);
+      border-radius: 12px;
+    }
+
+    /* Score circle */
+    .score-circle {
+      width: 110px;
+      height: 110px;
+      border-radius: 50%;
+      background: conic-gradient(#C9A84C 190deg, rgba(201,168,76,0.15) 190deg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+    }
+    .score-circle::before {
+      content: '';
+      position: absolute;
+      width: 86px;
+      height: 86px;
+      border-radius: 50%;
+      background: #0F1B2D;
+    }
+    .score-inner {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+    }
+
+    /* Progress bar */
+    .progress-bar {
+      height: 6px;
+      background: rgba(201, 168, 76, 0.12);
+      border-radius: 3px;
+      overflow: hidden;
+    }
+    .progress-fill {
+      height: 100%;
+      border-radius: 3px;
+      background: linear-gradient(90deg, #C9A84C, #DEB96A);
+      transition: width 1s ease;
+    }
+
+    /* Status badge */
+    .badge-critico {
+      background: rgba(239, 68, 68, 0.15);
+      color: #FCA5A5;
+      border: 1px solid rgba(239, 68, 68, 0.3);
+    }
+    .badge-alta {
+      background: rgba(251, 146, 60, 0.15);
+      color: #FDB97D;
+      border: 1px solid rgba(251, 146, 60, 0.3);
+    }
+    .badge-media {
+      background: rgba(234, 179, 8, 0.15);
+      color: #FDE68A;
+      border: 1px solid rgba(234, 179, 8, 0.3);
+    }
+    .badge-baixa {
+      background: rgba(148, 163, 184, 0.12);
+      color: #CBD5E1;
+      border: 1px solid rgba(148, 163, 184, 0.2);
+    }
+
+    /* Status indicators */
+    .status-ok {
+      background: rgba(34, 197, 94, 0.12);
+      border-left: 3px solid #22C55E;
+    }
+    .status-warn {
+      background: rgba(234, 179, 8, 0.1);
+      border-left: 3px solid #EAB308;
+    }
+    .status-critical {
+      background: rgba(239, 68, 68, 0.1);
+      border-left: 3px solid #EF4444;
+    }
+
+    /* Section divider */
+    .music-divider {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      color: rgba(201, 168, 76, 0.4);
+      font-size: 18px;
+      letter-spacing: 4px;
+    }
+    .music-divider::before, .music-divider::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(201, 168, 76, 0.3), transparent);
+    }
+
+    /* Hero musical decoration */
+    .musical-float {
+      position: absolute;
+      font-size: 4rem;
+      opacity: 0.04;
+      pointer-events: none;
+      color: #C9A84C;
+      font-family: 'Playfair Display', serif;
+    }
+
+    /* Strength item */
+    .strength-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      padding: 14px 16px;
+      background: rgba(34, 197, 94, 0.06);
+      border: 1px solid rgba(34, 197, 94, 0.15);
+      border-radius: 10px;
+    }
+
+    /* Recommendation number */
+    .rec-number {
+      width: 32px;
+      height: 32px;
+      min-width: 32px;
+      border-radius: 50%;
+      background: rgba(201, 168, 76, 0.12);
+      border: 1px solid rgba(201, 168, 76, 0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Playfair Display', serif;
+      font-size: 13px;
+      color: #C9A84C;
+      font-weight: 600;
+    }
+
+    /* Table styles */
+    .score-table tr {
+      border-bottom: 1px solid rgba(201, 168, 76, 0.08);
+    }
+    .score-table tr:last-child {
+      border-bottom: none;
+    }
+
+    @media (max-width: 640px) {
+      .score-circle { width: 90px; height: 90px; }
+      .score-circle::before { width: 70px; height: 70px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .progress-fill { transition: none; }
+      .card { transition: none; }
+    }
+  </style>
+</head>
+<body class="staff-bg">
+
+  <!-- ═══════════════════════════ HEADER ═══════════════════════════ -->
+  <header class="relative overflow-hidden" style="background: linear-gradient(180deg, #060D18 0%, #0F1B2D 100%); border-bottom: 1px solid rgba(201,168,76,0.15);">
+    <!-- Floating musical chars (decorative) -->
+    <span class="musical-float" style="top: 10%; left: 3%;">♪</span>
+    <span class="musical-float" style="top: 60%; left: 8%;">♫</span>
+    <span class="musical-float" style="top: 20%; right: 5%;">♩</span>
+    <span class="musical-float" style="top: 70%; right: 3%;">𝄞</span>
+    <span class="musical-float" style="top: 5%; left: 45%;">♬</span>
+
+    <div class="relative max-w-4xl mx-auto px-6 py-14 text-center">
+      <!-- Audit badge -->
+      <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full mb-6" style="background: rgba(201,168,76,0.1); border: 1px solid rgba(201,168,76,0.3);">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#C9A84C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/>
+        </svg>
+        <span class="font-sans text-xs font-semibold tracking-widest uppercase" style="color: #C9A84C;">Auditoria Instagram</span>
+      </div>
+
+      <!-- Title -->
+      <h1 class="font-serif text-4xl sm:text-5xl lg:text-6xl font-bold mb-2" style="color: #F5F0E8;">
+        Lincoln Music School
+      </h1>
+      <p class="font-sans text-sm sm:text-base mb-8" style="color: rgba(201,168,76,0.7);">
+        @lincolnmusicschool_ &nbsp;•&nbsp; Auditoria realizada em 08 de abril de 2026
+      </p>
+
+      <!-- Score circle -->
+      <div class="flex justify-center">
+        <div class="score-circle" role="img" aria-label="Nota geral: 5.3 de 10">
+          <div class="score-inner">
+            <div class="font-serif text-xl font-bold" style="color: #C9A84C; line-height: 1;">5.3</div>
+            <div class="font-sans text-xs" style="color: rgba(201,168,76,0.6);">/10</div>
+          </div>
+        </div>
+      </div>
+      <p class="font-sans text-xs mt-3" style="color: rgba(245,240,232,0.4);">Nota Geral</p>
+    </div>
+  </header>
+
+  <main class="max-w-4xl mx-auto px-4 sm:px-6 py-12 space-y-14">
+
+    <!-- ═══════════════════════ SECTION 1: VISÃO GERAL ═══════════════════════ -->
+    <section aria-labelledby="overview-title">
+      <div class="music-divider mb-6" aria-hidden="true">♩ ♪ ♫</div>
+      <h2 id="overview-title" class="font-serif text-2xl sm:text-3xl font-semibold mb-6 text-center" style="color: #F5F0E8;">
+        Visão Geral do Perfil
+      </h2>
+
+      <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
+        <div class="metric-card p-5 text-center">
+          <svg class="w-5 h-5 mx-auto mb-2 opacity-60" viewBox="0 0 24 24" fill="none" stroke="#C9A84C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/>
+          </svg>
+          <div class="font-serif text-2xl sm:text-3xl font-bold text-gold-gradient">360</div>
+          <div class="font-sans text-xs mt-1" style="color: rgba(245,240,232,0.5);">Total de Posts</div>
+        </div>
+        <div class="metric-card p-5 text-center">
+          <svg class="w-5 h-5 mx-auto mb-2 opacity-60" viewBox="0 0 24 24" fill="none" stroke="#C9A84C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/>
+          </svg>
+          <div class="font-serif text-2xl sm:text-3xl font-bold text-gold-gradient">2.138</div>
+          <div class="font-sans text-xs mt-1" style="color: rgba(245,240,232,0.5);">Seguidores</div>
+        </div>
+        <div class="metric-card p-5 text-center">
+          <svg class="w-5 h-5 mx-auto mb-2 opacity-60" viewBox="0 0 24 24" fill="none" stroke="#C9A84C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="M8.59 13.51l6.83 3.98M15.41 6.51l-6.82 3.98"/>
+          </svg>
+          <div class="font-serif text-2xl sm:text-3xl font-bold" style="color: #FCA5A5;">5.549</div>
+          <div class="font-sans text-xs mt-1" style="color: rgba(245,240,232,0.5);">Seguindo</div>
+        </div>
+        <div class="metric-card p-5 text-center">
+          <svg class="w-5 h-5 mx-auto mb-2 opacity-60" viewBox="0 0 24 24" fill="none" stroke="#C9A84C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M20 7H4a2 2 0 00-2 2v6a2 2 0 002 2h16a2 2 0 002-2V9a2 2 0 00-2-2z"/><path d="M16 21V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v16"/>
+          </svg>
+          <div class="font-serif text-lg sm:text-xl font-bold" style="color: #F5F0E8;">Empreendedor(a)</div>
+          <div class="font-sans text-xs mt-1" style="color: rgba(245,240,232,0.5);">Categoria</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════ SECTION 2: ANÁLISE DO PERFIL ═══════════════════════ -->
+    <section aria-labelledby="profile-title">
+      <div class="music-divider mb-6" aria-hidden="true">♩ ♪ ♫</div>
+      <h2 id="profile-title" class="font-serif text-2xl sm:text-3xl font-semibold mb-6 text-center" style="color: #F5F0E8;">
+        Análise do Perfil
+      </h2>
+
+      <div class="space-y-3">
+        <!-- OK items -->
+        <div class="status-ok card p-4 rounded-xl">
+          <div class="flex items-start gap-3">
+            <svg class="w-5 h-5 mt-0.5 flex-shrink-0" viewBox="0 0 20 20" fill="#22C55E" aria-hidden="true"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z" clip-rule="evenodd"/></svg>
+            <div>
+              <div class="font-sans text-sm font-semibold" style="color: #86EFAC;">Foto de Perfil</div>
+              <div class="font-sans text-sm mt-0.5" style="color: rgba(245,240,232,0.7);">Lincoln ao piano — clara, bem iluminada e comunica o universo musical da marca de forma profissional.</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="status-warn card p-4 rounded-xl">
+          <div class="flex items-start gap-3">
+            <svg class="w-5 h-5 mt-0.5 flex-shrink-0" viewBox="0 0 20 20" fill="#EAB308" aria-hidden="true"><path fill-rule="evenodd" d="M8.485 2.495c.673-1.167 2.357-1.167 3.03 0l6.28 10.875c.673 1.167-.17 2.625-1.516 2.625H3.72c-1.347 0-2.189-1.458-1.515-2.625L8.485 2.495zM10 5a.75.75 0 01.75.75v3.5a.75.75 0 01-1.5 0v-3.5A.75.75 0 0110 5zm0 9a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd"/></svg>
+            <div>
+              <div class="font-sans text-sm font-semibold" style="color: #FDE68A;">Username</div>
+              <div class="font-sans text-sm mt-0.5" style="color: rgba(245,240,232,0.7);">O underscore final <span class="font-mono text-xs bg-white/10 px-1.5 py-0.5 rounded">lincolnmusicschool_</span> sugere que o handle preferido já estava ocupado — pequena fricção na memorização e busca orgânica.</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="status-ok card p-4 rounded-xl">
+          <div class="flex items-start gap-3">
+            <svg class="w-5 h-5 mt-0.5 flex-shrink-0" viewBox="0 0 20 20" fill="#22C55E" aria-hidden="true"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z" clip-rule="evenodd"/></svg>
+            <div>
+              <div class="font-sans text-sm font-semibold" style="color: #86EFAC;">Nome de Exibição</div>
+              <div class="font-sans text-sm mt-0.5" style="color: rgba(245,240,232,0.7);">"Lincoln Music School" — claro, descritivo e otimizado para pesquisas no Instagram.</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="status-warn card p-4 rounded-xl">
+          <div class="flex items-start gap-3">
+            <svg class="w-5 h-5 mt-0.5 flex-shrink-0" viewBox="0 0 20 20" fill="#EAB308" aria-hidden="true"><path fill-rule="evenodd" d="M8.485 2.495c.673-1.167 2.357-1.167 3.03 0l6.28 10.875c.673 1.167-.17 2.625-1.516 2.625H3.72c-1.347 0-2.189-1.458-1.515-2.625L8.485 2.495zM10 5a.75.75 0 01.75.75v3.5a.75.75 0 01-1.5 0v-3.5A.75.75 0 0110 5zm0 9a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd"/></svg>
+            <div>
+              <div class="font-sans text-sm font-semibold" style="color: #FDE68A;">Bio</div>
+              <div class="font-sans text-sm mt-0.5" style="color: rgba(245,240,232,0.7);">Transmite proposta de valor e localização (Centro Comercial Alphaville), mas o texto corre junto sem quebras visuais. Não menciona aulas online — um serviço-chave com Highlight próprio. A categoria "Empreendedor(a)" reduz a descoberta por nicho.</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="status-ok card p-4 rounded-xl">
+          <div class="flex items-start gap-3">
+            <svg class="w-5 h-5 mt-0.5 flex-shrink-0" viewBox="0 0 20 20" fill="#22C55E" aria-hidden="true"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z" clip-rule="evenodd"/></svg>
+            <div>
+              <div class="font-sans text-sm font-semibold" style="color: #86EFAC;">Links na Bio</div>
+              <div class="font-sans text-sm mt-0.5" style="color: rgba(245,240,232,0.7);">4 links bem estruturados: site, Facebook, YouTube e WhatsApp. O link direto para WhatsApp é especialmente valioso para negócio de serviços no Brasil.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════ SECTION 3: STORY HIGHLIGHTS ═══════════════════════ -->
+    <section aria-labelledby="highlights-title">
+      <div class="music-divider mb-6" aria-hidden="true">♩ ♪ ♫</div>
+      <h2 id="highlights-title" class="font-serif text-2xl sm:text-3xl font-semibold mb-6 text-center" style="color: #F5F0E8;">
+        Story Highlights
+      </h2>
+
+      <div class="card p-6 rounded-2xl">
+        <!-- Highlight pills -->
+        <div class="flex flex-wrap gap-2 mb-5">
+          <span class="font-sans text-xs px-3 py-1.5 rounded-full font-medium" style="background: rgba(201,168,76,0.12); border: 1px solid rgba(201,168,76,0.25); color: #DEB96A;">Escola</span>
+          <span class="font-sans text-xs px-3 py-1.5 rounded-full font-medium" style="background: rgba(201,168,76,0.12); border: 1px solid rgba(201,168,76,0.25); color: #DEB96A;">Aulas on-line</span>
+          <span class="font-sans text-xs px-3 py-1.5 rounded-full font-medium" style="background: rgba(201,168,76,0.12); border: 1px solid rgba(201,168,76,0.25); color: #DEB96A;">Kidsmusic</span>
+          <span class="font-sans text-xs px-3 py-1.5 rounded-full font-medium" style="background: rgba(201,168,76,0.12); border: 1px solid rgba(201,168,76,0.25); color: #DEB96A;">PraiseWorship</span>
+          <span class="font-sans text-xs px-3 py-1.5 rounded-full font-medium" style="background: rgba(201,168,76,0.12); border: 1px solid rgba(201,168,76,0.25); color: #DEB96A;">best pupil</span>
+          <span class="font-sans text-xs px-3 py-1.5 rounded-full font-medium" style="background: rgba(201,168,76,0.12); border: 1px solid rgba(201,168,76,0.25); color: #DEB96A;">Natal</span>
+        </div>
+
+        <div class="space-y-3">
+          <div class="status-ok p-3 rounded-lg">
+            <div class="flex items-start gap-2">
+              <svg class="w-4 h-4 mt-0.5 flex-shrink-0" viewBox="0 0 20 20" fill="#22C55E" aria-hidden="true"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z" clip-rule="evenodd"/></svg>
+              <p class="font-sans text-sm" style="color: rgba(245,240,232,0.8);"><span class="font-semibold" style="color: #86EFAC;">Bem segmentados:</span> os 6 highlights cobrem os pilares principais — escola, aulas online, música infantil, worship, alunos e conteúdo sazonal.</p>
+            </div>
+          </div>
+          <div class="status-warn p-3 rounded-lg">
+            <div class="flex items-start gap-2">
+              <svg class="w-4 h-4 mt-0.5 flex-shrink-0" viewBox="0 0 20 20" fill="#EAB308" aria-hidden="true"><path fill-rule="evenodd" d="M8.485 2.495c.673-1.167 2.357-1.167 3.03 0l6.28 10.875c.673 1.167-.17 2.625-1.516 2.625H3.72c-1.347 0-2.189-1.458-1.515-2.625L8.485 2.495zM10 5a.75.75 0 01.75.75v3.5a.75.75 0 01-1.5 0v-3.5A.75.75 0 0110 5zm0 9a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd"/></svg>
+              <p class="font-sans text-sm" style="color: rgba(245,240,232,0.8);"><span class="font-semibold" style="color: #FDE68A;">Capas sem identidade visual:</span> os covers são frames de vídeo brutos, sem paleta de cores ou ícones padronizados. É um dos primeiros elementos que novos visitantes veem — e uma grande oportunidade perdida de branding. Covers com ícones simples sobre cor consistente elevariam instantaneamente a percepção da marca.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════ SECTION 4: ANÁLISE DE CONTEÚDO ═══════════════════════ -->
+    <section aria-labelledby="content-title">
+      <div class="music-divider mb-6" aria-hidden="true">♩ ♪ ♫</div>
+      <h2 id="content-title" class="font-serif text-2xl sm:text-3xl font-semibold mb-6 text-center" style="color: #F5F0E8;">
+        Análise de Conteúdo
+      </h2>
+
+      <div class="grid sm:grid-cols-2 gap-4">
+        <div class="card p-5 rounded-2xl">
+          <div class="flex items-center gap-2 mb-2">
+            <svg class="w-4 h-4 flex-shrink-0" viewBox="0 0 20 20" fill="#22C55E" aria-hidden="true"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z" clip-rule="evenodd"/></svg>
+            <h3 class="font-sans text-sm font-semibold" style="color: #86EFAC;">Mix de Formatos</h3>
+          </div>
+          <p class="font-sans text-sm" style="color: rgba(245,240,232,0.7);">~90% Reels — estratégia alinhada ao algoritmo atual do Instagram, que prioriza vídeo no alcance orgânico.</p>
+        </div>
+
+        <div class="card p-5 rounded-2xl">
+          <div class="flex items-center gap-2 mb-2">
+            <svg class="w-4 h-4 flex-shrink-0" viewBox="0 0 20 20" fill="#EAB308" aria-hidden="true"><path fill-rule="evenodd" d="M8.485 2.495c.673-1.167 2.357-1.167 3.03 0l6.28 10.875c.673 1.167-.17 2.625-1.516 2.625H3.72c-1.347 0-2.189-1.458-1.515-2.625L8.485 2.495zM10 5a.75.75 0 01.75.75v3.5a.75.75 0 01-1.5 0v-3.5A.75.75 0 0110 5zm0 9a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd"/></svg>
+            <h3 class="font-sans text-sm font-semibold" style="color: #FDE68A;">Frequência de Postagem</h3>
+          </div>
+          <p class="font-sans text-sm" style="color: rgba(245,240,232,0.7);">Irregular — burst de atividade no início de abril 2026 após período quieto em fevereiro/março. Consistência é chave para o algoritmo.</p>
+        </div>
+
+        <div class="card p-5 rounded-2xl">
+          <div class="flex items-center gap-2 mb-2">
+            <svg class="w-4 h-4 flex-shrink-0" viewBox="0 0 20 20" fill="#22C55E" aria-hidden="true"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z" clip-rule="evenodd"/></svg>
+            <h3 class="font-sans text-sm font-semibold" style="color: #86EFAC;">Temas de Conteúdo</h3>
+          </div>
+          <p class="font-sans text-sm" style="color: rgba(245,240,232,0.7);">Mix rico e autêntico: alunos em destaque, covers de piano (Lauren Daigle, Il Divo, Amazing Grace), coral/vocal, worship, conteúdo religioso/Páscoa, notícias da escola.</p>
+        </div>
+
+        <div class="card p-5 rounded-2xl">
+          <div class="flex items-center gap-2 mb-2">
+            <svg class="w-4 h-4 flex-shrink-0" viewBox="0 0 20 20" fill="#EAB308" aria-hidden="true"><path fill-rule="evenodd" d="M8.485 2.495c.673-1.167 2.357-1.167 3.03 0l6.28 10.875c.673 1.167-.17 2.625-1.516 2.625H3.72c-1.347 0-2.189-1.458-1.515-2.625L8.485 2.495zM10 5a.75.75 0 01.75.75v3.5a.75.75 0 01-1.5 0v-3.5A.75.75 0 0110 5zm0 9a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd"/></svg>
+            <h3 class="font-sans text-sm font-semibold" style="color: #FDE68A;">Estratégia de Legendas</h3>
+          </div>
+          <p class="font-sans text-sm" style="color: rgba(245,240,232,0.7);">Website incluído nas legendas é boa prática. Porém, o uso de hashtags é inconsistente — vários posts sem nenhuma hashtag, perdendo oportunidades de descoberta orgânica.</p>
+        </div>
+
+        <div class="card p-5 rounded-2xl sm:col-span-2">
+          <div class="flex items-center gap-2 mb-2">
+            <svg class="w-4 h-4 flex-shrink-0" viewBox="0 0 20 20" fill="#EAB308" aria-hidden="true"><path fill-rule="evenodd" d="M8.485 2.495c.673-1.167 2.357-1.167 3.03 0l6.28 10.875c.673 1.167-.17 2.625-1.516 2.625H3.72c-1.347 0-2.189-1.458-1.515-2.625L8.485 2.495zM10 5a.75.75 0 01.75.75v3.5a.75.75 0 01-1.5 0v-3.5A.75.75 0 0110 5zm0 9a1 1 0 100-2 1 1 0 000 2z" clip-rule="evenodd"/></svg>
+            <h3 class="font-sans text-sm font-semibold" style="color: #FDE68A;">Qualidade Visual</h3>
+          </div>
+          <p class="font-sans text-sm" style="color: rgba(245,240,232,0.7);">Filmagem majoritariamente em vertical/retrato (correto para Reels). A qualidade varia — alguns clips bem iluminados e enquadrados, outros com iluminação fraca ou enquadramento casual. Consistência na produção elevaria a percepção da marca.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════ SECTION 5: ENGAJAMENTO ═══════════════════════ -->
+    <section aria-labelledby="engagement-title">
+      <div class="music-divider mb-6" aria-hidden="true">♩ ♪ ♫</div>
+      <h2 id="engagement-title" class="font-serif text-2xl sm:text-3xl font-semibold mb-6 text-center" style="color: #F5F0E8;">
+        Análise de Engajamento
+      </h2>
+
+      <div class="space-y-4">
+        <!-- Critical -->
+        <div class="status-critical card p-5 rounded-2xl">
+          <div class="flex items-start gap-3">
+            <svg class="w-5 h-5 mt-0.5 flex-shrink-0" viewBox="0 0 20 20" fill="#EF4444" aria-hidden="true"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.28 7.22a.75.75 0 00-1.06 1.06L8.94 10l-1.72 1.72a.75.75 0 101.06 1.06L10 11.06l1.72 1.72a.75.75 0 101.06-1.06L11.06 10l1.72-1.72a.75.75 0 00-1.06-1.06L10 8.94 8.28 7.22z" clip-rule="evenodd"/></svg>
+            <div class="flex-1">
+              <div class="flex items-center flex-wrap gap-2 mb-2">
+                <h3 class="font-sans text-sm font-semibold" style="color: #FCA5A5;">Ratio Seguidores / Seguindo</h3>
+                <span class="badge-critico font-sans text-xs font-bold px-2 py-0.5 rounded-full">CRÍTICO</span>
+              </div>
+              <p class="font-sans text-sm mb-3" style="color: rgba(245,240,232,0.7);">A conta segue <strong style="color: #FCA5A5;">5.549 perfis</strong> e tem apenas <strong>2.138 seguidores</strong> — um ratio de 2,6:1 invertido. Isso sugere uso histórico de táticas follow-for-follow, que não constroem uma audiência genuína e podem suprimir o alcance orgânico. Uma conta de marca saudável segue muito menos do que é seguida.</p>
+              <div class="flex items-center gap-3">
+                <div class="flex-1">
+                  <div class="flex justify-between text-xs mb-1" style="color: rgba(245,240,232,0.5);">
+                    <span>Atual: 0.39:1</span><span>Meta: 5:1+</span>
+                  </div>
+                  <div class="progress-bar">
+                    <div class="progress-fill" style="width: 7.8%; background: linear-gradient(90deg, #EF4444, #FCA5A5);"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Good engagement -->
+        <div class="status-ok card p-5 rounded-2xl">
+          <div class="flex items-start gap-3">
+            <svg class="w-5 h-5 mt-0.5 flex-shrink-0" viewBox="0 0 20 20" fill="#22C55E" aria-hidden="true"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.857-9.809a.75.75 0 00-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 10-1.06 1.061l2.5 2.5a.75.75 0 001.137-.089l4-5.5z" clip-rule="evenodd"/></svg>
+            <div>
+              <h3 class="font-sans text-sm font-semibold mb-1" style="color: #86EFAC;">Qualidade dos Comentários</h3>
+              <p class="font-sans text-sm mb-2" style="color: rgba(245,240,232,0.7);">Comentários calorosos e genuínos de alunos e seguidores — um ativo raro e inestimável que não se compra:</p>
+              <div class="space-y-2">
+                <blockquote class="font-sans text-sm italic px-3 py-2 rounded-lg" style="background: rgba(34,197,94,0.06); border-left: 2px solid rgba(34,197,94,0.3); color: rgba(245,240,232,0.8);">"Ele arrasa!!!"</blockquote>
+                <blockquote class="font-sans text-sm italic px-3 py-2 rounded-lg" style="background: rgba(34,197,94,0.06); border-left: 2px solid rgba(34,197,94,0.3); color: rgba(245,240,232,0.8);">"A evolução tem sido notória! Parabéns!"</blockquote>
+                <blockquote class="font-sans text-sm italic px-3 py-2 rounded-lg" style="background: rgba(34,197,94,0.06); border-left: 2px solid rgba(34,197,94,0.3); color: rgba(245,240,232,0.8);">"Amoooo ❤️" — @ronaldosilva1974 deixou depoimento elogiando profissionalismo e conhecimento</blockquote>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card p-5 rounded-2xl">
+          <div class="flex items-start gap-3">
+            <svg class="w-5 h-5 mt-0.5 flex-shrink-0" style="color: #C9A84C;" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M10 12.5a2.5 2.5 0 100-5 2.5 2.5 0 000 5z"/><path fill-rule="evenodd" d="M.664 10.59a1.651 1.651 0 010-1.186A10.004 10.004 0 0110 3c4.257 0 7.893 2.66 9.336 6.41.147.381.146.804 0 1.186A10.004 10.004 0 0110 17c-4.257 0-7.893-2.66-9.336-6.41zM14 10a4 4 0 11-8 0 4 4 0 018 0z" clip-rule="evenodd"/></svg>
+            <div>
+              <h3 class="font-sans text-sm font-semibold mb-1" style="color: #F5F0E8;">Volume de Engajamento</h3>
+              <p class="font-sans text-sm" style="color: rgba(245,240,232,0.7);">Modesto e consistente com o nicho/tamanho da conta. Cross-posting ativo com Facebook (1–5 comentários por post). A conta demonstra interação real de uma comunidade local engajada — base sólida para crescimento orgânico.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════ SECTION 6: PONTOS FORTES ═══════════════════════ -->
+    <section aria-labelledby="strengths-title">
+      <div class="music-divider mb-6" aria-hidden="true">♩ ♪ ♫</div>
+      <h2 id="strengths-title" class="font-serif text-2xl sm:text-3xl font-semibold mb-6 text-center" style="color: #F5F0E8;">
+        Pontos Fortes
+      </h2>
+
+      <div class="grid sm:grid-cols-2 gap-3">
+        <div class="strength-item rounded-xl">
+          <div class="font-sans text-xs font-bold w-6 h-6 min-w-6 rounded-full flex items-center justify-center" style="background: rgba(34,197,94,0.2); color: #22C55E;">1</div>
+          <div>
+            <div class="font-sans text-sm font-semibold" style="color: #F5F0E8;">Conteúdo autêntico</div>
+            <div class="font-sans text-xs mt-0.5" style="color: rgba(245,240,232,0.6);">Performances reais de alunos constroem confiança que nenhum marketing produzido consegue replicar</div>
+          </div>
+        </div>
+
+        <div class="strength-item rounded-xl">
+          <div class="font-sans text-xs font-bold w-6 h-6 min-w-6 rounded-full flex items-center justify-center" style="background: rgba(34,197,94,0.2); color: #22C55E;">2</div>
+          <div>
+            <div class="font-sans text-sm font-semibold" style="color: #F5F0E8;">Presença multiplataforma</div>
+            <div class="font-sans text-xs mt-0.5" style="color: rgba(245,240,232,0.6);">Site, Facebook, YouTube e WhatsApp todos linkados — ecossistema digital bem estruturado</div>
+          </div>
+        </div>
+
+        <div class="strength-item rounded-xl">
+          <div class="font-sans text-xs font-bold w-6 h-6 min-w-6 rounded-full flex items-center justify-center" style="background: rgba(34,197,94,0.2); color: #22C55E;">3</div>
+          <div>
+            <div class="font-sans text-sm font-semibold" style="color: #F5F0E8;">Nicho consistente</div>
+            <div class="font-sans text-xs mt-0.5" style="color: rgba(245,240,232,0.6);">Educação musical com sub-nicho worship/gospel bem definido — posicionamento claro</div>
+          </div>
+        </div>
+
+        <div class="strength-item rounded-xl">
+          <div class="font-sans text-xs font-bold w-6 h-6 min-w-6 rounded-full flex items-center justify-center" style="background: rgba(34,197,94,0.2); color: #22C55E;">4</div>
+          <div>
+            <div class="font-sans text-sm font-semibold" style="color: #F5F0E8;">Highlights bem organizados</div>
+            <div class="font-sans text-xs mt-0.5" style="color: rgba(245,240,232,0.6);">6 categorias que cobrem os pilares principais da escola de forma lógica</div>
+          </div>
+        </div>
+
+        <div class="strength-item rounded-xl">
+          <div class="font-sans text-xs font-bold w-6 h-6 min-w-6 rounded-full flex items-center justify-center" style="background: rgba(34,197,94,0.2); color: #22C55E;">5</div>
+          <div>
+            <div class="font-sans text-sm font-semibold" style="color: #F5F0E8;">Comunidade ativa e genuína</div>
+            <div class="font-sans text-xs mt-0.5" style="color: rgba(245,240,232,0.6);">Comentários reais e calorosos — o ativo mais difícil de construir no digital</div>
+          </div>
+        </div>
+
+        <div class="strength-item rounded-xl">
+          <div class="font-sans text-xs font-bold w-6 h-6 min-w-6 rounded-full flex items-center justify-center" style="background: rgba(34,197,94,0.2); color: #22C55E;">6</div>
+          <div>
+            <div class="font-sans text-sm font-semibold" style="color: #F5F0E8;">Estratégia Reels-first</div>
+            <div class="font-sans text-xs mt-0.5" style="color: rgba(245,240,232,0.6);">~90% vídeos — alinhado com as prioridades algorítmicas atuais do Instagram</div>
+          </div>
+        </div>
+
+        <div class="strength-item rounded-xl sm:col-span-2">
+          <div class="font-sans text-xs font-bold w-6 h-6 min-w-6 rounded-full flex items-center justify-center" style="background: rgba(34,197,94,0.2); color: #22C55E;">7</div>
+          <div>
+            <div class="font-sans text-sm font-semibold" style="color: #F5F0E8;">CTA via WhatsApp</div>
+            <div class="font-sans text-xs mt-0.5" style="color: rgba(245,240,232,0.6);">Link direto para WhatsApp na bio — canal de conversão essencial para negócios de serviços no Brasil</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════ SECTION 7: RECOMENDAÇÕES ═══════════════════════ -->
+    <section aria-labelledby="recs-title">
+      <div class="music-divider mb-6" aria-hidden="true">♩ ♪ ♫</div>
+      <h2 id="recs-title" class="font-serif text-2xl sm:text-3xl font-semibold mb-6 text-center" style="color: #F5F0E8;">
+        Recomendações
+      </h2>
+
+      <div class="space-y-3">
+        <!-- 1 CRÍTICO -->
+        <div class="card p-5 rounded-2xl">
+          <div class="flex items-start gap-4">
+            <div class="rec-number flex-shrink-0">1</div>
+            <div class="flex-1">
+              <div class="flex items-center flex-wrap gap-2 mb-1.5">
+                <h3 class="font-sans text-sm font-semibold" style="color: #F5F0E8;">Corrigir Ratio Seguindo / Seguidores</h3>
+                <span class="badge-critico font-sans text-xs font-bold px-2 py-0.5 rounded-full">CRÍTICO</span>
+              </div>
+              <p class="font-sans text-sm" style="color: rgba(245,240,232,0.65);">Fazer unfollow gradual de contas que não seguem de volta para trazer o número seguindo abaixo dos seguidores. Meta de longo prazo: ratio 1:5 ou melhor. Esta é a correção de maior impacto isolado na percepção de autoridade e no alcance orgânico.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- 2 ALTA -->
+        <div class="card p-5 rounded-2xl">
+          <div class="flex items-start gap-4">
+            <div class="rec-number flex-shrink-0">2</div>
+            <div class="flex-1">
+              <div class="flex items-center flex-wrap gap-2 mb-1.5">
+                <h3 class="font-sans text-sm font-semibold" style="color: #F5F0E8;">Cadência de Postagem Consistente</h3>
+                <span class="badge-alta font-sans text-xs font-bold px-2 py-0.5 rounded-full">ALTA</span>
+              </div>
+              <p class="font-sans text-sm" style="color: rgba(245,240,232,0.65);">Comprometer-se com pelo menos 3 posts/semana em horários fixos. Mesmo 3 posts consistentes superam bursts irregulares no algoritmo. Usar um calendário editorial para planejar com antecedência.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- 3 ALTA -->
+        <div class="card p-5 rounded-2xl">
+          <div class="flex items-start gap-4">
+            <div class="rec-number flex-shrink-0">3</div>
+            <div class="flex-1">
+              <div class="flex items-center flex-wrap gap-2 mb-1.5">
+                <h3 class="font-sans text-sm font-semibold" style="color: #F5F0E8;">Capas de Highlights com Identidade Visual</h3>
+                <span class="badge-alta font-sans text-xs font-bold px-2 py-0.5 rounded-full">ALTA</span>
+              </div>
+              <p class="font-sans text-sm" style="color: rgba(245,240,232,0.65);">Criar capas personalizadas com ícones simples (piano, microfone, nota musical, coroa, estrela) sobre fundo de cor consistente alinhada à identidade da escola. Ferramentas gratuitas como Canva têm templates prontos para isso.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- 4 MÉDIA -->
+        <div class="card p-5 rounded-2xl">
+          <div class="flex items-start gap-4">
+            <div class="rec-number flex-shrink-0">4</div>
+            <div class="flex-1">
+              <div class="flex items-center flex-wrap gap-2 mb-1.5">
+                <h3 class="font-sans text-sm font-semibold" style="color: #F5F0E8;">Estratégia de Hashtags</h3>
+                <span class="badge-media font-sans text-xs font-bold px-2 py-0.5 rounded-full">MÉDIA</span>
+              </div>
+              <p class="font-sans text-sm" style="color: rgba(245,240,232,0.65);">Criar 2–3 sets de 10–15 hashtags por tipo de conteúdo (ex: covers de piano, destaques de alunos, música worship) e aplicar consistentemente. Focar em hashtags de porte médio (10K–500K posts) para melhor visibilidade no nicho.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- 5 MÉDIA -->
+        <div class="card p-5 rounded-2xl">
+          <div class="flex items-start gap-4">
+            <div class="rec-number flex-shrink-0">5</div>
+            <div class="flex-1">
+              <div class="flex items-center flex-wrap gap-2 mb-1.5">
+                <h3 class="font-sans text-sm font-semibold" style="color: #F5F0E8;">Clareza na Bio</h3>
+                <span class="badge-media font-sans text-xs font-bold px-2 py-0.5 rounded-full">MÉDIA</span>
+              </div>
+              <p class="font-sans text-sm mb-2" style="color: rgba(245,240,232,0.65);">Adicionar linha de serviços escaneável e considerar troca de categoria:</p>
+              <div class="font-mono text-xs px-3 py-2 rounded-lg" style="background: rgba(201,168,76,0.08); border: 1px solid rgba(201,168,76,0.15); color: #DEB96A;">Piano | Canto | Teoria Musical | Aulas Online</div>
+              <p class="font-sans text-xs mt-2" style="color: rgba(245,240,232,0.5);">Categoria: trocar de "Empreendedor(a)" para "Escola de Música" ou "Professor(a) de Música"</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- 6 MÉDIA -->
+        <div class="card p-5 rounded-2xl">
+          <div class="flex items-start gap-4">
+            <div class="rec-number flex-shrink-0">6</div>
+            <div class="flex-1">
+              <div class="flex items-center flex-wrap gap-2 mb-1.5">
+                <h3 class="font-sans text-sm font-semibold" style="color: #F5F0E8;">CTAs nas Legendas</h3>
+                <span class="badge-media font-sans text-xs font-bold px-2 py-0.5 rounded-full">MÉDIA</span>
+              </div>
+              <p class="font-sans text-sm mb-2" style="color: rgba(245,240,232,0.65);">Adicionar chamada para ação clara ao final de cada legenda. Exemplos prontos:</p>
+              <div class="space-y-1.5">
+                <div class="font-sans text-xs px-3 py-2 rounded-lg" style="background: rgba(201,168,76,0.08); border: 1px solid rgba(201,168,76,0.15); color: #DEB96A;">"DM para agendar sua aula experimental gratuita!"</div>
+                <div class="font-sans text-xs px-3 py-2 rounded-lg" style="background: rgba(201,168,76,0.08); border: 1px solid rgba(201,168,76,0.15); color: #DEB96A;">"Clique no link da bio para saber mais sobre nossas turmas."</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 7 BAIXA -->
+        <div class="card p-5 rounded-2xl">
+          <div class="flex items-start gap-4">
+            <div class="rec-number flex-shrink-0">7</div>
+            <div class="flex-1">
+              <div class="flex items-center flex-wrap gap-2 mb-1.5">
+                <h3 class="font-sans text-sm font-semibold" style="color: #F5F0E8;">Consistência de Produção</h3>
+                <span class="badge-baixa font-sans text-xs font-bold px-2 py-0.5 rounded-full">BAIXA</span>
+              </div>
+              <p class="font-sans text-sm" style="color: rgba(245,240,232,0.65);">Investir em um ring light e tripé — equipamentos acessíveis que fazem diferença significativa na qualidade percebida dos vídeos. Iluminação e enquadramento consistentes elevam a percepção de profissionalismo da marca.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- 8 BAIXA -->
+        <div class="card p-5 rounded-2xl">
+          <div class="flex items-start gap-4">
+            <div class="rec-number flex-shrink-0">8</div>
+            <div class="flex-1">
+              <div class="flex items-center flex-wrap gap-2 mb-1.5">
+                <h3 class="font-sans text-sm font-semibold" style="color: #F5F0E8;">Pilares de Conteúdo Formalizados</h3>
+                <span class="badge-baixa font-sans text-xs font-bold px-2 py-0.5 rounded-full">BAIXA</span>
+              </div>
+              <p class="font-sans text-sm mb-2" style="color: rgba(245,240,232,0.65);">Estruturar 4–5 séries recorrentes que seguidores antecipam:</p>
+              <div class="flex flex-wrap gap-2">
+                <span class="font-sans text-xs px-2.5 py-1 rounded-full" style="background: rgba(201,168,76,0.1); border: 1px solid rgba(201,168,76,0.2); color: #C9A84C;">Aluno em Destaque</span>
+                <span class="font-sans text-xs px-2.5 py-1 rounded-full" style="background: rgba(201,168,76,0.1); border: 1px solid rgba(201,168,76,0.2); color: #C9A84C;">Cover da Semana</span>
+                <span class="font-sans text-xs px-2.5 py-1 rounded-full" style="background: rgba(201,168,76,0.1); border: 1px solid rgba(201,168,76,0.2); color: #C9A84C;">Dica Musical</span>
+                <span class="font-sans text-xs px-2.5 py-1 rounded-full" style="background: rgba(201,168,76,0.1); border: 1px solid rgba(201,168,76,0.2); color: #C9A84C;">Aula por Dentro</span>
+                <span class="font-sans text-xs px-2.5 py-1 rounded-full" style="background: rgba(201,168,76,0.1); border: 1px solid rgba(201,168,76,0.2); color: #C9A84C;">Depoimento</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════ SECTION 8: PONTUAÇÃO FINAL ═══════════════════════ -->
+    <section aria-labelledby="score-title">
+      <div class="music-divider mb-6" aria-hidden="true">♩ ♪ ♫</div>
+      <h2 id="score-title" class="font-serif text-2xl sm:text-3xl font-semibold mb-6 text-center" style="color: #F5F0E8;">
+        Pontuação Final
+      </h2>
+
+      <div class="card p-6 rounded-2xl">
+        <table class="score-table w-full" aria-label="Pontuação por categoria">
+          <thead>
+            <tr>
+              <th class="font-sans text-xs font-semibold text-left pb-3" style="color: rgba(201,168,76,0.6);">Categoria</th>
+              <th class="font-sans text-xs font-semibold text-right pb-3 w-16" style="color: rgba(201,168,76,0.6);">Nota</th>
+              <th class="font-sans text-xs font-semibold text-right pb-3 pl-4 hidden sm:table-cell w-36" style="color: rgba(201,168,76,0.6);">Desempenho</th>
+            </tr>
+          </thead>
+          <tbody class="space-y-2">
+            <tr>
+              <td class="font-sans text-sm py-3 pr-4" style="color: rgba(245,240,232,0.8);">Otimização do Perfil</td>
+              <td class="font-sans text-sm font-semibold text-right py-3" style="color: #C9A84C;">6/10</td>
+              <td class="py-3 pl-4 hidden sm:table-cell">
+                <div class="progress-bar"><div class="progress-fill" style="width: 60%;"></div></div>
+              </td>
+            </tr>
+            <tr>
+              <td class="font-sans text-sm py-3 pr-4" style="color: rgba(245,240,232,0.8);">Qualidade do Conteúdo</td>
+              <td class="font-sans text-sm font-semibold text-right py-3" style="color: #C9A84C;">7/10</td>
+              <td class="py-3 pl-4 hidden sm:table-cell">
+                <div class="progress-bar"><div class="progress-fill" style="width: 70%;"></div></div>
+              </td>
+            </tr>
+            <tr>
+              <td class="font-sans text-sm py-3 pr-4" style="color: rgba(245,240,232,0.8);">Consistência de Postagem</td>
+              <td class="font-sans text-sm font-semibold text-right py-3" style="color: #C9A84C;">5/10</td>
+              <td class="py-3 pl-4 hidden sm:table-cell">
+                <div class="progress-bar"><div class="progress-fill" style="width: 50%;"></div></div>
+              </td>
+            </tr>
+            <tr>
+              <td class="font-sans text-sm py-3 pr-4" style="color: rgba(245,240,232,0.8);">Engajamento</td>
+              <td class="font-sans text-sm font-semibold text-right py-3" style="color: #C9A84C;">6/10</td>
+              <td class="py-3 pl-4 hidden sm:table-cell">
+                <div class="progress-bar"><div class="progress-fill" style="width: 60%;"></div></div>
+              </td>
+            </tr>
+            <tr>
+              <td class="font-sans text-sm py-3 pr-4" style="color: rgba(245,240,232,0.8);">Ratio Seguidores / Seguindo</td>
+              <td class="font-sans text-sm font-semibold text-right py-3" style="color: #FCA5A5;">3/10</td>
+              <td class="py-3 pl-4 hidden sm:table-cell">
+                <div class="progress-bar"><div class="progress-fill" style="width: 30%; background: linear-gradient(90deg, #EF4444, #FCA5A5);"></div></div>
+              </td>
+            </tr>
+            <tr>
+              <td class="font-sans text-sm py-3 pr-4" style="color: rgba(245,240,232,0.8);">Branding e Identidade Visual</td>
+              <td class="font-sans text-sm font-semibold text-right py-3" style="color: #C9A84C;">5/10</td>
+              <td class="py-3 pl-4 hidden sm:table-cell">
+                <div class="progress-bar"><div class="progress-fill" style="width: 50%;"></div></div>
+              </td>
+            </tr>
+          </tbody>
+          <tfoot>
+            <tr style="border-top: 1px solid rgba(201,168,76,0.25);">
+              <td class="font-serif text-base font-bold pt-4 pr-4" style="color: #F5F0E8;">Nota Geral</td>
+              <td class="font-serif text-xl font-bold text-right pt-4 text-gold-gradient">5.3/10</td>
+              <td class="pt-4 pl-4 hidden sm:table-cell">
+                <div class="progress-bar" style="height: 8px;"><div class="progress-fill" style="width: 53%; height: 8px;"></div></div>
+              </td>
+            </tr>
+          </tfoot>
+        </table>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ═══════════════════════ FOOTER ═══════════════════════ -->
+  <footer style="background: #060D18; border-top: 1px solid rgba(201,168,76,0.12);" class="mt-16">
+    <div class="max-w-4xl mx-auto px-6 py-12 text-center">
+      <!-- Musical decoration -->
+      <div class="font-serif text-3xl mb-4" style="color: rgba(201,168,76,0.2);" aria-hidden="true">𝄞 ♩ ♪ ♫ ♬ 𝄞</div>
+
+      <!-- Key insight -->
+      <div class="max-w-2xl mx-auto mb-8 px-6 py-5 rounded-2xl" style="background: rgba(201,168,76,0.06); border: 1px solid rgba(201,168,76,0.15);">
+        <p class="font-serif text-base italic leading-relaxed" style="color: rgba(245,240,232,0.8);">
+          "A conta tem criador genuíno e talentoso, com comunidade real — o mais difícil de construir. Os maiores ganhos virão de corrigir o ratio, estruturar hashtags e legendas, e trazer consistência visual."
+        </p>
+      </div>
+
+      <div class="font-sans text-sm" style="color: rgba(245,240,232,0.35);">
+        Auditoria realizada por <span style="color: rgba(201,168,76,0.6);">Raphael</span> · raphaelmmbb
+      </div>
+      <div class="font-sans text-xs mt-1" style="color: rgba(245,240,232,0.2);">Abril 2026</div>
+    </div>
+  </footer>
+
+  <script>
+    // Animate progress bars on scroll
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.style.width = entry.target.dataset.width;
+        }
+      });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.progress-fill').forEach(bar => {
+      const currentWidth = bar.style.width;
+      bar.dataset.width = currentWidth;
+      bar.style.width = '0%';
+      observer.observe(bar);
+    });
+  </script>
+</body>
+</html>
