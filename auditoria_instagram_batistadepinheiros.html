@@ -25,14 +25,12 @@
       --gold-500: #c8963e;
       --gold-600: #a87830;
       --green-500: #2a7a4b;
-      --green-400: #35996000;
       --green-light: #3aaf65;
       --text: #e8e4d9;
       --text-muted: #9a9280;
       --border: rgba(200,150,62,0.18);
       --card: rgba(27,42,59,0.85);
       --red: #e05252;
-      --amber: #e8b44a;
     }
 
     body {
@@ -43,7 +41,6 @@
       font-size: 16px;
     }
 
-    /* ── GRAD TEXT ── */
     .grad-text {
       background: linear-gradient(135deg, #e8b44a 0%, #f5d580 40%, #c8963e 100%);
       -webkit-background-clip: text;
@@ -74,20 +71,13 @@
       pointer-events: none;
     }
 
-    /* decorative cross */
     .cross-deco {
       position: absolute;
       opacity: 0.04;
       pointer-events: none;
     }
-    .cross-deco.top-right {
-      top: -60px; right: -60px;
-      width: 320px; height: 320px;
-    }
-    .cross-deco.bottom-left {
-      bottom: -80px; left: -80px;
-      width: 400px; height: 400px;
-    }
+    .cross-deco.top-right { top: -60px; right: -60px; width: 320px; height: 320px; }
+    .cross-deco.bottom-left { bottom: -80px; left: -80px; width: 400px; height: 400px; }
 
     .cover-inner {
       position: relative;
@@ -96,7 +86,6 @@
       width: 100%;
     }
 
-    /* ── BADGE ── */
     .badge {
       display: inline-flex;
       align-items: center;
@@ -119,7 +108,6 @@
       flex-shrink: 0;
     }
 
-    /* ── HERO TITLE ── */
     .hero-title {
       font-family: 'Playfair Display', serif;
       font-size: clamp(2.4rem, 6vw, 4.2rem);
@@ -135,12 +123,8 @@
       letter-spacing: 0.01em;
     }
 
-    .hero-subtitle span {
-      color: var(--gold-400);
-      font-weight: 500;
-    }
+    .hero-subtitle span { color: var(--gold-400); font-weight: 500; }
 
-    /* ── SCORE CIRCLE ── */
     .score-circle-wrap {
       display: flex;
       flex-direction: column;
@@ -149,8 +133,7 @@
     }
 
     .score-circle {
-      width: 130px;
-      height: 130px;
+      width: 130px; height: 130px;
       border-radius: 50%;
       border: 3px solid var(--gold-500);
       background: rgba(200,150,62,0.08);
@@ -172,28 +155,14 @@
       background-clip: text;
     }
 
-    .score-denom {
-      font-size: 0.78rem;
-      color: var(--text-muted);
-      margin-top: 2px;
-      letter-spacing: 0.06em;
-    }
+    .score-denom { font-size: 0.78rem; color: var(--text-muted); margin-top: 2px; letter-spacing: 0.06em; }
+    .score-label { margin-top: 12px; font-size: 0.8rem; color: var(--text-muted); letter-spacing: 0.08em; text-transform: uppercase; }
 
-    .score-label {
-      margin-top: 12px;
-      font-size: 0.8rem;
-      color: var(--text-muted);
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-    }
-
-    /* ── QUICK METRICS ── */
     .quick-metrics {
       display: flex;
       gap: 16px;
       flex-wrap: wrap;
       justify-content: center;
-      margin-bottom: 0;
     }
 
     .qm-card {
@@ -214,15 +183,9 @@
       line-height: 1;
     }
 
-    .qm-label {
-      font-size: 0.74rem;
-      color: var(--text-muted);
-      margin-top: 5px;
-      letter-spacing: 0.04em;
-      text-transform: uppercase;
-    }
+    .qm-label { font-size: 0.74rem; color: var(--text-muted); margin-top: 5px; letter-spacing: 0.04em; text-transform: uppercase; }
 
-    /* ── SECTION ── */
+    /* ── SEÇÕES ── */
     .section {
       max-width: 900px;
       margin: 0 auto;
@@ -230,14 +193,7 @@
       border-top: 1px solid var(--border);
     }
 
-    .section-number {
-      font-size: 0.72rem;
-      letter-spacing: 0.15em;
-      text-transform: uppercase;
-      color: var(--gold-500);
-      font-weight: 600;
-      margin-bottom: 8px;
-    }
+    .section-number { font-size: 0.72rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--gold-500); font-weight: 600; margin-bottom: 8px; }
 
     .section-title {
       font-family: 'Playfair Display', serif;
@@ -248,49 +204,18 @@
       line-height: 1.2;
     }
 
-    /* ── TABLE ── */
-    .audit-table {
-      width: 100%;
-      border-collapse: collapse;
-      margin-bottom: 28px;
-      font-size: 0.9rem;
-    }
+    .divider { width: 60px; height: 2px; background: linear-gradient(90deg, var(--gold-500), transparent); border-radius: 999px; margin-bottom: 32px; }
 
-    .audit-table th {
-      text-align: left;
-      padding: 10px 16px;
-      font-size: 0.72rem;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--gold-500);
-      border-bottom: 1px solid var(--border);
-      font-weight: 600;
-    }
-
-    .audit-table td {
-      padding: 12px 16px;
-      border-bottom: 1px solid rgba(255,255,255,0.04);
-      color: var(--text);
-    }
-
+    /* ── TABELA ── */
+    .audit-table { width: 100%; border-collapse: collapse; margin-bottom: 28px; font-size: 0.9rem; }
+    .audit-table th { text-align: left; padding: 10px 16px; font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gold-500); border-bottom: 1px solid var(--border); font-weight: 600; }
+    .audit-table td { padding: 12px 16px; border-bottom: 1px solid rgba(255,255,255,0.04); color: var(--text); }
     .audit-table tr:last-child td { border-bottom: none; }
+    .audit-table tbody tr:hover { background: rgba(200,150,62,0.04); }
 
-    .audit-table tbody tr:hover {
-      background: rgba(200,150,62,0.04);
-    }
+    .tag-saudavel { display: inline-block; background: rgba(42,122,75,0.2); color: #3aaf65; border: 1px solid rgba(42,122,75,0.4); border-radius: 999px; padding: 2px 10px; font-size: 0.72rem; font-weight: 600; }
 
-    .tag-healthy {
-      display: inline-block;
-      background: rgba(42,122,75,0.2);
-      color: #3aaf65;
-      border: 1px solid rgba(42,122,75,0.4);
-      border-radius: 999px;
-      padding: 2px 10px;
-      font-size: 0.72rem;
-      font-weight: 600;
-    }
-
-    /* ── ASSESSMENT BLOCK ── */
+    /* ── BLOCOS DE ANÁLISE ── */
     .assessment-block {
       background: var(--card);
       border: 1px solid var(--border);
@@ -300,555 +225,160 @@
       backdrop-filter: blur(6px);
     }
 
-    .assessment-block h4 {
-      font-size: 0.8rem;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      color: var(--gold-500);
-      margin-bottom: 10px;
-      font-weight: 600;
-    }
+    .assessment-block h4 { font-size: 0.8rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gold-500); margin-bottom: 10px; font-weight: 600; }
+    .assessment-block p { color: #c8c0b0; font-size: 0.92rem; line-height: 1.7; }
 
-    .assessment-block p {
-      color: #c8c0b0;
-      font-size: 0.92rem;
-      line-height: 1.7;
-    }
+    /* ── PILARES ── */
+    .pillar-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 14px; margin-bottom: 24px; }
 
-    /* ── PILLARS ── */
-    .pillar-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-      gap: 14px;
-      margin-bottom: 24px;
-    }
+    .pillar-card { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 18px 20px; backdrop-filter: blur(6px); }
+    .pillar-card-title { font-size: 0.8rem; font-weight: 700; color: var(--gold-400); margin-bottom: 6px; }
+    .pillar-card p { font-size: 0.83rem; color: #a09888; line-height: 1.6; }
 
-    .pillar-card {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 18px 20px;
-      backdrop-filter: blur(6px);
-    }
-
-    .pillar-card-title {
-      font-size: 0.8rem;
-      font-weight: 700;
-      color: var(--gold-400);
-      margin-bottom: 6px;
-    }
-
-    .pillar-card p {
-      font-size: 0.83rem;
-      color: #a09888;
-      line-height: 1.6;
-    }
-
-    /* ── GAPS & POSITIVES ── */
-    .two-col {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 16px;
-      margin-top: 20px;
-    }
+    /* ── DOIS COLUNAS ── */
+    .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 20px; }
 
     @media (max-width: 640px) {
       .two-col { grid-template-columns: 1fr; }
       .quick-metrics { gap: 10px; }
       .qm-card { min-width: 100px; padding: 14px 18px; }
+      .score-row-label { width: 140px; font-size: 0.8rem; }
+      .score-row-stars { width: 70px; }
     }
 
-    .pos-block {
-      background: rgba(42,122,75,0.10);
-      border: 1px solid rgba(42,122,75,0.30);
-      border-radius: 14px;
-      padding: 22px 24px;
-    }
-
-    .gap-block {
-      background: rgba(224,82,82,0.08);
-      border: 1px solid rgba(224,82,82,0.25);
-      border-radius: 14px;
-      padding: 22px 24px;
-    }
-
-    .block-label {
-      font-size: 0.72rem;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      font-weight: 700;
-      margin-bottom: 12px;
-    }
-
+    .pos-block { background: rgba(42,122,75,0.10); border: 1px solid rgba(42,122,75,0.30); border-radius: 14px; padding: 22px 24px; }
+    .gap-block { background: rgba(224,82,82,0.08); border: 1px solid rgba(224,82,82,0.25); border-radius: 14px; padding: 22px 24px; }
+    .block-label { font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; font-weight: 700; margin-bottom: 12px; }
     .pos-block .block-label { color: #3aaf65; }
     .gap-block .block-label { color: #e05252; }
+    .block-text { font-size: 0.87rem; color: #b0a898; line-height: 1.7; }
 
-    .block-text {
-      font-size: 0.87rem;
-      color: #b0a898;
-      line-height: 1.7;
-    }
+    /* ── CARDS DE POST ── */
+    .post-cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 14px; margin-bottom: 28px; }
 
-    /* ── ENGAGEMENT CARDS ── */
-    .post-cards {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-      gap: 14px;
-      margin-bottom: 28px;
-    }
+    .post-card { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 18px 20px; backdrop-filter: blur(6px); }
 
-    .post-card {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 18px 20px;
-      backdrop-filter: blur(6px);
-    }
+    .post-card-type { display: inline-block; background: rgba(200,150,62,0.12); color: var(--gold-400); border: 1px solid rgba(200,150,62,0.3); border-radius: 999px; padding: 2px 10px; font-size: 0.7rem; font-weight: 600; letter-spacing: 0.05em; margin-bottom: 10px; }
+    .post-card-type.collab { background: rgba(42,122,75,0.12); color: #3aaf65; border-color: rgba(42,122,75,0.3); }
+    .post-card-type.carousel { background: rgba(100,120,200,0.12); color: #8090e0; border-color: rgba(100,120,200,0.3); }
 
-    .post-card-type {
-      display: inline-block;
-      background: rgba(200,150,62,0.12);
-      color: var(--gold-400);
-      border: 1px solid rgba(200,150,62,0.3);
-      border-radius: 999px;
-      padding: 2px 10px;
-      font-size: 0.7rem;
-      font-weight: 600;
-      letter-spacing: 0.05em;
-      margin-bottom: 10px;
-    }
+    .post-card-name { font-size: 0.88rem; font-weight: 600; color: var(--text); margin-bottom: 6px; line-height: 1.4; }
+    .post-card-date { font-size: 0.75rem; color: var(--text-muted); margin-bottom: 14px; }
+    .post-card-stats { display: flex; gap: 18px; }
+    .stat-item { display: flex; flex-direction: column; gap: 2px; }
+    .stat-num { font-family: 'Playfair Display', serif; font-size: 1.3rem; font-weight: 700; color: var(--gold-400); line-height: 1; }
+    .stat-label { font-size: 0.68rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.07em; }
 
-    .post-card-type.collab {
-      background: rgba(42,122,75,0.12);
-      color: #3aaf65;
-      border-color: rgba(42,122,75,0.3);
-    }
-
-    .post-card-name {
-      font-size: 0.88rem;
-      font-weight: 600;
-      color: var(--text);
-      margin-bottom: 6px;
-      line-height: 1.4;
-    }
-
-    .post-card-date {
-      font-size: 0.75rem;
-      color: var(--text-muted);
-      margin-bottom: 14px;
-    }
-
-    .post-card-stats {
-      display: flex;
-      gap: 18px;
-    }
-
-    .stat-item {
-      display: flex;
-      flex-direction: column;
-      gap: 2px;
-    }
-
-    .stat-num {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.3rem;
-      font-weight: 700;
-      color: var(--gold-400);
-      line-height: 1;
-    }
-
-    .stat-label {
-      font-size: 0.68rem;
-      color: var(--text-muted);
-      text-transform: uppercase;
-      letter-spacing: 0.07em;
-    }
-
-    /* engagement summary */
-    .eng-summary {
-      display: flex;
-      gap: 16px;
-      flex-wrap: wrap;
-      margin-bottom: 20px;
-    }
-
-    .eng-badge {
-      background: rgba(200,150,62,0.10);
-      border: 1px solid rgba(200,150,62,0.28);
-      border-radius: 12px;
-      padding: 14px 22px;
-      flex: 1;
-      min-width: 180px;
-      text-align: center;
-    }
-
-    .eng-badge-val {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.8rem;
-      font-weight: 700;
-      color: var(--gold-400);
-    }
-
-    .eng-badge-label {
-      font-size: 0.78rem;
-      color: var(--text-muted);
-      margin-top: 4px;
-      line-height: 1.4;
-    }
+    /* ── ENGAJAMENTO RESUMO ── */
+    .eng-summary { display: flex; gap: 16px; flex-wrap: wrap; margin-bottom: 20px; }
+    .eng-badge { background: rgba(200,150,62,0.10); border: 1px solid rgba(200,150,62,0.28); border-radius: 12px; padding: 14px 22px; flex: 1; min-width: 180px; text-align: center; }
+    .eng-badge-val { font-family: 'Playfair Display', serif; font-size: 1.8rem; font-weight: 700; color: var(--gold-400); }
+    .eng-badge-val.green { color: #3aaf65; }
+    .eng-badge-label { font-size: 0.78rem; color: var(--text-muted); margin-top: 4px; line-height: 1.4; }
 
     /* ── HASHTAG PILLS ── */
-    .hashtag-pills {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin: 16px 0;
-    }
+    .hashtag-pills { display: flex; flex-wrap: wrap; gap: 8px; margin: 16px 0; }
+    .hashtag-pill { background: rgba(200,150,62,0.10); border: 1px solid rgba(200,150,62,0.28); color: var(--gold-400); border-radius: 999px; padding: 5px 13px; font-size: 0.8rem; font-weight: 500; letter-spacing: 0.02em; }
+    .hashtag-pill.juventude { background: rgba(42,122,75,0.10); border-color: rgba(42,122,75,0.3); color: #3aaf65; }
 
-    .hashtag-pill {
-      background: rgba(200,150,62,0.10);
-      border: 1px solid rgba(200,150,62,0.28);
-      color: var(--gold-400);
-      border-radius: 999px;
-      padding: 5px 13px;
-      font-size: 0.8rem;
-      font-weight: 500;
-      letter-spacing: 0.02em;
-    }
+    /* ── PONTOS FORTES ── */
+    .strength-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 14px; }
+    .strength-item { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 18px 20px; display: flex; gap: 14px; align-items: flex-start; backdrop-filter: blur(6px); }
+    .strength-icon { width: 36px; height: 36px; border-radius: 8px; background: rgba(200,150,62,0.12); border: 1px solid rgba(200,150,62,0.28); display: flex; align-items: center; justify-content: center; flex-shrink: 0; color: var(--gold-400); }
+    .strength-title { font-size: 0.85rem; font-weight: 700; color: var(--text); margin-bottom: 4px; }
+    .strength-desc { font-size: 0.82rem; color: #a09888; line-height: 1.6; }
 
-    .hashtag-pill.youth {
-      background: rgba(42,122,75,0.10);
-      border-color: rgba(42,122,75,0.3);
-      color: #3aaf65;
-    }
-
-    /* ── STRENGTHS ── */
-    .strength-list {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-      gap: 14px;
-    }
-
-    .strength-item {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 18px 20px;
-      display: flex;
-      gap: 14px;
-      align-items: flex-start;
-      backdrop-filter: blur(6px);
-    }
-
-    .strength-icon {
-      width: 36px;
-      height: 36px;
-      border-radius: 8px;
-      background: rgba(200,150,62,0.12);
-      border: 1px solid rgba(200,150,62,0.28);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
-      color: var(--gold-400);
-    }
-
-    .strength-title {
-      font-size: 0.85rem;
-      font-weight: 700;
-      color: var(--text);
-      margin-bottom: 4px;
-    }
-
-    .strength-desc {
-      font-size: 0.82rem;
-      color: #a09888;
-      line-height: 1.6;
-    }
-
-    /* ── RECOMMENDATIONS ── */
-    .rec-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-      gap: 16px;
-    }
-
-    .rec-card {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 14px;
-      padding: 22px 24px;
-      backdrop-filter: blur(6px);
-      transition: border-color 0.2s, box-shadow 0.2s;
-      cursor: default;
-    }
-
-    .rec-card:hover {
-      border-color: rgba(200,150,62,0.40);
-      box-shadow: 0 4px 24px rgba(200,150,62,0.08);
-    }
-
-    .rec-card-icon {
-      width: 40px;
-      height: 40px;
-      border-radius: 10px;
-      background: rgba(200,150,62,0.10);
-      border: 1px solid rgba(200,150,62,0.25);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: var(--gold-400);
-      margin-bottom: 14px;
-    }
-
-    .rec-card-title {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.05rem;
-      font-weight: 700;
-      color: var(--text);
-      margin-bottom: 10px;
-    }
-
-    .rec-card-text {
-      font-size: 0.85rem;
-      color: #a09888;
-      line-height: 1.7;
-    }
-
-    .rec-card-text strong {
-      color: var(--gold-400);
-      font-weight: 600;
-    }
+    /* ── RECOMENDAÇÕES ── */
+    .rec-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 16px; }
+    .rec-card { background: var(--card); border: 1px solid var(--border); border-radius: 14px; padding: 22px 24px; backdrop-filter: blur(6px); transition: border-color 0.2s, box-shadow 0.2s; cursor: default; }
+    .rec-card:hover { border-color: rgba(200,150,62,0.40); box-shadow: 0 4px 24px rgba(200,150,62,0.08); }
+    .rec-card-icon { width: 40px; height: 40px; border-radius: 10px; background: rgba(200,150,62,0.10); border: 1px solid rgba(200,150,62,0.25); display: flex; align-items: center; justify-content: center; color: var(--gold-400); margin-bottom: 14px; }
+    .rec-card-title { font-family: 'Playfair Display', serif; font-size: 1.05rem; font-weight: 700; color: var(--text); margin-bottom: 10px; }
+    .rec-card-text { font-size: 0.85rem; color: #a09888; line-height: 1.7; }
+    .rec-card-text strong { color: var(--gold-400); font-weight: 600; }
 
     /* ── SCORE SUMMARY ── */
-    .score-rows {
-      display: flex;
-      flex-direction: column;
-      gap: 14px;
-    }
-
-    .score-row {
-      display: flex;
-      align-items: center;
-      gap: 16px;
-    }
-
-    .score-row-label {
-      font-size: 0.88rem;
-      color: var(--text);
-      width: 200px;
-      flex-shrink: 0;
-    }
-
-    .score-bar-wrap {
-      flex: 1;
-      height: 8px;
-      background: rgba(255,255,255,0.06);
-      border-radius: 999px;
-      overflow: hidden;
-    }
-
-    .score-bar {
-      height: 100%;
-      border-radius: 999px;
-      transition: width 1s ease;
-    }
-
+    .score-rows { display: flex; flex-direction: column; gap: 14px; }
+    .score-row { display: flex; align-items: center; gap: 16px; }
+    .score-row-label { font-size: 0.88rem; color: var(--text); width: 200px; flex-shrink: 0; }
+    .score-bar-wrap { flex: 1; height: 8px; background: rgba(255,255,255,0.06); border-radius: 999px; overflow: hidden; }
+    .score-bar { height: 100%; border-radius: 999px; }
     .score-bar.s5 { background: linear-gradient(90deg, #2a7a4b, #3aaf65); }
     .score-bar.s4 { background: linear-gradient(90deg, #c8963e, #e8b44a); }
     .score-bar.s3 { background: linear-gradient(90deg, #e8923e, #e8b44a); }
     .score-bar.s2 { background: linear-gradient(90deg, #e05252, #e87070); }
-
-    .score-row-stars {
-      display: flex;
-      gap: 3px;
-      flex-shrink: 0;
-      width: 100px;
-      justify-content: flex-end;
-    }
-
-    .star {
-      font-size: 0.9rem;
-      color: var(--gold-400);
-    }
-
+    .score-row-stars { display: flex; gap: 3px; flex-shrink: 0; width: 100px; justify-content: flex-end; }
+    .star { font-size: 0.9rem; color: var(--gold-400); }
     .star.empty { color: rgba(255,255,255,0.15); }
-    .star.half { color: var(--gold-500); }
+    .score-row-num { font-size: 0.78rem; color: var(--text-muted); width: 32px; text-align: right; flex-shrink: 0; }
 
-    .score-row-num {
-      font-size: 0.78rem;
-      color: var(--text-muted);
-      width: 32px;
-      text-align: right;
-      flex-shrink: 0;
-    }
+    /* ── BLOCO GERAL FINAL ── */
+    .overall-block { background: linear-gradient(135deg, rgba(200,150,62,0.12) 0%, rgba(27,42,59,0.6) 100%); border: 1px solid rgba(200,150,62,0.35); border-radius: 18px; padding: 36px; text-align: center; margin-top: 36px; }
+    .overall-block .big-score { font-family: 'Playfair Display', serif; font-size: 3rem; font-weight: 800; line-height: 1; margin-bottom: 6px; }
+    .overall-block .score-stars { font-size: 1.4rem; color: var(--gold-400); letter-spacing: 4px; margin-bottom: 14px; }
+    .overall-block p { font-size: 0.9rem; color: #a09888; max-width: 600px; margin: 0 auto; line-height: 1.7; }
 
-    /* ── OVERALL SCORE BLOCK ── */
-    .overall-block {
-      background: linear-gradient(135deg, rgba(200,150,62,0.12) 0%, rgba(27,42,59,0.6) 100%);
-      border: 1px solid rgba(200,150,62,0.35);
-      border-radius: 18px;
-      padding: 36px;
-      text-align: center;
-      margin-top: 36px;
-    }
+    /* ── NOTA INLINE ── */
+    .inline-note { background: rgba(200,150,62,0.07); border-left: 3px solid var(--gold-500); border-radius: 0 8px 8px 0; padding: 14px 18px; font-size: 0.87rem; color: #b8a888; line-height: 1.65; margin: 20px 0; }
 
-    .overall-block .big-score {
-      font-family: 'Playfair Display', serif;
-      font-size: 3rem;
-      font-weight: 800;
-      line-height: 1;
-      margin-bottom: 6px;
-    }
+    /* ── FREQUÊNCIA ── */
+    .freq-bar { display: flex; align-items: center; gap: 14px; margin: 16px 0; }
+    .freq-label { font-size: 0.82rem; color: var(--text-muted); width: 170px; flex-shrink: 0; }
+    .freq-track { flex: 1; height: 10px; background: rgba(255,255,255,0.06); border-radius: 999px; overflow: hidden; }
+    .freq-fill { height: 100%; border-radius: 999px; }
+    .freq-fill.atual { width: 33%; background: linear-gradient(90deg, #c8963e, #e8b44a); }
+    .freq-fill.ideal { width: 80%; background: linear-gradient(90deg, #2a7a4b, #3aaf65); }
 
-    .overall-block .score-stars {
-      font-size: 1.4rem;
-      color: var(--gold-400);
-      letter-spacing: 4px;
-      margin-bottom: 14px;
-    }
-
-    .overall-block p {
-      font-size: 0.9rem;
-      color: #a09888;
-      max-width: 600px;
-      margin: 0 auto;
-      line-height: 1.7;
-    }
+    /* ── HIGHLIGHT ── */
+    .hl { color: var(--gold-400); font-weight: 600; }
+    .hl-green { color: #3aaf65; font-weight: 600; }
+    .hl-red { color: #e07070; font-weight: 600; }
+    code { background: rgba(255,255,255,0.06); padding: 1px 6px; border-radius: 4px; font-size: 0.85em; }
 
     /* ── FOOTER ── */
-    footer {
-      text-align: center;
-      padding: 40px 24px;
-      border-top: 1px solid var(--border);
-      color: var(--text-muted);
-      font-size: 0.8rem;
-    }
-
-    footer span {
-      color: var(--gold-500);
-    }
-
-    /* ── DIVIDER ── */
-    .divider {
-      width: 60px;
-      height: 2px;
-      background: linear-gradient(90deg, var(--gold-500), transparent);
-      border-radius: 999px;
-      margin-bottom: 32px;
-    }
-
-    /* ── HIGHLIGHT TEXT ── */
-    .highlight {
-      color: var(--gold-400);
-      font-weight: 600;
-    }
-
-    .highlight-green {
-      color: #3aaf65;
-      font-weight: 600;
-    }
-
-    .highlight-red {
-      color: #e07070;
-      font-weight: 600;
-    }
-
-    /* ── INLINE NOTE ── */
-    .inline-note {
-      background: rgba(200,150,62,0.07);
-      border-left: 3px solid var(--gold-500);
-      border-radius: 0 8px 8px 0;
-      padding: 14px 18px;
-      font-size: 0.87rem;
-      color: #b8a888;
-      line-height: 1.65;
-      margin: 20px 0;
-    }
-
-    .freq-bar {
-      display: flex;
-      align-items: center;
-      gap: 14px;
-      margin: 16px 0;
-    }
-
-    .freq-label {
-      font-size: 0.82rem;
-      color: var(--text-muted);
-      width: 120px;
-      flex-shrink: 0;
-    }
-
-    .freq-track {
-      flex: 1;
-      height: 10px;
-      background: rgba(255,255,255,0.06);
-      border-radius: 999px;
-      overflow: hidden;
-    }
-
-    .freq-fill {
-      height: 100%;
-      border-radius: 999px;
-    }
-
-    .freq-fill.current {
-      width: 33%;
-      background: linear-gradient(90deg, #c8963e, #e8b44a);
-    }
-
-    .freq-fill.ideal {
-      width: 80%;
-      background: linear-gradient(90deg, #2a7a4b, #3aaf65);
-    }
+    footer { text-align: center; padding: 40px 24px; border-top: 1px solid var(--border); color: var(--text-muted); font-size: 0.8rem; }
+    footer span { color: var(--gold-500); }
   </style>
 </head>
 <body>
 
   <!-- ══════════════════════════════════════
-       COVER / HERO
+       CAPA / HERO
   ══════════════════════════════════════ -->
   <section class="cover">
-    <!-- decorative cross SVG top-right -->
-    <svg class="cross-deco top-right" viewBox="0 0 320 320" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <svg class="cross-deco top-right" viewBox="0 0 320 320" fill="none" aria-hidden="true">
       <rect x="130" y="0" width="60" height="320" rx="8" fill="#e8b44a"/>
       <rect x="0" y="100" width="320" height="60" rx="8" fill="#e8b44a"/>
     </svg>
-    <!-- decorative cross SVG bottom-left -->
-    <svg class="cross-deco bottom-left" viewBox="0 0 400 400" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <svg class="cross-deco bottom-left" viewBox="0 0 400 400" fill="none" aria-hidden="true">
       <rect x="165" y="0" width="70" height="400" rx="8" fill="#e8b44a"/>
       <rect x="0" y="130" width="400" height="70" rx="8" fill="#e8b44a"/>
     </svg>
 
     <div class="cover-inner">
-      <!-- 1. Badge -->
       <div class="badge">
         <span class="badge-dot" aria-hidden="true"></span>
         Auditoria de Conteúdo · Instagram · 08/04/2025
       </div>
 
-      <!-- 2. Título -->
       <h1 class="hero-title grad-text">Manual de Boas Práticas</h1>
 
-      <!-- 3. Subtítulo -->
       <p class="hero-subtitle">
         Análise de desempenho para <span>@batista.de.pinheiros</span> · 1ª Igreja Batista em Pinheiros
       </p>
 
-      <!-- 4. Score Circle -->
       <div class="score-circle-wrap">
-        <div class="score-circle" role="img" aria-label="Nota geral: 3.5 de 5">
-          <span class="score-num">3.5</span>
+        <div class="score-circle" role="img" aria-label="Nota geral: 3,5 de 5">
+          <span class="score-num">3,5</span>
           <span class="score-denom">/ 5</span>
         </div>
         <span class="score-label">Nota Geral</span>
       </div>
 
-      <!-- 5. Quick metrics -->
       <div class="quick-metrics" role="list">
         <div class="qm-card" role="listitem">
           <div class="qm-value">193</div>
-          <div class="qm-label">Posts</div>
+          <div class="qm-label">Publicações</div>
         </div>
         <div class="qm-card" role="listitem">
           <div class="qm-value">1.807</div>
@@ -867,14 +397,14 @@
   </section>
 
   <!-- ══════════════════════════════════════
-       SEÇÃO 1 — PROFILE OVERVIEW
+       SEÇÃO 1 — VISÃO GERAL DO PERFIL
   ══════════════════════════════════════ -->
   <section class="section" aria-labelledby="s1-title">
     <p class="section-number">01</p>
     <div class="divider" aria-hidden="true"></div>
-    <h2 class="section-title" id="s1-title">Profile Overview</h2>
+    <h2 class="section-title" id="s1-title">Visão Geral do Perfil</h2>
 
-    <table class="audit-table" role="table" aria-label="Dados do perfil">
+    <table class="audit-table" aria-label="Dados do perfil">
       <thead>
         <tr>
           <th scope="col">Métrica</th>
@@ -882,182 +412,182 @@
         </tr>
       </thead>
       <tbody>
-        <tr><td>Username</td><td class="highlight">@batista.de.pinheiros</td></tr>
-        <tr><td>Name</td><td>1ª Igreja Batista em Pinheiros</td></tr>
-        <tr><td>Category</td><td>Igreja Evangélica</td></tr>
-        <tr><td>Posts</td><td>193</td></tr>
-        <tr><td>Followers</td><td>1,807</td></tr>
-        <tr><td>Following</td><td>67</td></tr>
-        <tr><td>Follower/Following ratio</td><td>27:1 &nbsp;<span class="tag-healthy">healthy</span></td></tr>
-        <tr><td>External link</td><td>Facebook page (1ª Igreja Batista em Pinheiros)</td></tr>
+        <tr><td>Usuário</td><td class="hl">@batista.de.pinheiros</td></tr>
+        <tr><td>Nome</td><td>1ª Igreja Batista em Pinheiros</td></tr>
+        <tr><td>Categoria</td><td>Igreja Evangélica</td></tr>
+        <tr><td>Publicações</td><td>193</td></tr>
+        <tr><td>Seguidores</td><td>1.807</td></tr>
+        <tr><td>Seguindo</td><td>67</td></tr>
+        <tr><td>Proporção Seguidores/Seguindo</td><td>27:1 &nbsp;<span class="tag-saudavel">saudável</span></td></tr>
+        <tr><td>Link externo</td><td>Página do Facebook (1ª Igreja Batista em Pinheiros)</td></tr>
       </tbody>
     </table>
 
     <div class="assessment-block">
-      <h4>Bio Assessment</h4>
+      <h4>Avaliação da Bio</h4>
       <p>
-        The bio is functional and informative — it clearly lists service times (Sunday 11h &amp; 19h), Bible Study (Sunday 10h), the physical address with a helpful proximity note to the Pinheiros metro station, and parking availability. However, it <span class="highlight-red">lacks a URL link</span> to a website, WhatsApp, or Linktree where visitors could take a next step (e.g., contact, join a small group, donate). The Facebook link is present but may not be the most effective CTA for a younger audience.
+        A bio é funcional e informativa — lista claramente os horários de culto (domingo às 11h e 19h), Escola Bíblica Dominical (domingo às 10h), o endereço físico com referência útil à estação de metrô Pinheiros e disponibilidade de estacionamento. No entanto, <span class="hl-red">falta um link de URL</span> para site, WhatsApp ou Linktree onde visitantes possam tomar uma próxima ação (contato, participar de um grupo, doação). O link para o Facebook está presente, mas pode não ser o CTA mais eficaz para o público mais jovem.
       </p>
     </div>
 
     <div class="assessment-block">
-      <h4>Profile Photo</h4>
+      <h4>Foto de Perfil</h4>
       <p>
-        The logo is clean and legible — the green shield with "Primeira Igreja Batista de Pinheiros" is recognizable and professional.
+        O logotipo é limpo e legível — o escudo verde com "Primeira Igreja Batista de Pinheiros" é reconhecível e profissional.
       </p>
     </div>
   </section>
 
   <!-- ══════════════════════════════════════
-       SEÇÃO 2 — CONTENT STRATEGY
+       SEÇÃO 2 — ESTRATÉGIA DE CONTEÚDO
   ══════════════════════════════════════ -->
   <section class="section" aria-labelledby="s2-title">
     <p class="section-number">02</p>
     <div class="divider" aria-hidden="true"></div>
-    <h2 class="section-title" id="s2-title">Content Strategy</h2>
+    <h2 class="section-title" id="s2-title">Estratégia de Conteúdo</h2>
 
     <div class="inline-note">
-      The account relies almost exclusively on <strong style="color:#e8b44a">Reels</strong> (short videos). In the 7 most recent posts reviewed, <strong style="color:#e8b44a">6 were Reels</strong> and 1 was a Carousel (multi-photo post for the church anniversary). There were no static single-image posts in recent content, which aligns well with Instagram's current algorithm preference for video.
+      O perfil usa quase exclusivamente <strong style="color:#e8b44a">Reels</strong> (vídeos curtos). Nos 7 posts mais recentes analisados, <strong style="color:#e8b44a">6 foram Reels</strong> e 1 foi um Carrossel (post com múltiplas fotos do aniversário da igreja). Não houve posts estáticos de imagem única nos conteúdos recentes, o que está alinhado com a preferência atual do algoritmo do Instagram por vídeo.
     </div>
 
-    <p class="section-number" style="margin-bottom:16px">Content Pillars Observed</p>
+    <p class="section-number" style="margin-bottom:16px;">Pilares de Conteúdo Observados</p>
     <div class="pillar-grid">
       <div class="pillar-card">
-        <div class="pillar-card-title">Worship Moments</div>
-        <p>Reels capturing Sunday services, with praise music, congregation shots, and scripture captions. This is the dominant content type.</p>
+        <div class="pillar-card-title">Momentos de Louvor</div>
+        <p>Reels que capturam os cultos de domingo, com músicas de louvor, cenas da congregação e legendas com versículos. Este é o tipo de conteúdo dominante.</p>
       </div>
       <div class="pillar-card">
-        <div class="pillar-card-title">Announcements / Events</div>
-        <p>Designed graphic Reels promoting specific events (e.g., the Easter Musical <em>"A Cruz: Espetáculo da Vida"</em>).</p>
+        <div class="pillar-card-title">Comunicados e Eventos</div>
+        <p>Reels gráficos promovendo eventos específicos (ex: o Musical de Páscoa <em>"A Cruz: Espetáculo da Vida"</em>).</p>
       </div>
       <div class="pillar-card">
-        <div class="pillar-card-title">Ministry Spotlights</div>
-        <p>Youth group (via the @habitejuventude collaboration), Women's Day celebration.</p>
+        <div class="pillar-card-title">Destaque dos Ministérios</div>
+        <p>Grupo de jovens (via colaboração com @habitejuventude), celebração do Dia da Mulher.</p>
       </div>
       <div class="pillar-card">
-        <div class="pillar-card-title">Milestone Commemorations</div>
-        <p>The 76th church anniversary carousel.</p>
+        <div class="pillar-card-title">Datas Comemorativas</div>
+        <p>Carrossel do 76º aniversário da igreja.</p>
       </div>
     </div>
 
     <div class="two-col">
       <div class="pos-block">
-        <div class="block-label">Positives</div>
+        <div class="block-label">Pontos Positivos</div>
         <p class="block-text">
-          The content pillars are coherent and well-aligned with the church's identity. Captions consistently include a relevant Bible verse, which reinforces the spiritual tone and gives followers devotional value beyond just the visual. The writing style is warm and accessible.
+          Os pilares de conteúdo são coerentes e bem alinhados com a identidade da igreja. As legendas consistentemente incluem um versículo bíblico relevante, o que reforça o tom espiritual e oferece valor devocional além do visual. O estilo de escrita é caloroso e acessível.
         </p>
       </div>
       <div class="gap-block">
-        <div class="block-label">Gaps</div>
+        <div class="block-label">Lacunas</div>
         <p class="block-text">
-          There is very little content variety beyond worship services. Missing content types that could diversify and grow the profile include: pastoral teaching clips or devotionals, behind-the-scenes of ministries, testimonials, community outreach content, Q&amp;A or interactive formats, and seasonal devotional series.
+          Há pouca variedade de conteúdo além dos cultos. Tipos de conteúdo que poderiam diversificar e ampliar o perfil: clipes de ensino pastoral ou devocionais, bastidores dos ministérios, depoimentos, conteúdo de alcance comunitário, formatos de perguntas e respostas, e séries devocionais sazonais.
         </p>
       </div>
     </div>
   </section>
 
   <!-- ══════════════════════════════════════
-       SEÇÃO 3 — ENGAGEMENT METRICS
+       SEÇÃO 3 — MÉTRICAS DE ENGAJAMENTO
   ══════════════════════════════════════ -->
   <section class="section" aria-labelledby="s3-title">
     <p class="section-number">03</p>
     <div class="divider" aria-hidden="true"></div>
-    <h2 class="section-title" id="s3-title">Engagement Metrics</h2>
+    <h2 class="section-title" id="s3-title">Métricas de Engajamento</h2>
 
     <div class="eng-summary">
       <div class="eng-badge">
         <div class="eng-badge-val">~73</div>
-        <div class="eng-badge-label">Média de likes por post (amostra)</div>
+        <div class="eng-badge-label">Média de curtidas por post (amostra)</div>
       </div>
       <div class="eng-badge">
-        <div class="eng-badge-val highlight-green" style="-webkit-text-fill-color:unset;background:none">~4,0%</div>
-        <div class="eng-badge-label">Taxa de engajamento estimada<br/>(acima do benchmark 1–3%)</div>
+        <div class="eng-badge-val green">~4,0%</div>
+        <div class="eng-badge-label">Taxa de engajamento estimada<br/>(acima do benchmark de 1–3%)</div>
       </div>
     </div>
 
-    <p style="font-size:0.78rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--gold-500);font-weight:600;margin-bottom:16px;">7 Posts Analisados</p>
+    <p class="section-number" style="margin-bottom:16px;">7 Posts Analisados</p>
 
     <div class="post-cards">
       <div class="post-card">
         <div class="post-card-type">Reel</div>
-        <div class="post-card-name">Easter Musical promo ("A Cruz")</div>
-        <div class="post-card-date">Apr 3</div>
+        <div class="post-card-name">Promo Musical de Páscoa ("A Cruz")</div>
+        <div class="post-card-date">3 de abr</div>
         <div class="post-card-stats">
-          <div class="stat-item"><span class="stat-num">95</span><span class="stat-label">Likes</span></div>
-          <div class="stat-item"><span class="stat-num">4</span><span class="stat-label">Comments</span></div>
+          <div class="stat-item"><span class="stat-num">95</span><span class="stat-label">Curtidas</span></div>
+          <div class="stat-item"><span class="stat-num">4</span><span class="stat-label">Comentários</span></div>
         </div>
       </div>
       <div class="post-card">
         <div class="post-card-type collab">Reel (collab)</div>
-        <div class="post-card-name">Youth PG no Parque</div>
-        <div class="post-card-date">Apr 3</div>
+        <div class="post-card-name">Jovens no Parque</div>
+        <div class="post-card-date">3 de abr</div>
         <div class="post-card-stats">
-          <div class="stat-item"><span class="stat-num">58</span><span class="stat-label">Likes</span></div>
-          <div class="stat-item"><span class="stat-num">2+</span><span class="stat-label">Comments</span></div>
+          <div class="stat-item"><span class="stat-num">58</span><span class="stat-label">Curtidas</span></div>
+          <div class="stat-item"><span class="stat-num">2+</span><span class="stat-label">Comentários</span></div>
         </div>
       </div>
       <div class="post-card">
-        <div class="post-card-type" style="background:rgba(100,120,200,0.12);color:#8090e0;border-color:rgba(100,120,200,0.3)">Carousel</div>
-        <div class="post-card-name">76th Anniversary</div>
-        <div class="post-card-date">Mar 26</div>
+        <div class="post-card-type carousel">Carrossel</div>
+        <div class="post-card-name">76º Aniversário da Igreja</div>
+        <div class="post-card-date">26 de mar</div>
         <div class="post-card-stats">
-          <div class="stat-item"><span class="stat-num">85</span><span class="stat-label">Likes</span></div>
-          <div class="stat-item"><span class="stat-num">—</span><span class="stat-label">Comments</span></div>
-        </div>
-      </div>
-      <div class="post-card">
-        <div class="post-card-type">Reel</div>
-        <div class="post-card-name">Sunday Worship</div>
-        <div class="post-card-date">Mar 18</div>
-        <div class="post-card-stats">
-          <div class="stat-item"><span class="stat-num">76</span><span class="stat-label">Likes</span></div>
-          <div class="stat-item"><span class="stat-num">2</span><span class="stat-label">Comments</span></div>
+          <div class="stat-item"><span class="stat-num">85</span><span class="stat-label">Curtidas</span></div>
+          <div class="stat-item"><span class="stat-num">—</span><span class="stat-label">Comentários</span></div>
         </div>
       </div>
       <div class="post-card">
         <div class="post-card-type">Reel</div>
-        <div class="post-card-name">Women's Day</div>
-        <div class="post-card-date">Mar 12</div>
+        <div class="post-card-name">Culto de Domingo</div>
+        <div class="post-card-date">18 de mar</div>
         <div class="post-card-stats">
-          <div class="stat-item"><span class="stat-num">59</span><span class="stat-label">Likes</span></div>
-          <div class="stat-item"><span class="stat-num">—</span><span class="stat-label">Comments</span></div>
+          <div class="stat-item"><span class="stat-num">76</span><span class="stat-label">Curtidas</span></div>
+          <div class="stat-item"><span class="stat-num">2</span><span class="stat-label">Comentários</span></div>
         </div>
       </div>
       <div class="post-card">
         <div class="post-card-type">Reel</div>
-        <div class="post-card-name">Sunday Worship</div>
-        <div class="post-card-date">Mar 4</div>
+        <div class="post-card-name">Dia da Mulher</div>
+        <div class="post-card-date">12 de mar</div>
         <div class="post-card-stats">
-          <div class="stat-item"><span class="stat-num">65</span><span class="stat-label">Likes</span></div>
-          <div class="stat-item"><span class="stat-num">3</span><span class="stat-label">Comments</span></div>
+          <div class="stat-item"><span class="stat-num">59</span><span class="stat-label">Curtidas</span></div>
+          <div class="stat-item"><span class="stat-num">—</span><span class="stat-label">Comentários</span></div>
         </div>
       </div>
       <div class="post-card">
         <div class="post-card-type">Reel</div>
-        <div class="post-card-name">Celebration 22/02</div>
-        <div class="post-card-date">Feb 25</div>
+        <div class="post-card-name">Culto de Domingo</div>
+        <div class="post-card-date">4 de mar</div>
         <div class="post-card-stats">
-          <div class="stat-item"><span class="stat-num">72</span><span class="stat-label">Likes</span></div>
-          <div class="stat-item"><span class="stat-num">—</span><span class="stat-label">Comments</span></div>
+          <div class="stat-item"><span class="stat-num">65</span><span class="stat-label">Curtidas</span></div>
+          <div class="stat-item"><span class="stat-num">3</span><span class="stat-label">Comentários</span></div>
+        </div>
+      </div>
+      <div class="post-card">
+        <div class="post-card-type">Reel</div>
+        <div class="post-card-name">Celebração 22/02</div>
+        <div class="post-card-date">25 de fev</div>
+        <div class="post-card-stats">
+          <div class="stat-item"><span class="stat-num">72</span><span class="stat-label">Curtidas</span></div>
+          <div class="stat-item"><span class="stat-num">—</span><span class="stat-label">Comentários</span></div>
         </div>
       </div>
     </div>
 
     <div class="assessment-block">
-      <h4>Observação sobre Comments</h4>
+      <h4>Observação sobre Comentários</h4>
       <p>
-        Comments are <span class="highlight-red">low</span> relative to likes. Most posts receive 2–4 comments, suggesting followers consume content passively but aren't being prompted to interact. This is a <span class="highlight">significant growth lever</span>.
+        Os comentários são <span class="hl-red">baixos</span> em relação às curtidas. A maioria dos posts recebe 2–4 comentários, sugerindo que os seguidores consomem o conteúdo de forma passiva, sem ser estimulados a interagir. Este é um <span class="hl">importante alavancador de crescimento</span>.
       </p>
     </div>
   </section>
 
   <!-- ══════════════════════════════════════
-       SEÇÃO 4 — HASHTAG STRATEGY
+       SEÇÃO 4 — ESTRATÉGIA DE HASHTAGS
   ══════════════════════════════════════ -->
   <section class="section" aria-labelledby="s4-title">
     <p class="section-number">04</p>
     <div class="divider" aria-hidden="true"></div>
-    <h2 class="section-title" id="s4-title">Hashtag Strategy</h2>
+    <h2 class="section-title" id="s4-title">Estratégia de Hashtags</h2>
 
     <p style="font-size:0.82rem;color:var(--text-muted);margin-bottom:12px;">Hashtags em uso — Posts gerais:</p>
     <div class="hashtag-pills" role="list" aria-label="Hashtags usadas nos posts gerais">
@@ -1067,54 +597,54 @@
       <span class="hashtag-pill" role="listitem">#igreja</span>
     </div>
 
-    <p style="font-size:0.82rem;color:var(--text-muted);margin-bottom:12px;margin-top:16px;">Hashtags adicionais — Posts da Juventude:</p>
-    <div class="hashtag-pills" role="list" aria-label="Hashtags usadas nos posts da juventude">
-      <span class="hashtag-pill youth" role="listitem">#HabiteJuventude</span>
-      <span class="hashtag-pill youth" role="listitem">#JuventudeBatista</span>
-      <span class="hashtag-pill youth" role="listitem">#juventudecristã</span>
+    <p style="font-size:0.82rem;color:var(--text-muted);margin-bottom:12px;margin-top:20px;">Hashtags adicionais — Posts de Juventude:</p>
+    <div class="hashtag-pills" role="list" aria-label="Hashtags dos posts de juventude">
+      <span class="hashtag-pill juventude" role="listitem">#HabiteJuventude</span>
+      <span class="hashtag-pill juventude" role="listitem">#JuventudeBatista</span>
+      <span class="hashtag-pill juventude" role="listitem">#juventudecristã</span>
     </div>
 
-    <div class="assessment-block" style="margin-top:24px">
-      <h4>Issues Identificados</h4>
+    <div class="assessment-block" style="margin-top:24px;">
+      <h4>Problemas Identificados</h4>
       <p>
-        Only <span class="highlight-red">4–7 hashtags</span> are being used per post, well below the recommended <span class="highlight">10–15</span> for discoverability. The hashtags are all brand or category-level — there are no <strong style="color:#e8b44a">location-based hashtags</strong> (e.g., <code style="background:rgba(255,255,255,0.06);padding:1px 6px;border-radius:4px;">#igrejasaopaulo</code> <code style="background:rgba(255,255,255,0.06);padding:1px 6px;border-radius:4px;">#Pinheiros</code> <code style="background:rgba(255,255,255,0.06);padding:1px 6px;border-radius:4px;">#SP</code>) or <strong style="color:#e8b44a">trend-adjacent tags</strong> (e.g., <code style="background:rgba(255,255,255,0.06);padding:1px 6px;border-radius:4px;">#fé</code> <code style="background:rgba(255,255,255,0.06);padding:1px 6px;border-radius:4px;">#devocional</code> <code style="background:rgba(255,255,255,0.06);padding:1px 6px;border-radius:4px;">#palavradeDeus</code>) that could attract new audiences outside existing followers.
+        Apenas <span class="hl-red">4–7 hashtags</span> são usadas por post, bem abaixo das <span class="hl">10–15 recomendadas</span> para descoberta orgânica. Todas são de marca ou categoria — não há <strong style="color:#e8b44a">hashtags de localização</strong> (ex: <code>#igrejasaopaulo</code> <code>#Pinheiros</code> <code>#SP</code>) nem <strong style="color:#e8b44a">hashtags temáticas ou devocionais</strong> (ex: <code>#fé</code> <code>#devocional</code> <code>#palavradeDeus</code>) que poderiam atrair novos públicos fora dos seguidores atuais.
       </p>
     </div>
   </section>
 
   <!-- ══════════════════════════════════════
-       SEÇÃO 5 — POSTING FREQUENCY
+       SEÇÃO 5 — FREQUÊNCIA DE PUBLICAÇÃO
   ══════════════════════════════════════ -->
   <section class="section" aria-labelledby="s5-title">
     <p class="section-number">05</p>
     <div class="divider" aria-hidden="true"></div>
-    <h2 class="section-title" id="s5-title">Posting Frequency</h2>
+    <h2 class="section-title" id="s5-title">Frequência de Publicação</h2>
 
-    <div class="freq-bar" role="group" aria-label="Frequência atual vs ideal">
-      <span class="freq-label">Atual (1–2x/semana)</span>
-      <div class="freq-track" role="progressbar" aria-valuenow="33" aria-valuemin="0" aria-valuemax="100" aria-label="Frequência atual: 33%">
-        <div class="freq-fill current"></div>
+    <div class="freq-bar" role="group" aria-label="Frequência atual de postagem">
+      <span class="freq-label">Atual (1–2x por semana)</span>
+      <div class="freq-track" role="progressbar" aria-valuenow="33" aria-valuemin="0" aria-valuemax="100">
+        <div class="freq-fill atual"></div>
       </div>
     </div>
-    <div class="freq-bar">
-      <span class="freq-label">Ideal (3–5x/semana)</span>
-      <div class="freq-track" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" aria-label="Frequência ideal: 80%">
+    <div class="freq-bar" role="group" aria-label="Frequência ideal de postagem">
+      <span class="freq-label">Ideal (3–5x por semana)</span>
+      <div class="freq-track" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100">
         <div class="freq-fill ideal"></div>
       </div>
     </div>
 
-    <div class="inline-note" style="margin-top:20px">
-      Based on post dates, the account appears to post roughly <strong style="color:#e8b44a">1–2 times per week</strong>, which is adequate but on the lower end for growth. Ideal frequency for a church account seeking growth would be <strong style="color:#3aaf65">3–5 times per week</strong>, including a mix of Reels, Stories (not audited here), and static posts.
+    <div class="inline-note" style="margin-top:20px;">
+      Com base nas datas dos posts, o perfil publica aproximadamente <strong style="color:#e8b44a">1–2 vezes por semana</strong>, o que é adequado mas está no limite inferior para crescimento. A frequência ideal para um perfil de igreja em busca de crescimento seria <strong style="color:#3aaf65">3–5 vezes por semana</strong>, com mix de Reels, Stories (não auditados aqui) e posts estáticos.
     </div>
   </section>
 
   <!-- ══════════════════════════════════════
-       SEÇÃO 6 — KEY STRENGTHS
+       SEÇÃO 6 — PONTOS FORTES
   ══════════════════════════════════════ -->
   <section class="section" aria-labelledby="s6-title">
     <p class="section-number">06</p>
     <div class="divider" aria-hidden="true"></div>
-    <h2 class="section-title" id="s6-title">Key Strengths</h2>
+    <h2 class="section-title" id="s6-title">Pontos Fortes</h2>
 
     <div class="strength-list">
       <div class="strength-item">
@@ -1122,8 +652,8 @@
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
         </div>
         <div>
-          <div class="strength-title">Authentic Visual Content</div>
-          <p class="strength-desc">Genuine photos and videos of the congregation create warmth and community feeling, far more effective than stock imagery.</p>
+          <div class="strength-title">Conteúdo Visual Autêntico</div>
+          <p class="strength-desc">Fotos e vídeos genuínos da congregação criam calor e senso de comunidade, muito mais eficazes do que imagens de banco de fotos.</p>
         </div>
       </div>
       <div class="strength-item">
@@ -1131,8 +661,8 @@
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
         </div>
         <div>
-          <div class="strength-title">Consistent Theological Voice</div>
-          <p class="strength-desc">Every caption ties back to scripture, which reinforces the brand mission and gives content spiritual weight.</p>
+          <div class="strength-title">Voz Teológica Consistente</div>
+          <p class="strength-desc">Cada legenda remete às Escrituras, o que reforça a missão e dá peso espiritual ao conteúdo.</p>
         </div>
       </div>
       <div class="strength-item">
@@ -1140,8 +670,8 @@
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
         </div>
         <div>
-          <div class="strength-title">Strong Engagement Rate</div>
-          <p class="strength-desc">4%+ engagement is excellent for an account this size, indicating a loyal core community.</p>
+          <div class="strength-title">Taxa de Engajamento Elevada</div>
+          <p class="strength-desc">Engajamento acima de 4% é excelente para um perfil deste tamanho, indicando uma comunidade fiel e genuinamente engajada.</p>
         </div>
       </div>
       <div class="strength-item">
@@ -1149,8 +679,8 @@
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg>
         </div>
         <div>
-          <div class="strength-title">Reels-First Approach</div>
-          <p class="strength-desc">Smart alignment with the Instagram algorithm, maximizing organic reach potential.</p>
+          <div class="strength-title">Foco em Reels</div>
+          <p class="strength-desc">Alinhamento inteligente com o algoritmo do Instagram, maximizando o potencial de alcance orgânico.</p>
         </div>
       </div>
       <div class="strength-item">
@@ -1158,29 +688,29 @@
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
         </div>
         <div>
-          <div class="strength-title">Collaboration with Sub-Ministries</div>
-          <p class="strength-desc">The @habitejuventude collab post is a great practice that expands reach and highlights ministry diversity.</p>
+          <div class="strength-title">Colaboração com Ministérios</div>
+          <p class="strength-desc">O post em collab com @habitejuventude é uma ótima prática que amplia o alcance e destaca a diversidade dos ministérios.</p>
         </div>
       </div>
     </div>
   </section>
 
   <!-- ══════════════════════════════════════
-       SEÇÃO 7 — RECOMMENDATIONS
+       SEÇÃO 7 — RECOMENDAÇÕES
   ══════════════════════════════════════ -->
   <section class="section" aria-labelledby="s7-title">
     <p class="section-number">07</p>
     <div class="divider" aria-hidden="true"></div>
-    <h2 class="section-title" id="s7-title">Recommendations</h2>
+    <h2 class="section-title" id="s7-title">Recomendações</h2>
 
     <div class="rec-grid">
       <div class="rec-card">
         <div class="rec-card-icon" aria-hidden="true">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
         </div>
-        <div class="rec-card-title">Bio &amp; Profile</div>
+        <div class="rec-card-title">Bio e Perfil</div>
         <p class="rec-card-text">
-          Add a link — ideally a <strong>Linktree</strong> or a direct <strong>WhatsApp link</strong> — so visitors can take immediate action (visit the church, contact leadership, join a group). Consider adding a clear call-to-action line in the bio such as <em>"Venha nos conhecer 👇."</em>
+          Adicione um link — idealmente um <strong>Linktree</strong> ou <strong>link direto para o WhatsApp</strong> — para que visitantes possam tomar uma ação imediata (visitar a igreja, contato com a liderança, participar de um grupo). Considere incluir uma linha de CTA clara na bio como <em>"Venha nos conhecer 👇."</em>
         </p>
       </div>
 
@@ -1188,9 +718,9 @@
         <div class="rec-card-icon" aria-hidden="true">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
         </div>
-        <div class="rec-card-title">Content Mix</div>
+        <div class="rec-card-title">Mix de Conteúdo</div>
         <p class="rec-card-text">
-          Introduce at least <strong>2–3 new content types</strong>: short pastoral reflection videos (30–60s clips of the pastor with a devotional thought), congregation testimonials (even 15-second clips), and ministry introductions (showing EBD, worship team, etc.). This will attract new visitors who may not yet feel ready to attend in person.
+          Introduza pelo menos <strong>2–3 novos tipos de conteúdo</strong>: vídeos curtos de reflexão pastoral (30–60s com o pastor compartilhando um pensamento devocional), depoimentos de membros (mesmo 15 segundos) e apresentações dos ministérios (EBD, equipe de louvor, etc.). Isso atrai visitantes que ainda não se sentem prontos para comparecer pessoalmente.
         </p>
       </div>
 
@@ -1200,7 +730,7 @@
         </div>
         <div class="rec-card-title">Hashtags</div>
         <p class="rec-card-text">
-          Expand to <strong>12–15 hashtags per post</strong>. Include local hashtags like <strong>#igrejasaopaulo</strong> <strong>#Pinheiros</strong> <strong>#igrejaemSP</strong> and thematic/devotional ones like <strong>#palavradeDeus</strong> <strong>#devocional</strong> <strong>#fécristã</strong>. This is one of the easiest and highest-impact changes to implement immediately.
+          Expanda para <strong>12–15 hashtags por post</strong>. Inclua hashtags locais como <strong>#igrejasaopaulo</strong>, <strong>#Pinheiros</strong>, <strong>#igrejaemSP</strong> e temáticas/devocionais como <strong>#palavradeDeus</strong>, <strong>#devocional</strong>, <strong>#fécristã</strong>. Esta é uma das mudanças mais fáceis e de maior impacto para implementar imediatamente.
         </p>
       </div>
 
@@ -1208,9 +738,9 @@
         <div class="rec-card-icon" aria-hidden="true">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
         </div>
-        <div class="rec-card-title">Call-to-Action in Captions</div>
+        <div class="rec-card-title">CTA nas Legendas</div>
         <p class="rec-card-text">
-          End every caption with a question or CTA to drive comments — for example: <em>"Como Deus tem te lembrado da Sua presença essa semana? Conta pra gente nos comentários 💬"</em>. This alone could meaningfully increase comment counts and boost algorithmic distribution.
+          Encerre cada legenda com uma pergunta ou CTA para estimular comentários — por exemplo: <em>"Como Deus tem te lembrado da Sua presença essa semana? Conta pra gente nos comentários 💬"</em>. Isso pode aumentar significativamente os comentários e impulsionar a distribuição algorítmica.
         </p>
       </div>
 
@@ -1220,7 +750,7 @@
         </div>
         <div class="rec-card-title">Stories</div>
         <p class="rec-card-text">
-          Stories were not audited but are critical — they drive <strong>daily visibility</strong> and keep the community engaged between posts. The account should post daily Stories covering: announcements, behind-the-scenes moments, polls, scripture of the day, and reminders about service times.
+          Os Stories não foram auditados, mas são fundamentais — eles garantem <strong>visibilidade diária</strong> e mantêm a comunidade engajada entre os posts. O perfil deve publicar Stories diários com: comunicados, bastidores, enquetes, versículo do dia e lembretes sobre horários de culto.
         </p>
       </div>
 
@@ -1228,9 +758,9 @@
         <div class="rec-card-icon" aria-hidden="true">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
         </div>
-        <div class="rec-card-title">Posting Frequency</div>
+        <div class="rec-card-title">Frequência de Publicação</div>
         <p class="rec-card-text">
-          Aim for <strong>3–4 posts per week</strong>. A simple editorial calendar could be: <em>Monday</em> devotional Reel, <em>Wednesday</em> ministry spotlight or announcement, <em>Saturday</em> worship preview, <em>Sunday</em> worship recap.
+          Busque <strong>3–4 posts por semana</strong>. Uma agenda editorial simples poderia ser: <em>Segunda</em> — Reel devocional, <em>Quarta</em> — destaque de ministério ou comunicado, <em>Sábado</em> — prévia do culto, <em>Domingo</em> — resumo do culto.
         </p>
       </div>
 
@@ -1238,127 +768,100 @@
         <div class="rec-card-icon" aria-hidden="true">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
         </div>
-        <div class="rec-card-title">Explore Cross-Platform</div>
+        <div class="rec-card-title">Presença Multiplataforma</div>
         <p class="rec-card-text">
-          The Facebook page is linked but there's no website URL. A simple landing page (even a <strong>Neon or Linktree</strong>) aggregating service times, event registration, and a WhatsApp contact would reduce friction for first-time visitors discovering the church through Instagram.
+          A página do Facebook está vinculada, mas não há URL de site. Uma landing page simples (até mesmo via <strong>Neon ou Linktree</strong>) reunindo horários, inscrição em eventos e contato pelo WhatsApp reduziria a fricção para novos visitantes que descobrem a igreja pelo Instagram.
         </p>
       </div>
     </div>
   </section>
 
   <!-- ══════════════════════════════════════
-       SEÇÃO 8 — SUMMARY SCORE
+       SEÇÃO 8 — PONTUAÇÃO GERAL
   ══════════════════════════════════════ -->
   <section class="section" aria-labelledby="s8-title">
     <p class="section-number">08</p>
     <div class="divider" aria-hidden="true"></div>
-    <h2 class="section-title" id="s8-title">Summary Score</h2>
+    <h2 class="section-title" id="s8-title">Pontuação Geral</h2>
 
     <div class="score-rows" role="list" aria-label="Pontuações por área">
 
       <div class="score-row" role="listitem">
-        <span class="score-row-label">Profile completeness</span>
-        <div class="score-bar-wrap"><div class="score-bar s4" style="width:80%" aria-hidden="true"></div></div>
+        <span class="score-row-label">Completude do perfil</span>
+        <div class="score-bar-wrap"><div class="score-bar s4" style="width:80%"></div></div>
         <div class="score-row-stars" aria-label="4 de 5 estrelas">
-          <span class="star" aria-hidden="true">★</span>
-          <span class="star" aria-hidden="true">★</span>
-          <span class="star" aria-hidden="true">★</span>
-          <span class="star" aria-hidden="true">★</span>
-          <span class="star empty" aria-hidden="true">★</span>
+          <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star empty">★</span>
         </div>
         <span class="score-row-num">4/5</span>
       </div>
 
       <div class="score-row" role="listitem">
-        <span class="score-row-label">Content quality</span>
-        <div class="score-bar-wrap"><div class="score-bar s4" style="width:80%" aria-hidden="true"></div></div>
+        <span class="score-row-label">Qualidade do conteúdo</span>
+        <div class="score-bar-wrap"><div class="score-bar s4" style="width:80%"></div></div>
         <div class="score-row-stars" aria-label="4 de 5 estrelas">
-          <span class="star" aria-hidden="true">★</span>
-          <span class="star" aria-hidden="true">★</span>
-          <span class="star" aria-hidden="true">★</span>
-          <span class="star" aria-hidden="true">★</span>
-          <span class="star empty" aria-hidden="true">★</span>
+          <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star empty">★</span>
         </div>
         <span class="score-row-num">4/5</span>
       </div>
 
       <div class="score-row" role="listitem">
-        <span class="score-row-label">Content variety</span>
-        <div class="score-bar-wrap"><div class="score-bar s3" style="width:60%" aria-hidden="true"></div></div>
+        <span class="score-row-label">Variedade de conteúdo</span>
+        <div class="score-bar-wrap"><div class="score-bar s3" style="width:60%"></div></div>
         <div class="score-row-stars" aria-label="3 de 5 estrelas">
-          <span class="star" aria-hidden="true">★</span>
-          <span class="star" aria-hidden="true">★</span>
-          <span class="star" aria-hidden="true">★</span>
-          <span class="star empty" aria-hidden="true">★</span>
-          <span class="star empty" aria-hidden="true">★</span>
+          <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star empty">★</span><span class="star empty">★</span>
         </div>
         <span class="score-row-num">3/5</span>
       </div>
 
       <div class="score-row" role="listitem">
-        <span class="score-row-label">Engagement rate</span>
-        <div class="score-bar-wrap"><div class="score-bar s5" style="width:100%" aria-hidden="true"></div></div>
+        <span class="score-row-label">Taxa de engajamento</span>
+        <div class="score-bar-wrap"><div class="score-bar s5" style="width:100%"></div></div>
         <div class="score-row-stars" aria-label="5 de 5 estrelas">
-          <span class="star" aria-hidden="true">★</span>
-          <span class="star" aria-hidden="true">★</span>
-          <span class="star" aria-hidden="true">★</span>
-          <span class="star" aria-hidden="true">★</span>
-          <span class="star" aria-hidden="true">★</span>
+          <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span>
         </div>
         <span class="score-row-num">5/5</span>
       </div>
 
       <div class="score-row" role="listitem">
-        <span class="score-row-label">Hashtag strategy</span>
-        <div class="score-bar-wrap"><div class="score-bar s2" style="width:40%" aria-hidden="true"></div></div>
+        <span class="score-row-label">Estratégia de hashtags</span>
+        <div class="score-bar-wrap"><div class="score-bar s2" style="width:40%"></div></div>
         <div class="score-row-stars" aria-label="2 de 5 estrelas">
-          <span class="star" aria-hidden="true">★</span>
-          <span class="star" aria-hidden="true">★</span>
-          <span class="star empty" aria-hidden="true">★</span>
-          <span class="star empty" aria-hidden="true">★</span>
-          <span class="star empty" aria-hidden="true">★</span>
+          <span class="star">★</span><span class="star">★</span><span class="star empty">★</span><span class="star empty">★</span><span class="star empty">★</span>
         </div>
         <span class="score-row-num">2/5</span>
       </div>
 
       <div class="score-row" role="listitem">
-        <span class="score-row-label">Posting frequency</span>
-        <div class="score-bar-wrap"><div class="score-bar s3" style="width:60%" aria-hidden="true"></div></div>
+        <span class="score-row-label">Frequência de publicação</span>
+        <div class="score-bar-wrap"><div class="score-bar s3" style="width:60%"></div></div>
         <div class="score-row-stars" aria-label="3 de 5 estrelas">
-          <span class="star" aria-hidden="true">★</span>
-          <span class="star" aria-hidden="true">★</span>
-          <span class="star" aria-hidden="true">★</span>
-          <span class="star empty" aria-hidden="true">★</span>
-          <span class="star empty" aria-hidden="true">★</span>
+          <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star empty">★</span><span class="star empty">★</span>
         </div>
         <span class="score-row-num">3/5</span>
       </div>
 
       <div class="score-row" role="listitem">
-        <span class="score-row-label">Community interaction</span>
-        <div class="score-bar-wrap"><div class="score-bar s2" style="width:40%" aria-hidden="true"></div></div>
+        <span class="score-row-label">Interação com comunidade</span>
+        <div class="score-bar-wrap"><div class="score-bar s2" style="width:40%"></div></div>
         <div class="score-row-stars" aria-label="2 de 5 estrelas">
-          <span class="star" aria-hidden="true">★</span>
-          <span class="star" aria-hidden="true">★</span>
-          <span class="star empty" aria-hidden="true">★</span>
-          <span class="star empty" aria-hidden="true">★</span>
-          <span class="star empty" aria-hidden="true">★</span>
+          <span class="star">★</span><span class="star">★</span><span class="star empty">★</span><span class="star empty">★</span><span class="star empty">★</span>
         </div>
         <span class="score-row-num">2/5</span>
       </div>
+
     </div>
 
     <div class="overall-block" role="region" aria-label="Nota geral final">
-      <div class="big-score grad-text">3.5 / 5</div>
+      <div class="big-score grad-text">3,5 / 5</div>
       <div class="score-stars" aria-label="3 estrelas e meia de 5">★★★½☆</div>
       <p>
-        The account has a strong, authentic foundation with excellent engagement from a loyal audience. The biggest untapped opportunities are in <strong style="color:#e8b44a">hashtag optimization</strong>, <strong style="color:#e8b44a">CTA usage to drive comments</strong>, <strong style="color:#e8b44a">content diversification</strong>, and a consistent <strong style="color:#e8b44a">Stories presence</strong> — none of which require significant resources to implement.
+        O perfil tem uma base sólida e autêntica, com excelente engajamento de uma audiência fiel. As maiores oportunidades ainda inexploradas estão na <strong style="color:#e8b44a">otimização de hashtags</strong>, no <strong style="color:#e8b44a">uso de CTAs para gerar comentários</strong>, na <strong style="color:#e8b44a">diversificação de conteúdo</strong> e em uma presença consistente nos <strong style="color:#e8b44a">Stories</strong> — nenhuma delas exige recursos significativos para ser implementada.
       </p>
     </div>
   </section>
 
   <!-- ══════════════════════════════════════
-       FOOTER
+       RODAPÉ
   ══════════════════════════════════════ -->
   <footer>
     <p>Auditoria gerada em <span>08/04/2025</span> · <span>@batista.de.pinheiros</span> · 1ª Igreja Batista em Pinheiros</p>
