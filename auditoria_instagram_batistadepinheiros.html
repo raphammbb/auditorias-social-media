@@ -1,0 +1,1368 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Auditoria Instagram — @batista.de.pinheiros</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+    }
+
+    html { scroll-behavior: smooth; }
+
+    :root {
+      --navy-900: #0d1b2a;
+      --navy-800: #1b2a3b;
+      --navy-700: #243447;
+      --navy-600: #2e4058;
+      --gold-400: #e8b44a;
+      --gold-500: #c8963e;
+      --gold-600: #a87830;
+      --green-500: #2a7a4b;
+      --green-400: #35996000;
+      --green-light: #3aaf65;
+      --text: #e8e4d9;
+      --text-muted: #9a9280;
+      --border: rgba(200,150,62,0.18);
+      --card: rgba(27,42,59,0.85);
+      --red: #e05252;
+      --amber: #e8b44a;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--navy-900);
+      color: var(--text);
+      line-height: 1.65;
+      font-size: 16px;
+    }
+
+    /* ── GRAD TEXT ── */
+    .grad-text {
+      background: linear-gradient(135deg, #e8b44a 0%, #f5d580 40%, #c8963e 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    /* ── COVER ── */
+    .cover {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 80px 24px 60px;
+      overflow: hidden;
+    }
+
+    .cover::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 70% 60% at 50% 40%, rgba(200,150,62,0.10) 0%, transparent 70%),
+        radial-gradient(ellipse 50% 50% at 20% 80%, rgba(42,122,75,0.07) 0%, transparent 60%);
+      pointer-events: none;
+    }
+
+    /* decorative cross */
+    .cross-deco {
+      position: absolute;
+      opacity: 0.04;
+      pointer-events: none;
+    }
+    .cross-deco.top-right {
+      top: -60px; right: -60px;
+      width: 320px; height: 320px;
+    }
+    .cross-deco.bottom-left {
+      bottom: -80px; left: -80px;
+      width: 400px; height: 400px;
+    }
+
+    .cover-inner {
+      position: relative;
+      z-index: 1;
+      max-width: 800px;
+      width: 100%;
+    }
+
+    /* ── BADGE ── */
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      border: 1px solid var(--gold-500);
+      background: rgba(200,150,62,0.08);
+      color: var(--gold-400);
+      font-size: 0.78rem;
+      font-weight: 500;
+      letter-spacing: 0.04em;
+      padding: 6px 16px;
+      border-radius: 999px;
+      margin-bottom: 32px;
+    }
+
+    .badge-dot {
+      width: 7px; height: 7px;
+      border-radius: 50%;
+      background: var(--gold-400);
+      flex-shrink: 0;
+    }
+
+    /* ── HERO TITLE ── */
+    .hero-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.4rem, 6vw, 4.2rem);
+      font-weight: 800;
+      line-height: 1.1;
+      margin-bottom: 18px;
+    }
+
+    .hero-subtitle {
+      font-size: clamp(0.95rem, 2vw, 1.1rem);
+      color: var(--text-muted);
+      margin-bottom: 48px;
+      letter-spacing: 0.01em;
+    }
+
+    .hero-subtitle span {
+      color: var(--gold-400);
+      font-weight: 500;
+    }
+
+    /* ── SCORE CIRCLE ── */
+    .score-circle-wrap {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-bottom: 52px;
+    }
+
+    .score-circle {
+      width: 130px;
+      height: 130px;
+      border-radius: 50%;
+      border: 3px solid var(--gold-500);
+      background: rgba(200,150,62,0.08);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 0 40px rgba(200,150,62,0.18), inset 0 0 24px rgba(200,150,62,0.06);
+    }
+
+    .score-num {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.6rem;
+      font-weight: 700;
+      line-height: 1;
+      background: linear-gradient(135deg, #e8b44a, #f5d580);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .score-denom {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      margin-top: 2px;
+      letter-spacing: 0.06em;
+    }
+
+    .score-label {
+      margin-top: 12px;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    /* ── QUICK METRICS ── */
+    .quick-metrics {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-bottom: 0;
+    }
+
+    .qm-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 16px 24px;
+      min-width: 120px;
+      text-align: center;
+      backdrop-filter: blur(8px);
+    }
+
+    .qm-value {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: var(--gold-400);
+      line-height: 1;
+    }
+
+    .qm-label {
+      font-size: 0.74rem;
+      color: var(--text-muted);
+      margin-top: 5px;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    /* ── SECTION ── */
+    .section {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 64px 24px;
+      border-top: 1px solid var(--border);
+    }
+
+    .section-number {
+      font-size: 0.72rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--gold-500);
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.5rem, 3vw, 2rem);
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 32px;
+      line-height: 1.2;
+    }
+
+    /* ── TABLE ── */
+    .audit-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 28px;
+      font-size: 0.9rem;
+    }
+
+    .audit-table th {
+      text-align: left;
+      padding: 10px 16px;
+      font-size: 0.72rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--gold-500);
+      border-bottom: 1px solid var(--border);
+      font-weight: 600;
+    }
+
+    .audit-table td {
+      padding: 12px 16px;
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+      color: var(--text);
+    }
+
+    .audit-table tr:last-child td { border-bottom: none; }
+
+    .audit-table tbody tr:hover {
+      background: rgba(200,150,62,0.04);
+    }
+
+    .tag-healthy {
+      display: inline-block;
+      background: rgba(42,122,75,0.2);
+      color: #3aaf65;
+      border: 1px solid rgba(42,122,75,0.4);
+      border-radius: 999px;
+      padding: 2px 10px;
+      font-size: 0.72rem;
+      font-weight: 600;
+    }
+
+    /* ── ASSESSMENT BLOCK ── */
+    .assessment-block {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 24px 28px;
+      margin-bottom: 20px;
+      backdrop-filter: blur(6px);
+    }
+
+    .assessment-block h4 {
+      font-size: 0.8rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--gold-500);
+      margin-bottom: 10px;
+      font-weight: 600;
+    }
+
+    .assessment-block p {
+      color: #c8c0b0;
+      font-size: 0.92rem;
+      line-height: 1.7;
+    }
+
+    /* ── PILLARS ── */
+    .pillar-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 14px;
+      margin-bottom: 24px;
+    }
+
+    .pillar-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 18px 20px;
+      backdrop-filter: blur(6px);
+    }
+
+    .pillar-card-title {
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--gold-400);
+      margin-bottom: 6px;
+    }
+
+    .pillar-card p {
+      font-size: 0.83rem;
+      color: #a09888;
+      line-height: 1.6;
+    }
+
+    /* ── GAPS & POSITIVES ── */
+    .two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-top: 20px;
+    }
+
+    @media (max-width: 640px) {
+      .two-col { grid-template-columns: 1fr; }
+      .quick-metrics { gap: 10px; }
+      .qm-card { min-width: 100px; padding: 14px 18px; }
+    }
+
+    .pos-block {
+      background: rgba(42,122,75,0.10);
+      border: 1px solid rgba(42,122,75,0.30);
+      border-radius: 14px;
+      padding: 22px 24px;
+    }
+
+    .gap-block {
+      background: rgba(224,82,82,0.08);
+      border: 1px solid rgba(224,82,82,0.25);
+      border-radius: 14px;
+      padding: 22px 24px;
+    }
+
+    .block-label {
+      font-size: 0.72rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+
+    .pos-block .block-label { color: #3aaf65; }
+    .gap-block .block-label { color: #e05252; }
+
+    .block-text {
+      font-size: 0.87rem;
+      color: #b0a898;
+      line-height: 1.7;
+    }
+
+    /* ── ENGAGEMENT CARDS ── */
+    .post-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 14px;
+      margin-bottom: 28px;
+    }
+
+    .post-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 18px 20px;
+      backdrop-filter: blur(6px);
+    }
+
+    .post-card-type {
+      display: inline-block;
+      background: rgba(200,150,62,0.12);
+      color: var(--gold-400);
+      border: 1px solid rgba(200,150,62,0.3);
+      border-radius: 999px;
+      padding: 2px 10px;
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      margin-bottom: 10px;
+    }
+
+    .post-card-type.collab {
+      background: rgba(42,122,75,0.12);
+      color: #3aaf65;
+      border-color: rgba(42,122,75,0.3);
+    }
+
+    .post-card-name {
+      font-size: 0.88rem;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 6px;
+      line-height: 1.4;
+    }
+
+    .post-card-date {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      margin-bottom: 14px;
+    }
+
+    .post-card-stats {
+      display: flex;
+      gap: 18px;
+    }
+
+    .stat-item {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .stat-num {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: var(--gold-400);
+      line-height: 1;
+    }
+
+    .stat-label {
+      font-size: 0.68rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+    }
+
+    /* engagement summary */
+    .eng-summary {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+      margin-bottom: 20px;
+    }
+
+    .eng-badge {
+      background: rgba(200,150,62,0.10);
+      border: 1px solid rgba(200,150,62,0.28);
+      border-radius: 12px;
+      padding: 14px 22px;
+      flex: 1;
+      min-width: 180px;
+      text-align: center;
+    }
+
+    .eng-badge-val {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: var(--gold-400);
+    }
+
+    .eng-badge-label {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      margin-top: 4px;
+      line-height: 1.4;
+    }
+
+    /* ── HASHTAG PILLS ── */
+    .hashtag-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin: 16px 0;
+    }
+
+    .hashtag-pill {
+      background: rgba(200,150,62,0.10);
+      border: 1px solid rgba(200,150,62,0.28);
+      color: var(--gold-400);
+      border-radius: 999px;
+      padding: 5px 13px;
+      font-size: 0.8rem;
+      font-weight: 500;
+      letter-spacing: 0.02em;
+    }
+
+    .hashtag-pill.youth {
+      background: rgba(42,122,75,0.10);
+      border-color: rgba(42,122,75,0.3);
+      color: #3aaf65;
+    }
+
+    /* ── STRENGTHS ── */
+    .strength-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 14px;
+    }
+
+    .strength-item {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 18px 20px;
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+      backdrop-filter: blur(6px);
+    }
+
+    .strength-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: 8px;
+      background: rgba(200,150,62,0.12);
+      border: 1px solid rgba(200,150,62,0.28);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      color: var(--gold-400);
+    }
+
+    .strength-title {
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 4px;
+    }
+
+    .strength-desc {
+      font-size: 0.82rem;
+      color: #a09888;
+      line-height: 1.6;
+    }
+
+    /* ── RECOMMENDATIONS ── */
+    .rec-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 16px;
+    }
+
+    .rec-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 22px 24px;
+      backdrop-filter: blur(6px);
+      transition: border-color 0.2s, box-shadow 0.2s;
+      cursor: default;
+    }
+
+    .rec-card:hover {
+      border-color: rgba(200,150,62,0.40);
+      box-shadow: 0 4px 24px rgba(200,150,62,0.08);
+    }
+
+    .rec-card-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      background: rgba(200,150,62,0.10);
+      border: 1px solid rgba(200,150,62,0.25);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--gold-400);
+      margin-bottom: 14px;
+    }
+
+    .rec-card-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 10px;
+    }
+
+    .rec-card-text {
+      font-size: 0.85rem;
+      color: #a09888;
+      line-height: 1.7;
+    }
+
+    .rec-card-text strong {
+      color: var(--gold-400);
+      font-weight: 600;
+    }
+
+    /* ── SCORE SUMMARY ── */
+    .score-rows {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .score-row {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .score-row-label {
+      font-size: 0.88rem;
+      color: var(--text);
+      width: 200px;
+      flex-shrink: 0;
+    }
+
+    .score-bar-wrap {
+      flex: 1;
+      height: 8px;
+      background: rgba(255,255,255,0.06);
+      border-radius: 999px;
+      overflow: hidden;
+    }
+
+    .score-bar {
+      height: 100%;
+      border-radius: 999px;
+      transition: width 1s ease;
+    }
+
+    .score-bar.s5 { background: linear-gradient(90deg, #2a7a4b, #3aaf65); }
+    .score-bar.s4 { background: linear-gradient(90deg, #c8963e, #e8b44a); }
+    .score-bar.s3 { background: linear-gradient(90deg, #e8923e, #e8b44a); }
+    .score-bar.s2 { background: linear-gradient(90deg, #e05252, #e87070); }
+
+    .score-row-stars {
+      display: flex;
+      gap: 3px;
+      flex-shrink: 0;
+      width: 100px;
+      justify-content: flex-end;
+    }
+
+    .star {
+      font-size: 0.9rem;
+      color: var(--gold-400);
+    }
+
+    .star.empty { color: rgba(255,255,255,0.15); }
+    .star.half { color: var(--gold-500); }
+
+    .score-row-num {
+      font-size: 0.78rem;
+      color: var(--text-muted);
+      width: 32px;
+      text-align: right;
+      flex-shrink: 0;
+    }
+
+    /* ── OVERALL SCORE BLOCK ── */
+    .overall-block {
+      background: linear-gradient(135deg, rgba(200,150,62,0.12) 0%, rgba(27,42,59,0.6) 100%);
+      border: 1px solid rgba(200,150,62,0.35);
+      border-radius: 18px;
+      padding: 36px;
+      text-align: center;
+      margin-top: 36px;
+    }
+
+    .overall-block .big-score {
+      font-family: 'Playfair Display', serif;
+      font-size: 3rem;
+      font-weight: 800;
+      line-height: 1;
+      margin-bottom: 6px;
+    }
+
+    .overall-block .score-stars {
+      font-size: 1.4rem;
+      color: var(--gold-400);
+      letter-spacing: 4px;
+      margin-bottom: 14px;
+    }
+
+    .overall-block p {
+      font-size: 0.9rem;
+      color: #a09888;
+      max-width: 600px;
+      margin: 0 auto;
+      line-height: 1.7;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      text-align: center;
+      padding: 40px 24px;
+      border-top: 1px solid var(--border);
+      color: var(--text-muted);
+      font-size: 0.8rem;
+    }
+
+    footer span {
+      color: var(--gold-500);
+    }
+
+    /* ── DIVIDER ── */
+    .divider {
+      width: 60px;
+      height: 2px;
+      background: linear-gradient(90deg, var(--gold-500), transparent);
+      border-radius: 999px;
+      margin-bottom: 32px;
+    }
+
+    /* ── HIGHLIGHT TEXT ── */
+    .highlight {
+      color: var(--gold-400);
+      font-weight: 600;
+    }
+
+    .highlight-green {
+      color: #3aaf65;
+      font-weight: 600;
+    }
+
+    .highlight-red {
+      color: #e07070;
+      font-weight: 600;
+    }
+
+    /* ── INLINE NOTE ── */
+    .inline-note {
+      background: rgba(200,150,62,0.07);
+      border-left: 3px solid var(--gold-500);
+      border-radius: 0 8px 8px 0;
+      padding: 14px 18px;
+      font-size: 0.87rem;
+      color: #b8a888;
+      line-height: 1.65;
+      margin: 20px 0;
+    }
+
+    .freq-bar {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin: 16px 0;
+    }
+
+    .freq-label {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      width: 120px;
+      flex-shrink: 0;
+    }
+
+    .freq-track {
+      flex: 1;
+      height: 10px;
+      background: rgba(255,255,255,0.06);
+      border-radius: 999px;
+      overflow: hidden;
+    }
+
+    .freq-fill {
+      height: 100%;
+      border-radius: 999px;
+    }
+
+    .freq-fill.current {
+      width: 33%;
+      background: linear-gradient(90deg, #c8963e, #e8b44a);
+    }
+
+    .freq-fill.ideal {
+      width: 80%;
+      background: linear-gradient(90deg, #2a7a4b, #3aaf65);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ══════════════════════════════════════
+       COVER / HERO
+  ══════════════════════════════════════ -->
+  <section class="cover">
+    <!-- decorative cross SVG top-right -->
+    <svg class="cross-deco top-right" viewBox="0 0 320 320" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <rect x="130" y="0" width="60" height="320" rx="8" fill="#e8b44a"/>
+      <rect x="0" y="100" width="320" height="60" rx="8" fill="#e8b44a"/>
+    </svg>
+    <!-- decorative cross SVG bottom-left -->
+    <svg class="cross-deco bottom-left" viewBox="0 0 400 400" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <rect x="165" y="0" width="70" height="400" rx="8" fill="#e8b44a"/>
+      <rect x="0" y="130" width="400" height="70" rx="8" fill="#e8b44a"/>
+    </svg>
+
+    <div class="cover-inner">
+      <!-- 1. Badge -->
+      <div class="badge">
+        <span class="badge-dot" aria-hidden="true"></span>
+        Auditoria de Conteúdo · Instagram · 08/04/2025
+      </div>
+
+      <!-- 2. Título -->
+      <h1 class="hero-title grad-text">Manual de Boas Práticas</h1>
+
+      <!-- 3. Subtítulo -->
+      <p class="hero-subtitle">
+        Análise de desempenho para <span>@batista.de.pinheiros</span> · 1ª Igreja Batista em Pinheiros
+      </p>
+
+      <!-- 4. Score Circle -->
+      <div class="score-circle-wrap">
+        <div class="score-circle" role="img" aria-label="Nota geral: 3.5 de 5">
+          <span class="score-num">3.5</span>
+          <span class="score-denom">/ 5</span>
+        </div>
+        <span class="score-label">Nota Geral</span>
+      </div>
+
+      <!-- 5. Quick metrics -->
+      <div class="quick-metrics" role="list">
+        <div class="qm-card" role="listitem">
+          <div class="qm-value">193</div>
+          <div class="qm-label">Posts</div>
+        </div>
+        <div class="qm-card" role="listitem">
+          <div class="qm-value">1.807</div>
+          <div class="qm-label">Seguidores</div>
+        </div>
+        <div class="qm-card" role="listitem">
+          <div class="qm-value">67</div>
+          <div class="qm-label">Seguindo</div>
+        </div>
+        <div class="qm-card" role="listitem">
+          <div class="qm-value">~4,0%</div>
+          <div class="qm-label">Engajamento</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════
+       SEÇÃO 1 — PROFILE OVERVIEW
+  ══════════════════════════════════════ -->
+  <section class="section" aria-labelledby="s1-title">
+    <p class="section-number">01</p>
+    <div class="divider" aria-hidden="true"></div>
+    <h2 class="section-title" id="s1-title">Profile Overview</h2>
+
+    <table class="audit-table" role="table" aria-label="Dados do perfil">
+      <thead>
+        <tr>
+          <th scope="col">Métrica</th>
+          <th scope="col">Valor</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>Username</td><td class="highlight">@batista.de.pinheiros</td></tr>
+        <tr><td>Name</td><td>1ª Igreja Batista em Pinheiros</td></tr>
+        <tr><td>Category</td><td>Igreja Evangélica</td></tr>
+        <tr><td>Posts</td><td>193</td></tr>
+        <tr><td>Followers</td><td>1,807</td></tr>
+        <tr><td>Following</td><td>67</td></tr>
+        <tr><td>Follower/Following ratio</td><td>27:1 &nbsp;<span class="tag-healthy">healthy</span></td></tr>
+        <tr><td>External link</td><td>Facebook page (1ª Igreja Batista em Pinheiros)</td></tr>
+      </tbody>
+    </table>
+
+    <div class="assessment-block">
+      <h4>Bio Assessment</h4>
+      <p>
+        The bio is functional and informative — it clearly lists service times (Sunday 11h &amp; 19h), Bible Study (Sunday 10h), the physical address with a helpful proximity note to the Pinheiros metro station, and parking availability. However, it <span class="highlight-red">lacks a URL link</span> to a website, WhatsApp, or Linktree where visitors could take a next step (e.g., contact, join a small group, donate). The Facebook link is present but may not be the most effective CTA for a younger audience.
+      </p>
+    </div>
+
+    <div class="assessment-block">
+      <h4>Profile Photo</h4>
+      <p>
+        The logo is clean and legible — the green shield with "Primeira Igreja Batista de Pinheiros" is recognizable and professional.
+      </p>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════
+       SEÇÃO 2 — CONTENT STRATEGY
+  ══════════════════════════════════════ -->
+  <section class="section" aria-labelledby="s2-title">
+    <p class="section-number">02</p>
+    <div class="divider" aria-hidden="true"></div>
+    <h2 class="section-title" id="s2-title">Content Strategy</h2>
+
+    <div class="inline-note">
+      The account relies almost exclusively on <strong style="color:#e8b44a">Reels</strong> (short videos). In the 7 most recent posts reviewed, <strong style="color:#e8b44a">6 were Reels</strong> and 1 was a Carousel (multi-photo post for the church anniversary). There were no static single-image posts in recent content, which aligns well with Instagram's current algorithm preference for video.
+    </div>
+
+    <p class="section-number" style="margin-bottom:16px">Content Pillars Observed</p>
+    <div class="pillar-grid">
+      <div class="pillar-card">
+        <div class="pillar-card-title">Worship Moments</div>
+        <p>Reels capturing Sunday services, with praise music, congregation shots, and scripture captions. This is the dominant content type.</p>
+      </div>
+      <div class="pillar-card">
+        <div class="pillar-card-title">Announcements / Events</div>
+        <p>Designed graphic Reels promoting specific events (e.g., the Easter Musical <em>"A Cruz: Espetáculo da Vida"</em>).</p>
+      </div>
+      <div class="pillar-card">
+        <div class="pillar-card-title">Ministry Spotlights</div>
+        <p>Youth group (via the @habitejuventude collaboration), Women's Day celebration.</p>
+      </div>
+      <div class="pillar-card">
+        <div class="pillar-card-title">Milestone Commemorations</div>
+        <p>The 76th church anniversary carousel.</p>
+      </div>
+    </div>
+
+    <div class="two-col">
+      <div class="pos-block">
+        <div class="block-label">Positives</div>
+        <p class="block-text">
+          The content pillars are coherent and well-aligned with the church's identity. Captions consistently include a relevant Bible verse, which reinforces the spiritual tone and gives followers devotional value beyond just the visual. The writing style is warm and accessible.
+        </p>
+      </div>
+      <div class="gap-block">
+        <div class="block-label">Gaps</div>
+        <p class="block-text">
+          There is very little content variety beyond worship services. Missing content types that could diversify and grow the profile include: pastoral teaching clips or devotionals, behind-the-scenes of ministries, testimonials, community outreach content, Q&amp;A or interactive formats, and seasonal devotional series.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════
+       SEÇÃO 3 — ENGAGEMENT METRICS
+  ══════════════════════════════════════ -->
+  <section class="section" aria-labelledby="s3-title">
+    <p class="section-number">03</p>
+    <div class="divider" aria-hidden="true"></div>
+    <h2 class="section-title" id="s3-title">Engagement Metrics</h2>
+
+    <div class="eng-summary">
+      <div class="eng-badge">
+        <div class="eng-badge-val">~73</div>
+        <div class="eng-badge-label">Média de likes por post (amostra)</div>
+      </div>
+      <div class="eng-badge">
+        <div class="eng-badge-val highlight-green" style="-webkit-text-fill-color:unset;background:none">~4,0%</div>
+        <div class="eng-badge-label">Taxa de engajamento estimada<br/>(acima do benchmark 1–3%)</div>
+      </div>
+    </div>
+
+    <p style="font-size:0.78rem;letter-spacing:0.1em;text-transform:uppercase;color:var(--gold-500);font-weight:600;margin-bottom:16px;">7 Posts Analisados</p>
+
+    <div class="post-cards">
+      <div class="post-card">
+        <div class="post-card-type">Reel</div>
+        <div class="post-card-name">Easter Musical promo ("A Cruz")</div>
+        <div class="post-card-date">Apr 3</div>
+        <div class="post-card-stats">
+          <div class="stat-item"><span class="stat-num">95</span><span class="stat-label">Likes</span></div>
+          <div class="stat-item"><span class="stat-num">4</span><span class="stat-label">Comments</span></div>
+        </div>
+      </div>
+      <div class="post-card">
+        <div class="post-card-type collab">Reel (collab)</div>
+        <div class="post-card-name">Youth PG no Parque</div>
+        <div class="post-card-date">Apr 3</div>
+        <div class="post-card-stats">
+          <div class="stat-item"><span class="stat-num">58</span><span class="stat-label">Likes</span></div>
+          <div class="stat-item"><span class="stat-num">2+</span><span class="stat-label">Comments</span></div>
+        </div>
+      </div>
+      <div class="post-card">
+        <div class="post-card-type" style="background:rgba(100,120,200,0.12);color:#8090e0;border-color:rgba(100,120,200,0.3)">Carousel</div>
+        <div class="post-card-name">76th Anniversary</div>
+        <div class="post-card-date">Mar 26</div>
+        <div class="post-card-stats">
+          <div class="stat-item"><span class="stat-num">85</span><span class="stat-label">Likes</span></div>
+          <div class="stat-item"><span class="stat-num">—</span><span class="stat-label">Comments</span></div>
+        </div>
+      </div>
+      <div class="post-card">
+        <div class="post-card-type">Reel</div>
+        <div class="post-card-name">Sunday Worship</div>
+        <div class="post-card-date">Mar 18</div>
+        <div class="post-card-stats">
+          <div class="stat-item"><span class="stat-num">76</span><span class="stat-label">Likes</span></div>
+          <div class="stat-item"><span class="stat-num">2</span><span class="stat-label">Comments</span></div>
+        </div>
+      </div>
+      <div class="post-card">
+        <div class="post-card-type">Reel</div>
+        <div class="post-card-name">Women's Day</div>
+        <div class="post-card-date">Mar 12</div>
+        <div class="post-card-stats">
+          <div class="stat-item"><span class="stat-num">59</span><span class="stat-label">Likes</span></div>
+          <div class="stat-item"><span class="stat-num">—</span><span class="stat-label">Comments</span></div>
+        </div>
+      </div>
+      <div class="post-card">
+        <div class="post-card-type">Reel</div>
+        <div class="post-card-name">Sunday Worship</div>
+        <div class="post-card-date">Mar 4</div>
+        <div class="post-card-stats">
+          <div class="stat-item"><span class="stat-num">65</span><span class="stat-label">Likes</span></div>
+          <div class="stat-item"><span class="stat-num">3</span><span class="stat-label">Comments</span></div>
+        </div>
+      </div>
+      <div class="post-card">
+        <div class="post-card-type">Reel</div>
+        <div class="post-card-name">Celebration 22/02</div>
+        <div class="post-card-date">Feb 25</div>
+        <div class="post-card-stats">
+          <div class="stat-item"><span class="stat-num">72</span><span class="stat-label">Likes</span></div>
+          <div class="stat-item"><span class="stat-num">—</span><span class="stat-label">Comments</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="assessment-block">
+      <h4>Observação sobre Comments</h4>
+      <p>
+        Comments are <span class="highlight-red">low</span> relative to likes. Most posts receive 2–4 comments, suggesting followers consume content passively but aren't being prompted to interact. This is a <span class="highlight">significant growth lever</span>.
+      </p>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════
+       SEÇÃO 4 — HASHTAG STRATEGY
+  ══════════════════════════════════════ -->
+  <section class="section" aria-labelledby="s4-title">
+    <p class="section-number">04</p>
+    <div class="divider" aria-hidden="true"></div>
+    <h2 class="section-title" id="s4-title">Hashtag Strategy</h2>
+
+    <p style="font-size:0.82rem;color:var(--text-muted);margin-bottom:12px;">Hashtags em uso — Posts gerais:</p>
+    <div class="hashtag-pills" role="list" aria-label="Hashtags usadas nos posts gerais">
+      <span class="hashtag-pill" role="listitem">#batistadepinheiros</span>
+      <span class="hashtag-pill" role="listitem">#cultodominical</span>
+      <span class="hashtag-pill" role="listitem">#igrejabatista</span>
+      <span class="hashtag-pill" role="listitem">#igreja</span>
+    </div>
+
+    <p style="font-size:0.82rem;color:var(--text-muted);margin-bottom:12px;margin-top:16px;">Hashtags adicionais — Posts da Juventude:</p>
+    <div class="hashtag-pills" role="list" aria-label="Hashtags usadas nos posts da juventude">
+      <span class="hashtag-pill youth" role="listitem">#HabiteJuventude</span>
+      <span class="hashtag-pill youth" role="listitem">#JuventudeBatista</span>
+      <span class="hashtag-pill youth" role="listitem">#juventudecristã</span>
+    </div>
+
+    <div class="assessment-block" style="margin-top:24px">
+      <h4>Issues Identificados</h4>
+      <p>
+        Only <span class="highlight-red">4–7 hashtags</span> are being used per post, well below the recommended <span class="highlight">10–15</span> for discoverability. The hashtags are all brand or category-level — there are no <strong style="color:#e8b44a">location-based hashtags</strong> (e.g., <code style="background:rgba(255,255,255,0.06);padding:1px 6px;border-radius:4px;">#igrejasaopaulo</code> <code style="background:rgba(255,255,255,0.06);padding:1px 6px;border-radius:4px;">#Pinheiros</code> <code style="background:rgba(255,255,255,0.06);padding:1px 6px;border-radius:4px;">#SP</code>) or <strong style="color:#e8b44a">trend-adjacent tags</strong> (e.g., <code style="background:rgba(255,255,255,0.06);padding:1px 6px;border-radius:4px;">#fé</code> <code style="background:rgba(255,255,255,0.06);padding:1px 6px;border-radius:4px;">#devocional</code> <code style="background:rgba(255,255,255,0.06);padding:1px 6px;border-radius:4px;">#palavradeDeus</code>) that could attract new audiences outside existing followers.
+      </p>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════
+       SEÇÃO 5 — POSTING FREQUENCY
+  ══════════════════════════════════════ -->
+  <section class="section" aria-labelledby="s5-title">
+    <p class="section-number">05</p>
+    <div class="divider" aria-hidden="true"></div>
+    <h2 class="section-title" id="s5-title">Posting Frequency</h2>
+
+    <div class="freq-bar" role="group" aria-label="Frequência atual vs ideal">
+      <span class="freq-label">Atual (1–2x/semana)</span>
+      <div class="freq-track" role="progressbar" aria-valuenow="33" aria-valuemin="0" aria-valuemax="100" aria-label="Frequência atual: 33%">
+        <div class="freq-fill current"></div>
+      </div>
+    </div>
+    <div class="freq-bar">
+      <span class="freq-label">Ideal (3–5x/semana)</span>
+      <div class="freq-track" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" aria-label="Frequência ideal: 80%">
+        <div class="freq-fill ideal"></div>
+      </div>
+    </div>
+
+    <div class="inline-note" style="margin-top:20px">
+      Based on post dates, the account appears to post roughly <strong style="color:#e8b44a">1–2 times per week</strong>, which is adequate but on the lower end for growth. Ideal frequency for a church account seeking growth would be <strong style="color:#3aaf65">3–5 times per week</strong>, including a mix of Reels, Stories (not audited here), and static posts.
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════
+       SEÇÃO 6 — KEY STRENGTHS
+  ══════════════════════════════════════ -->
+  <section class="section" aria-labelledby="s6-title">
+    <p class="section-number">06</p>
+    <div class="divider" aria-hidden="true"></div>
+    <h2 class="section-title" id="s6-title">Key Strengths</h2>
+
+    <div class="strength-list">
+      <div class="strength-item">
+        <div class="strength-icon" aria-hidden="true">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+        </div>
+        <div>
+          <div class="strength-title">Authentic Visual Content</div>
+          <p class="strength-desc">Genuine photos and videos of the congregation create warmth and community feeling, far more effective than stock imagery.</p>
+        </div>
+      </div>
+      <div class="strength-item">
+        <div class="strength-icon" aria-hidden="true">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        </div>
+        <div>
+          <div class="strength-title">Consistent Theological Voice</div>
+          <p class="strength-desc">Every caption ties back to scripture, which reinforces the brand mission and gives content spiritual weight.</p>
+        </div>
+      </div>
+      <div class="strength-item">
+        <div class="strength-icon" aria-hidden="true">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+        </div>
+        <div>
+          <div class="strength-title">Strong Engagement Rate</div>
+          <p class="strength-desc">4%+ engagement is excellent for an account this size, indicating a loyal core community.</p>
+        </div>
+      </div>
+      <div class="strength-item">
+        <div class="strength-icon" aria-hidden="true">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg>
+        </div>
+        <div>
+          <div class="strength-title">Reels-First Approach</div>
+          <p class="strength-desc">Smart alignment with the Instagram algorithm, maximizing organic reach potential.</p>
+        </div>
+      </div>
+      <div class="strength-item">
+        <div class="strength-icon" aria-hidden="true">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        </div>
+        <div>
+          <div class="strength-title">Collaboration with Sub-Ministries</div>
+          <p class="strength-desc">The @habitejuventude collab post is a great practice that expands reach and highlights ministry diversity.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════
+       SEÇÃO 7 — RECOMMENDATIONS
+  ══════════════════════════════════════ -->
+  <section class="section" aria-labelledby="s7-title">
+    <p class="section-number">07</p>
+    <div class="divider" aria-hidden="true"></div>
+    <h2 class="section-title" id="s7-title">Recommendations</h2>
+
+    <div class="rec-grid">
+      <div class="rec-card">
+        <div class="rec-card-icon" aria-hidden="true">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        </div>
+        <div class="rec-card-title">Bio &amp; Profile</div>
+        <p class="rec-card-text">
+          Add a link — ideally a <strong>Linktree</strong> or a direct <strong>WhatsApp link</strong> — so visitors can take immediate action (visit the church, contact leadership, join a group). Consider adding a clear call-to-action line in the bio such as <em>"Venha nos conhecer 👇."</em>
+        </p>
+      </div>
+
+      <div class="rec-card">
+        <div class="rec-card-icon" aria-hidden="true">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+        </div>
+        <div class="rec-card-title">Content Mix</div>
+        <p class="rec-card-text">
+          Introduce at least <strong>2–3 new content types</strong>: short pastoral reflection videos (30–60s clips of the pastor with a devotional thought), congregation testimonials (even 15-second clips), and ministry introductions (showing EBD, worship team, etc.). This will attract new visitors who may not yet feel ready to attend in person.
+        </p>
+      </div>
+
+      <div class="rec-card">
+        <div class="rec-card-icon" aria-hidden="true">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></svg>
+        </div>
+        <div class="rec-card-title">Hashtags</div>
+        <p class="rec-card-text">
+          Expand to <strong>12–15 hashtags per post</strong>. Include local hashtags like <strong>#igrejasaopaulo</strong> <strong>#Pinheiros</strong> <strong>#igrejaemSP</strong> and thematic/devotional ones like <strong>#palavradeDeus</strong> <strong>#devocional</strong> <strong>#fécristã</strong>. This is one of the easiest and highest-impact changes to implement immediately.
+        </p>
+      </div>
+
+      <div class="rec-card">
+        <div class="rec-card-icon" aria-hidden="true">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+        </div>
+        <div class="rec-card-title">Call-to-Action in Captions</div>
+        <p class="rec-card-text">
+          End every caption with a question or CTA to drive comments — for example: <em>"Como Deus tem te lembrado da Sua presença essa semana? Conta pra gente nos comentários 💬"</em>. This alone could meaningfully increase comment counts and boost algorithmic distribution.
+        </p>
+      </div>
+
+      <div class="rec-card">
+        <div class="rec-card-icon" aria-hidden="true">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        </div>
+        <div class="rec-card-title">Stories</div>
+        <p class="rec-card-text">
+          Stories were not audited but are critical — they drive <strong>daily visibility</strong> and keep the community engaged between posts. The account should post daily Stories covering: announcements, behind-the-scenes moments, polls, scripture of the day, and reminders about service times.
+        </p>
+      </div>
+
+      <div class="rec-card">
+        <div class="rec-card-icon" aria-hidden="true">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+        </div>
+        <div class="rec-card-title">Posting Frequency</div>
+        <p class="rec-card-text">
+          Aim for <strong>3–4 posts per week</strong>. A simple editorial calendar could be: <em>Monday</em> devotional Reel, <em>Wednesday</em> ministry spotlight or announcement, <em>Saturday</em> worship preview, <em>Sunday</em> worship recap.
+        </p>
+      </div>
+
+      <div class="rec-card">
+        <div class="rec-card-icon" aria-hidden="true">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
+        </div>
+        <div class="rec-card-title">Explore Cross-Platform</div>
+        <p class="rec-card-text">
+          The Facebook page is linked but there's no website URL. A simple landing page (even a <strong>Neon or Linktree</strong>) aggregating service times, event registration, and a WhatsApp contact would reduce friction for first-time visitors discovering the church through Instagram.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════
+       SEÇÃO 8 — SUMMARY SCORE
+  ══════════════════════════════════════ -->
+  <section class="section" aria-labelledby="s8-title">
+    <p class="section-number">08</p>
+    <div class="divider" aria-hidden="true"></div>
+    <h2 class="section-title" id="s8-title">Summary Score</h2>
+
+    <div class="score-rows" role="list" aria-label="Pontuações por área">
+
+      <div class="score-row" role="listitem">
+        <span class="score-row-label">Profile completeness</span>
+        <div class="score-bar-wrap"><div class="score-bar s4" style="width:80%" aria-hidden="true"></div></div>
+        <div class="score-row-stars" aria-label="4 de 5 estrelas">
+          <span class="star" aria-hidden="true">★</span>
+          <span class="star" aria-hidden="true">★</span>
+          <span class="star" aria-hidden="true">★</span>
+          <span class="star" aria-hidden="true">★</span>
+          <span class="star empty" aria-hidden="true">★</span>
+        </div>
+        <span class="score-row-num">4/5</span>
+      </div>
+
+      <div class="score-row" role="listitem">
+        <span class="score-row-label">Content quality</span>
+        <div class="score-bar-wrap"><div class="score-bar s4" style="width:80%" aria-hidden="true"></div></div>
+        <div class="score-row-stars" aria-label="4 de 5 estrelas">
+          <span class="star" aria-hidden="true">★</span>
+          <span class="star" aria-hidden="true">★</span>
+          <span class="star" aria-hidden="true">★</span>
+          <span class="star" aria-hidden="true">★</span>
+          <span class="star empty" aria-hidden="true">★</span>
+        </div>
+        <span class="score-row-num">4/5</span>
+      </div>
+
+      <div class="score-row" role="listitem">
+        <span class="score-row-label">Content variety</span>
+        <div class="score-bar-wrap"><div class="score-bar s3" style="width:60%" aria-hidden="true"></div></div>
+        <div class="score-row-stars" aria-label="3 de 5 estrelas">
+          <span class="star" aria-hidden="true">★</span>
+          <span class="star" aria-hidden="true">★</span>
+          <span class="star" aria-hidden="true">★</span>
+          <span class="star empty" aria-hidden="true">★</span>
+          <span class="star empty" aria-hidden="true">★</span>
+        </div>
+        <span class="score-row-num">3/5</span>
+      </div>
+
+      <div class="score-row" role="listitem">
+        <span class="score-row-label">Engagement rate</span>
+        <div class="score-bar-wrap"><div class="score-bar s5" style="width:100%" aria-hidden="true"></div></div>
+        <div class="score-row-stars" aria-label="5 de 5 estrelas">
+          <span class="star" aria-hidden="true">★</span>
+          <span class="star" aria-hidden="true">★</span>
+          <span class="star" aria-hidden="true">★</span>
+          <span class="star" aria-hidden="true">★</span>
+          <span class="star" aria-hidden="true">★</span>
+        </div>
+        <span class="score-row-num">5/5</span>
+      </div>
+
+      <div class="score-row" role="listitem">
+        <span class="score-row-label">Hashtag strategy</span>
+        <div class="score-bar-wrap"><div class="score-bar s2" style="width:40%" aria-hidden="true"></div></div>
+        <div class="score-row-stars" aria-label="2 de 5 estrelas">
+          <span class="star" aria-hidden="true">★</span>
+          <span class="star" aria-hidden="true">★</span>
+          <span class="star empty" aria-hidden="true">★</span>
+          <span class="star empty" aria-hidden="true">★</span>
+          <span class="star empty" aria-hidden="true">★</span>
+        </div>
+        <span class="score-row-num">2/5</span>
+      </div>
+
+      <div class="score-row" role="listitem">
+        <span class="score-row-label">Posting frequency</span>
+        <div class="score-bar-wrap"><div class="score-bar s3" style="width:60%" aria-hidden="true"></div></div>
+        <div class="score-row-stars" aria-label="3 de 5 estrelas">
+          <span class="star" aria-hidden="true">★</span>
+          <span class="star" aria-hidden="true">★</span>
+          <span class="star" aria-hidden="true">★</span>
+          <span class="star empty" aria-hidden="true">★</span>
+          <span class="star empty" aria-hidden="true">★</span>
+        </div>
+        <span class="score-row-num">3/5</span>
+      </div>
+
+      <div class="score-row" role="listitem">
+        <span class="score-row-label">Community interaction</span>
+        <div class="score-bar-wrap"><div class="score-bar s2" style="width:40%" aria-hidden="true"></div></div>
+        <div class="score-row-stars" aria-label="2 de 5 estrelas">
+          <span class="star" aria-hidden="true">★</span>
+          <span class="star" aria-hidden="true">★</span>
+          <span class="star empty" aria-hidden="true">★</span>
+          <span class="star empty" aria-hidden="true">★</span>
+          <span class="star empty" aria-hidden="true">★</span>
+        </div>
+        <span class="score-row-num">2/5</span>
+      </div>
+    </div>
+
+    <div class="overall-block" role="region" aria-label="Nota geral final">
+      <div class="big-score grad-text">3.5 / 5</div>
+      <div class="score-stars" aria-label="3 estrelas e meia de 5">★★★½☆</div>
+      <p>
+        The account has a strong, authentic foundation with excellent engagement from a loyal audience. The biggest untapped opportunities are in <strong style="color:#e8b44a">hashtag optimization</strong>, <strong style="color:#e8b44a">CTA usage to drive comments</strong>, <strong style="color:#e8b44a">content diversification</strong>, and a consistent <strong style="color:#e8b44a">Stories presence</strong> — none of which require significant resources to implement.
+      </p>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════
+       FOOTER
+  ══════════════════════════════════════ -->
+  <footer>
+    <p>Auditoria gerada em <span>08/04/2025</span> · <span>@batista.de.pinheiros</span> · 1ª Igreja Batista em Pinheiros</p>
+  </footer>
+
+</body>
+</html>
