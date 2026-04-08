@@ -1,0 +1,1241 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Auditoria Instagram — @diggofer · Diggofer Materiais de Construção</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800;900&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+    }
+
+    :root {
+      --orange:    #F97316;
+      --orange-d:  #EA580C;
+      --orange-dd: #C2410C;
+      --yellow:    #FBBF24;
+      --yellow-d:  #F59E0B;
+      --bg:        #0D0D0D;
+      --bg2:       #111111;
+      --bg3:       #161616;
+      --card:      #1A1A1A;
+      --card2:     #1E1E1E;
+      --border:    rgba(255,255,255,0.08);
+      --border-o:  rgba(249,115,22,0.35);
+      --text:      #F5F5F5;
+      --muted:     #999999;
+      --muted2:    #666666;
+      --green:     #22C55E;
+      --red:       #EF4444;
+      --amber:     #F59E0B;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.65;
+      font-size: 16px;
+      overflow-x: hidden;
+    }
+
+    /* ── GRAD TEXT ── */
+    .grad-text {
+      background: linear-gradient(135deg, var(--orange), var(--yellow));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    /* ── PULSING DOT ── */
+    @keyframes pulse-dot {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50%       { opacity: 0.5; transform: scale(1.4); }
+    }
+    .pulse-dot {
+      display: inline-block;
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      background: var(--orange);
+      animation: pulse-dot 1.8s ease-in-out infinite;
+    }
+
+    /* ── NOISE OVERLAY ── */
+    .noise::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* ── HERO ── */
+    .hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 80px 24px 60px;
+      overflow: hidden;
+      background: var(--bg);
+    }
+
+    .hero-glow {
+      position: absolute;
+      width: 700px; height: 700px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(249,115,22,0.13) 0%, transparent 70%);
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+    }
+
+    .hero-grid {
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(249,115,22,0.04) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(249,115,22,0.04) 1px, transparent 1px);
+      background-size: 48px 48px;
+      pointer-events: none;
+    }
+
+    .hero-content { position: relative; z-index: 1; max-width: 860px; }
+
+    .badge-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(249,115,22,0.1);
+      border: 1px solid rgba(249,115,22,0.3);
+      border-radius: 999px;
+      padding: 6px 16px;
+      font-size: 0.78rem;
+      font-weight: 500;
+      color: var(--orange);
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      margin-bottom: 28px;
+    }
+
+    .hero-title {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: clamp(2.4rem, 6vw, 4.4rem);
+      font-weight: 900;
+      line-height: 1.05;
+      letter-spacing: -0.01em;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+
+    .hero-sub {
+      font-size: clamp(0.9rem, 2vw, 1.1rem);
+      color: var(--muted);
+      margin-bottom: 40px;
+      font-weight: 400;
+    }
+    .hero-sub strong { color: var(--text); font-weight: 600; }
+
+    .metrics-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+      margin-bottom: 28px;
+    }
+
+    .metric-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 18px 12px;
+      text-align: center;
+      transition: border-color 0.2s;
+    }
+    .metric-card:hover { border-color: var(--border-o); cursor: default; }
+
+    .metric-val {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: clamp(1.6rem, 3.5vw, 2.2rem);
+      font-weight: 700;
+      color: var(--orange);
+      line-height: 1.1;
+    }
+
+    .metric-label {
+      font-size: 0.72rem;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-top: 6px;
+      font-weight: 500;
+    }
+
+    .warning-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(251,191,36,0.1);
+      border: 1px solid rgba(251,191,36,0.3);
+      border-radius: 999px;
+      padding: 8px 18px;
+      font-size: 0.82rem;
+      color: var(--yellow);
+      font-weight: 500;
+    }
+
+    /* ── LAYOUT ── */
+    .container {
+      max-width: 960px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* ── SECTION ── */
+    .section {
+      padding: 72px 0;
+      border-top: 1px solid var(--border);
+    }
+
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 32px;
+    }
+
+    .section-num {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.72rem;
+      color: var(--orange);
+      background: rgba(249,115,22,0.1);
+      border: 1px solid rgba(249,115,22,0.25);
+      border-radius: 4px;
+      padding: 3px 8px;
+      letter-spacing: 0.08em;
+      font-weight: 600;
+      flex-shrink: 0;
+    }
+
+    .section-title {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: clamp(1.5rem, 3vw, 2rem);
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.02em;
+      line-height: 1.1;
+    }
+
+    .section-line {
+      flex: 1;
+      height: 1px;
+      background: linear-gradient(90deg, var(--border-o), transparent);
+    }
+
+    /* ── CARD ── */
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 24px;
+    }
+
+    .card-orange {
+      background: rgba(249,115,22,0.07);
+      border-color: rgba(249,115,22,0.25);
+      border-left: 3px solid var(--orange);
+    }
+
+    .card-yellow {
+      background: rgba(251,191,36,0.06);
+      border-color: rgba(251,191,36,0.2);
+      border-left: 3px solid var(--yellow);
+    }
+
+    .card-red {
+      background: rgba(239,68,68,0.06);
+      border-color: rgba(239,68,68,0.2);
+      border-left: 3px solid var(--red);
+    }
+
+    .card-green {
+      background: rgba(34,197,94,0.06);
+      border-color: rgba(34,197,94,0.2);
+      border-left: 3px solid var(--green);
+    }
+
+    /* ── PROSE ── */
+    .prose {
+      font-size: 0.95rem;
+      line-height: 1.75;
+      color: var(--text);
+      max-width: 72ch;
+    }
+    .prose p { margin-bottom: 12px; }
+    .prose strong { color: var(--orange); font-weight: 600; }
+    .prose em { color: var(--yellow); font-style: normal; font-weight: 500; }
+
+    /* ── STATUS BADGE ── */
+    .status-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      border-radius: 6px;
+      padding: 3px 10px;
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      white-space: nowrap;
+    }
+    .status-warn  { background: rgba(245,158,11,0.15); color: var(--amber); border: 1px solid rgba(245,158,11,0.3); }
+    .status-alert { background: rgba(239,68,68,0.12);  color: var(--red);   border: 1px solid rgba(239,68,68,0.3); }
+    .status-ok    { background: rgba(34,197,94,0.12);  color: var(--green); border: 1px solid rgba(34,197,94,0.3); }
+
+    /* ── FORMAT BADGE ── */
+    .fmt-reel { background: rgba(249,115,22,0.2); color: var(--orange); border: 1px solid rgba(249,115,22,0.4); border-radius: 6px; padding: 2px 10px; font-size: 0.72rem; font-weight: 700; letter-spacing: 0.04em; }
+    .fmt-foto { background: rgba(153,153,153,0.12); color: var(--muted); border: 1px solid rgba(153,153,153,0.2); border-radius: 6px; padding: 2px 10px; font-size: 0.72rem; font-weight: 600; letter-spacing: 0.04em; }
+
+    /* ── TABLE ── */
+    .table-wrap {
+      overflow-x: auto;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.88rem;
+    }
+
+    thead {
+      background: var(--card2);
+      border-bottom: 1px solid var(--border);
+    }
+
+    th {
+      text-align: left;
+      padding: 12px 16px;
+      font-size: 0.72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--muted);
+    }
+
+    td {
+      padding: 12px 16px;
+      border-bottom: 1px solid var(--border);
+      vertical-align: middle;
+      color: var(--text);
+    }
+
+    tr:last-child td { border-bottom: none; }
+
+    tbody tr:hover { background: rgba(255,255,255,0.02); }
+
+    tr.reel-row { background: rgba(249,115,22,0.06); border-left: 3px solid var(--orange); }
+    tr.reel-row td { border-bottom: 1px solid rgba(249,115,22,0.15); }
+
+    .score-num {
+      font-family: 'JetBrains Mono', monospace;
+      font-weight: 700;
+      color: var(--orange);
+      font-size: 1rem;
+    }
+    .score-zero { color: var(--muted2); }
+
+    /* ── BIO BOX ── */
+    .bio-box {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-left: 3px solid var(--orange);
+      border-radius: 10px;
+      padding: 20px 24px;
+      font-family: 'Inter', monospace;
+      font-size: 0.9rem;
+      line-height: 1.8;
+      color: var(--text);
+      white-space: pre-line;
+    }
+
+    /* ── INFO ROW ── */
+    .info-row {
+      display: flex;
+      gap: 8px;
+      align-items: flex-start;
+      padding: 10px 0;
+      border-bottom: 1px solid var(--border);
+      font-size: 0.88rem;
+    }
+    .info-row:last-child { border-bottom: none; }
+    .info-key {
+      min-width: 160px;
+      color: var(--muted);
+      font-weight: 600;
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding-top: 2px;
+    }
+    .info-val { color: var(--text); flex: 1; }
+    .info-val strong { color: var(--orange); }
+
+    /* ── GRID 2 ── */
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    /* ── NUMBERED LIST ── */
+    .num-list { list-style: none; counter-reset: nl; }
+    .num-list li {
+      counter-increment: nl;
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+      padding: 12px 0;
+      border-bottom: 1px solid var(--border);
+      font-size: 0.9rem;
+    }
+    .num-list li:last-child { border-bottom: none; }
+    .num-list li::before {
+      content: counter(nl);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 28px; height: 28px;
+      border-radius: 6px;
+      background: var(--orange);
+      color: #fff;
+      font-weight: 700;
+      font-size: 0.8rem;
+      font-family: 'JetBrains Mono', monospace;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    /* ── INSIGHT CARD ── */
+    .insight-item {
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+      padding: 20px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      margin-bottom: 12px;
+      transition: border-color 0.2s;
+    }
+    .insight-item:hover { border-color: var(--border-o); }
+    .insight-icon {
+      width: 40px; height: 40px;
+      border-radius: 8px;
+      background: rgba(249,115,22,0.12);
+      border: 1px solid rgba(249,115,22,0.25);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .insight-icon svg { width: 18px; height: 18px; color: var(--orange); fill: none; stroke: currentColor; stroke-width: 2; }
+    .insight-text h4 { font-size: 0.9rem; font-weight: 700; margin-bottom: 4px; color: var(--orange); }
+    .insight-text p { font-size: 0.85rem; color: var(--muted); line-height: 1.6; }
+
+    /* ── QUICK WIN CARD ── */
+    .quickwin-card {
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+      background: linear-gradient(135deg, rgba(249,115,22,0.08), rgba(251,191,36,0.04));
+      border: 1px solid rgba(249,115,22,0.25);
+      border-radius: 12px;
+      padding: 24px;
+      margin-bottom: 16px;
+    }
+    .qw-num {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 2.5rem;
+      font-weight: 900;
+      color: rgba(249,115,22,0.25);
+      line-height: 1;
+      flex-shrink: 0;
+      min-width: 44px;
+    }
+    .qw-body h3 { font-size: 1rem; font-weight: 700; color: var(--orange); margin-bottom: 8px; }
+    .qw-body p { font-size: 0.88rem; color: var(--muted); line-height: 1.65; }
+
+    /* ── RECOMENDAÇÃO CARD ── */
+    .rec-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 24px;
+      margin-bottom: 16px;
+      border-left: 3px solid var(--orange);
+    }
+    .rec-card h3 {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 1.15rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      color: var(--orange);
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .rec-num-badge {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.72rem;
+      background: var(--orange);
+      color: #fff;
+      border-radius: 4px;
+      padding: 2px 8px;
+      font-weight: 700;
+    }
+    .rec-card p { font-size: 0.88rem; color: var(--muted); line-height: 1.7; }
+
+    /* ── HIGHLIGHT QUOTES ── */
+    .hook-example {
+      display: inline-block;
+      background: rgba(249,115,22,0.1);
+      border: 1px solid rgba(249,115,22,0.25);
+      border-radius: 6px;
+      padding: 4px 12px;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 1.05rem;
+      font-weight: 800;
+      color: var(--orange);
+      text-transform: uppercase;
+      letter-spacing: 0.02em;
+      margin: 3px 3px 3px 0;
+    }
+
+    /* ── DIVIDER ── */
+    .divider {
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--border-o), transparent);
+      margin: 32px 0;
+    }
+
+    /* ── POST CARD (funcionando / não funcionando) ── */
+    .post-analysis {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+      margin-bottom: 16px;
+    }
+    .post-analysis-header {
+      padding: 16px 20px;
+      background: var(--card2);
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    .post-analysis-header h3 {
+      font-size: 0.92rem;
+      font-weight: 700;
+      color: var(--text);
+    }
+    .post-score-badge {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.8rem;
+      font-weight: 700;
+      padding: 4px 12px;
+      border-radius: 6px;
+    }
+    .score-high { background: rgba(249,115,22,0.2); color: var(--orange); border: 1px solid rgba(249,115,22,0.4); }
+    .score-low  { background: rgba(239,68,68,0.12); color: var(--red);    border: 1px solid rgba(239,68,68,0.3); }
+    .post-analysis-body { padding: 20px; }
+    .post-analysis-body p { font-size: 0.88rem; line-height: 1.7; color: var(--muted); margin-bottom: 10px; }
+    .post-analysis-body p:last-child { margin-bottom: 0; }
+    .post-analysis-body strong { color: var(--text); font-weight: 600; }
+    .three-items { list-style: none; margin-top: 12px; }
+    .three-items li {
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+      padding: 8px 0;
+      border-bottom: 1px solid var(--border);
+      font-size: 0.85rem;
+      color: var(--muted);
+    }
+    .three-items li:last-child { border-bottom: none; }
+    .three-items li span.ti-num {
+      min-width: 22px; height: 22px;
+      background: rgba(249,115,22,0.15);
+      border: 1px solid rgba(249,115,22,0.3);
+      border-radius: 4px;
+      color: var(--orange);
+      font-size: 0.72rem;
+      font-weight: 700;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    /* ── GRID VISUAL INDICATORS ── */
+    .visual-indicator {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 14px 16px;
+      background: var(--card2);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      font-size: 0.85rem;
+    }
+    .vi-dot {
+      width: 10px; height: 10px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+    .vi-ok    { background: var(--green); }
+    .vi-warn  { background: var(--amber); }
+    .vi-alert { background: var(--red); }
+
+    /* ── AUDIENCE CARD ── */
+    .audience-item {
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+      padding: 16px 0;
+      border-bottom: 1px solid var(--border);
+      font-size: 0.88rem;
+    }
+    .audience-item:last-child { border-bottom: none; }
+    .ai-label {
+      min-width: 180px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--muted);
+      padding-top: 2px;
+    }
+    .ai-val { color: var(--text); flex: 1; }
+
+    /* ── FOOTER ── */
+    .footer {
+      background: var(--bg2);
+      border-top: 1px solid var(--border);
+      padding: 36px 24px;
+      text-align: center;
+    }
+    .footer p {
+      font-size: 0.78rem;
+      color: var(--muted2);
+      line-height: 1.8;
+    }
+    .footer strong { color: var(--muted); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 768px) {
+      .metrics-grid { grid-template-columns: repeat(2, 1fr); }
+      .grid-2 { grid-template-columns: 1fr; }
+      .info-key { min-width: 120px; }
+      .ai-label { min-width: 130px; }
+      .section { padding: 48px 0; }
+    }
+
+    @media (max-width: 480px) {
+      .metrics-grid { grid-template-columns: repeat(2, 1fr); gap: 8px; }
+      .section-header { flex-wrap: wrap; }
+      .section-line { display: none; }
+      td, th { padding: 10px 12px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ══ HERO ══════════════════════════════════════════════════════════════ -->
+  <section class="hero noise">
+    <div class="hero-grid"></div>
+    <div class="hero-glow"></div>
+    <div class="hero-content">
+
+      <div class="badge-pill">
+        <span class="pulse-dot"></span>
+        Auditoria de Conteúdo &middot; Instagram &middot; 08/04/2026
+      </div>
+
+      <h1 class="hero-title">
+        <span class="grad-text">Manual de Boas Práticas</span>
+      </h1>
+
+      <p class="hero-sub">
+        Análise de desempenho para <strong>@diggofer</strong> &middot; Diggofer Materiais de Construção
+      </p>
+
+      <div class="metrics-grid">
+        <div class="metric-card">
+          <div class="metric-val">7</div>
+          <div class="metric-label">Posts Analisados</div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-val">38</div>
+          <div class="metric-label">Melhor Score</div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-val" style="font-size:clamp(1.1rem,2.5vw,1.5rem);padding-top:4px;">Reel</div>
+          <div class="metric-label">Formato Campeão</div>
+        </div>
+        <div class="metric-card">
+          <div class="metric-val" style="font-size:clamp(0.9rem,2vw,1.2rem);padding-top:6px;">01–08/04</div>
+          <div class="metric-label">Período Analisado</div>
+        </div>
+      </div>
+
+      <div class="warning-pill">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+        Amostra reduzida — use como primeira impressão, não como diagnóstico definitivo
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ══ SEÇÃO 1 — VISÃO GERAL ══════════════════════════════════════════════ -->
+  <section class="section" id="visao-geral">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-num">01</span>
+        <h2 class="section-title">Visão Geral</h2>
+        <span class="section-line"></span>
+      </div>
+
+      <div class="card card-orange" style="margin-bottom:20px;">
+        <div class="prose">
+          <p>O perfil da Diggofer é uma loja de materiais de construção em São Paulo com presença no Instagram claramente em fase de <strong>retomada ou reestruturação</strong>: os 7 posts mais recentes foram todos publicados em menos de 8 dias (semana de 01–08/04/2026), sugerindo um esforço recente e intenso de geração de conteúdo.</p>
+          <p>O problema central é visível: quase todos os posts têm desempenho irrisório (<strong>0 a 2 curtidas</strong>), enquanto o único Reel publicado nesse período alcançou <strong>32 curtidas e 2 comentários</strong> — uma diferença de desempenho tão brutal que aponta com clareza qual caminho o perfil deve seguir.</p>
+          <p>O conteúdo é repetitivo no formato e no estilo de legenda, com <em>pouca variação criativa</em>.</p>
+        </div>
+      </div>
+
+      <div class="grid-2">
+        <div class="visual-indicator">
+          <span class="vi-dot vi-alert"></span>
+          <span>7 posts em menos de 8 dias — volume alto, estratégia inconsistente</span>
+        </div>
+        <div class="visual-indicator">
+          <span class="vi-dot vi-ok"></span>
+          <span>1 Reel com score 38 vs. 6 fotos somando apenas 6 pontos</span>
+        </div>
+        <div class="visual-indicator">
+          <span class="vi-dot vi-alert"></span>
+          <span>Desempenho irrisório de 0 a 2 curtidas na maioria dos posts</span>
+        </div>
+        <div class="visual-indicator">
+          <span class="vi-dot vi-warn"></span>
+          <span>Conteúdo repetitivo em formato e estilo de legenda</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ══ SEÇÃO 2 — BIO E LINK ══════════════════════════════════════════════ -->
+  <section class="section" id="bio-link">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-num">02</span>
+        <h2 class="section-title">Bio e Link</h2>
+        <span class="section-line"></span>
+      </div>
+
+      <div style="margin-bottom:24px;">
+        <p style="font-size:0.75rem;color:var(--muted);text-transform:uppercase;letter-spacing:0.06em;font-weight:700;margin-bottom:10px;">Bio atual</p>
+        <div class="bio-box">Loja de materiais de construção
+📍 Parelheiros - SP
+(EM FRENTE AO POSTO DE GASOLINA ORION)
+Abrasivos | Parafusos | Elétricos | Hidráulica
+Fale Conosco 👇</div>
+      </div>
+
+      <div class="card" style="margin-bottom:20px;">
+        <div class="info-row">
+          <span class="info-key">Avaliação</span>
+          <span class="info-val"><span class="status-badge status-warn">Parcialmente Clara</span> — comunica o que é e onde fica, mas falta posicionamento de diferencial e para quem serve (pessoa física? profissional de obra?)</span>
+        </div>
+        <div class="info-row">
+          <span class="info-key">CTA na bio</span>
+          <span class="info-val"><span class="status-badge status-ok">Sim</span> — "Fale Conosco 👇" com link abaixo</span>
+        </div>
+        <div class="info-row">
+          <span class="info-key">Palavras-chave</span>
+          <span class="info-val"><span class="status-badge status-ok">Sim</span> — "Abrasivos", "Parafusos", "Elétricos", "Hidráulica", "materiais de construção"</span>
+        </div>
+        <div class="info-row">
+          <span class="info-key">Link</span>
+          <span class="info-val"><strong>Presente</strong> | Tipo: agregador (contate.me — similar ao Linktree) | Ativo: Sim</span>
+        </div>
+        <div class="info-row">
+          <span class="info-key">Destino coerente</span>
+          <span class="info-val"><span class="status-badge status-warn">Parcialmente</span> — o link abre uma página de contato, coerente com o CTA "Fale Conosco", mas <strong>não há link para a loja online ou Shopee</strong>, que são mencionados nos posts.</span>
+        </div>
+      </div>
+
+      <div class="card card-yellow">
+        <p style="font-size:0.75rem;color:var(--yellow);text-transform:uppercase;letter-spacing:0.06em;font-weight:700;margin-bottom:10px;">O que melhorar</p>
+        <p style="font-size:0.88rem;color:var(--muted);line-height:1.7;">Adicionar um diferencial claro na bio — ex.: <strong style="color:var(--yellow);">"Entregamos em Parelheiros e região"</strong> ou <strong style="color:var(--yellow);">"Mais de X produtos para obra e casa"</strong> — e incluir o link da Shopee no agregador.</p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ══ SEÇÃO 3 — GRID VISUAL ══════════════════════════════════════════════ -->
+  <section class="section" id="grid-visual">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-num">03</span>
+        <h2 class="section-title">Grid Visual</h2>
+        <span class="section-line"></span>
+      </div>
+
+      <div class="grid-2" style="margin-bottom:20px;">
+        <div class="card">
+          <p style="font-size:0.72rem;color:var(--muted);text-transform:uppercase;letter-spacing:0.06em;font-weight:700;margin-bottom:10px;">Identidade Visual</p>
+          <span class="status-badge status-warn" style="margin-bottom:12px;display:inline-flex;">Irregular</span>
+          <p style="font-size:0.85rem;color:var(--muted);line-height:1.65;margin-top:10px;">Há uma paleta laranja/preto reconhecível nos destaques e em alguns posts com fundo escuro e texto em branco/amarelo, mas vários posts fogem completamente desse padrão (post de Páscoa com paleta diferente, mistura de fotos com fundo branco e reels filmados na loja).</p>
+        </div>
+        <div class="card">
+          <p style="font-size:0.72rem;color:var(--muted);text-transform:uppercase;letter-spacing:0.06em;font-weight:700;margin-bottom:10px;">Convida a Seguir</p>
+          <span class="status-badge status-warn" style="margin-bottom:12px;display:inline-flex;">Parcialmente</span>
+          <p style="font-size:0.85rem;color:var(--muted);line-height:1.65;margin-top:10px;">O post fixado (reel da loja) e os reels de produto filmados in-store têm boa energia visual, mas a maioria dos posts de foto de produto tem aparência genérica, como se fossem imagens de catálogo.</p>
+        </div>
+      </div>
+
+      <div class="card card-red">
+        <p style="font-size:0.72rem;color:var(--red);text-transform:uppercase;letter-spacing:0.06em;font-weight:700;margin-bottom:10px;">Diagnóstico do Grid</p>
+        <p style="font-size:0.88rem;color:var(--muted);line-height:1.7;">O grid <strong style="color:var(--text);">não tem um padrão visual coeso</strong> o suficiente para identificação imediata da marca — ao rolar rapidamente, as fotos de produto parecem peças soltas sem assinatura visual da Diggofer.</p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ══ SEÇÃO 4 — DESTAQUES DE STORIES ════════════════════════════════════ -->
+  <section class="section" id="destaques">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-num">04</span>
+        <h2 class="section-title">Destaques de Stories</h2>
+        <span class="section-line"></span>
+      </div>
+
+      <div class="table-wrap" style="margin-bottom:20px;">
+        <table>
+          <thead>
+            <tr>
+              <th>Nome</th>
+              <th>Slides</th>
+              <th>Tema</th>
+              <th>CTA</th>
+              <th>Visual</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>loja online</strong></td>
+              <td><span style="font-family:'JetBrains Mono',monospace;color:var(--muted);">~1–2</span></td>
+              <td>Divulgação da loja / site</td>
+              <td><span class="status-badge status-ok">Sim</span></td>
+              <td><span class="status-badge status-ok">Consistente</span></td>
+              <td><span class="status-badge status-warn">97 semanas</span></td>
+            </tr>
+            <tr>
+              <td><strong>pagamento</strong></td>
+              <td><span style="font-family:'JetBrains Mono',monospace;color:var(--muted);">~1</span></td>
+              <td>Formas de pagamento</td>
+              <td><span class="status-badge status-alert">Não</span></td>
+              <td><span class="status-badge status-ok">Consistente</span></td>
+              <td><span class="status-badge status-alert">153 semanas</span></td>
+            </tr>
+            <tr>
+              <td><strong>horários</strong></td>
+              <td><span style="font-family:'JetBrains Mono',monospace;color:var(--muted);">~1</span></td>
+              <td>Horários de funcionamento</td>
+              <td><span class="status-badge status-alert">Não</span></td>
+              <td><span class="status-badge status-ok">Consistente</span></td>
+              <td><span class="status-badge status-alert">153 semanas</span></td>
+            </tr>
+            <tr>
+              <td><strong>endereço</strong></td>
+              <td><span style="font-family:'JetBrains Mono',monospace;color:var(--muted);">~1</span></td>
+              <td>Endereço físico da loja</td>
+              <td><span class="status-badge status-alert">Não</span></td>
+              <td><span class="status-badge status-ok">Consistente</span></td>
+              <td><span class="status-badge status-alert">153 semanas</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="card card-red">
+        <p style="font-size:0.72rem;color:var(--red);text-transform:uppercase;letter-spacing:0.06em;font-weight:700;margin-bottom:10px;">Avaliação Crítica</p>
+        <p style="font-size:0.88rem;color:var(--muted);line-height:1.7;">Os destaques são relevantes e bem organizados (informações institucionais essenciais), com identidade visual coerente em laranja — mas estão <strong style="color:var(--red);">completamente desatualizados (97 a 153 semanas = quase 2–3 anos)</strong>, o que passa uma impressão de abandono e levanta dúvida sobre se as informações ainda são válidas. <strong style="color:var(--text);">Falta um destaque de depoimentos ou produtos em destaque.</strong></p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ══ SEÇÃO 5 — RANKING DE ENGAJAMENTO ══════════════════════════════════ -->
+  <section class="section" id="ranking">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-num">05</span>
+        <h2 class="section-title">Ranking de Engajamento</h2>
+        <span class="section-line"></span>
+      </div>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Rank</th>
+              <th>Post</th>
+              <th>Formato</th>
+              <th>Score</th>
+              <th>Curtidas</th>
+              <th>Comentários</th>
+              <th>Tema</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="reel-row">
+              <td><span style="font-family:'JetBrains Mono',monospace;font-weight:700;color:var(--orange);">#1</span></td>
+              <td><span style="font-family:'JetBrains Mono',monospace;color:var(--muted);">7</span></td>
+              <td><span class="fmt-reel">Reel</span></td>
+              <td><span class="score-num" style="font-size:1.2rem;">38</span></td>
+              <td><span style="font-family:'JetBrains Mono',monospace;font-weight:600;color:var(--orange);">32</span></td>
+              <td><span style="font-family:'JetBrains Mono',monospace;color:var(--orange);">2</span></td>
+              <td style="color:var(--text);">Algicida de choque — "Sua piscina está verde?"</td>
+            </tr>
+            <tr>
+              <td><span style="font-family:'JetBrains Mono',monospace;color:var(--muted);">#2</span></td>
+              <td><span style="font-family:'JetBrains Mono',monospace;color:var(--muted);">4</span></td>
+              <td><span class="fmt-foto">Foto</span></td>
+              <td><span class="score-num">2</span></td>
+              <td><span style="font-family:'JetBrains Mono',monospace;color:var(--muted);">2</span></td>
+              <td><span style="font-family:'JetBrains Mono',monospace;color:var(--muted);">0</span></td>
+              <td style="color:var(--muted);">Mangueira hidráulica</td>
+            </tr>
+            <tr>
+              <td><span style="font-family:'JetBrains Mono',monospace;color:var(--muted);">#3</span></td>
+              <td><span style="font-family:'JetBrains Mono',monospace;color:var(--muted);">1</span></td>
+              <td><span class="fmt-foto">Foto</span></td>
+              <td><span class="score-num">1</span></td>
+              <td><span style="font-family:'JetBrains Mono',monospace;color:var(--muted);">1</span></td>
+              <td><span style="font-family:'JetBrains Mono',monospace;color:var(--muted);">0</span></td>
+              <td style="color:var(--muted);">Escada de alumínio</td>
+            </tr>
+            <tr>
+              <td><span style="font-family:'JetBrains Mono',monospace;color:var(--muted);">#4</span></td>
+              <td><span style="font-family:'JetBrains Mono',monospace;color:var(--muted);">2</span></td>
+              <td><span class="fmt-foto">Foto</span></td>
+              <td><span class="score-num">1</span></td>
+              <td><span style="font-family:'JetBrains Mono',monospace;color:var(--muted);">1</span></td>
+              <td><span style="font-family:'JetBrains Mono',monospace;color:var(--muted);">0</span></td>
+              <td style="color:var(--muted);">Carrinho de mão Tramontina</td>
+            </tr>
+            <tr>
+              <td><span style="font-family:'JetBrains Mono',monospace;color:var(--muted);">#5</span></td>
+              <td><span style="font-family:'JetBrains Mono',monospace;color:var(--muted);">6</span></td>
+              <td><span class="fmt-foto">Foto</span></td>
+              <td><span class="score-num">1</span></td>
+              <td><span style="font-family:'JetBrains Mono',monospace;color:var(--muted);">1</span></td>
+              <td><span style="font-family:'JetBrains Mono',monospace;color:var(--muted);">0</span></td>
+              <td style="color:var(--muted);">Algicida (foto estática)</td>
+            </tr>
+            <tr>
+              <td><span style="font-family:'JetBrains Mono',monospace;color:var(--muted2);">#6</span></td>
+              <td><span style="font-family:'JetBrains Mono',monospace;color:var(--muted2);">3</span></td>
+              <td><span class="fmt-foto">Foto</span></td>
+              <td><span class="score-num score-zero">0</span></td>
+              <td><span style="font-family:'JetBrains Mono',monospace;color:var(--muted2);">0</span></td>
+              <td><span style="font-family:'JetBrains Mono',monospace;color:var(--muted2);">0</span></td>
+              <td style="color:var(--muted2);">Páscoa (data comemorativa)</td>
+            </tr>
+            <tr>
+              <td><span style="font-family:'JetBrains Mono',monospace;color:var(--muted2);">#7</span></td>
+              <td><span style="font-family:'JetBrains Mono',monospace;color:var(--muted2);">5</span></td>
+              <td><span class="fmt-foto">Foto</span></td>
+              <td><span class="score-num score-zero">0</span></td>
+              <td><span style="font-family:'JetBrains Mono',monospace;color:var(--muted2);">0</span></td>
+              <td><span style="font-family:'JetBrains Mono',monospace;color:var(--muted2);">0</span></td>
+              <td style="color:var(--muted2);">Lavadora de alta vazão</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ══ SEÇÃO 6 — O QUE ESTÁ FUNCIONANDO ══════════════════════════════════ -->
+  <section class="section" id="funcionando">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-num">06</span>
+        <h2 class="section-title">O Que Está Funcionando</h2>
+        <span class="section-line"></span>
+      </div>
+
+      <div class="post-analysis" style="margin-bottom:20px;">
+        <div class="post-analysis-header">
+          <h3>Post #7 — Reel "Algicida de Choque / Sua piscina está verde?"</h3>
+          <div style="display:flex;align-items:center;gap:8px;">
+            <span class="fmt-reel">Reel</span>
+            <span class="post-score-badge score-high">Score 38</span>
+          </div>
+        </div>
+        <div class="post-analysis-body">
+          <p>Este post se destaca de forma absurda em relação a todos os outros: <strong>32 curtidas</strong> contra uma média de 1 nos demais. O que o diferenciou? Três elementos claros:</p>
+          <ul class="three-items">
+            <li>
+              <span class="ti-num">1</span>
+              <span><strong>Formato Reel</strong> com uma atendente real filmada na loja, segurando o produto — humanização e prova de que o produto existe no estoque.</span>
+            </li>
+            <li>
+              <span class="ti-num">2</span>
+              <span><strong>Hook visual forte no vídeo:</strong> o texto <span class="hook-example">SUA PISCINA ESTÁ VERDE?</span> aparece em destaque no reel, ativando diretamente uma dor conhecida do cliente.</span>
+            </li>
+            <li>
+              <span class="ti-num">3</span>
+              <span><strong>Sazonalidade implícita:</strong> piscinas esverdeadas são um problema típico do verão/início de outono no Brasil, o que aumenta a relevância do conteúdo neste período.</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="post-analysis">
+        <div class="post-analysis-header">
+          <h3>Post #4 — Foto "Mangueira Hidráulica"</h3>
+          <div style="display:flex;align-items:center;gap:8px;">
+            <span class="fmt-foto">Foto</span>
+            <span class="post-score-badge score-high" style="background:rgba(251,191,36,0.15);color:var(--yellow);border-color:rgba(251,191,36,0.3);">Score 2</span>
+          </div>
+        </div>
+        <div class="post-analysis-body">
+          <p>Tecnicamente empatado com outros posts (2 curtidas), mas ocupa o segundo lugar e se destaca marginalmente. A diferença em relação aos posts de score 0 é sutil — o produto tem apelo a um <strong>público mais específico (uso profissional)</strong>, o que pode ter favorecido o salvamento/compartilhamento (<strong>2 reposts registrados</strong>). Não há elemento criativo diferenciador visível neste caso.</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ══ SEÇÃO 7 — O QUE A AUDIÊNCIA ESTÁ DIZENDO ══════════════════════════ -->
+  <section class="section" id="audiencia">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-num">07</span>
+        <h2 class="section-title">O Que a Audiência Está Dizendo</h2>
+        <span class="section-line"></span>
+      </div>
+
+      <div class="card" style="margin-bottom:20px;">
+        <div class="audience-item">
+          <span class="ai-label">Tipos predominantes</span>
+          <span class="ai-val">Os 2 comentários visíveis são oriundos do <strong>Facebook</strong> (o reel foi compartilhado/sincronizado) — não há comentários diretos no Instagram.</span>
+        </div>
+        <div class="audience-item">
+          <span class="ai-label">Perguntas da audiência</span>
+          <span class="ai-val">Não foi possível acessar o conteúdo dos comentários do Facebook via Instagram.</span>
+        </div>
+        <div class="audience-item">
+          <span class="ai-label">O perfil responde?</span>
+          <span class="ai-val"><span class="status-badge status-warn">Não identificado</span> — ausência de comentários no Instagram, impossibilitando avaliação.</span>
+        </div>
+      </div>
+
+      <div class="card card-yellow">
+        <p style="font-size:0.72rem;color:var(--yellow);text-transform:uppercase;letter-spacing:0.06em;font-weight:700;margin-bottom:10px;">Insight</p>
+        <p style="font-size:0.88rem;color:var(--muted);line-height:1.7;">O fato de o reel ter gerado engajamento no Facebook — onde o público da Diggofer pode ser mais ativo — sugere que o conteúdo em vídeo com apresentação de produto alcança uma audiência além do Instagram, mas o perfil <strong style="color:var(--text);">ainda não está colhendo interação diretamente na plataforma</strong>.</p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ══ SEÇÃO 8 — O QUE NÃO ESTÁ FUNCIONANDO ══════════════════════════════ -->
+  <section class="section" id="nao-funcionando">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-num">08</span>
+        <h2 class="section-title">O Que Não Está Funcionando</h2>
+        <span class="section-line"></span>
+      </div>
+
+      <div class="post-analysis" style="margin-bottom:20px;">
+        <div class="post-analysis-header" style="background:rgba(239,68,68,0.06);border-bottom-color:rgba(239,68,68,0.15);">
+          <h3>Post #3 — Foto "Páscoa"</h3>
+          <div style="display:flex;align-items:center;gap:8px;">
+            <span class="fmt-foto">Foto</span>
+            <span class="post-score-badge score-low">Score 0</span>
+          </div>
+        </div>
+        <div class="post-analysis-body">
+          <p>Zero curtidas, zero comentários. O erro aqui é <strong>estrutural</strong>: conteúdo comemorativo genérico desconectado do negócio. A mensagem é bonita, mas poderia ter sido postada por qualquer loja, padaria ou corretora de seguros — não há nada da Diggofer nela além do nome no final.</p>
+          <p>Não há produto, não há benefício ao seguidor, não há motivo para curtir ou salvar. <strong>Datas comemorativas exigem conexão com o produto ou o cliente para funcionar.</strong></p>
+        </div>
+      </div>
+
+      <div class="post-analysis">
+        <div class="post-analysis-header" style="background:rgba(239,68,68,0.06);border-bottom-color:rgba(239,68,68,0.15);">
+          <h3>Post #5 — Foto "Lavadora de Alta Vazão Eletroplas"</h3>
+          <div style="display:flex;align-items:center;gap:8px;">
+            <span class="fmt-foto">Foto</span>
+            <span class="post-score-badge score-low">Score 0</span>
+          </div>
+        </div>
+        <div class="post-analysis-body">
+          <p>Conteúdo tecnicamente equivalente aos posts de produto que tiveram 1–2 curtidas, mas ficou com zero. A hipótese mais provável: o produto tem <strong>apelo mais restrito</strong> (lavadora de alta pressão profissional) e a foto estática sem contexto de uso não cria desejo.</p>
+          <p>Além disso, <strong>dois posts foram publicados no mesmo dia</strong> (posts 4 e 5), o que pode ter dividido o alcance. A legenda segue exatamente o mesmo template dos outros posts — sem variação criativa.</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ══ SEÇÃO 9 — PRINCIPAIS INSIGHTS ════════════════════════════════════ -->
+  <section class="section" id="insights">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-num">09</span>
+        <h2 class="section-title">Principais Insights</h2>
+        <span class="section-line"></span>
+      </div>
+
+      <div class="insight-item">
+        <div class="insight-icon">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+        </div>
+        <div class="insight-text">
+          <h4>Reel &gt; Foto, sem discussão</h4>
+          <p>O único Reel da semana teve <strong style="color:var(--text);">16–32x mais engajamento</strong> que qualquer foto. Com 7 posts publicados em 7 dias e apenas 1 reel, o perfil está produzindo o formato errado na maioria do tempo.</p>
+        </div>
+      </div>
+
+      <div class="insight-item">
+        <div class="insight-icon">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>
+        </div>
+        <div class="insight-text">
+          <h4>O template repetitivo está matando o alcance</h4>
+          <p><strong style="color:var(--text);">5 dos 7 posts</strong> usam a mesma estrutura de legenda (nome do produto, bullet points de vantagens, CTA para Shopee/WhatsApp, hashtags fixas). Sem variação, o algoritmo e o usuário ignoram o conteúdo.</p>
+        </div>
+      </div>
+
+      <div class="insight-item">
+        <div class="insight-icon">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        </div>
+        <div class="insight-text">
+          <h4>Volume sem estratégia de formato</h4>
+          <p>A frequência alta (<strong style="color:var(--text);">7 posts em 7 dias</strong>) indica esforço, mas sem o formato certo (Reels) e sem variação criativa, o volume não converte em crescimento ou engajamento.</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ══ SEÇÃO 10 — RECOMENDAÇÕES PRÁTICAS ════════════════════════════════ -->
+  <section class="section" id="recomendacoes">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-num">10</span>
+        <h2 class="section-title">Recomendações Práticas</h2>
+        <span class="section-line"></span>
+      </div>
+
+      <div class="rec-card">
+        <h3><span class="rec-num-badge">01</span> Converter pelo menos 3 dos 5 dias de publicação semanal em Reels</h3>
+        <p>A evidência é direta: o único Reel da semana teve 38 pontos de score; as 6 fotos somaram 6. Filmar reels simples na loja — pessoa segurando o produto, 30 segundos, com texto de hook na tela — é suficiente (o reel da algicida prova isso).</p>
+      </div>
+
+      <div class="rec-card">
+        <h3><span class="rec-num-badge">02</span> Criar hooks visuais com dor do cliente nos vídeos</h3>
+        <p>O texto <span class="hook-example">SUA PISCINA ESTÁ VERDE?</span> foi o diferencial do post #7. Replicar essa fórmula para outros produtos:</p>
+        <div style="margin-top:12px;display:flex;flex-wrap:wrap;gap:6px;">
+          <span class="hook-example">PARAFUSO SOLTOU DE NOVO?</span>
+          <span class="hook-example">MANGUEIRA FUROU NA HORA ERRADA?</span>
+          <span class="hook-example">OBRA PARADA POR FALTA DE MATERIAL?</span>
+        </div>
+        <p style="margin-top:12px;">Conectar o produto a uma situação concreta que o cliente reconhece.</p>
+      </div>
+
+      <div class="rec-card">
+        <h3><span class="rec-num-badge">03</span> Abandonar o template único de legenda — criar pelo menos 3 variações</h3>
+        <p>A legenda atual (nome + bullet points + CTA Shopee + hashtags) é igual em todos os posts. Criar variações:</p>
+        <ul class="three-items" style="margin-top:12px;">
+          <li><span class="ti-num">A</span><span><strong>Legenda curta</strong> com pergunta + CTA direto</span></li>
+          <li><span class="ti-num">B</span><span><strong>Legenda educativa</strong> explicando quando/como usar o produto</span></li>
+          <li><span class="ti-num">C</span><span><strong>Legenda com prova social</strong> — "nosso produto mais vendido essa semana"</span></li>
+        </ul>
+        <p style="margin-top:10px;">Isso aumenta a relevância do post para diferentes momentos da jornada do cliente.</p>
+      </div>
+
+      <div class="rec-card">
+        <h3><span class="rec-num-badge">04</span> Atualizar os Destaques de Stories urgentemente</h3>
+        <p>Destaques com 2–3 anos de idade passam credibilidade zero. O investimento é mínimo: gravar novos stories institucionais (horários, formas de pagamento, endereço, como comprar na Shopee) e substituir os atuais. Adicionar um destaque <strong>"Produtos"</strong> com os itens mais vendidos e um destaque <strong>"Depoimentos"</strong> assim que houver material.</p>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ══ SEÇÃO 11 — QUICK WINS ════════════════════════════════════════════ -->
+  <section class="section" id="quick-wins">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-num">11</span>
+        <h2 class="section-title">Quick Wins</h2>
+        <span class="section-line"></span>
+      </div>
+
+      <p style="font-size:0.85rem;color:var(--muted);margin-bottom:28px;">Ações de alto impacto que podem ser executadas <strong style="color:var(--text);">imediatamente</strong>, sem planejamento adicional.</p>
+
+      <div class="quickwin-card">
+        <div class="qw-num">01</div>
+        <div class="qw-body">
+          <h3>Gravar e publicar um Reel amanhã com hook de dor</h3>
+          <p>Escolher um produto que resolva um problema cotidiano (ex.: disco de corte, fita isolante, cano PVC), filmar 20–30 segundos com alguém segurando o produto na loja, escrever um texto de gancho na tela tipo <span class="hook-example" style="font-size:0.85rem;">ISSO RESOLVE O PROBLEMA DE [X]</span> e publicar. <strong style="color:var(--text);">Nenhum equipamento necessário, apenas o celular.</strong></p>
+        </div>
+      </div>
+
+      <div class="quickwin-card">
+        <div class="qw-num">02</div>
+        <div class="qw-body">
+          <h3>Atualizar os 4 Destaques de Stories nos próximos 2 dias</h3>
+          <p>Gravar um story novo para cada um (horários, pagamento, endereço, loja online) e substituir os que têm <strong style="color:var(--red);">97–153 semanas</strong>. Isso não aumenta seguidores, mas <strong style="color:var(--text);">elimina imediatamente uma fricção de credibilidade</strong> para quem visita o perfil pela primeira vez.</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ══ FOOTER ══════════════════════════════════════════════════════════════ -->
+  <footer class="footer">
+    <p>
+      <strong>Auditoria gerada em 08/04/2026</strong> &middot; <strong>@diggofer</strong> &middot; Diggofer Materiais de Construção<br>
+      <span style="color:var(--muted2);font-size:0.72rem;margin-top:6px;display:block;">Análise baseada nos 7 posts mais recentes publicados entre 01/04/2026 e 08/04/2026. Amostra reduzida — use como primeira impressão.</span>
+    </p>
+  </footer>
+
+</body>
+</html>
