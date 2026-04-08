@@ -242,18 +242,8 @@
 </head>
 <body class="staff-bg">
 
-  <!-- ═══════════════════════════ TOP META BAR ═══════════════════════════ -->
-  <div style="background: rgba(6,13,24,0.95); border-bottom: 1px solid rgba(201,168,76,0.2); padding: 10px 24px; text-align: center;">
-    <p style="font-family: 'Inter', system-ui, sans-serif; font-size: 0.75rem; font-weight: 600; letter-spacing: 0.08em; color: rgba(201,168,76,0.85); margin: 0 0 2px 0; text-transform: uppercase;">
-      Auditoria de Conteúdo &nbsp;·&nbsp; Instagram &nbsp;·&nbsp; 08/04/2026
-    </p>
-    <p style="font-family: 'Inter', system-ui, sans-serif; font-size: 0.7rem; letter-spacing: 0.05em; color: rgba(245,240,232,0.45); margin: 0; text-transform: uppercase;">
-      Manual de Boas Práticas
-    </p>
-  </div>
-
-  <!-- ═══════════════════════════ HEADER ═══════════════════════════ -->
-  <header class="relative overflow-hidden" style="background: linear-gradient(180deg, #060D18 0%, #0F1B2D 100%); border-bottom: 1px solid rgba(201,168,76,0.15);">
+  <!-- ═══════════════════════════ COVER / HERO ═══════════════════════════ -->
+  <header class="relative overflow-hidden" style="background: linear-gradient(180deg, #060D18 0%, #0F1B2D 100%); border-bottom: 1px solid rgba(201,168,76,0.15); min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center;">
     <!-- Floating musical chars (decorative) -->
     <span class="musical-float" style="top: 10%; left: 3%;">♪</span>
     <span class="musical-float" style="top: 60%; left: 8%;">♫</span>
@@ -261,21 +251,22 @@
     <span class="musical-float" style="top: 70%; right: 3%;">𝄞</span>
     <span class="musical-float" style="top: 5%; left: 45%;">♬</span>
 
-    <div class="relative max-w-4xl mx-auto px-6 py-14 text-center">
-      <!-- Audit badge -->
-      <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full mb-6" style="background: rgba(201,168,76,0.1); border: 1px solid rgba(201,168,76,0.3);">
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#C9A84C" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-          <path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/>
-        </svg>
-        <span class="font-sans text-xs font-semibold tracking-widest uppercase" style="color: #C9A84C;">Auditoria Instagram</span>
+    <div class="relative max-w-4xl mx-auto px-6 py-20 text-center">
+
+      <!-- Badge com data (estilo ig-badge) -->
+      <div style="display: inline-flex; align-items: center; gap: 8px; padding: 6px 16px; border-radius: 999px; background: rgba(201,168,76,0.1); border: 1px solid rgba(201,168,76,0.35); margin-bottom: 32px;">
+        <span style="width: 8px; height: 8px; border-radius: 50%; background: #C9A84C; flex-shrink: 0; display: inline-block;"></span>
+        <span class="font-sans" style="font-size: 0.78rem; font-weight: 600; letter-spacing: 0.04em; color: rgba(201,168,76,0.9);">Auditoria de Conteúdo · Instagram · 08/04/2026</span>
       </div>
 
-      <!-- Title -->
-      <h1 class="font-serif text-4xl sm:text-5xl lg:text-6xl font-bold mb-2" style="color: #F5F0E8;">
-        Lincoln Music School
+      <!-- Título principal -->
+      <h1 class="font-serif" style="font-size: clamp(2.4rem, 6vw, 4.2rem); font-weight: 800; line-height: 1.1; margin-bottom: 24px; background: linear-gradient(135deg, #DEB96A 0%, #F5F0E8 50%, #C9A84C 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">
+        Manual de Boas<br/>Práticas
       </h1>
-      <p class="font-sans text-sm sm:text-base mb-8" style="color: rgba(201,168,76,0.7);">
-        @lincolnmusicschool_ &nbsp;•&nbsp; Auditoria realizada em 08 de abril de 2026
+
+      <!-- Perfil -->
+      <p class="font-sans" style="font-size: clamp(1rem, 2.5vw, 1.3rem); font-weight: 300; color: rgba(245,240,232,0.6); margin-bottom: 48px;">
+        Análise de desempenho para <strong style="font-weight: 600; color: #F5F0E8;">@lincolnmusicschool_</strong> · Lincoln Music School
       </p>
 
       <!-- Score circle -->
