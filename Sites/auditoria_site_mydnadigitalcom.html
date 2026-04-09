@@ -1,0 +1,1213 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Diagnóstico Estratégico Digital — MyDNA (mydnadigital.com)</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+    }
+    html { scroll-behavior: smooth; }
+    :root {
+      --bg:     #07081a;
+      --bg2:    #0d0f24;
+      --bg3:    #131530;
+      --card:   #181a38;
+      --border: rgba(124,58,237,0.18);
+      --text:   #e8eaf6;
+      --muted:  #8b8fbd;
+      --purple: #7c3aed;
+      --indigo: #4f46e5;
+      --cyan:   #06b6d4;
+      --grad:   linear-gradient(135deg, #7c3aed, #4f46e5, #06b6d4);
+      --grad2:  linear-gradient(135deg, #7c3aed 0%, #06b6d4 100%);
+      --red:    #ef4444;
+      --yellow: #f59e0b;
+      --green:  #22c55e;
+      --r-med:  #f97316;
+    }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.65;
+      font-size: 16px;
+    }
+    h1,h2,h3,h4 { font-family: 'Poppins', sans-serif; line-height: 1.25; }
+    a { color: var(--cyan); text-decoration: none; }
+
+    /* GRAD TEXT */
+    .grad { background: var(--grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+
+    /* NAV */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      background: rgba(7,8,26,0.82); backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--border);
+      padding: 14px 32px;
+      display: flex; align-items: center; justify-content: space-between;
+    }
+    .nav-logo { font-family: 'Poppins', sans-serif; font-weight: 700; font-size: 0.95rem; color: var(--text); display: flex; align-items: center; gap: 8px; }
+    .nav-logo span { background: var(--grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+    .nav-badge { font-size: 0.72rem; background: rgba(124,58,237,0.18); border: 1px solid rgba(124,58,237,0.4); color: #a78bfa; padding: 3px 10px; border-radius: 20px; }
+
+    /* HERO */
+    .hero {
+      min-height: 100vh;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      text-align: center; padding: 100px 24px 80px;
+      position: relative; overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse 90% 70% at 50% 40%, rgba(79,70,229,0.22) 0%, rgba(124,58,237,0.1) 40%, transparent 75%);
+      pointer-events: none;
+    }
+    .hero-glow {
+      position: absolute; width: 700px; height: 700px; border-radius: 50%;
+      background: radial-gradient(circle, rgba(6,182,212,0.07) 0%, transparent 70%);
+      top: 50%; left: 50%; transform: translate(-50%,-50%);
+      pointer-events: none;
+    }
+    .pill {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: rgba(124,58,237,0.12); border: 1px solid rgba(124,58,237,0.35);
+      color: #c4b5fd; padding: 6px 16px; border-radius: 50px;
+      font-size: 0.8rem; font-weight: 500; margin-bottom: 28px;
+    }
+    .pill-dot {
+      width: 7px; height: 7px; border-radius: 50%; background: #7c3aed;
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse {
+      0%,100% { box-shadow: 0 0 0 0 rgba(124,58,237,0.7); }
+      50% { box-shadow: 0 0 0 6px rgba(124,58,237,0); }
+    }
+    .hero-title {
+      font-size: clamp(2.4rem, 6vw, 4.2rem);
+      font-weight: 800; letter-spacing: -0.02em; margin-bottom: 16px;
+    }
+    .hero-sub {
+      font-size: clamp(0.95rem, 2vw, 1.15rem);
+      color: var(--muted); max-width: 560px; margin: 0 auto 40px;
+    }
+    .hero-sub strong { color: var(--text); }
+
+    /* METRIC CARDS */
+    .metric-grid {
+      display: grid; grid-template-columns: repeat(4, 1fr);
+      gap: 16px; max-width: 760px; width: 100%; margin: 0 auto;
+    }
+    @media (max-width: 700px) { .metric-grid { grid-template-columns: repeat(2,1fr); } }
+    .metric-card {
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: 14px; padding: 20px 16px; text-align: center;
+      transition: border-color 0.2s, transform 0.2s; cursor: default;
+    }
+    .metric-card:hover { border-color: rgba(124,58,237,0.5); transform: translateY(-3px); }
+    .metric-score {
+      font-family: 'Poppins', sans-serif;
+      font-size: 2rem; font-weight: 800; margin-bottom: 4px;
+    }
+    .metric-label { font-size: 0.75rem; color: var(--muted); font-weight: 500; text-transform: uppercase; letter-spacing: 0.05em; }
+    .score-red { color: #ef4444; }
+    .score-orange { color: #f97316; }
+    .score-yellow { color: #f59e0b; }
+
+    /* SECTION */
+    .section { max-width: 1080px; margin: 0 auto; padding: 80px 24px; }
+    .section-tag {
+      font-size: 0.72rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em;
+      color: var(--cyan); margin-bottom: 10px;
+    }
+    .section-title { font-size: clamp(1.5rem, 3vw, 2.1rem); font-weight: 700; margin-bottom: 12px; }
+    .section-desc { color: var(--muted); max-width: 640px; margin-bottom: 40px; font-size: 0.95rem; }
+    .divider { border: none; border-top: 1px solid var(--border); margin: 0; }
+
+    /* PAGES GRID */
+    .pages-grid {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(200px,1fr));
+      gap: 12px;
+    }
+    .page-chip {
+      background: var(--bg3); border: 1px solid var(--border);
+      border-radius: 10px; padding: 14px 16px;
+      display: flex; align-items: center; gap: 10px;
+      font-size: 0.85rem;
+    }
+    .page-chip svg { flex-shrink: 0; }
+    .page-chip .url { font-size: 0.72rem; color: var(--muted); margin-top: 2px; }
+    .chip-ok { border-left: 3px solid var(--green); }
+    .chip-warn { border-left: 3px solid var(--yellow); }
+    .chip-err { border-left: 3px solid var(--red); }
+
+    /* INFO TABLE */
+    .info-table { width: 100%; border-collapse: collapse; }
+    .info-table th, .info-table td {
+      padding: 12px 16px; text-align: left;
+      border-bottom: 1px solid var(--border);
+      font-size: 0.88rem;
+    }
+    .info-table th { color: var(--muted); font-weight: 500; font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.05em; }
+    .info-table tr:last-child td { border-bottom: none; }
+    .info-table td:first-child { color: var(--muted); white-space: nowrap; }
+    .info-table td:last-child { color: var(--text); }
+    .table-wrap { background: var(--card); border: 1px solid var(--border); border-radius: 14px; overflow: hidden; }
+
+    /* TEXT BLOCKS */
+    .prose { font-size: 0.93rem; color: var(--text); line-height: 1.8; }
+    .prose p { margin-bottom: 14px; }
+    .prose strong { color: #c4b5fd; }
+    .prose ul { padding-left: 20px; margin-bottom: 14px; }
+    .prose ul li { margin-bottom: 6px; }
+
+    /* CARD */
+    .card {
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: 16px; padding: 28px;
+      transition: border-color 0.2s;
+    }
+    .card:hover { border-color: rgba(124,58,237,0.4); }
+
+    /* PAGE SCORE CARDS */
+    .page-cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px,1fr)); gap: 20px; }
+    .page-score-card {
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: 16px; padding: 24px; position: relative; overflow: hidden;
+      transition: border-color 0.2s, transform 0.2s; cursor: default;
+    }
+    .page-score-card:hover { border-color: rgba(124,58,237,0.4); transform: translateY(-2px); }
+    .page-score-card .score-badge {
+      position: absolute; top: 20px; right: 20px;
+      font-family: 'Poppins', sans-serif; font-size: 1.5rem; font-weight: 800;
+    }
+    .page-score-card h3 { font-size: 1rem; font-weight: 700; margin-bottom: 4px; }
+    .page-score-card .page-url { font-size: 0.75rem; color: var(--cyan); margin-bottom: 12px; font-family: monospace; }
+    .page-score-card .page-obj { font-size: 0.82rem; color: var(--muted); margin-bottom: 16px; }
+    .score-bar-wrap { margin-bottom: 14px; }
+    .score-bar-bg { background: rgba(255,255,255,0.08); border-radius: 4px; height: 6px; overflow: hidden; }
+    .score-bar-fill { height: 100%; border-radius: 4px; transition: width 1s ease; }
+    .tag-list { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 12px; }
+    .tag {
+      font-size: 0.72rem; padding: 3px 10px; border-radius: 20px;
+      background: rgba(124,58,237,0.12); border: 1px solid rgba(124,58,237,0.25); color: #c4b5fd;
+    }
+    .tag-ok { background: rgba(34,197,94,0.1); border-color: rgba(34,197,94,0.3); color: #4ade80; }
+    .tag-warn { background: rgba(245,158,11,0.1); border-color: rgba(245,158,11,0.3); color: #fbbf24; }
+    .tag-err { background: rgba(239,68,68,0.1); border-color: rgba(239,68,68,0.3); color: #f87171; }
+    .problem-list { margin: 0; padding: 0; list-style: none; }
+    .problem-list li {
+      font-size: 0.8rem; color: var(--muted); padding: 5px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+      display: flex; align-items: flex-start; gap: 6px;
+    }
+    .problem-list li:last-child { border-bottom: none; }
+    .problem-list li::before { content: '!'; color: var(--red); font-weight: 700; flex-shrink: 0; }
+
+    /* SEO TABLE */
+    .seo-table { width: 100%; border-collapse: collapse; }
+    .seo-table th, .seo-table td {
+      padding: 12px 14px; text-align: left;
+      border-bottom: 1px solid var(--border); font-size: 0.82rem;
+    }
+    .seo-table th { color: var(--muted); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em; font-weight: 600; background: rgba(255,255,255,0.02); }
+    .seo-table td:first-child { font-weight: 600; white-space: nowrap; }
+    .seo-table tr:last-child td { border-bottom: none; }
+    .seo-table tr:hover td { background: rgba(255,255,255,0.02); }
+    .seo-ok { color: var(--green); }
+    .seo-warn { color: var(--yellow); }
+    .seo-err { color: var(--red); }
+
+    /* TOP 10 PROBLEMS */
+    .problems-list { display: flex; flex-direction: column; gap: 16px; }
+    .problem-row {
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: 14px; padding: 20px 24px;
+      display: grid; grid-template-columns: 36px 1fr auto;
+      gap: 16px; align-items: flex-start;
+      transition: border-color 0.2s;
+    }
+    .problem-row:hover { border-color: rgba(124,58,237,0.4); }
+    .prob-num {
+      font-family: 'Poppins', sans-serif; font-size: 1.2rem; font-weight: 800;
+      color: var(--purple); line-height: 1;
+    }
+    .prob-title { font-weight: 600; font-size: 0.92rem; margin-bottom: 6px; }
+    .prob-layer { font-size: 0.78rem; color: var(--muted); margin-bottom: 8px; }
+    .prob-action { font-size: 0.82rem; color: var(--text); line-height: 1.6; }
+    .prob-badges { display: flex; flex-direction: column; gap: 6px; align-items: flex-end; white-space: nowrap; }
+    .badge {
+      font-size: 0.72rem; font-weight: 600; padding: 3px 10px;
+      border-radius: 20px; display: inline-flex; align-items: center; gap: 4px;
+    }
+    .badge-alto { background: rgba(239,68,68,0.12); border: 1px solid rgba(239,68,68,0.3); color: #f87171; }
+    .badge-medio { background: rgba(245,158,11,0.12); border: 1px solid rgba(245,158,11,0.3); color: #fbbf24; }
+    .badge-baixo { background: rgba(34,197,94,0.12); border: 1px solid rgba(34,197,94,0.3); color: #4ade80; }
+    .badge-esforco-med { background: rgba(249,115,22,0.1); border: 1px solid rgba(249,115,22,0.3); color: #fb923c; }
+    @media (max-width: 600px) {
+      .problem-row { grid-template-columns: 28px 1fr; }
+      .prob-badges { flex-direction: row; align-items: center; grid-column: 2; }
+    }
+
+    /* ACTION PLAN */
+    .phase-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+    @media (max-width: 700px) { .phase-grid { grid-template-columns: 1fr; } }
+    .phase-card {
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: 16px; padding: 28px;
+    }
+    .phase-header { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; }
+    .phase-icon {
+      width: 40px; height: 40px; border-radius: 10px;
+      display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+    }
+    .phase-icon-quick { background: rgba(34,197,94,0.15); }
+    .phase-icon-mid { background: rgba(79,70,229,0.15); }
+    .phase-title { font-family: 'Poppins', sans-serif; font-weight: 700; font-size: 1rem; }
+    .phase-subtitle { font-size: 0.78rem; color: var(--muted); }
+    .action-item {
+      display: flex; gap: 12px; padding: 12px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+    .action-item:last-child { border-bottom: none; }
+    .action-num {
+      font-family: 'Poppins', sans-serif; font-size: 0.8rem; font-weight: 700;
+      color: var(--cyan); flex-shrink: 0; min-width: 20px;
+    }
+    .action-text { font-size: 0.85rem; line-height: 1.6; }
+    .action-text strong { color: var(--text); font-weight: 600; }
+    .action-text span { color: var(--muted); }
+
+    /* COMPETITIVE */
+    .comp-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+    @media (max-width: 640px) { .comp-grid { grid-template-columns: 1fr; } }
+    .comp-card { background: var(--bg3); border: 1px solid var(--border); border-radius: 14px; padding: 24px; }
+    .comp-card h4 { font-size: 0.82rem; text-transform: uppercase; letter-spacing: 0.06em; color: var(--muted); margin-bottom: 14px; }
+    .kw-cloud { display: flex; flex-wrap: wrap; gap: 8px; }
+    .kw-pill {
+      background: rgba(79,70,229,0.12); border: 1px solid rgba(79,70,229,0.25);
+      color: #a5b4fc; font-size: 0.78rem; padding: 4px 12px; border-radius: 20px;
+    }
+    .diff-list { list-style: none; padding: 0; }
+    .diff-list li { padding: 7px 0; border-bottom: 1px solid rgba(255,255,255,0.05); font-size: 0.85rem; display: flex; align-items: flex-start; gap: 8px; }
+    .diff-list li:last-child { border-bottom: none; }
+    .diff-list li::before { content: '+'; color: var(--green); font-weight: 700; flex-shrink: 0; }
+    .miss-list { list-style: none; padding: 0; }
+    .miss-list li { padding: 7px 0; border-bottom: 1px solid rgba(255,255,255,0.05); font-size: 0.85rem; display: flex; align-items: flex-start; gap: 8px; }
+    .miss-list li:last-child { border-bottom: none; }
+    .miss-list li::before { content: '–'; color: var(--red); font-weight: 700; flex-shrink: 0; }
+
+    /* CONCLUSION */
+    .concl-card {
+      background: linear-gradient(135deg, rgba(124,58,237,0.12), rgba(79,70,229,0.08), rgba(6,182,212,0.06));
+      border: 1px solid rgba(124,58,237,0.3);
+      border-radius: 20px; padding: 48px;
+    }
+    .concl-card p { font-size: 0.95rem; line-height: 1.85; color: var(--text); margin-bottom: 16px; }
+    .concl-card p:last-child { margin-bottom: 0; }
+    .concl-card strong { color: #c4b5fd; }
+    .phase-summary { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 32px; }
+    @media (max-width: 600px) { .phase-summary { grid-template-columns: 1fr; } }
+    .phase-sum-card { background: rgba(255,255,255,0.04); border: 1px solid var(--border); border-radius: 14px; padding: 20px; }
+    .phase-sum-card h4 { font-size: 0.82rem; text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 12px; }
+    .phase-sum-card ul { list-style: none; padding: 0; }
+    .phase-sum-card ul li { font-size: 0.83rem; color: var(--muted); padding: 5px 0; display: flex; gap: 8px; border-bottom: 1px solid rgba(255,255,255,0.04); }
+    .phase-sum-card ul li:last-child { border-bottom: none; }
+    .phase-sum-card ul li::before { content: '→'; color: var(--cyan); flex-shrink: 0; }
+
+    /* RECON TABLE */
+    .access-table { width: 100%; border-collapse: collapse; }
+    .access-table th, .access-table td { padding: 11px 14px; text-align: left; border-bottom: 1px solid var(--border); font-size: 0.83rem; }
+    .access-table th { color: var(--muted); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.05em; font-weight: 600; background: rgba(255,255,255,0.02); }
+    .access-table tr:last-child td { border-bottom: none; }
+    .access-table tr:hover td { background: rgba(255,255,255,0.015); }
+
+    /* FOOTER */
+    footer {
+      background: var(--bg2); border-top: 1px solid var(--border);
+      text-align: center; padding: 32px 24px;
+      font-size: 0.82rem; color: var(--muted);
+    }
+    footer span { color: var(--text); }
+
+    /* SEO ISSUES */
+    .seo-issues { display: flex; flex-direction: column; gap: 10px; }
+    .seo-issue {
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: 10px; padding: 14px 18px;
+      display: flex; align-items: flex-start; gap: 12px;
+      font-size: 0.85rem;
+    }
+    .seo-issue .issue-num { font-weight: 700; color: var(--purple); flex-shrink: 0; min-width: 22px; }
+    .seo-issue .issue-ok { color: var(--green); }
+    .seo-issue-ok { border-left: 3px solid var(--green); }
+    .seo-issue-err { border-left: 3px solid var(--red); }
+
+    /* IDENTITY */
+    .ident-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+    @media (max-width: 640px) { .ident-grid { grid-template-columns: 1fr; } }
+
+    /* RECONSTRUCT */
+    .recon-card {
+      background: rgba(79,70,229,0.06); border: 1px solid rgba(79,70,229,0.25);
+      border-radius: 16px; padding: 28px;
+    }
+    .recon-card h3 { margin-bottom: 12px; font-size: 1rem; }
+    .recon-card p { font-size: 0.88rem; color: var(--muted); margin-bottom: 16px; line-height: 1.7; }
+    .recon-list { list-style: none; padding: 0; }
+    .recon-list li { font-size: 0.85rem; color: var(--text); padding: 6px 0; border-bottom: 1px solid rgba(255,255,255,0.05); display: flex; gap: 8px; }
+    .recon-list li:last-child { border-bottom: none; }
+    .recon-list li::before { content: '◆'; color: var(--purple); font-size: 0.6rem; margin-top: 5px; flex-shrink: 0; }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#7c3aed" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+    <span>Site Audit</span> · MyDNA
+  </div>
+  <div class="nav-badge">Diagnóstico Premium · Abril 2026</div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-glow"></div>
+  <div class="pill">
+    <div class="pill-dot"></div>
+    Auditoria de Site · 09/04/2026
+  </div>
+  <h1 class="hero-title">
+    <span class="grad">Diagnóstico Estratégico</span><br>Digital
+  </h1>
+  <p class="hero-sub">
+    Análise completa para <strong>mydnadigital.com</strong> · MyDNA HR Tech<br>
+    Preparado por Agência Logos · Site Audit Premium
+  </p>
+  <div class="metric-grid">
+    <div class="metric-card">
+      <div class="metric-score score-orange">4.5<span style="font-size:1rem;color:var(--muted)">/10</span></div>
+      <div class="metric-label">UX Score</div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-score score-red">3.0<span style="font-size:1rem;color:var(--muted)">/10</span></div>
+      <div class="metric-label">SEO Score</div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-score score-orange">4.0<span style="font-size:1rem;color:var(--muted)">/10</span></div>
+      <div class="metric-label">Copy Score</div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-score score-red">3.5<span style="font-size:1rem;color:var(--muted)">/10</span></div>
+      <div class="metric-label">Conversão</div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider" />
+
+<!-- PÁGINAS ANALISADAS -->
+<section class="section">
+  <div class="section-tag">Fase 0 — Reconhecimento e Mapeamento</div>
+  <h2 class="section-title">8 Páginas Analisadas</h2>
+  <p class="section-desc">Mapeamento completo via menu principal, rodapé e submenus do site mydnadigital.com. 7 páginas em análise profunda + 1 verificação superficial (Privacy — Erro 503).</p>
+  <div class="pages-grid">
+    <div class="page-chip chip-warn">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#f59e0b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+      <div><div style="font-weight:600">Homepage</div><div class="url">/ — espaço em branco</div></div>
+    </div>
+    <div class="page-chip chip-warn">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#f59e0b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+      <div><div style="font-weight:600">Talent Acquisition</div><div class="url">/recruiting/</div></div>
+    </div>
+    <div class="page-chip chip-warn">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#f59e0b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+      <div><div style="font-weight:600">Employee Experience</div><div class="url">/hr/</div></div>
+    </div>
+    <div class="page-chip chip-ok">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+      <div><div style="font-weight:600">Maturidad RRHH</div><div class="url">/maturidad-rh/</div></div>
+    </div>
+    <div class="page-chip chip-warn">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#f59e0b" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+      <div><div style="font-weight:600">E-books</div><div class="url">/ebooks/</div></div>
+    </div>
+    <div class="page-chip chip-ok">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+      <div><div style="font-weight:600">Vacantes / Jobs</div><div class="url">/jobs/</div></div>
+    </div>
+    <div class="page-chip chip-ok">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+      <div><div style="font-weight:600">Empresas / Companies</div><div class="url">/companies/</div></div>
+    </div>
+    <div class="page-chip chip-err">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#ef4444" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>
+      <div><div style="font-weight:600">Política de Privacidade</div><div class="url">/privacy/ — Erro 503</div></div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider" />
+
+<!-- IDENTIFICAÇÃO -->
+<section class="section">
+  <div class="section-tag">Fase 0A — Identificação do Site</div>
+  <h2 class="section-title">Ficha Técnica</h2>
+  <p class="section-desc">Dados básicos identificados na análise inicial do site.</p>
+  <div class="table-wrap">
+    <table class="info-table">
+      <thead><tr><th>Item</th><th>Detalhe</th></tr></thead>
+      <tbody>
+        <tr><td>URL exata</td><td><a href="https://mydnadigital.com/" target="_blank">https://mydnadigital.com/</a></td></tr>
+        <tr><td>Empresa / marca</td><td>MyDNA (subtítulo: "MyDNA HR Tech")</td></tr>
+        <tr><td>Setor / nicho</td><td>HR Tech / Tecnologia para Recursos Humanos</td></tr>
+        <tr><td>Tipo</td><td>SaaS / Plataforma digital híbrida (institucional + produto + portal de emprego)</td></tr>
+        <tr><td>Tecnologia percebida</td><td>Next.js (framework React), Tailwind CSS, Google Tag Manager, hospedado provavelmente em cloud</td></tr>
+        <tr><td>Idioma(s)</td><td>Espanhol (principal). Atributo <code>lang</code> ausente no HTML — problema de acessibilidade e SEO</td></tr>
+        <tr><td>Site carregando?</td><td style="color:var(--yellow)">Parcialmente — Hero e 1º viewport carregam bem, mas há enormes espaços em branco ao rolar (homepage, recruiting, ebooks). Conteúdo existe no DOM mas não renderiza visualmente. Problema grave de UX e renderização.</td></tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<hr class="divider" />
+
+<!-- MAPEAMENTO DE PÁGINAS -->
+<section class="section">
+  <div class="section-tag">Fase 0B — Mapeamento de Páginas Acessíveis</div>
+  <h2 class="section-title">Mapa de Acessibilidade</h2>
+  <p class="section-desc">Todas as páginas encontradas via menu principal, rodapé e submenus. Categorização por função e acessibilidade.</p>
+  <div class="table-wrap" style="overflow-x:auto">
+    <table class="access-table">
+      <thead>
+        <tr><th>Página</th><th>URL</th><th>Acessível?</th><th>Tipo</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>Homepage</td><td><code>/</code></td><td class="seo-warn">Parcialmente (espaço em branco)</td><td>Principal</td></tr>
+        <tr><td>Talent Acquisition</td><td><code>/recruiting/</code></td><td class="seo-warn">Parcialmente (espaço em branco)</td><td>Principal (produto)</td></tr>
+        <tr><td>Employee Experience</td><td><code>/hr/</code></td><td class="seo-warn">Parcialmente (espaço em branco)</td><td>Principal (produto)</td></tr>
+        <tr><td>Maturidad RRHH</td><td><code>/maturidad-rh/</code></td><td class="seo-ok">Sim</td><td>Landing page (conversão)</td></tr>
+        <tr><td>E-books</td><td><code>/ebooks/</code></td><td class="seo-warn">Parcialmente (espaço em branco)</td><td>Conteúdo</td></tr>
+        <tr><td>Vacantes (Jobs)</td><td><code>/jobs/</code></td><td class="seo-ok">Sim</td><td>Funcional (portal emprego)</td></tr>
+        <tr><td>Empresas (Companies)</td><td><code>/companies/</code></td><td class="seo-ok">Sim</td><td>Funcional (diretório)</td></tr>
+        <tr><td>Portal del Candidato</td><td><code>/candidates/</code> → candidate.mydnadigital.com</td><td class="seo-ok">Sim (subdomínio externo)</td><td>App externa</td></tr>
+        <tr><td>Blog</td><td><code>blog.mydnadigital.com/blog/</code></td><td style="color:var(--muted)">Subdomínio externo (não avaliável)</td><td>Conteúdo</td></tr>
+        <tr><td>Política de Privacidade</td><td><code>/privacy/</code></td><td class="seo-err">NÃO — Erro 503</td><td>Legal</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:12px;margin-top:24px">
+    <div class="card" style="padding:18px">
+      <div style="font-size:0.72rem;text-transform:uppercase;letter-spacing:0.06em;color:var(--purple);margin-bottom:8px">Núcleo do negócio</div>
+      <div style="font-size:0.83rem">Homepage, Talent Acquisition, Employee Experience, Maturidad RRHH</div>
+    </div>
+    <div class="card" style="padding:18px">
+      <div style="font-size:0.72rem;text-transform:uppercase;letter-spacing:0.06em;color:var(--cyan);margin-bottom:8px">Conteúdo</div>
+      <div style="font-size:0.83rem">E-books, Blog (externo)</div>
+    </div>
+    <div class="card" style="padding:18px">
+      <div style="font-size:0.72rem;text-transform:uppercase;letter-spacing:0.06em;color:var(--indigo);margin-bottom:8px">Funcionais</div>
+      <div style="font-size:0.83rem">Vacantes, Empresas, Portal del Candidato</div>
+    </div>
+    <div class="card" style="padding:18px">
+      <div style="font-size:0.72rem;text-transform:uppercase;letter-spacing:0.06em;color:var(--red);margin-bottom:8px">Legais</div>
+      <div style="font-size:0.83rem">Política de Privacidade — <strong style="color:var(--red)">FORA DO AR</strong></div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider" />
+
+<!-- FASE 1 IDENTIDADE -->
+<section class="section">
+  <div class="section-tag">Fase 1 — Identidade e Posicionamento</div>
+  <h2 class="section-title">Branding e Proposta de Valor</h2>
+  <p class="section-desc">Avaliação da identidade visual, consistência entre páginas e clareza do posicionamento para um visitante novo.</p>
+  <div class="ident-grid">
+    <div class="card">
+      <h3 style="font-size:0.95rem;margin-bottom:14px;color:var(--cyan)">1A — Branding e Identidade Visual</h3>
+      <div class="prose">
+        <p>A identidade visual do site segue uma <strong>paleta escura</strong> (fundo quase preto/azul marinho) com acentos em roxo, ciano/turquesa e verde (WhatsApp). O logo MyDNA é moderno, com um ícone que remete a DNA/hélice em degradê azul-roxo — transmite tecnologia e inovação. A tipografia é limpa e contemporânea (sans-serif).</p>
+        <p>A identidade visual comunica um posicionamento tecnológico e moderno, tentando se posicionar como premium/inovador no segmento HR Tech. O logo é profissional. A <strong>consistência visual entre páginas é média</strong>: as páginas de produto (recruiting, hr) seguem o mesmo padrão visual com ícones circulares e gráficos de roda de funcionalidades, mas a página de Maturidad RRHH tem um estilo visual completamente diferente (fundo claro, tipografia maior, layout mais moderno) — parece ter sido desenvolvida em outro momento ou por outra equipe.</p>
+        <p>As imagens são mistas: há imagens stock de qualidade razoável (pessoas em ambiente corporativo) e ícones próprios/ilustrações. <strong>Não há vídeo em nenhuma página do site.</strong></p>
+      </div>
+    </div>
+    <div class="card">
+      <h3 style="font-size:0.95rem;margin-bottom:14px;color:var(--cyan)">1B — Posicionamento e Proposta de Valor</h3>
+      <div class="prose">
+        <p>A proposta de valor central percebida é: <strong>"MyDNA oferece um ecossistema digital integrado de soluções de RRHH (recrutamento, experiência do colaborador, carreira) para empresas na América Latina, unificando tudo em uma plataforma."</strong></p>
+        <p>Essa proposta está <strong>parcialmente clara</strong> para um visitante novo. O headline principal é genérico e longo. Um visitante entende que é sobre RRHH e tecnologia, mas não entende rapidamente O QUE DIFERENCIA a MyDNA de concorrentes como Buk, Factorial, Gupy ou Workday.</p>
+        <p>A diferenciação mencionada é vaga: termos como "ecosistema digital", "todo en un solo lugar", "Reclutamiento 4.0" são promessas genéricas que qualquer concorrente poderia fazer. O público-alvo é parcialmente definido: empresas e profissionais na América Latina. O <strong>tom de voz oscila entre comercial e técnico</strong>, com uso misto de "tú/usted" (inconsistência).</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider" />
+
+<!-- FASE 2 PÁGINAS -->
+<section class="section">
+  <div class="section-tag">Fase 2 — Análise Profunda por Página</div>
+  <h2 class="section-title">Score por Página</h2>
+  <p class="section-desc">Avaliação individual de 7 páginas em profundidade: conteúdo, visual e conversão.</p>
+  <div class="page-cards">
+
+    <!-- Homepage -->
+    <div class="page-score-card" style="border-left:4px solid #ef4444">
+      <div class="score-badge score-red">3<span style="font-size:1rem;color:var(--muted)">/10</span></div>
+      <h3>Homepage</h3>
+      <div class="page-url">https://mydnadigital.com/</div>
+      <div class="page-obj">Apresentar a empresa, suas soluções e direcionar visitantes para produtos ou conversão.</div>
+      <div class="score-bar-wrap">
+        <div style="display:flex;justify-content:space-between;font-size:0.72rem;color:var(--muted);margin-bottom:4px"><span>Score geral</span><span style="color:#ef4444">3/10</span></div>
+        <div class="score-bar-bg"><div class="score-bar-fill" style="width:30%;background:#ef4444"></div></div>
+      </div>
+      <div class="tag-list">
+        <span class="tag tag-err">7 H1s</span>
+        <span class="tag tag-err">Sem CTA no hero</span>
+        <span class="tag tag-err">Sem prova social</span>
+        <span class="tag tag-err">Link dev em produção</span>
+        <span class="tag tag-warn">Conteúdo invisível</span>
+        <span class="tag tag-warn">Seção duplicada</span>
+      </div>
+      <ul class="problem-list" style="margin-top:14px">
+        <li>7 H1s na mesma página — gravíssimo para SEO. Principal: "Todas las soluciones estratégicas de RRHH y Gestión de Carrera en un solo lugar."</li>
+        <li>Espaços em branco enormes ao rolar — conteúdo não renderiza (bug de scroll-triggered animations)</li>
+        <li>Seção "Employee Experience" aparece DUPLICADA no DOM</li>
+        <li>Link "Regístrate" aponta para URL de desenvolvimento (candidate.develop.mydnadigital.com)</li>
+        <li>Sem CTA acima da dobra no hero</li>
+        <li>Inconsistência "tú" vs "usted" em toda a página</li>
+        <li>Zero prova social: sem depoimentos, logos de clientes ou números de resultado</li>
+        <li>Texto genérico: "Potencia el talento de tu organización", "Cuida de tu equipo, impulsa el crecimiento"</li>
+      </ul>
+    </div>
+
+    <!-- Talent Acquisition -->
+    <div class="page-score-card" style="border-left:4px solid #f59e0b">
+      <div class="score-badge score-yellow">5<span style="font-size:1rem;color:var(--muted)">/10</span></div>
+      <h3>Talent Acquisition</h3>
+      <div class="page-url">https://mydnadigital.com/recruiting/</div>
+      <div class="page-obj">Apresentar o produto de Recrutamento e Seleção e converter visitantes em leads/trials.</div>
+      <div class="score-bar-wrap">
+        <div style="display:flex;justify-content:space-between;font-size:0.72rem;color:var(--muted);margin-bottom:4px"><span>Score geral</span><span style="color:#f59e0b">5/10</span></div>
+        <div class="score-bar-bg"><div class="score-bar-fill" style="width:50%;background:#f59e0b"></div></div>
+      </div>
+      <div class="tag-list">
+        <span class="tag tag-ok">H1 único e adequado</span>
+        <span class="tag tag-ok">CTA acima da dobra</span>
+        <span class="tag tag-warn">Bug espaço branco</span>
+        <span class="tag tag-err">Sem preços</span>
+        <span class="tag tag-err">Sem depoimentos</span>
+      </div>
+      <ul class="problem-list" style="margin-top:14px">
+        <li>Espaço em branco enorme na segunda metade da página (mesmo bug da homepage)</li>
+        <li>Cross-sell de Employee Experience no final mistura a mensagem</li>
+        <li>Sem preços ou indicação de faixa de valor</li>
+        <li>Sem depoimentos ou cases de recrutamento bem-sucedido</li>
+      </ul>
+    </div>
+
+    <!-- Employee Experience -->
+    <div class="page-score-card" style="border-left:4px solid #f59e0b">
+      <div class="score-badge score-yellow">5<span style="font-size:1rem;color:var(--muted)">/10</span></div>
+      <h3>Employee Experience</h3>
+      <div class="page-url">https://mydnadigital.com/hr/</div>
+      <div class="page-obj">Apresentar o ecossistema de RRHH integrado e converter.</div>
+      <div class="score-bar-wrap">
+        <div style="display:flex;justify-content:space-between;font-size:0.72rem;color:var(--muted);margin-bottom:4px"><span>Score geral</span><span style="color:#f59e0b">5/10</span></div>
+        <div class="score-bar-bg"><div class="score-bar-fill" style="width:50%;background:#f59e0b"></div></div>
+      </div>
+      <div class="tag-list">
+        <span class="tag tag-ok">H1 único e adequado</span>
+        <span class="tag tag-ok">30+ ferramentas listadas</span>
+        <span class="tag tag-warn">Bug espaço branco</span>
+        <span class="tag tag-warn">Cross-sell repetitivo</span>
+      </div>
+      <ul class="problem-list" style="margin-top:14px">
+        <li>Mesmo bug de espaço em branco na segunda metade</li>
+        <li>Cross-sell de Talent Acquisition no final — repetitivo e sem estratégia</li>
+        <li>Lista de 30+ ferramentas pode sobrecarregar — falta priorização visual</li>
+      </ul>
+    </div>
+
+    <!-- Jobs -->
+    <div class="page-score-card" style="border-left:4px solid #f97316">
+      <div class="score-badge score-orange">4<span style="font-size:1rem;color:var(--muted)">/10</span></div>
+      <h3>Vacantes / Jobs</h3>
+      <div class="page-url">https://mydnadigital.com/jobs/</div>
+      <div class="page-obj">Permitir busca de vagas de emprego na América Latina.</div>
+      <div class="score-bar-wrap">
+        <div style="display:flex;justify-content:space-between;font-size:0.72rem;color:var(--muted);margin-bottom:4px"><span>Score geral</span><span style="color:#f97316">4/10</span></div>
+        <div class="score-bar-bg"><div class="score-bar-fill" style="width:40%;background:#f97316"></div></div>
+      </div>
+      <div class="tag-list">
+        <span class="tag tag-err">Typo no H1</span>
+        <span class="tag tag-err">Bandeiras quebradas</span>
+        <span class="tag tag-warn">Loading visível</span>
+        <span class="tag tag-ok">Busca funcional</span>
+      </div>
+      <ul class="problem-list" style="margin-top:14px">
+        <li>H1: "MyDNA Talent <strong>Acquistion</strong>" — ERRO ORTOGRÁFICO ("Acquistion" em vez de "Acquisition")</li>
+        <li>"Loading..." exibido como texto estático H2 visível ao usuário</li>
+        <li>Imagens de bandeiras quebradas em alguns cards (exibem ".." em vez da imagem)</li>
+        <li>Paginação presente mas não claro se funciona corretamente</li>
+      </ul>
+    </div>
+
+    <!-- Companies -->
+    <div class="page-score-card" style="border-left:4px solid #f59e0b">
+      <div class="score-badge score-yellow">5<span style="font-size:1rem;color:var(--muted)">/10</span></div>
+      <h3>Empresas / Companies</h3>
+      <div class="page-url">https://mydnadigital.com/companies/</div>
+      <div class="page-obj">Diretório de empresas com informações de cultura e salário.</div>
+      <div class="score-bar-wrap">
+        <div style="display:flex;justify-content:space-between;font-size:0.72rem;color:var(--muted);margin-bottom:4px"><span>Score geral</span><span style="color:#f59e0b">5/10</span></div>
+        <div class="score-bar-bg"><div class="score-bar-fill" style="width:50%;background:#f59e0b"></div></div>
+      </div>
+      <div class="tag-list">
+        <span class="tag tag-ok">51 links internos</span>
+        <span class="tag tag-ok">Logos reconhecíveis</span>
+        <span class="tag tag-err">Title = Meta</span>
+        <span class="tag tag-warn">H1 genérico</span>
+      </div>
+      <ul class="problem-list" style="margin-top:14px">
+        <li>Título e meta description são idênticos — oportunidade desperdiçada para SEO</li>
+        <li>H1: "Todo lo que debes saber sobre como es trabajar en una empresa" — muito genérico</li>
+        <li>Sem contexto sobre como os ratings de empresas são calculados</li>
+      </ul>
+    </div>
+
+    <!-- Maturidad RRHH -->
+    <div class="page-score-card" style="border-left:4px solid #22c55e">
+      <div class="score-badge" style="color:#22c55e">7<span style="font-size:1rem;color:var(--muted)">/10</span></div>
+      <h3>Maturidad RRHH <span style="font-size:0.72rem;background:rgba(34,197,94,0.15);border:1px solid rgba(34,197,94,0.3);color:#4ade80;padding:2px 8px;border-radius:20px;margin-left:6px">Melhor Página</span></h3>
+      <div class="page-url">https://mydnadigital.com/maturidad-rh/</div>
+      <div class="page-obj">Ferramenta de diagnóstico/assessment gratuito para capturar leads qualificados.</div>
+      <div class="score-bar-wrap">
+        <div style="display:flex;justify-content:space-between;font-size:0.72rem;color:var(--muted);margin-bottom:4px"><span>Score geral</span><span style="color:#22c55e">7/10</span></div>
+        <div class="score-bar-bg"><div class="score-bar-fill" style="width:70%;background:#22c55e"></div></div>
+      </div>
+      <div class="tag-list">
+        <span class="tag tag-ok">CTA acima da dobra</span>
+        <span class="tag tag-ok">H1 forte e claro</span>
+        <span class="tag tag-ok">Isca gratuita</span>
+        <span class="tag tag-ok">40 perguntas, 5 dimensões</span>
+        <span class="tag tag-warn">Sem canonical</span>
+        <span class="tag tag-warn">Visual inconsistente</span>
+      </div>
+      <ul class="problem-list" style="margin-top:14px">
+        <li>Sem canonical tag — risco de conteúdo duplicado</li>
+        <li>Estilo visual completamente diferente do restante do site (parece desenvolvida por outra equipe)</li>
+        <li>Não há footer nem formulário nesta página — limitação de navegação</li>
+      </ul>
+    </div>
+
+    <!-- Ebooks -->
+    <div class="page-score-card" style="border-left:4px solid #f59e0b">
+      <div class="score-badge score-yellow">5<span style="font-size:1rem;color:var(--muted)">/10</span></div>
+      <h3>E-books</h3>
+      <div class="page-url">https://mydnadigital.com/ebooks/</div>
+      <div class="page-obj">Oferecer conteúdo rico para captura de leads.</div>
+      <div class="score-bar-wrap">
+        <div style="display:flex;justify-content:space-between;font-size:0.72rem;color:var(--muted);margin-bottom:4px"><span>Score geral</span><span style="color:#f59e0b">5/10</span></div>
+        <div class="score-bar-bg"><div class="score-bar-fill" style="width:50%;background:#f59e0b"></div></div>
+      </div>
+      <div class="tag-list">
+        <span class="tag tag-ok">Layout limpo</span>
+        <span class="tag tag-err">Apenas 1 ebook</span>
+        <span class="tag tag-err">1 link interno (crítico)</span>
+        <span class="tag tag-warn">Bug espaço branco</span>
+      </div>
+      <ul class="problem-list" style="margin-top:14px">
+        <li>Espaço em branco na segunda metade da página (mesmo bug recorrente)</li>
+        <li>Parece haver apenas 1 ebook visível — biblioteca pobre para captura de leads</li>
+        <li>Apenas 1 link interno na página — péssimo para SEO e navegação interna</li>
+      </ul>
+    </div>
+
+  </div>
+</section>
+
+<hr class="divider" />
+
+<!-- FASE 3 SEO -->
+<section class="section">
+  <div class="section-tag">Fase 3 — SEO On-Page</div>
+  <h2 class="section-title">Auditoria de SEO por Página</h2>
+  <p class="section-desc">Análise de title tag, meta description, estrutura de headings, URLs e links internos em cada página do site.</p>
+  <div class="table-wrap" style="overflow-x:auto;margin-bottom:40px">
+    <table class="seo-table">
+      <thead>
+        <tr><th>Página</th><th>Title Tag</th><th>Meta Description</th><th>H1</th><th>URL</th><th>Links Int.</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Homepage</td>
+          <td>"MyDNA Soluciones Estratégicas de RRHH para Empresas y Gestión de Carrera" — descritivo, longo</td>
+          <td class="seo-ok">Presente, descritiva</td>
+          <td class="seo-err">7 H1s! — gravíssimo</td>
+          <td class="seo-ok">/ — limpa</td>
+          <td class="seo-warn">~10 — poucos</td>
+        </tr>
+        <tr>
+          <td>Recruiting</td>
+          <td>"MyDNA Adquisición de Talento | Reclute el mejor talento" — bom</td>
+          <td class="seo-ok">Presente, persuasiva</td>
+          <td class="seo-ok">1 H1 — adequado</td>
+          <td class="seo-ok">/recruiting/ — limpa</td>
+          <td class="seo-warn">~7 — poucos</td>
+        </tr>
+        <tr>
+          <td>HR</td>
+          <td>"MyDNA | La mejor gestión 360 para tus colaboradores" — bom</td>
+          <td class="seo-ok">Presente, descritiva</td>
+          <td class="seo-ok">1 H1 — adequado</td>
+          <td class="seo-ok">/hr/ — limpa</td>
+          <td class="seo-ok">~39 — bom</td>
+        </tr>
+        <tr>
+          <td>Jobs</td>
+          <td>"Ofertas de Empleo en América Latina..." — bom</td>
+          <td class="seo-ok">Presente</td>
+          <td class="seo-warn">1 H1 — com erro ortográfico</td>
+          <td class="seo-ok">/jobs/ — limpa</td>
+          <td class="seo-err">~2 — crítico</td>
+        </tr>
+        <tr>
+          <td>Companies</td>
+          <td>"Salario, cultura y vacantes..." — ok</td>
+          <td class="seo-err">Idêntica ao title — preguiçosa</td>
+          <td class="seo-warn">1 H1 — genérico</td>
+          <td class="seo-ok">/companies/ — limpa</td>
+          <td class="seo-ok">~51 — excelente</td>
+        </tr>
+        <tr>
+          <td>Maturidad</td>
+          <td>"Descubra el Nivel Real de Madurez de su RH – MyDNA" — excelente</td>
+          <td class="seo-ok">Presente, persuasiva</td>
+          <td class="seo-ok">1 H1 — forte</td>
+          <td class="seo-ok">/maturidad-rh/ — limpa</td>
+          <td style="color:var(--muted)">—</td>
+        </tr>
+        <tr>
+          <td>Ebooks</td>
+          <td>"Ebooks MyDNA, Guías Salariales..." — bom</td>
+          <td class="seo-ok">Presente</td>
+          <td class="seo-ok">1 H1 — funcional</td>
+          <td class="seo-ok">/ebooks/ — limpa</td>
+          <td class="seo-err">1 — crítico</td>
+        </tr>
+        <tr>
+          <td>Privacy</td>
+          <td class="seo-err">Erro 503 — site fora do ar</td>
+          <td class="seo-err">—</td>
+          <td class="seo-err">—</td>
+          <td class="seo-warn">/privacy/ — inacessível</td>
+          <td style="color:var(--muted)">—</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3 style="font-size:1.1rem;margin-bottom:20px">Problemas Críticos de SEO — 12 Encontrados</h3>
+  <div class="seo-issues">
+    <div class="seo-issue seo-issue-err">
+      <span class="issue-num">1</span>
+      <span><strong>robots.txt referencia localhost:3000</strong> — os buscadores recebem um host incorreto. Erro de deploy que invalida completamente o arquivo.</span>
+    </div>
+    <div class="seo-issue seo-issue-err">
+      <span class="issue-num">2</span>
+      <span><strong>sitemap.xml referencia localhost:3000</strong> em todos os sub-sitemaps — os buscadores NÃO conseguem indexar o site corretamente via sitemap.</span>
+    </div>
+    <div class="seo-issue seo-issue-err">
+      <span class="issue-num">3</span>
+      <span><strong>7 H1s na homepage</strong> — viola fundamentalmente a estrutura de headings para SEO.</span>
+    </div>
+    <div class="seo-issue seo-issue-err">
+      <span class="issue-num">4</span>
+      <span><strong>Atributo <code>lang</code> ausente no HTML</strong> (<code>&lt;html lang=""&gt;</code>) — prejudica SEO internacional e acessibilidade.</span>
+    </div>
+    <div class="seo-issue seo-issue-err">
+      <span class="issue-num">5</span>
+      <span><strong>Zero Schema markup</strong> (0 scripts application/ld+json) — nenhum dado estruturado para rich snippets.</span>
+    </div>
+    <div class="seo-issue seo-issue-err">
+      <span class="issue-num">6</span>
+      <span><strong>Política de Privacidade retorna Erro 503</strong> — além de SEO, é uma questão legal/LGPD urgente.</span>
+    </div>
+    <div class="seo-issue seo-issue-err">
+      <span class="issue-num">7</span>
+      <span><strong>Erro ortográfico no H1 da página Jobs</strong>: "Acquistion" em vez de "Acquisition" — transmite falta de atenção.</span>
+    </div>
+    <div class="seo-issue seo-issue-err">
+      <span class="issue-num">8</span>
+      <span><strong>Meta description duplicada com title</strong> na página Companies — oportunidade de SEO desperdiçada.</span>
+    </div>
+    <div class="seo-issue seo-issue-err">
+      <span class="issue-num">9</span>
+      <span><strong>Sem canonical tag</strong> na página Maturidad RRHH — risco de conteúdo duplicado.</span>
+    </div>
+    <div class="seo-issue seo-issue-ok">
+      <span class="issue-num">10</span>
+      <span class="issue-ok"><strong>HTTPS presente e funcionando.</strong> Ponto positivo.</span>
+    </div>
+    <div class="seo-issue seo-issue-err">
+      <span class="issue-num">11</span>
+      <span><strong>Blog em subdomínio separado</strong> (blog.mydnadigital.com) — pode diluir autoridade do domínio principal.</span>
+    </div>
+    <div class="seo-issue seo-issue-err">
+      <span class="issue-num">12</span>
+      <span><strong>Sem produção de conteúdo visível</strong> no site principal — apenas 1 ebook visível na página de conteúdo.</span>
+    </div>
+  </div>
+</section>
+
+<hr class="divider" />
+
+<!-- FASE 4 UX + TOP 10 -->
+<section class="section">
+  <div class="section-tag">Fase 4 — Experiência do Usuário</div>
+  <h2 class="section-title">Navegação e Top 10 Problemas Críticos</h2>
+  <div class="card" style="margin-bottom:32px">
+    <h3 style="font-size:0.95rem;margin-bottom:12px;color:var(--cyan)">4A — Navegação e Arquitetura da Informação</h3>
+    <div class="prose">
+      <p>O menu principal é <strong>parcialmente intuitivo</strong>: divide entre "Para personas" e "Para empresas", o que é uma boa segmentação. Porém, "Contenido" como nome de menu é vago (poderia ser "Recursos" ou "Aprenda"). O dropdown "Login" com <strong>3 opções de login</strong> (Experiencia, Talent Acquisition, Portal del Candidato) revela a fragmentação da plataforma — são 3 apps separadas, o que gera confusão para o usuário.</p>
+    </div>
+  </div>
+  <div class="problems-list">
+
+    <div class="problem-row">
+      <div class="prob-num">01</div>
+      <div>
+        <div class="prob-title">Conteúdo não renderiza ao rolar — espaços em branco enormes em todas as páginas principais</div>
+        <div class="prob-layer">Camada: Técnico · Homepage, Recruiting, HR, E-books</div>
+        <div class="prob-action">Auditar e corrigir as scroll-triggered animations ou lazy-loading que falham ao renderizar as seções abaixo da dobra. Isso provavelmente envolve revisar a lógica de IntersectionObserver ou bibliotecas de animação (Framer Motion, GSAP, etc.) no Next.js. Sem essa correção, mais da metade do conteúdo do site é invisível.</div>
+      </div>
+      <div class="prob-badges">
+        <span class="badge badge-alto">Alto impacto</span>
+        <span class="badge badge-esforco-med">Esforço médio</span>
+      </div>
+    </div>
+
+    <div class="problem-row">
+      <div class="prob-num">02</div>
+      <div>
+        <div class="prob-title">robots.txt e sitemap.xml referenciam localhost:3000 em vez do domínio de produção</div>
+        <div class="prob-layer">Camada: SEO / Técnico</div>
+        <div class="prob-action">Alterar a configuração de build/deploy do Next.js para gerar os arquivos com a URL correta (mydnadigital.com). Essa correção de configuração pode ser feita em minutos e desbloqueia a indexação correta do site pelos buscadores.</div>
+      </div>
+      <div class="prob-badges">
+        <span class="badge badge-alto">Alto impacto</span>
+        <span class="badge badge-baixo">Esforço baixo</span>
+      </div>
+    </div>
+
+    <div class="problem-row">
+      <div class="prob-num">03</div>
+      <div>
+        <div class="prob-title">Zero prova social em todo o site — sem depoimentos, cases, logos de clientes ou números de resultado</div>
+        <div class="prob-layer">Camada: Conversão / Branding</div>
+        <div class="prob-action">Coletar pelo menos 5 depoimentos de clientes reais (com nome, cargo e foto), documentar 3 cases com métricas e adicionar uma seção de logos de clientes na homepage. Adicionar números de impacto (quantidade de clientes, processos seletivos, países de operação).</div>
+      </div>
+      <div class="prob-badges">
+        <span class="badge badge-alto">Alto impacto</span>
+        <span class="badge badge-esforco-med">Esforço médio</span>
+      </div>
+    </div>
+
+    <div class="problem-row">
+      <div class="prob-num">04</div>
+      <div>
+        <div class="prob-title">Homepage com 7 H1 tags e seção Employee Experience duplicada no DOM</div>
+        <div class="prob-layer">Camada: SEO / Técnico</div>
+        <div class="prob-action">Reestruturar os headings da homepage para 1 único H1 e hierarquia H2/H3. Remover o bloco duplicado de Employee Experience. Correção de desenvolvimento rápida com impacto direto no ranqueamento.</div>
+      </div>
+      <div class="prob-badges">
+        <span class="badge badge-alto">Alto impacto</span>
+        <span class="badge badge-baixo">Esforço baixo</span>
+      </div>
+    </div>
+
+    <div class="problem-row">
+      <div class="prob-num">05</div>
+      <div>
+        <div class="prob-title">Página de Política de Privacidade retorna Erro 503 — FORA DO AR</div>
+        <div class="prob-layer">Camada: Técnico / Legal</div>
+        <div class="prob-action">Restaurar a página imediatamente. Operar em países como Brasil (LGPD), Chile (Ley 19.628) e Colômbia (Ley 1581) sem política de privacidade acessível é um risco regulatório real. Enquanto não corrigir, adicionar link temporário para PDF ou Google Doc.</div>
+      </div>
+      <div class="prob-badges">
+        <span class="badge badge-alto">Alto impacto</span>
+        <span class="badge badge-baixo">Esforço baixo</span>
+      </div>
+    </div>
+
+    <div class="problem-row">
+      <div class="prob-num">06</div>
+      <div>
+        <div class="prob-title">Formulário de contato com 7 campos — excesso de fricção na conversão</div>
+        <div class="prob-layer">Camada: Conversão / UX</div>
+        <div class="prob-action">Reduzir para 3-4 campos essenciais: nome, email, empresa e mensagem. Os campos Cargo, Área e País podem ser coletados em etapa posterior ou de forma opcional. Essa mudança sozinha pode aumentar a taxa de conversão do formulário em 30-50%.</div>
+      </div>
+      <div class="prob-badges">
+        <span class="badge badge-alto">Alto impacto</span>
+        <span class="badge badge-baixo">Esforço baixo</span>
+      </div>
+    </div>
+
+    <div class="problem-row">
+      <div class="prob-num">07</div>
+      <div>
+        <div class="prob-title">Sem CTA acima da dobra na homepage — visitante não recebe direção imediata</div>
+        <div class="prob-layer">Camada: Conversão</div>
+        <div class="prob-action">Adicionar um CTA claro e visível no hero da homepage ("Solicita tu Demo Gratis" ou "Prueba Gratis — Sin tarjeta de crédito") com botão destacado imediatamente abaixo do headline principal.</div>
+      </div>
+      <div class="prob-badges">
+        <span class="badge badge-medio">Médio impacto</span>
+        <span class="badge badge-baixo">Esforço baixo</span>
+      </div>
+    </div>
+
+    <div class="problem-row">
+      <div class="prob-num">08</div>
+      <div>
+        <div class="prob-title">Link "Regístrate" aponta para ambiente de desenvolvimento (candidate.develop.mydnadigital.com)</div>
+        <div class="prob-layer">Camada: Técnico</div>
+        <div class="prob-action">Corrigir o href para apontar ao domínio de produção (candidate.mydnadigital.com). O ambiente develop pode conter bugs, dados de teste e comprometer seriamente a experiência do candidato.</div>
+      </div>
+      <div class="prob-badges">
+        <span class="badge badge-medio">Médio impacto</span>
+        <span class="badge badge-baixo">Esforço baixo</span>
+      </div>
+    </div>
+
+    <div class="problem-row">
+      <div class="prob-num">09</div>
+      <div>
+        <div class="prob-title">Atributo <code>lang</code> vazio no HTML e zero Schema markup em todas as páginas</div>
+        <div class="prob-layer">Camada: SEO / Acessibilidade</div>
+        <div class="prob-action">Definir <code>lang="es"</code> no HTML. Implementar Schema markup para Organization, SoftwareApplication e FAQ nas páginas principais. Ações rápidas com impacto direto em acessibilidade e rich snippets.</div>
+      </div>
+      <div class="prob-badges">
+        <span class="badge badge-medio">Médio impacto</span>
+        <span class="badge badge-baixo">Esforço baixo</span>
+      </div>
+    </div>
+
+    <div class="problem-row">
+      <div class="prob-num">10</div>
+      <div>
+        <div class="prob-title">Erro ortográfico no H1 de Jobs ("Acquistion") e imagens de bandeiras quebradas</div>
+        <div class="prob-layer">Camada: Conteúdo / Técnico</div>
+        <div class="prob-action">Corrigir o typo ("Acquistion" → "Acquisition") e reparar as imagens de bandeiras que não carregam nos cards de vagas. Erros básicos como esses corroem a confiança em uma plataforma que promete modernizar o recrutamento.</div>
+      </div>
+      <div class="prob-badges">
+        <span class="badge badge-medio">Médio impacto</span>
+        <span class="badge badge-baixo">Esforço baixo</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<hr class="divider" />
+
+<!-- PLANO DE AÇÃO -->
+<section class="section">
+  <div class="section-tag">Plano de Ação Estratégico</div>
+  <h2 class="section-title">Roadmap de Melhorias</h2>
+  <p class="section-desc">Ações organizadas em duas fases: quick wins de curto prazo e projetos de médio prazo, seguidos da análise de reconstrução.</p>
+
+  <div class="phase-grid" style="margin-bottom:24px">
+    <div class="phase-card">
+      <div class="phase-header">
+        <div class="phase-icon phase-icon-quick">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#22c55e" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+        </div>
+        <div>
+          <div class="phase-title">Quick Wins</div>
+          <div class="phase-subtitle">Sem redesign · até 2 semanas</div>
+        </div>
+      </div>
+      <div class="action-item">
+        <span class="action-num">01</span>
+        <div class="action-text"><strong>Corrigir robots.txt e sitemap.xml</strong> — <span>Atualizar a configuração de deploy do Next.js para gerar esses arquivos com https://mydnadigital.com em vez de https://localhost:3000. Correção de minutos que desbloqueia a indexação correta pelos buscadores.</span></div>
+      </div>
+      <div class="action-item">
+        <span class="action-num">02</span>
+        <div class="action-text"><strong>Restaurar Política de Privacidade (/privacy/)</strong> — <span>Resolver o erro 503. Enquanto não corrigir, adicionar link temporário para PDF ou Google Doc com a política.</span></div>
+      </div>
+      <div class="action-item">
+        <span class="action-num">03</span>
+        <div class="action-text"><strong>Corrigir links de desenvolvimento</strong> — <span>Trocar candidate.develop.mydnadigital.com por candidate.mydnadigital.com nas duas ocorrências. Corrigir "Acquistion" → "Acquisition" no H1 de /jobs/.</span></div>
+      </div>
+      <div class="action-item">
+        <span class="action-num">04</span>
+        <div class="action-text"><strong>Reduzir formulário para 3-4 campos</strong> — <span>Manter nome, email, empresa e mensagem. Remover Cargo, Área e País como obrigatórios. Pode aumentar a taxa de conversão em 30-50%.</span></div>
+      </div>
+      <div class="action-item">
+        <span class="action-num">05</span>
+        <div class="action-text"><strong>Definir lang="es" e adicionar CTA no hero</strong> — <span>Incluir botão "Solicita tu Demo Gratis" ou "Prueba Gratis — Sin tarjeta de crédito" diretamente no primeiro viewport da homepage.</span></div>
+      </div>
+    </div>
+
+    <div class="phase-card">
+      <div class="phase-header">
+        <div class="phase-icon phase-icon-mid">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#818cf8" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        </div>
+        <div>
+          <div class="phase-title">Médio Prazo</div>
+          <div class="phase-subtitle">Melhoria do site atual · 1 a 3 meses</div>
+        </div>
+      </div>
+      <div class="action-item">
+        <span class="action-num">01</span>
+        <div class="action-text"><strong>Resolver renderização de conteúdo</strong> — <span>Auditar e reescrever as animações de scroll/lazy-loading (IntersectionObserver, Framer Motion, GSAP). É a correção mais importante: sem ela, mais da metade do conteúdo de venda é invisível.</span></div>
+      </div>
+      <div class="action-item">
+        <span class="action-num">02</span>
+        <div class="action-text"><strong>Construir camada de prova social completa</strong> — <span>Coletar 5-10 depoimentos com nome, cargo e empresa. Documentar 3 cases com métricas reais. Criar seção de logos de clientes na homepage. Adicionar números de impacto.</span></div>
+      </div>
+      <div class="action-item">
+        <span class="action-num">03</span>
+        <div class="action-text"><strong>Reestruturar a homepage</strong> — <span>Eliminar os 7 H1s (manter 1 único H1). Remover seção duplicada. Narrativa clara: Hero + CTA → Problema → Soluções → Prova social → Formulário simplificado.</span></div>
+      </div>
+      <div class="action-item">
+        <span class="action-num">04</span>
+        <div class="action-text"><strong>Implementar Schema markup e SEO técnico</strong> — <span>Dados estruturados (Organization, SoftwareApplication, FAQ, Review). Canonical tags consistentes. Considerar migrar blog do subdomínio para mydnadigital.com/blog/.</span></div>
+      </div>
+      <div class="action-item">
+        <span class="action-num">05</span>
+        <div class="action-text"><strong>Criar "Sobre Nosotros" e unificar tom de voz</strong> — <span>Página institucional com história, equipe, missão, valores e presença regional. Padronizar "tú" ou "usted" em todo o site de forma consistente.</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="recon-card">
+    <h3>Reconstrução Estratégica — Vale Reconstruir do Zero?</h3>
+    <p>Recomendação: <strong style="color:#c4b5fd">NÃO reconstruir do zero neste momento</strong>, mas sim fazer uma refatoração profunda.</p>
+    <p>O site está construído em Next.js com Tailwind CSS — uma stack moderna e escalável. A base tecnológica é sólida. O problema não é a tecnologia, mas sim a implementação e o conteúdo. Os problemas principais (renderização, SEO técnico, estrutura de headings) são corrigíveis sem reconstrução. A identidade visual pode ser refinada incrementalmente.</p>
+    <p>Se a refatoração de médio prazo (3 meses) não produzir resultados mensuráveis em conversão e indexação, então considerar reconstrução completa focada em:</p>
+    <ul class="recon-list">
+      <li>Arquitetura de informação redesenhada com base em pesquisa de usuário (quem visita, o que busca, como decide)</li>
+      <li>Design system unificado (a página de Maturidad RRHH mostra o caminho do design moderno)</li>
+      <li>Conteúdo orientado à conversão com prova social integrada em cada página</li>
+      <li>SEO-first desde a fundação (headings, schema, sitemap, URLs semânticas)</li>
+      <li>Integração nativa com CRM e automação de marketing (Hubspot, RD Station, Pipedrive ou similar)</li>
+      <li>Plataforma de login unificada (eliminar os 3 logins separados que fragmentam a experiência)</li>
+    </ul>
+  </div>
+</section>
+
+<hr class="divider" />
+
+<!-- POSICIONAMENTO COMPETITIVO -->
+<section class="section">
+  <div class="section-tag">Posicionamento Competitivo</div>
+  <h2 class="section-title">Benchmarking e Análise de Mercado</h2>
+  <p class="section-desc">Público-alvo, palavras-chave, diferenciais e gaps em relação a concorrentes como Buk, Factorial, Gupy e Workday.</p>
+  <div class="card" style="margin-bottom:20px">
+    <h4 style="font-size:0.82rem;text-transform:uppercase;letter-spacing:0.06em;color:var(--muted);margin-bottom:12px">Público-alvo percebido</h4>
+    <div class="prose">
+      <p>Gerentes, diretores e VPs de Recursos Humanos em <strong>empresas de médio e grande porte na América Latina</strong>, com concentração em Chile, Argentina, México, Colômbia, Peru e Brasil. Secundariamente: profissionais em transição de carreira e candidatos buscando oportunidades no mercado latinoamericano.</p>
+    </div>
+  </div>
+  <div class="comp-grid">
+    <div class="comp-card">
+      <h4>Palavras-chave percebidas</h4>
+      <div class="kw-cloud">
+        <span class="kw-pill">soluciones estratégicas RRHH</span>
+        <span class="kw-pill">reclutamiento y selección digital</span>
+        <span class="kw-pill">talent acquisition plataforma</span>
+        <span class="kw-pill">employee experience software</span>
+        <span class="kw-pill">gestión de carrera</span>
+        <span class="kw-pill">outplacement digital</span>
+        <span class="kw-pill">evaluación de desempeño</span>
+        <span class="kw-pill">clima organizacional</span>
+        <span class="kw-pill">ofertas de empleo América Latina</span>
+        <span class="kw-pill">madurez RRHH</span>
+      </div>
+    </div>
+    <div class="comp-card">
+      <h4>Diferenciais percebidos</h4>
+      <ul class="diff-list">
+        <li>Ecossistema que serve tanto empresas quanto profissionais individuais — combinação rara no mercado</li>
+        <li>Ferramenta de diagnóstico de Maturidad RRHH — isca de marketing inteligente e potencialmente única</li>
+        <li>Foco regional em toda a América Latina (11 países) — diferencial frente a soluções localizadas</li>
+        <li>30+ ferramentas integradas em uma única plataforma</li>
+      </ul>
+    </div>
+    <div class="comp-card">
+      <h4>O que falta (que concorrentes têm)</h4>
+      <ul class="miss-list">
+        <li>Demonstrações visuais do produto (screenshots, vídeos, tours interativos)</li>
+        <li>Depoimentos e cases documentados com métricas</li>
+        <li>Transparência de preços ou planos</li>
+        <li>Página institucional com equipe e história</li>
+        <li>Certificações de segurança (ISO 27001, SOC2)</li>
+        <li>Integrações listadas com ferramentas populares (Slack, Teams, SAP)</li>
+        <li>Chat ao vivo para dúvidas de pré-venda</li>
+        <li>Comparativos explícitos ("MyDNA vs. Buk", "MyDNA vs. Factorial")</li>
+        <li>Conteúdo educativo robusto (blog ativo, webinars, whitepapers)</li>
+      </ul>
+    </div>
+    <div class="comp-card">
+      <h4>Benchmarking rápido</h4>
+      <div class="prose">
+        <p>A MyDNA possui uma amplitude de produto impressionante (30+ ferramentas), mas essa amplitude está <strong>escondida atrás de um site que não sabe comunicá-la</strong>. Enquanto concorrentes diretos como Buk ou Factorial investem pesado em conteúdo, prova social e experiência de onboarding visual, a MyDNA depende quase exclusivamente do botão de WhatsApp e de um formulário extenso para gerar leads.</p>
+        <p>O gap mais perigoso não é tecnológico — é de <strong>comunicação e credibilidade</strong>.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="divider" />
+
+<!-- CONCLUSÃO -->
+<section class="section">
+  <div class="section-tag">Conclusão e Recomendação Final</div>
+  <h2 class="section-title">Diagnóstico Final</h2>
+  <div class="concl-card">
+    <p>A MyDNA possui um produto com <strong>potencial real de diferenciação</strong> no mercado de HR Tech da América Latina. A amplitude do ecossistema (30+ ferramentas, soluções para empresas e profissionais, presença em 11 países) é um ativo genuíno. A ferramenta de Maturidad RRHH demonstra capacidade de criar conteúdo de valor estratégico. A stack tecnológica (Next.js + Tailwind) é moderna e escalável. Os ingredientes para um site de alta conversão existem — mas estão desperdiçados por problemas de implementação e pela ausência de elementos fundamentais de persuasão.</p>
+    <p>O diagnóstico é severo, porém construtivo: este site, no estado atual, <strong>provavelmente opera como um detrator de negócio</strong> — visitantes que chegam com interesse genuíno encontram conteúdo invisível (espaços em branco), zero evidência de que a plataforma funciona para outros clientes (sem prova social), um processo de conversão burocrático (7 campos) e erros técnicos básicos que corroem a confiança (typos, links de desenvolvimento, página legal fora do ar). Para uma empresa que vende tecnologia e eficiência em RRHH, esses sinais são particularmente danosos — o site é a primeira impressão da competência da empresa.</p>
+    <p>A recomendação é de <strong>reforma profunda em duas fases</strong>.</p>
+    <div class="phase-summary">
+      <div class="phase-sum-card">
+        <h4 style="color:#22c55e">Fase 1 — Imediata (até 2 semanas)</h4>
+        <ul>
+          <li>Corrigir robots.txt e sitemap.xml</li>
+          <li>Restaurar página de Política de Privacidade</li>
+          <li>Corrigir H1s e seção duplicada na homepage</li>
+          <li>Simplificar formulário para 3-4 campos</li>
+          <li>Corrigir links de desenvolvimento</li>
+          <li>Adicionar CTA no hero da homepage</li>
+        </ul>
+      </div>
+      <div class="phase-sum-card">
+        <h4 style="color:#818cf8">Fase 2 — Médio Prazo (1 a 3 meses)</h4>
+        <ul>
+          <li>Resolver renderização de conteúdo (espaços em branco)</li>
+          <li>Construir camada completa de prova social</li>
+          <li>Reestruturar homepage como máquina de conversão</li>
+          <li>Implementar Schema markup e SEO técnico completo</li>
+          <li>Criar página institucional e unificar tom de voz</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <span>Diagnóstico Estratégico Digital · MyDNA (mydnadigital.com) · Abril 2026 · Agência Logos</span>
+</footer>
+
+</body>
+</html>
