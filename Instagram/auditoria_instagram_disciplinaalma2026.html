@@ -274,10 +274,18 @@
     ──────────────────────────────────────── */
     main { max-width: 960px; margin: 0 auto; padding: 0 24px 100px; }
 
+    @media (max-width: 480px) {
+      main { padding: 0 16px 80px; }
+    }
+
     /* ────────────────────────────────────────
        SECTIONS
     ──────────────────────────────────────── */
     .section { padding-top: 80px; }
+
+    @media (max-width: 480px) {
+      .section { padding-top: 56px; }
+    }
 
     .section-header {
       display: flex;
@@ -489,7 +497,6 @@
       border: 1px solid var(--border);
       border-radius: 16px;
       overflow: hidden;
-      overflow-x: auto;
     }
 
     table {
@@ -523,6 +530,52 @@
     tbody tr:hover { background: rgba(212,168,83,0.04); }
 
     td { padding: 13px 16px; vertical-align: middle; }
+
+    /* ── RESPONSIVE TABLES → cards on mobile ── */
+    @media (max-width: 640px) {
+      .table-wrap { border: none; border-radius: 0; background: transparent; }
+
+      table, thead, tbody, th, td, tr { display: block; }
+
+      thead tr { display: none; }
+
+      tbody tr {
+        background: var(--card);
+        border: 1px solid var(--border);
+        border-radius: 14px;
+        margin-bottom: 12px;
+        padding: 4px 0;
+      }
+
+      tbody tr:last-child { border-bottom: 1px solid var(--border); margin-bottom: 0; }
+      tbody tr:hover { background: var(--card); }
+
+      td {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 10px;
+        padding: 10px 16px;
+        border-bottom: 1px solid var(--border);
+        font-size: 13px;
+      }
+
+      td:last-child { border-bottom: none; }
+
+      td::before {
+        content: attr(data-label);
+        font-size: 10px;
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.07em;
+        color: var(--muted);
+        flex-shrink: 0;
+        min-width: 90px;
+      }
+
+      td:first-child { padding-top: 14px; }
+      td:last-child  { padding-bottom: 14px; }
+    }
 
     .rank-badge {
       width: 28px; height: 28px;
@@ -1111,22 +1164,22 @@ Fé • Propósito • Perseverança
         </thead>
         <tbody>
           <tr>
-            <td><strong>Quem Somos</strong></td>
-            <td>1</td>
-            <td>Propósito da conta</td>
-            <td>Card estático com logo</td>
-            <td><span class="status-badge sb-bad" style="font-size:10px;padding:2px 8px;">Sem CTA</span></td>
-            <td><span class="status-badge sb-ok" style="font-size:10px;padding:2px 8px;">Profissional</span></td>
-            <td><span class="status-badge sb-warn" style="font-size:10px;padding:2px 8px;">12 semanas atrás</span></td>
+            <td data-label="Nome"><strong>Quem Somos</strong></td>
+            <td data-label="Slides">1</td>
+            <td data-label="Tema">Propósito da conta</td>
+            <td data-label="Conteúdo">Card estático com logo</td>
+            <td data-label="CTA"><span class="status-badge sb-bad" style="font-size:10px;padding:2px 8px;">Sem CTA</span></td>
+            <td data-label="Qualidade"><span class="status-badge sb-ok" style="font-size:10px;padding:2px 8px;">Profissional</span></td>
+            <td data-label="Status"><span class="status-badge sb-warn" style="font-size:10px;padding:2px 8px;">12 semanas atrás</span></td>
           </tr>
           <tr>
-            <td><strong>Nosso Propósito!</strong></td>
-            <td>1</td>
-            <td>Missão do perfil</td>
-            <td>Card estático com logo</td>
-            <td><span class="status-badge sb-bad" style="font-size:10px;padding:2px 8px;">Sem CTA</span></td>
-            <td><span class="status-badge sb-ok" style="font-size:10px;padding:2px 8px;">Profissional</span></td>
-            <td><span class="status-badge sb-warn" style="font-size:10px;padding:2px 8px;">12 semanas atrás</span></td>
+            <td data-label="Nome"><strong>Nosso Propósito!</strong></td>
+            <td data-label="Slides">1</td>
+            <td data-label="Tema">Missão do perfil</td>
+            <td data-label="Conteúdo">Card estático com logo</td>
+            <td data-label="CTA"><span class="status-badge sb-bad" style="font-size:10px;padding:2px 8px;">Sem CTA</span></td>
+            <td data-label="Qualidade"><span class="status-badge sb-ok" style="font-size:10px;padding:2px 8px;">Profissional</span></td>
+            <td data-label="Status"><span class="status-badge sb-warn" style="font-size:10px;padding:2px 8px;">12 semanas atrás</span></td>
           </tr>
         </tbody>
       </table>
@@ -1163,94 +1216,94 @@ Fé • Propósito • Perseverança
         </thead>
         <tbody>
           <tr>
-            <td><span class="rank-badge rank-1">1</span></td>
-            <td>Post 2</td>
-            <td><span class="fmt-badge">Reel</span></td>
-            <td><span class="score-cell score-high">128</span></td>
-            <td>101</td>
-            <td>9</td>
-            <td><span class="theme-text">Tony Stark reencontra o pai — conexão/cura emocional</span></td>
+            <td data-label="Rank"><span class="rank-badge rank-1">1</span></td>
+            <td data-label="Post">Post 2</td>
+            <td data-label="Formato"><span class="fmt-badge">Reel</span></td>
+            <td data-label="Score"><span class="score-cell score-high">128</span></td>
+            <td data-label="Curtidas">101</td>
+            <td data-label="Coment.">9</td>
+            <td data-label="Tema"><span class="theme-text">Tony Stark reencontra o pai — conexão/cura emocional</span></td>
           </tr>
           <tr>
-            <td><span class="rank-badge rank-2">2</span></td>
-            <td>Post 4</td>
-            <td><span class="fmt-badge">Reel</span></td>
-            <td><span class="score-cell score-mid">27</span></td>
-            <td>27</td>
-            <td>0</td>
-            <td><span class="theme-text">Peter Parker — viver o chamado, não fugir</span></td>
+            <td data-label="Rank"><span class="rank-badge rank-2">2</span></td>
+            <td data-label="Post">Post 4</td>
+            <td data-label="Formato"><span class="fmt-badge">Reel</span></td>
+            <td data-label="Score"><span class="score-cell score-mid">27</span></td>
+            <td data-label="Curtidas">27</td>
+            <td data-label="Coment.">0</td>
+            <td data-label="Tema"><span class="theme-text">Peter Parker — viver o chamado, não fugir</span></td>
           </tr>
           <tr>
-            <td><span class="rank-badge rank-3">3</span></td>
-            <td>Post 7</td>
-            <td><span class="fmt-badge">Reel</span></td>
-            <td><span class="score-cell score-mid">24</span></td>
-            <td>24</td>
-            <td>0</td>
-            <td><span class="theme-text">Desmond Doss — coragem de viver os princípios</span></td>
+            <td data-label="Rank"><span class="rank-badge rank-3">3</span></td>
+            <td data-label="Post">Post 7</td>
+            <td data-label="Formato"><span class="fmt-badge">Reel</span></td>
+            <td data-label="Score"><span class="score-cell score-mid">24</span></td>
+            <td data-label="Curtidas">24</td>
+            <td data-label="Coment.">0</td>
+            <td data-label="Tema"><span class="theme-text">Desmond Doss — coragem de viver os princípios</span></td>
           </tr>
           <tr>
-            <td><span class="rank-badge rank-other">4</span></td>
-            <td>Post 9</td>
-            <td><span class="fmt-badge">Reel</span></td>
-            <td><span class="score-cell score-medlow">21</span></td>
-            <td>18</td>
-            <td>1</td>
-            <td><span class="theme-text">The Chosen (Jesus) — oração em secreto</span></td>
+            <td data-label="Rank"><span class="rank-badge rank-other">4</span></td>
+            <td data-label="Post">Post 9</td>
+            <td data-label="Formato"><span class="fmt-badge">Reel</span></td>
+            <td data-label="Score"><span class="score-cell score-medlow">21</span></td>
+            <td data-label="Curtidas">18</td>
+            <td data-label="Coment.">1</td>
+            <td data-label="Tema"><span class="theme-text">The Chosen (Jesus) — oração em secreto</span></td>
           </tr>
           <tr>
-            <td><span class="rank-badge rank-other">5</span></td>
-            <td>Post 6</td>
-            <td><span class="fmt-badge">Reel</span></td>
-            <td><span class="score-cell score-low">8</span></td>
-            <td>8</td>
-            <td>0</td>
-            <td><span class="theme-text">Will Smith — disciplina vs opinião alheia</span></td>
+            <td data-label="Rank"><span class="rank-badge rank-other">5</span></td>
+            <td data-label="Post">Post 6</td>
+            <td data-label="Formato"><span class="fmt-badge">Reel</span></td>
+            <td data-label="Score"><span class="score-cell score-low">8</span></td>
+            <td data-label="Curtidas">8</td>
+            <td data-label="Coment.">0</td>
+            <td data-label="Tema"><span class="theme-text">Will Smith — disciplina vs opinião alheia</span></td>
           </tr>
           <tr>
-            <td><span class="rank-badge rank-other">6</span></td>
-            <td>Post 10</td>
-            <td><span class="fmt-badge">Reel</span></td>
-            <td><span class="score-cell score-low">8</span></td>
-            <td>5</td>
-            <td>1</td>
-            <td><span class="theme-text">Homem-Aranha noturno — batalhas internas</span></td>
+            <td data-label="Rank"><span class="rank-badge rank-other">6</span></td>
+            <td data-label="Post">Post 10</td>
+            <td data-label="Formato"><span class="fmt-badge">Reel</span></td>
+            <td data-label="Score"><span class="score-cell score-low">8</span></td>
+            <td data-label="Curtidas">5</td>
+            <td data-label="Coment.">1</td>
+            <td data-label="Tema"><span class="theme-text">Homem-Aranha noturno — batalhas internas</span></td>
           </tr>
           <tr>
-            <td><span class="rank-badge rank-other">7</span></td>
-            <td>Post 3</td>
-            <td><span class="fmt-badge">Reel</span></td>
-            <td><span class="score-cell score-low">5</span></td>
-            <td>5</td>
-            <td>0</td>
-            <td><span class="theme-text">Capitão América — herói forjado no silêncio</span></td>
+            <td data-label="Rank"><span class="rank-badge rank-other">7</span></td>
+            <td data-label="Post">Post 3</td>
+            <td data-label="Formato"><span class="fmt-badge">Reel</span></td>
+            <td data-label="Score"><span class="score-cell score-low">5</span></td>
+            <td data-label="Curtidas">5</td>
+            <td data-label="Coment.">0</td>
+            <td data-label="Tema"><span class="theme-text">Capitão América — herói forjado no silêncio</span></td>
           </tr>
           <tr>
-            <td><span class="rank-badge rank-other">8</span></td>
-            <td>Post 5</td>
-            <td><span class="fmt-badge">Reel</span></td>
-            <td><span class="score-cell score-low">4</span></td>
-            <td>4</td>
-            <td>0</td>
-            <td><span class="theme-text">Denilson — testemunho de fé e superação</span></td>
+            <td data-label="Rank"><span class="rank-badge rank-other">8</span></td>
+            <td data-label="Post">Post 5</td>
+            <td data-label="Formato"><span class="fmt-badge">Reel</span></td>
+            <td data-label="Score"><span class="score-cell score-low">4</span></td>
+            <td data-label="Curtidas">4</td>
+            <td data-label="Coment.">0</td>
+            <td data-label="Tema"><span class="theme-text">Denilson — testemunho de fé e superação</span></td>
           </tr>
           <tr>
-            <td><span class="rank-badge rank-other">9</span></td>
-            <td>Post 8</td>
-            <td><span class="fmt-badge">Reel</span></td>
-            <td><span class="score-cell score-low">3</span></td>
-            <td>3</td>
-            <td>0</td>
-            <td><span class="theme-text">Chris Bumstead — disciplina invisível</span></td>
+            <td data-label="Rank"><span class="rank-badge rank-other">9</span></td>
+            <td data-label="Post">Post 8</td>
+            <td data-label="Formato"><span class="fmt-badge">Reel</span></td>
+            <td data-label="Score"><span class="score-cell score-low">3</span></td>
+            <td data-label="Curtidas">3</td>
+            <td data-label="Coment.">0</td>
+            <td data-label="Tema"><span class="theme-text">Chris Bumstead — disciplina invisível</span></td>
           </tr>
           <tr>
-            <td><span class="rank-badge rank-other">10</span></td>
-            <td>Post 1</td>
-            <td><span class="fmt-badge">Reel</span></td>
-            <td><span class="score-cell score-low">0*</span></td>
-            <td>0</td>
-            <td>0</td>
-            <td><span class="theme-text">Stan Lee — ideia vs execução</span></td>
+            <td data-label="Rank"><span class="rank-badge rank-other">10</span></td>
+            <td data-label="Post">Post 1</td>
+            <td data-label="Formato"><span class="fmt-badge">Reel</span></td>
+            <td data-label="Score"><span class="score-cell score-low">0*</span></td>
+            <td data-label="Curtidas">0</td>
+            <td data-label="Coment.">0</td>
+            <td data-label="Tema"><span class="theme-text">Stan Lee — ideia vs execução</span></td>
           </tr>
         </tbody>
       </table>
