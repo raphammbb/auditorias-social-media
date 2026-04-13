@@ -1,0 +1,1526 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Auditoria Instagram — @disciplinaalma2026</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,300;0,14..32,400;0,14..32,500;0,14..32,600;0,14..32,700;0,14..32,800;0,14..32,900;1,14..32,400&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+    }
+
+    :root {
+      --bg:      #0B0B16;
+      --bg2:     #0F0F1E;
+      --bg3:     #141428;
+      --card:    #1A1A30;
+      --card2:   #1F1F38;
+      --border:  rgba(255,255,255,0.07);
+      --text:    #EDE8DC;
+      --muted:   #7A7A9A;
+      --gold:    #D4A853;
+      --gold2:   #C9874A;
+      --crimson: #B84040;
+      --green:   #22c55e;
+      --yellow:  #f59e0b;
+      --red:     #ef4444;
+      --grad:    linear-gradient(135deg, #D4A853, #C9874A);
+      --grad2:   linear-gradient(135deg, #C9874A, #B84040);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.65;
+      font-size: 16px;
+    }
+
+    /* ── GRAD TEXT ── */
+    .grad-text {
+      background: var(--grad);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    /* ────────────────────────────────────────
+       COVER
+    ──────────────────────────────────────── */
+    .cover {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 80px 24px 60px;
+      overflow: hidden;
+    }
+
+    .cover::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 70% 60% at 50% 40%, rgba(212,168,83,0.10) 0%, transparent 70%),
+        radial-gradient(ellipse 50% 40% at 80% 80%, rgba(184,64,64,0.07) 0%, transparent 60%);
+      pointer-events: none;
+    }
+
+    /* film grain overlay */
+    .cover::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none;
+      opacity: 0.4;
+    }
+
+    .cover-glow {
+      position: absolute;
+      width: 700px;
+      height: 700px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(212,168,83,0.07) 0%, transparent 65%);
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      animation: glow-pulse 8s ease-in-out infinite;
+    }
+
+    @keyframes glow-pulse {
+      0%, 100% { opacity: 0.5; transform: translate(-50%,-50%) scale(1); }
+      50% { opacity: 1; transform: translate(-50%,-50%) scale(1.1); }
+    }
+
+    .badge-row {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-bottom: 32px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 100px;
+      padding: 7px 16px;
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--muted);
+    }
+
+    .badge-dot {
+      width: 7px; height: 7px;
+      border-radius: 50%;
+      background: var(--grad);
+      flex-shrink: 0;
+    }
+
+    .badge-warn {
+      background: rgba(245,158,11,0.1);
+      border-color: rgba(245,158,11,0.25);
+      color: #f59e0b;
+    }
+
+    .cover h1 {
+      font-size: clamp(2.2rem, 6vw, 4rem);
+      font-weight: 900;
+      line-height: 1.05;
+      letter-spacing: -0.03em;
+      margin-bottom: 14px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .cover-handle {
+      font-size: clamp(1rem, 2.5vw, 1.35rem);
+      font-weight: 300;
+      color: var(--muted);
+      margin-bottom: 10px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .cover-handle strong {
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    .cover-niche {
+      font-size: 13px;
+      color: var(--muted);
+      margin-bottom: 52px;
+      position: relative;
+      z-index: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+
+    .cover-niche span {
+      color: var(--gold);
+      font-weight: 500;
+    }
+
+    .metrics-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+      max-width: 680px;
+      width: 100%;
+      position: relative;
+      z-index: 1;
+    }
+
+    @media (max-width: 600px) {
+      .metrics-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    .metric-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 18px 14px;
+      transition: border-color 0.2s;
+    }
+
+    .metric-card:hover { border-color: rgba(212,168,83,0.3); }
+
+    .metric-label {
+      font-size: 10px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--muted);
+      margin-bottom: 7px;
+    }
+
+    .metric-value {
+      font-size: 1.6rem;
+      font-weight: 800;
+      line-height: 1;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .metric-sub {
+      font-size: 11px;
+      color: var(--muted);
+      margin-top: 3px;
+    }
+
+    /* ────────────────────────────────────────
+       STICKY NAV
+    ──────────────────────────────────────── */
+    .toc {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(11,11,22,0.88);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+      padding: 0 20px;
+      overflow-x: auto;
+      scrollbar-width: none;
+    }
+
+    .toc::-webkit-scrollbar { display: none; }
+
+    .toc-inner {
+      display: flex;
+      gap: 0;
+      max-width: 960px;
+      margin: 0 auto;
+      white-space: nowrap;
+    }
+
+    .toc a {
+      display: inline-block;
+      padding: 13px 14px;
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+      color: var(--muted);
+      text-decoration: none;
+      border-bottom: 2px solid transparent;
+      transition: color 0.2s, border-color 0.2s;
+      cursor: pointer;
+    }
+
+    .toc a:hover { color: var(--gold); border-bottom-color: rgba(212,168,83,0.5); }
+
+    /* ────────────────────────────────────────
+       MAIN
+    ──────────────────────────────────────── */
+    main { max-width: 960px; margin: 0 auto; padding: 0 24px 100px; }
+
+    /* ────────────────────────────────────────
+       SECTIONS
+    ──────────────────────────────────────── */
+    .section { padding-top: 80px; }
+
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 28px;
+    }
+
+    .section-num {
+      width: 38px; height: 38px;
+      border-radius: 10px;
+      background: var(--grad);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+      font-weight: 800;
+      color: #0B0B16;
+      flex-shrink: 0;
+    }
+
+    .section-title {
+      font-size: clamp(1.3rem, 3.5vw, 1.75rem);
+      font-weight: 800;
+      letter-spacing: -0.025em;
+    }
+
+    .section-desc {
+      color: var(--muted);
+      font-size: 13px;
+      margin-top: 2px;
+    }
+
+    .divider {
+      height: 1px;
+      background: var(--border);
+      margin-bottom: 28px;
+    }
+
+    /* ────────────────────────────────────────
+       OVERVIEW TEXT
+    ──────────────────────────────────────── */
+    .overview-text {
+      font-size: 15px;
+      line-height: 1.8;
+      color: #C8C4BA;
+      max-width: 720px;
+      margin-bottom: 32px;
+      border-left: 3px solid var(--gold);
+      padding-left: 20px;
+    }
+
+    /* ────────────────────────────────────────
+       DIAGNOSIS GRID
+    ──────────────────────────────────────── */
+    .diagnosis-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    @media (max-width: 580px) { .diagnosis-grid { grid-template-columns: 1fr; } }
+
+    .diag-item {
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 15px 18px;
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+    }
+
+    .diag-icon {
+      width: 34px; height: 34px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .diag-icon.ok   { background: rgba(34,197,94,0.12); color: var(--green); }
+    .diag-icon.warn { background: rgba(245,158,11,0.12); color: var(--yellow); }
+    .diag-icon.bad  { background: rgba(184,64,64,0.15); color: var(--crimson); }
+
+    .diag-label {
+      font-size: 10px;
+      color: var(--muted);
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-bottom: 2px;
+    }
+
+    .diag-text { font-size: 13px; font-weight: 500; color: var(--text); }
+
+    /* ────────────────────────────────────────
+       BIO BLOCK
+    ──────────────────────────────────────── */
+    .bio-block {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 28px 32px;
+      margin-bottom: 24px;
+      font-family: 'Inter', monospace;
+    }
+
+    .bio-label {
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--gold);
+      margin-bottom: 16px;
+    }
+
+    .bio-text {
+      font-size: 15px;
+      line-height: 1.9;
+      color: var(--text);
+      white-space: pre-line;
+    }
+
+    .bio-cut {
+      background: rgba(184,64,64,0.15);
+      border: 1px solid rgba(184,64,64,0.3);
+      border-radius: 4px;
+      padding: 1px 6px;
+      color: #f87171;
+      font-size: 12px;
+      font-weight: 600;
+      margin-left: 6px;
+      vertical-align: middle;
+    }
+
+    .eval-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+
+    @media (max-width: 580px) { .eval-row { grid-template-columns: 1fr; } }
+
+    .eval-card {
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 16px;
+    }
+
+    .eval-card .diag-label { margin-bottom: 6px; }
+
+    .improve-box {
+      background: rgba(212,168,83,0.07);
+      border: 1px solid rgba(212,168,83,0.2);
+      border-radius: 12px;
+      padding: 18px 22px;
+      font-size: 14px;
+      color: #C8C4BA;
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+    }
+
+    .improve-icon {
+      color: var(--gold);
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    /* ────────────────────────────────────────
+       STATUS BADGES
+    ──────────────────────────────────────── */
+    .status-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 20px;
+    }
+
+    .status-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      border-radius: 8px;
+      padding: 7px 14px;
+      font-size: 12px;
+      font-weight: 600;
+    }
+
+    .sb-warn { background: rgba(245,158,11,0.1); border: 1px solid rgba(245,158,11,0.25); color: #f59e0b; }
+    .sb-bad  { background: rgba(184,64,64,0.1); border: 1px solid rgba(184,64,64,0.25); color: #f87171; }
+    .sb-ok   { background: rgba(34,197,94,0.1); border: 1px solid rgba(34,197,94,0.25); color: #4ade80; }
+
+    .grid-eval-text {
+      font-size: 14px;
+      line-height: 1.8;
+      color: #C8C4BA;
+      margin-bottom: 24px;
+    }
+
+    /* ────────────────────────────────────────
+       TABLE
+    ──────────────────────────────────────── */
+    .table-wrap {
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      overflow: hidden;
+      overflow-x: auto;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px;
+    }
+
+    thead tr {
+      background: var(--card2);
+      border-bottom: 1px solid var(--border);
+    }
+
+    thead th {
+      padding: 13px 16px;
+      text-align: left;
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--muted);
+      white-space: nowrap;
+    }
+
+    tbody tr {
+      border-bottom: 1px solid var(--border);
+      transition: background 0.15s;
+    }
+
+    tbody tr:last-child { border-bottom: none; }
+    tbody tr:hover { background: rgba(212,168,83,0.04); }
+
+    td { padding: 13px 16px; vertical-align: middle; }
+
+    .rank-badge {
+      width: 28px; height: 28px;
+      border-radius: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 11px;
+      font-weight: 800;
+    }
+
+    .rank-1 { background: rgba(212,168,83,0.18); color: var(--gold); border: 1px solid rgba(212,168,83,0.4); }
+    .rank-2 { background: rgba(168,178,192,0.15); color: #a8b2c0; border: 1px solid rgba(168,178,192,0.35); }
+    .rank-3 { background: rgba(201,135,74,0.18); color: #C9874A; border: 1px solid rgba(201,135,74,0.4); }
+    .rank-other { background: rgba(255,255,255,0.05); color: var(--muted); border: 1px solid var(--border); }
+
+    .fmt-badge {
+      display: inline-block;
+      padding: 3px 9px;
+      border-radius: 6px;
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      background: rgba(184,64,64,0.15);
+      color: #f87171;
+    }
+
+    .score-cell {
+      font-weight: 800;
+      font-size: 14px;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .score-high   { color: var(--gold); }
+    .score-mid    { color: var(--green); }
+    .score-medlow { color: var(--text); }
+    .score-low    { color: var(--muted); }
+
+    .theme-text { font-size: 12px; color: var(--muted); }
+
+    .star-note { font-size: 11px; color: var(--muted); margin-top: 12px; font-style: italic; }
+
+    /* ────────────────────────────────────────
+       ANALYSIS CARDS
+    ──────────────────────────────────────── */
+    .analysis-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 16px;
+    }
+
+    .post-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 24px;
+      transition: border-color 0.2s, transform 0.2s;
+      cursor: default;
+    }
+
+    .post-card.good {
+      border-color: rgba(212,168,83,0.15);
+    }
+
+    .post-card.good:hover {
+      border-color: rgba(212,168,83,0.45);
+      transform: translateY(-3px);
+    }
+
+    .post-card.bad {
+      border-color: rgba(184,64,64,0.15);
+    }
+
+    .post-card.bad:hover {
+      border-color: rgba(184,64,64,0.4);
+      transform: translateY(-3px);
+    }
+
+    .post-card-header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 14px;
+    }
+
+    .post-medal {
+      font-size: 22px;
+      flex-shrink: 0;
+    }
+
+    .post-title {
+      font-size: 14px;
+      font-weight: 700;
+      line-height: 1.35;
+      flex: 1;
+    }
+
+    .post-body {
+      font-size: 13px;
+      line-height: 1.75;
+      color: #A8A49C;
+      margin-bottom: 18px;
+    }
+
+    .post-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .post-tag {
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 3px 9px;
+      font-size: 11px;
+      font-weight: 500;
+      color: var(--muted);
+    }
+
+    .post-tag.gold {
+      background: rgba(212,168,83,0.1);
+      border-color: rgba(212,168,83,0.2);
+      color: var(--gold);
+    }
+
+    /* ────────────────────────────────────────
+       AUDIENCE SECTION
+    ──────────────────────────────────────── */
+    .audience-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-bottom: 20px;
+    }
+
+    @media (max-width: 580px) { .audience-grid { grid-template-columns: 1fr; } }
+
+    .audience-card {
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 20px;
+    }
+
+    .audience-card .diag-label { margin-bottom: 10px; }
+
+    .audience-body { font-size: 13px; line-height: 1.7; color: #A8A49C; }
+
+    .insight-box {
+      background: rgba(212,168,83,0.06);
+      border: 1px solid rgba(212,168,83,0.18);
+      border-left: 3px solid var(--gold);
+      border-radius: 12px;
+      padding: 20px 24px;
+      font-size: 14px;
+      line-height: 1.75;
+      color: #C8C4BA;
+    }
+
+    .insight-box strong { color: var(--gold); }
+
+    /* ────────────────────────────────────────
+       INSIGHTS CARDS (3-col)
+    ──────────────────────────────────────── */
+    .insights-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+
+    @media (max-width: 720px) { .insights-grid { grid-template-columns: 1fr; } }
+
+    .insight-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 24px;
+      transition: border-color 0.2s;
+    }
+
+    .insight-card:hover { border-color: rgba(212,168,83,0.3); }
+
+    .insight-num {
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--gold);
+      margin-bottom: 10px;
+    }
+
+    .insight-heading {
+      font-size: 14px;
+      font-weight: 700;
+      margin-bottom: 10px;
+      line-height: 1.4;
+    }
+
+    .insight-body {
+      font-size: 13px;
+      line-height: 1.7;
+      color: #A8A49C;
+    }
+
+    /* ────────────────────────────────────────
+       RECOMMENDATIONS
+    ──────────────────────────────────────── */
+    .rec-list { display: flex; flex-direction: column; gap: 16px; }
+
+    .rec-item {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 22px 24px;
+      display: flex;
+      gap: 20px;
+      align-items: flex-start;
+      transition: border-color 0.2s;
+    }
+
+    .rec-item:hover { border-color: rgba(212,168,83,0.3); }
+
+    .rec-num {
+      width: 34px; height: 34px;
+      border-radius: 50%;
+      background: var(--grad);
+      color: #0B0B16;
+      font-size: 14px;
+      font-weight: 900;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .rec-title {
+      font-size: 14px;
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+
+    .rec-body {
+      font-size: 13px;
+      line-height: 1.75;
+      color: #A8A49C;
+    }
+
+    /* ────────────────────────────────────────
+       QUICK WINS
+    ──────────────────────────────────────── */
+    .qw-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    @media (max-width: 640px) { .qw-grid { grid-template-columns: 1fr; } }
+
+    .qw-card {
+      background: linear-gradient(135deg, rgba(212,168,83,0.09) 0%, rgba(201,135,74,0.06) 100%);
+      border: 1px solid rgba(212,168,83,0.25);
+      border-radius: 18px;
+      padding: 26px;
+      transition: border-color 0.2s, transform 0.2s;
+      cursor: default;
+    }
+
+    .qw-card:hover {
+      border-color: rgba(212,168,83,0.5);
+      transform: translateY(-3px);
+    }
+
+    .qw-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 14px;
+    }
+
+    .qw-icon {
+      width: 36px; height: 36px;
+      border-radius: 10px;
+      background: var(--grad);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .qw-title {
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    .qw-body {
+      font-size: 13px;
+      line-height: 1.75;
+      color: #A8A49C;
+    }
+
+    /* ────────────────────────────────────────
+       STORIES TABLE
+    ──────────────────────────────────────── */
+    .stories-eval {
+      background: rgba(245,158,11,0.07);
+      border: 1px solid rgba(245,158,11,0.2);
+      border-radius: 12px;
+      padding: 16px 20px;
+      font-size: 13px;
+      color: #C8C4BA;
+      margin-top: 16px;
+    }
+
+    /* ────────────────────────────────────────
+       FOOTER
+    ──────────────────────────────────────── */
+    footer {
+      text-align: center;
+      padding: 48px 24px;
+      border-top: 1px solid var(--border);
+      color: var(--muted);
+      font-size: 12px;
+      line-height: 1.8;
+    }
+
+    footer strong { color: var(--gold); }
+  </style>
+</head>
+<body>
+
+<!-- ════════════════════════════════════════
+     COVER
+════════════════════════════════════════ -->
+<section class="cover">
+  <div class="cover-glow"></div>
+
+  <div class="badge-row">
+    <div class="badge">
+      <div class="badge-dot"></div>
+      Auditoria Instagram · 13/04/2026
+    </div>
+    <div class="badge badge-warn">
+      <svg width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z"/></svg>
+      Amostra reduzida — use como primeira impressão
+    </div>
+  </div>
+
+  <h1><span class="grad-text">Auditoria Instagram</span></h1>
+  <p class="cover-handle"><strong>@disciplinaalma2026</strong></p>
+  <p class="cover-niche">
+    <svg width="14" height="14" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M3.375 19.5h17.25m-17.25 0a1.125 1.125 0 01-1.125-1.125M3.375 19.5h7.5c.621 0 1.125-.504 1.125-1.125m-9.75 0V5.625m0 12.75v-1.5c0-.621.504-1.125 1.125-1.125m18.375 2.625V5.625m0 12.75c0 .621-.504 1.125-1.125 1.125m1.125-1.125v-1.5c0-.621-.504-1.125-1.125-1.125m0 3.75h-7.5A1.125 1.125 0 0112 18.375m9.75-12.75c0-.621-.504-1.125-1.125-1.125H3.375c-.621 0-1.125.504-1.125 1.125m19.5 0v1.5c0 .621-.504 1.125-1.125 1.125M2.25 5.625v1.5c0 .621.504 1.125 1.125 1.125m0 0h17.25m-17.25 0h7.5c.621 0 1.125.504 1.125 1.125M3.375 8.25c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125m17.25-3.75h-7.5c-.621 0-1.125.504-1.125 1.125m8.625-1.125c.621 0 1.125.504 1.125 1.125v1.5c0 .621-.504 1.125-1.125 1.125m-17.25 0h7.5m-7.5 0c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125M12 10.875v-1.5m0 1.5c0 .621-.504 1.125-1.125 1.125M12 10.875c0 .621.504 1.125 1.125 1.125m-2.25 0c0 .621-.504 1.125-1.125 1.125m2.25-2.25v1.5m0-1.5c0-.621.504-1.125 1.125-1.125"/></svg>
+    <span>Reflexões motivacionais cristãs via filmes e séries</span>
+  </p>
+
+  <div class="metrics-grid">
+    <div class="metric-card">
+      <div class="metric-label">Seguidores</div>
+      <div class="metric-value grad-text">102</div>
+      <div class="metric-sub">Perfil novo</div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-label">Posts analisados</div>
+      <div class="metric-value grad-text">10</div>
+      <div class="metric-sub">10 mais recentes</div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-label">Eng. médio</div>
+      <div class="metric-value grad-text">~23</div>
+      <div class="metric-sub">Score / post</div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-label">Melhor post</div>
+      <div class="metric-value" style="color:var(--gold)">128</div>
+      <div class="metric-sub">Post 2 — Tony Stark</div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════════════════════════════════
+     STICKY NAV
+════════════════════════════════════════ -->
+<nav class="toc" aria-label="Navegação">
+  <div class="toc-inner">
+    <a href="#visao-geral">Visão Geral</a>
+    <a href="#bio">Bio &amp; Link</a>
+    <a href="#grid">Grid Visual</a>
+    <a href="#stories">Stories</a>
+    <a href="#ranking">Ranking</a>
+    <a href="#funciona">Funciona</a>
+    <a href="#audiencia">Audiência</a>
+    <a href="#nao-funciona">Não Funciona</a>
+    <a href="#insights">Insights</a>
+    <a href="#recomendacoes">Recomendações</a>
+    <a href="#quickwins">Quick Wins</a>
+  </div>
+</nav>
+
+<!-- ════════════════════════════════════════
+     MAIN CONTENT
+════════════════════════════════════════ -->
+<main>
+
+  <!-- ── 1. VISÃO GERAL ── -->
+  <section id="visao-geral" class="section">
+    <div class="section-header">
+      <div class="section-num">01</div>
+      <div>
+        <div class="section-title">Visão Geral</div>
+        <div class="section-desc">Diagnóstico inicial do perfil</div>
+      </div>
+    </div>
+    <div class="divider"></div>
+
+    <p class="overview-text">
+      O perfil tem identidade de nicho clara (reflexões motivacionais com base em filmes, séries e personalidades reais, com viés cristão), mas ainda está em fase inicial com 102 seguidores e engajamento muito concentrado em um único post viral. O conteúdo tem qualidade narrativa acima da média para um perfil novo, porém a ausência de link na bio, a bio incompleta, e a irregularidade na frequência de publicação limitam seriamente o crescimento. O potencial está visível — o pico de 101 curtidas em um post de 1 dia num perfil com 102 seguidores é um sinal real.
+    </p>
+
+    <div class="diagnosis-grid">
+      <div class="diag-item">
+        <div class="diag-icon ok">
+          <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>
+        </div>
+        <div>
+          <div class="diag-label">Nicho definido</div>
+          <div class="diag-text">Reflexões cristãs via pop culture</div>
+        </div>
+      </div>
+      <div class="diag-item">
+        <div class="diag-icon ok">
+          <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>
+        </div>
+        <div>
+          <div class="diag-label">Qualidade narrativa</div>
+          <div class="diag-text">Acima da média para perfil novo</div>
+        </div>
+      </div>
+      <div class="diag-item">
+        <div class="diag-icon warn">
+          <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m9.303 3.376c.866 1.5-.217 3.374-1.948 3.374H4.645c-1.73 0-2.813-1.874-1.948-3.374l7.304-12.75c.866-1.5 3.032-1.5 3.898 0L21.303 16.126zM12 15.75h.008v.008H12v-.008z"/></svg>
+        </div>
+        <div>
+          <div class="diag-label">Engajamento concentrado</div>
+          <div class="diag-text">1 post viral, restante baixo</div>
+        </div>
+      </div>
+      <div class="diag-item">
+        <div class="diag-icon bad">
+          <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg>
+        </div>
+        <div>
+          <div class="diag-label">Link na bio</div>
+          <div class="diag-text">Ausente — oportunidade perdida</div>
+        </div>
+      </div>
+      <div class="diag-item">
+        <div class="diag-icon bad">
+          <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg>
+        </div>
+        <div>
+          <div class="diag-label">Bio incompleta</div>
+          <div class="diag-text">Última frase cortada</div>
+        </div>
+      </div>
+      <div class="diag-item">
+        <div class="diag-icon warn">
+          <svg width="16" height="16" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m9.303 3.376c.866 1.5-.217 3.374-1.948 3.374H4.645c-1.73 0-2.813-1.874-1.948-3.374l7.304-12.75c.866-1.5 3.032-1.5 3.898 0L21.303 16.126zM12 15.75h.008v.008H12v-.008z"/></svg>
+        </div>
+        <div>
+          <div class="diag-label">Frequência</div>
+          <div class="diag-text">3 semanas sem posts (25/mar–12/abr)</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── 2. BIO & LINK ── -->
+  <section id="bio" class="section">
+    <div class="section-header">
+      <div class="section-num">02</div>
+      <div>
+        <div class="section-title">Bio &amp; Link</div>
+        <div class="section-desc">Texto de apresentação e presença no link</div>
+      </div>
+    </div>
+    <div class="divider"></div>
+
+    <div class="bio-block">
+      <div class="bio-label">Bio atual</div>
+      <div class="bio-text">Histórias que despertam algo dentro de você.
+Fé • Propósito • Perseverança
+🎬 Reflexões que fortalecem a alma
+⬇️ Siga e fortaleça a sua<span class="bio-cut">FRASE CORTADA</span></div>
+    </div>
+
+    <div class="eval-row">
+      <div class="eval-card">
+        <div class="diag-label">CTA na bio</div>
+        <div class="diag-icon warn" style="width:auto;height:auto;background:none;padding:0;margin:6px 0 4px;">
+          <span class="status-badge sb-warn">
+            <svg width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m9.303 3.376c.866 1.5-.217 3.374-1.948 3.374H4.645c-1.73 0-2.813-1.874-1.948-3.374l7.304-12.75c.866-1.5 3.032-1.5 3.898 0L21.303 16.126zM12 15.75h.008v.008H12v-.008z"/></svg>
+            Sim — mas incompleto
+          </span>
+        </div>
+      </div>
+      <div class="eval-card">
+        <div class="diag-label">Palavras-chave</div>
+        <div style="margin-top:6px;">
+          <span class="status-badge sb-ok">
+            <svg width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>
+            Fé · Propósito · Alma
+          </span>
+        </div>
+      </div>
+      <div class="eval-card">
+        <div class="diag-label">Link na bio</div>
+        <div style="margin-top:6px;">
+          <span class="status-badge sb-bad">
+            <svg width="12" height="12" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg>
+            Ausente
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <div class="improve-box">
+      <div class="improve-icon">
+        <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M12 18v-5.25m0 0a6.01 6.01 0 001.5-.189m-1.5.189a6.01 6.01 0 01-1.5-.189m3.75 7.478a12.06 12.06 0 01-4.5 0m3.75 2.383a14.406 14.406 0 01-3 0M14.25 18v-.192c0-.983.658-1.823 1.508-2.316a7.5 7.5 0 10-7.517 0c.85.493 1.509 1.333 1.509 2.316V18"/></svg>
+      </div>
+      <div>
+        <strong style="color:var(--gold);">O que melhorar:</strong> Completar a frase cortada — <em>"Siga e fortaleça a sua alma."</em> — e incluir um link na bio. Pode ser um Linktree simples apontando para conteúdo de valor, canal no YouTube/TikTok ou formulário de DM. Um perfil sem link em 2026 desperdiça conversões.
+      </div>
+    </div>
+  </section>
+
+  <!-- ── 3. GRID VISUAL ── -->
+  <section id="grid" class="section">
+    <div class="section-header">
+      <div class="section-num">03</div>
+      <div>
+        <div class="section-title">Grid Visual</div>
+        <div class="section-desc">Aparência do perfil e coerência de identidade</div>
+      </div>
+    </div>
+    <div class="divider"></div>
+
+    <div class="status-row">
+      <span class="status-badge sb-warn">Identidade Visual: Irregular</span>
+      <span class="status-badge sb-warn">Convida a seguir: Parcialmente</span>
+      <span class="status-badge sb-bad">Coerência de paleta: Baixa</span>
+    </div>
+
+    <p class="grid-eval-text">
+      Todos os posts são Reels com thumbnails de cenas de filmes, séries e personalidades — alguns têm o selo <strong style="color:var(--text);">"Disciplina da Alma ©"</strong> sobreposto (consistente), mas as thumbnails variam muito em estilo e cor (cenas escuras, coloridas, ilustrações HQ) sem uma paleta coerente entre elas.
+    </p>
+    <p class="grid-eval-text">
+      O grid funciona mais como um canal de curadoria de clipes do que como uma marca visual reconhecível. A identidade "Disciplina da Alma" está presente nos vídeos, mas o grid como imagem estática não comunica isso com força suficiente para converter visitantes casuais em seguidores.
+    </p>
+  </section>
+
+  <!-- ── 4. STORIES ── -->
+  <section id="stories" class="section">
+    <div class="section-header">
+      <div class="section-num">04</div>
+      <div>
+        <div class="section-title">Destaques de Stories</div>
+        <div class="section-desc">Organização e qualidade dos highlights</div>
+      </div>
+    </div>
+    <div class="divider"></div>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Nome</th>
+            <th>Slides</th>
+            <th>Tema</th>
+            <th>Tipo de conteúdo</th>
+            <th>CTA</th>
+            <th>Qualidade</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Quem Somos</strong></td>
+            <td>1</td>
+            <td>Propósito da conta</td>
+            <td>Card estático com logo</td>
+            <td><span class="status-badge sb-bad" style="font-size:10px;padding:2px 8px;">Sem CTA</span></td>
+            <td><span class="status-badge sb-ok" style="font-size:10px;padding:2px 8px;">Profissional</span></td>
+            <td><span class="status-badge sb-warn" style="font-size:10px;padding:2px 8px;">12 semanas atrás</span></td>
+          </tr>
+          <tr>
+            <td><strong>Nosso Propósito!</strong></td>
+            <td>1</td>
+            <td>Missão do perfil</td>
+            <td>Card estático com logo</td>
+            <td><span class="status-badge sb-bad" style="font-size:10px;padding:2px 8px;">Sem CTA</span></td>
+            <td><span class="status-badge sb-ok" style="font-size:10px;padding:2px 8px;">Profissional</span></td>
+            <td><span class="status-badge sb-warn" style="font-size:10px;padding:2px 8px;">12 semanas atrás</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="stories-eval">
+      Os dois destaques têm identidade visual coerente (card branco, logo limpo) e cumprem a função de onboarding — mas foram criados há 12 semanas e nunca atualizados. Faltam destaques de <strong>conteúdo recente</strong>, bastidores, depoimentos ou FAQ que reforcem a proposta para novos visitantes.
+    </div>
+  </section>
+
+  <!-- ── 5. RANKING ── -->
+  <section id="ranking" class="section">
+    <div class="section-header">
+      <div class="section-num">05</div>
+      <div>
+        <div class="section-title">Ranking de Engajamento</div>
+        <div class="section-desc">Score = curtidas + (comentários × 4)</div>
+      </div>
+    </div>
+    <div class="divider"></div>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Post</th>
+            <th>Formato</th>
+            <th>Score</th>
+            <th>Curtidas</th>
+            <th>Coment.</th>
+            <th>Tema (inferido)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><span class="rank-badge rank-1">1</span></td>
+            <td>Post 2</td>
+            <td><span class="fmt-badge">Reel</span></td>
+            <td><span class="score-cell score-high">128</span></td>
+            <td>101</td>
+            <td>9</td>
+            <td><span class="theme-text">Tony Stark reencontra o pai — conexão/cura emocional</span></td>
+          </tr>
+          <tr>
+            <td><span class="rank-badge rank-2">2</span></td>
+            <td>Post 4</td>
+            <td><span class="fmt-badge">Reel</span></td>
+            <td><span class="score-cell score-mid">27</span></td>
+            <td>27</td>
+            <td>0</td>
+            <td><span class="theme-text">Peter Parker — viver o chamado, não fugir</span></td>
+          </tr>
+          <tr>
+            <td><span class="rank-badge rank-3">3</span></td>
+            <td>Post 7</td>
+            <td><span class="fmt-badge">Reel</span></td>
+            <td><span class="score-cell score-mid">24</span></td>
+            <td>24</td>
+            <td>0</td>
+            <td><span class="theme-text">Desmond Doss — coragem de viver os princípios</span></td>
+          </tr>
+          <tr>
+            <td><span class="rank-badge rank-other">4</span></td>
+            <td>Post 9</td>
+            <td><span class="fmt-badge">Reel</span></td>
+            <td><span class="score-cell score-medlow">21</span></td>
+            <td>18</td>
+            <td>1</td>
+            <td><span class="theme-text">The Chosen (Jesus) — oração em secreto</span></td>
+          </tr>
+          <tr>
+            <td><span class="rank-badge rank-other">5</span></td>
+            <td>Post 6</td>
+            <td><span class="fmt-badge">Reel</span></td>
+            <td><span class="score-cell score-low">8</span></td>
+            <td>8</td>
+            <td>0</td>
+            <td><span class="theme-text">Will Smith — disciplina vs opinião alheia</span></td>
+          </tr>
+          <tr>
+            <td><span class="rank-badge rank-other">6</span></td>
+            <td>Post 10</td>
+            <td><span class="fmt-badge">Reel</span></td>
+            <td><span class="score-cell score-low">8</span></td>
+            <td>5</td>
+            <td>1</td>
+            <td><span class="theme-text">Homem-Aranha noturno — batalhas internas</span></td>
+          </tr>
+          <tr>
+            <td><span class="rank-badge rank-other">7</span></td>
+            <td>Post 3</td>
+            <td><span class="fmt-badge">Reel</span></td>
+            <td><span class="score-cell score-low">5</span></td>
+            <td>5</td>
+            <td>0</td>
+            <td><span class="theme-text">Capitão América — herói forjado no silêncio</span></td>
+          </tr>
+          <tr>
+            <td><span class="rank-badge rank-other">8</span></td>
+            <td>Post 5</td>
+            <td><span class="fmt-badge">Reel</span></td>
+            <td><span class="score-cell score-low">4</span></td>
+            <td>4</td>
+            <td>0</td>
+            <td><span class="theme-text">Denilson — testemunho de fé e superação</span></td>
+          </tr>
+          <tr>
+            <td><span class="rank-badge rank-other">9</span></td>
+            <td>Post 8</td>
+            <td><span class="fmt-badge">Reel</span></td>
+            <td><span class="score-cell score-low">3</span></td>
+            <td>3</td>
+            <td>0</td>
+            <td><span class="theme-text">Chris Bumstead — disciplina invisível</span></td>
+          </tr>
+          <tr>
+            <td><span class="rank-badge rank-other">10</span></td>
+            <td>Post 1</td>
+            <td><span class="fmt-badge">Reel</span></td>
+            <td><span class="score-cell score-low">0*</span></td>
+            <td>0</td>
+            <td>0</td>
+            <td><span class="theme-text">Stan Lee — ideia vs execução</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="star-note">* Post 1 publicado há apenas 4 horas no momento da coleta — excluído do ranking de piores por tempo insuficiente.</p>
+  </section>
+
+  <!-- ── 6. O QUE ESTÁ FUNCIONANDO ── -->
+  <section id="funciona" class="section">
+    <div class="section-header">
+      <div class="section-num">06</div>
+      <div>
+        <div class="section-title">O que está funcionando</div>
+        <div class="section-desc">Top 2 padrões de alto desempenho</div>
+      </div>
+    </div>
+    <div class="divider"></div>
+
+    <div class="analysis-grid">
+      <div class="post-card good">
+        <div class="post-card-header">
+          <div class="post-title">Post 2 — Tony Stark &amp; Howard Stark<br><small style="font-weight:400;color:var(--muted);">Vingadores: Ultimato</small></div>
+          <svg width="24" height="24" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+            <circle cx="16" cy="16" r="15" fill="rgba(212,168,83,0.15)" stroke="rgba(212,168,83,0.4)" stroke-width="1.5"/>
+            <text x="50%" y="54%" dominant-baseline="middle" text-anchor="middle" font-size="14">🥇</text>
+          </svg>
+        </div>
+        <p class="post-body">
+          Este foi o post que gerou um salto absoluto de desempenho. O diferencial está na narrativa: o post não fala sobre o personagem em si, mas sobre uma experiência emocional universal — o peso de nunca ter sido suficiente para o pai, e a libertação que vem da conexão humana, não da perfeição. A legenda é longa, detalhada e conduz o leitor por uma jornada emocional que espelha dores reais. O pico de engajamento (101 curtidas num perfil de 102 seguidores) indica distribuição orgânica pelo algoritmo, provavelmente pelo alto volume de replays e compartilhamentos (7 no total).
+        </p>
+        <div class="post-tags">
+          <span class="post-tag gold">Score 128</span>
+          <span class="post-tag">101 curtidas</span>
+          <span class="post-tag">9 comentários</span>
+          <span class="post-tag">Narrativa emocional</span>
+          <span class="post-tag">Cena icônica</span>
+        </div>
+      </div>
+
+      <div class="post-card good">
+        <div class="post-card-header">
+          <div class="post-title">Post 4 — Peter Parker e o chamado<br><small style="font-weight:400;color:var(--muted);">Homem-Aranha</small></div>
+          <svg width="24" height="24" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+            <circle cx="16" cy="16" r="15" fill="rgba(168,178,192,0.12)" stroke="rgba(168,178,192,0.35)" stroke-width="1.5"/>
+            <text x="50%" y="54%" dominant-baseline="middle" text-anchor="middle" font-size="14">🥈</text>
+          </svg>
+        </div>
+        <p class="post-body">
+          A combinação de uma frase-gancho visual forte no thumbnail — <em>"Todos querem ser o Homem-Aranha mas ninguém quer ser o Peter Parker"</em> — com uma narrativa sobre renúncia e propósito funcionou melhor que todos os outros posts fora do Post 2. A frase do thumbnail gera parada forçada no feed, e a legenda entrega a reflexão prometida com consistência. Tom: provocativo na abertura, educativo-espiritual no desenvolvimento.
+        </p>
+        <div class="post-tags">
+          <span class="post-tag gold">Score 27</span>
+          <span class="post-tag">27 curtidas</span>
+          <span class="post-tag">Gancho visual forte</span>
+          <span class="post-tag">Frase de thumbnail</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── 7. AUDIÊNCIA ── -->
+  <section id="audiencia" class="section">
+    <div class="section-header">
+      <div class="section-num">07</div>
+      <div>
+        <div class="section-title">O que a audiência está dizendo</div>
+        <div class="section-desc">Comentários do melhor post (Post 2)</div>
+      </div>
+    </div>
+    <div class="divider"></div>
+
+    <div class="audience-grid">
+      <div class="audience-card">
+        <div class="diag-label">Tipos de comentários</div>
+        <p class="audience-body">
+          Elogios diretos <em>("Essa cena é incrível")</em>, reações emotivas <em>("Parabéns 👏🔥", "🔥🔥")</em>, comentário de meme/ironia (foto de suricato — sem texto) e autopresentação do criador nos comentários.
+        </p>
+      </div>
+      <div class="audience-card">
+        <div class="diag-label">Interação do perfil</div>
+        <p class="audience-body">
+          <span class="status-badge sb-warn" style="margin-bottom:10px;display:inline-flex;">Responde às vezes</span><br>
+          O criador (Ícaro) comentou se apresentando — estratégia de conexão positiva, mas sem resposta direta aos outros comentários. Nenhuma pergunta direta foi feita pela audiência.
+        </p>
+      </div>
+    </div>
+
+    <div class="insight-box">
+      <strong>Insight:</strong> Os comentários revelam que a audiência está reagindo emocionalmente ao conteúdo — a referência ao "Paradoxo de Bootstrap" (loop temporal do filme) mostra pessoas engajadas intelectualmente. Porém, ainda não há conversas ou perguntas que indiquem uma <strong>comunidade formada</strong>. O engajamento é <strong>reativo, não relacional</strong>.
+    </div>
+  </section>
+
+  <!-- ── 8. O QUE NÃO ESTÁ FUNCIONANDO ── -->
+  <section id="nao-funciona" class="section">
+    <div class="section-header">
+      <div class="section-num">08</div>
+      <div>
+        <div class="section-title">O que não está funcionando</div>
+        <div class="section-desc">Bottom 2 padrões de baixo desempenho</div>
+      </div>
+    </div>
+    <div class="divider"></div>
+
+    <div class="analysis-grid">
+      <div class="post-card bad">
+        <div class="post-card-header">
+          <div class="post-title">Post 8 — Chris Bumstead<br><small style="font-weight:400;color:var(--muted);">Fisiculturismo / Score 3</small></div>
+          <svg width="24" height="24" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+            <circle cx="16" cy="16" r="15" fill="rgba(184,64,64,0.12)" stroke="rgba(184,64,64,0.35)" stroke-width="1.5"/>
+            <text x="50%" y="54%" dominant-baseline="middle" text-anchor="middle" font-size="14">⬇️</text>
+          </svg>
+        </div>
+        <p class="post-body">
+          O tema (disciplina de campeão de fisiculturismo) é genérico demais para o nicho espiritual/emocional do perfil. A cena de um atleta fitness com escrita "Don't Be A Skinny Bitch" no fundo destoa visual e tonalmente de tudo o que o perfil propõe (fé, alma, propósito). É o post mais desconexo da identidade da conta — parece conteúdo de outro perfil, e a audiência percebeu isso com apenas 3 curtidas. A legenda é boa por si só, mas a dissonância visual sabotou o alcance.
+        </p>
+        <div class="post-tags">
+          <span class="post-tag" style="color:var(--crimson);border-color:rgba(184,64,64,0.3);">Score 3</span>
+          <span class="post-tag">Dissonância visual</span>
+          <span class="post-tag">Fora do nicho</span>
+        </div>
+      </div>
+
+      <div class="post-card bad">
+        <div class="post-card-header">
+          <div class="post-title">Post 5 — Denilson<br><small style="font-weight:400;color:var(--muted);">Testemunho / Score 4</small></div>
+          <svg width="24" height="24" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+            <circle cx="16" cy="16" r="15" fill="rgba(184,64,64,0.12)" stroke="rgba(184,64,64,0.35)" stroke-width="1.5"/>
+            <text x="50%" y="54%" dominant-baseline="middle" text-anchor="middle" font-size="14">⬇️</text>
+          </svg>
+        </div>
+        <p class="post-body">
+          O conteúdo é coerente com o nicho (testemunho de fé e superação), mas não gera a mesma identificação emocional dos posts mais fortes. O problema é a falta de uma âncora narrativa forte: ao contrário dos posts com personagens de ficção icônicos (Homem-Aranha, Tony Stark), o Denilson não é uma referência universal para a audiência cristã jovem. Além disso, o thumbnail — um homem em frente a microfone — não comunica visualmente o peso emocional da mensagem.
+        </p>
+        <div class="post-tags">
+          <span class="post-tag" style="color:var(--crimson);border-color:rgba(184,64,64,0.3);">Score 4</span>
+          <span class="post-tag">Sem âncora icônica</span>
+          <span class="post-tag">Thumbnail fraco</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── 9. INSIGHTS ── -->
+  <section id="insights" class="section">
+    <div class="section-header">
+      <div class="section-num">09</div>
+      <div>
+        <div class="section-title">Principais Insights</div>
+        <div class="section-desc">Padrões e conclusões estratégicas</div>
+      </div>
+    </div>
+    <div class="divider"></div>
+
+    <div class="insights-grid">
+      <div class="insight-card">
+        <div class="insight-num">Insight 01</div>
+        <div class="insight-heading">A narrativa emocional supera o personagem</div>
+        <p class="insight-body">
+          O post mais alto não performou porque era do Universo Marvel — performou porque tocou numa ferida real: a relação pai e filho, o peso de nunca ser suficiente. Posts que falam sobre experiências emocionais universais têm desempenho radicalmente superior aos que apenas enaltecem virtudes de forma abstrata.
+        </p>
+      </div>
+      <div class="insight-card">
+        <div class="insight-num">Insight 02</div>
+        <div class="insight-heading">Consistência de nicho é frágil, mas existe</div>
+        <p class="insight-body">
+          Com exceção do post do Chris Bumstead, todos os conteúdos giram em torno de fé, propósito, chamado e perseverança. Mas o perfil ainda mistura referências muito diferentes sem uma curadoria clara de persona-alvo: jovens cristãos evangélicos? Fãs de Marvel? Pessoas em busca de autodesenvolvimento?
+        </p>
+      </div>
+      <div class="insight-card">
+        <div class="insight-num">Insight 03</div>
+        <div class="insight-heading">Buraco de publicação de quase 1 mês</div>
+        <p class="insight-body">
+          Entre 25 de março e 12 de abril não houve posts. Para um perfil de 102 seguidores crescendo via Reels orgânicos, cada pausa longa reinicia o processo de distribuição algorítmica. A consistência é mais importante do que a perfeição de cada post.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── 10. RECOMENDAÇÕES ── -->
+  <section id="recomendacoes" class="section">
+    <div class="section-header">
+      <div class="section-num">10</div>
+      <div>
+        <div class="section-title">Recomendações Práticas</div>
+        <div class="section-desc">Ações ordenadas por impacto</div>
+      </div>
+    </div>
+    <div class="divider"></div>
+
+    <div class="rec-list">
+      <div class="rec-item">
+        <div class="rec-num">1</div>
+        <div>
+          <div class="rec-title">Escreva legendas com narrativas de dor emocional específica, não apenas de virtude</div>
+          <p class="rec-body">O Post 2 foi 4,7× mais eficiente que o segundo colocado porque a legenda descrevia uma experiência emocional real com detalhes (sentir que nunca foi suficiente para o pai, a libertação da conexão). Reestruture o roteiro de legenda: <em>gancho → dor específica → reviravolta → aplicação pessoal → pergunta ou CTA.</em></p>
+        </div>
+      </div>
+      <div class="rec-item">
+        <div class="rec-num">2</div>
+        <div>
+          <div class="rec-title">Abandone personagens e referências genéricos de outros nichos</div>
+          <p class="rec-body">O post do Chris Bumstead e o do Denilson mostraram que referências desconexas não ressoam. Foque em personagens de ficção com alto valor cultural (Marvel, DC, filmes bíblicos, The Chosen) ou personalidades com forte conotação espiritual/de superação que a audiência jovem cristã já conhece e ama.</p>
+        </div>
+      </div>
+      <div class="rec-item">
+        <div class="rec-num">3</div>
+        <div>
+          <div class="rec-title">Complete e ative a bio urgentemente</div>
+          <p class="rec-body">A última linha da bio está cortada — isso passa impressão de descuido para qualquer visitante novo. Corrija para <em>"Siga e fortaleça a sua alma."</em> e adicione um link. Um perfil sem link em 2026 desperdiça conversões.</p>
+        </div>
+      </div>
+      <div class="rec-item">
+        <div class="rec-num">4</div>
+        <div>
+          <div class="rec-title">Estabeleça frequência mínima de 4-5 posts por semana</div>
+          <p class="rec-body">O perfil ficou quase 3 semanas sem publicar (25 de março a 12 de abril). Para um perfil de 102 seguidores tentando crescer via alcance orgânico de Reels, cada pausa longa reinicia a distribuição algorítmica. A consistência é mais importante que a perfeição de cada post.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── 11. QUICK WINS ── -->
+  <section id="quickwins" class="section">
+    <div class="section-header">
+      <div class="section-num">11</div>
+      <div>
+        <div class="section-title">Quick Wins</div>
+        <div class="section-desc">Ações de alto impacto para os próximos 5 dias</div>
+      </div>
+    </div>
+    <div class="divider"></div>
+
+    <div class="qw-grid">
+      <div class="qw-card">
+        <div class="qw-header">
+          <div class="qw-icon">
+            <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="#0B0B16" stroke-width="2.5" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M3.375 19.5h17.25m-17.25 0a1.125 1.125 0 01-1.125-1.125M3.375 19.5h7.5c.621 0 1.125-.504 1.125-1.125m-9.75 0V5.625m0 12.75v-1.5c0-.621.504-1.125 1.125-1.125m18.375 2.625V5.625m0 12.75c0 .621-.504 1.125-1.125 1.125m1.125-1.125v-1.5c0-.621-.504-1.125-1.125-1.125m0 3.75h-7.5A1.125 1.125 0 0112 18.375m9.75-12.75c0-.621-.504-1.125-1.125-1.125H3.375c-.621 0-1.125.504-1.125 1.125m19.5 0v1.5c0 .621-.504 1.125-1.125 1.125M2.25 5.625v1.5c0 .621.504 1.125 1.125 1.125m0 0h17.25m-17.25 0h7.5c.621 0 1.125.504 1.125 1.125M3.375 8.25c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125m17.25-3.75h-7.5c-.621 0-1.125.504-1.125 1.125m8.625-1.125c.621 0 1.125.504 1.125 1.125v1.5c0 .621-.504 1.125-1.125 1.125m-17.25 0h7.5m-7.5 0c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125M12 10.875v-1.5m0 1.5c0 .621-.504 1.125-1.125 1.125M12 10.875c0 .621.504 1.125 1.125 1.125m-2.25 0c0 .621-.504 1.125-1.125 1.125m2.25-2.25v1.5m0-1.5c0-.621.504-1.125 1.125-1.125"/></svg>
+          </div>
+          <div class="qw-title">Replique a estrutura do Post 2</div>
+        </div>
+        <p class="qw-body">
+          Escolha uma cena de filme/série com forte carga emocional envolvendo relações humanas reais (pai e filho, perdão, abandono, recomeço) e escreva a legenda no modelo:<br><br>
+          <em>contextualização da cena → dor emocional específica → reviravolta → aplicação espiritual → pergunta direta</em><br><br>
+          Poste, monitore e compare com os resultados do Post 2.
+        </p>
+      </div>
+
+      <div class="qw-card">
+        <div class="qw-header">
+          <div class="qw-icon">
+            <svg width="18" height="18" fill="none" viewBox="0 0 24 24" stroke="#0B0B16" stroke-width="2.5" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10"/></svg>
+          </div>
+          <div class="qw-title">Corrija a bio em 5 minutos</div>
+        </div>
+        <p class="qw-body">
+          Substitua a última linha da bio por:<br><br>
+          <em style="color:var(--gold);">"⬇️ Siga e fortaleça a sua alma. 💬 Conta pra mim: qual história te marcou?"</em><br><br>
+          Isso cria uma micro-CTA que incentiva DMs sem precisar de link externo, e muda a percepção de qualquer novo visitante. Feito em 5 minutos — impacto imediato.
+        </p>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <strong>Auditoria Instagram</strong> · @disciplinaalma2026<br>
+  Gerada em 13 de abril de 2026 · 10 posts analisados<br>
+  <span style="color:rgba(122,122,154,0.5);font-size:11px;margin-top:4px;display:block;">Produzida pela Agência Logos · raphammbb.github.io/auditorias-social-media</span>
+</footer>
+
+</body>
+</html>
