@@ -9,30 +9,29 @@
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
     @media (prefers-reduced-motion: reduce) {
       *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
     }
-
     html { scroll-behavior: smooth; }
-
     :root {
       --navy-900: #0d1b2a;
       --navy-800: #1b2a3b;
       --navy-700: #243447;
       --navy-600: #2e4058;
+      --gold-300: #f5d580;
       --gold-400: #e8b44a;
       --gold-500: #c8963e;
       --gold-600: #a87830;
-      --green-500: #2a7a4b;
-      --green-light: #3aaf65;
-      --text: #e8e4d9;
-      --text-muted: #9a9280;
-      --border: rgba(200,150,62,0.18);
-      --card: rgba(27,42,59,0.85);
-      --red: #e05252;
+      --green:    #2a7a4b;
+      --green-lt: #3aaf65;
+      --red:      #c94040;
+      --yellow:   #b87d1a;
+      --text:     #e8e4d9;
+      --muted:    #9a9280;
+      --border:   rgba(200,150,62,0.18);
+      --card:     rgba(27,42,59,0.85);
+      --card-solid:#1b2a3b;
     }
-
     body {
       font-family: 'Inter', sans-serif;
       background: var(--navy-900);
@@ -40,15 +39,15 @@
       line-height: 1.65;
       font-size: 16px;
     }
-
+    h1,h2,h3,h4 { font-family: 'Playfair Display', Georgia, serif; }
     .grad-text {
-      background: linear-gradient(135deg, #e8b44a 0%, #f5d580 40%, #c8963e 100%);
+      background: linear-gradient(135deg, #e8b44a 0%, #f5d580 50%, #c8963e 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
     }
 
-    /* ── COVER ── */
+    /* ── COVER ─────────────────────────────────── */
     .cover {
       position: relative;
       min-height: 100vh;
@@ -57,819 +56,1359 @@
       align-items: center;
       justify-content: center;
       text-align: center;
-      padding: 80px 24px 60px;
+      padding: 80px 24px 64px;
       overflow: hidden;
     }
-
     .cover::before {
       content: '';
-      position: absolute;
-      inset: 0;
+      position: absolute; inset: 0;
       background:
         radial-gradient(ellipse 70% 60% at 50% 40%, rgba(200,150,62,0.10) 0%, transparent 70%),
-        radial-gradient(ellipse 50% 50% at 20% 80%, rgba(42,122,75,0.07) 0%, transparent 60%);
+        radial-gradient(ellipse 50% 50% at 15% 80%, rgba(42,122,75,0.06) 0%, transparent 60%);
       pointer-events: none;
     }
-
-    .cross-deco {
+    .cross-bg {
       position: absolute;
-      opacity: 0.04;
       pointer-events: none;
+      opacity: 0.035;
     }
-    .cross-deco.top-right { top: -60px; right: -60px; width: 320px; height: 320px; }
-    .cross-deco.bottom-left { bottom: -80px; left: -80px; width: 400px; height: 400px; }
-
+    .cross-bg svg { width: 100%; height: 100%; }
+    .cross-bg.tr { top: -40px; right: -40px; width: 280px; height: 280px; }
+    .cross-bg.bl { bottom: -60px; left: -60px; width: 360px; height: 360px; }
     .cover-inner {
-      position: relative;
-      z-index: 1;
-      max-width: 800px;
-      width: 100%;
+      position: relative; z-index: 1;
+      max-width: 820px; width: 100%;
     }
-
-    .badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
+    .cover-badge {
+      display: inline-flex; align-items: center; gap: 8px;
       border: 1px solid var(--gold-500);
       background: rgba(200,150,62,0.08);
       color: var(--gold-400);
-      font-size: 0.78rem;
-      font-weight: 500;
-      letter-spacing: 0.04em;
-      padding: 6px 16px;
-      border-radius: 999px;
+      font-size: 0.75rem; font-weight: 600;
+      letter-spacing: 0.08em; text-transform: uppercase;
+      padding: 6px 18px; border-radius: 999px;
+      margin-bottom: 28px;
+    }
+    .cover-badge span.dot {
+      width: 6px; height: 6px; border-radius: 50%;
+      background: var(--gold-400); flex-shrink: 0;
+    }
+    .cover h1 {
+      font-size: clamp(2.6rem, 7vw, 4.6rem);
+      font-weight: 800; line-height: 1.05;
+      letter-spacing: -0.02em;
+      margin-bottom: 12px;
+    }
+    .cover-sub {
+      font-size: clamp(1rem, 2.5vw, 1.25rem);
+      color: var(--muted); font-weight: 300;
+      margin-bottom: 48px;
+    }
+    .cover-sub strong { color: var(--text); font-weight: 500; }
+    .metrics-row {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 14px;
+      max-width: 680px; margin: 0 auto 48px;
+    }
+    .metric-card {
+      background: rgba(27,42,59,0.7);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 20px 14px;
+      transition: border-color 0.2s, transform 0.2s;
+      cursor: default;
+    }
+    .metric-card:hover { border-color: rgba(232,180,74,0.4); transform: translateY(-2px); }
+    .metric-label {
+      font-size: 10px; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 0.1em;
+      color: var(--muted); margin-bottom: 8px;
+    }
+    .metric-value {
+      font-size: 1.75rem; font-weight: 700; line-height: 1;
+      font-family: 'Playfair Display', serif;
+    }
+    .metric-sub { font-size: 11px; color: var(--muted); margin-top: 4px; }
+    .cover-meta {
+      font-size: 12px; color: var(--muted);
+      border-top: 1px solid var(--border);
+      padding-top: 20px; max-width: 480px; margin: 0 auto;
+      line-height: 1.8;
+    }
+    .cover-meta span { color: var(--gold-400); font-weight: 500; }
+
+    /* ── NAV ─────────────────────────────────── */
+    .nav {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(13,27,42,0.92);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--border);
+      padding: 0 24px;
+      overflow-x: auto;
+    }
+    .nav::-webkit-scrollbar { display: none; }
+    .nav-inner {
+      display: flex; gap: 0;
+      max-width: 1000px; margin: 0 auto;
+      white-space: nowrap;
+    }
+    .nav a {
+      display: inline-block;
+      padding: 14px 14px;
+      font-size: 11px; font-weight: 600;
+      text-transform: uppercase; letter-spacing: 0.07em;
+      color: var(--muted); text-decoration: none;
+      border-bottom: 2px solid transparent;
+      transition: color 0.2s, border-color 0.2s;
+    }
+    .nav a:hover { color: var(--gold-300); border-bottom-color: var(--gold-500); }
+
+    /* ── MAIN ─────────────────────────────────── */
+    main { max-width: 1000px; margin: 0 auto; padding: 0 24px 100px; }
+
+    .section { padding-top: 72px; }
+
+    .section-eyebrow {
+      font-size: 10px; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 0.15em;
+      color: var(--gold-500); margin-bottom: 6px;
+    }
+    .section-title {
+      font-size: clamp(1.5rem, 4vw, 2.1rem);
+      font-weight: 700; letter-spacing: -0.02em;
+      margin-bottom: 6px;
+    }
+    .section-desc {
+      color: var(--muted); font-size: 14px;
       margin-bottom: 32px;
     }
+    .divider {
+      height: 1px; background: var(--border); margin: 0 0 32px;
+    }
 
-    .badge-dot {
-      width: 7px; height: 7px;
-      border-radius: 50%;
-      background: var(--gold-400);
+    /* ── DIAGNÓSTICO ─────────────────────────── */
+    .diag-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 14px;
+    }
+    .diag-card {
+      background: var(--card-solid);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 20px;
+      display: flex; gap: 14px;
+      align-items: flex-start;
+      transition: border-color 0.2s;
+    }
+    .diag-card:hover { border-color: rgba(232,180,74,0.3); }
+    .diag-icon {
+      width: 38px; height: 38px; border-radius: 9px;
+      display: flex; align-items: center; justify-content: center;
       flex-shrink: 0;
     }
+    .diag-icon.ok   { background: rgba(42,122,75,0.18); color: var(--green-lt); }
+    .diag-icon.warn { background: rgba(200,150,62,0.18); color: var(--gold-400); }
+    .diag-icon.bad  { background: rgba(201,64,64,0.18);  color: #e07070; }
+    .diag-icon svg  { width: 18px; height: 18px; }
+    .diag-label { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); margin-bottom: 3px; }
+    .diag-text  { font-size: 14px; font-weight: 500; line-height: 1.4; }
+    .diag-note  { font-size: 12px; color: var(--muted); margin-top: 4px; line-height: 1.5; }
 
-    .hero-title {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(2.4rem, 6vw, 4.2rem);
-      font-weight: 800;
-      line-height: 1.1;
-      margin-bottom: 18px;
-    }
-
-    .hero-subtitle {
-      font-size: clamp(0.95rem, 2vw, 1.1rem);
-      color: var(--text-muted);
-      margin-bottom: 48px;
-      letter-spacing: 0.01em;
-    }
-
-    .hero-subtitle span { color: var(--gold-400); font-weight: 500; }
-
-    .score-circle-wrap {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      margin-bottom: 52px;
-    }
-
-    .score-circle {
-      width: 130px; height: 130px;
-      border-radius: 50%;
-      border: 3px solid var(--gold-500);
-      background: rgba(200,150,62,0.08);
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      box-shadow: 0 0 40px rgba(200,150,62,0.18), inset 0 0 24px rgba(200,150,62,0.06);
-    }
-
-    .score-num {
-      font-family: 'Playfair Display', serif;
-      font-size: 2.6rem;
-      font-weight: 700;
-      line-height: 1;
-      background: linear-gradient(135deg, #e8b44a, #f5d580);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
-
-    .score-denom { font-size: 0.78rem; color: var(--text-muted); margin-top: 2px; letter-spacing: 0.06em; }
-    .score-label { margin-top: 12px; font-size: 0.8rem; color: var(--text-muted); letter-spacing: 0.08em; text-transform: uppercase; }
-
-    .quick-metrics {
-      display: flex;
-      gap: 16px;
-      flex-wrap: wrap;
-      justify-content: center;
-    }
-
-    .qm-card {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      padding: 16px 24px;
-      min-width: 120px;
-      text-align: center;
-      backdrop-filter: blur(8px);
-    }
-
-    .qm-value {
-      font-family: 'Playfair Display', serif;
-      font-size: 1.6rem;
-      font-weight: 700;
-      color: var(--gold-400);
-      line-height: 1;
-    }
-
-    .qm-label { font-size: 0.74rem; color: var(--text-muted); margin-top: 5px; letter-spacing: 0.04em; text-transform: uppercase; }
-
-    /* ── SEÇÕES ── */
-    .section {
-      max-width: 900px;
-      margin: 0 auto;
-      padding: 64px 24px;
-      border-top: 1px solid var(--border);
-    }
-
-    .section-number { font-size: 0.72rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--gold-500); font-weight: 600; margin-bottom: 8px; }
-
-    .section-title {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(1.5rem, 3vw, 2rem);
-      font-weight: 700;
-      color: var(--text);
-      margin-bottom: 32px;
-      line-height: 1.2;
-    }
-
-    .divider { width: 60px; height: 2px; background: linear-gradient(90deg, var(--gold-500), transparent); border-radius: 999px; margin-bottom: 32px; }
-
-    /* ── TABELA ── */
-    .audit-table { width: 100%; border-collapse: collapse; margin-bottom: 28px; font-size: 0.9rem; }
-    .audit-table th { text-align: left; padding: 10px 16px; font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gold-500); border-bottom: 1px solid var(--border); font-weight: 600; }
-    .audit-table td { padding: 12px 16px; border-bottom: 1px solid rgba(255,255,255,0.04); color: var(--text); }
-    .audit-table tr:last-child td { border-bottom: none; }
-    .audit-table tbody tr:hover { background: rgba(200,150,62,0.04); }
-
-    .tag-saudavel { display: inline-block; background: rgba(42,122,75,0.2); color: #3aaf65; border: 1px solid rgba(42,122,75,0.4); border-radius: 999px; padding: 2px 10px; font-size: 0.72rem; font-weight: 600; }
-
-    /* ── BLOCOS DE ANÁLISE ── */
-    .assessment-block {
-      background: var(--card);
+    /* ── VISÃO GERAL BLOCO ───────────────────── */
+    .overview-block {
+      background: var(--card-solid);
       border: 1px solid var(--border);
       border-radius: 14px;
       padding: 24px 28px;
-      margin-bottom: 20px;
-      backdrop-filter: blur(6px);
+      margin-bottom: 24px;
+      font-size: 15px;
+      line-height: 1.75;
+      color: var(--text);
     }
+    .overview-block strong { color: var(--gold-400); }
 
-    .assessment-block h4 { font-size: 0.8rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gold-500); margin-bottom: 10px; font-weight: 600; }
-    .assessment-block p { color: #c8c0b0; font-size: 0.92rem; line-height: 1.7; }
-
-    /* ── PILARES ── */
-    .pillar-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 14px; margin-bottom: 24px; }
-
-    .pillar-card { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 18px 20px; backdrop-filter: blur(6px); }
-    .pillar-card-title { font-size: 0.8rem; font-weight: 700; color: var(--gold-400); margin-bottom: 6px; }
-    .pillar-card p { font-size: 0.83rem; color: #a09888; line-height: 1.6; }
-
-    /* ── DOIS COLUNAS ── */
-    .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 20px; }
-
-    @media (max-width: 640px) {
-      .two-col { grid-template-columns: 1fr; }
-      .quick-metrics { gap: 10px; }
-      .qm-card { min-width: 100px; padding: 14px 18px; }
-      .score-row-label { width: 140px; font-size: 0.8rem; }
-      .score-row-stars { width: 70px; }
+    /* ── TABELAS ─────────────────────────────── */
+    .table-wrap {
+      overflow-x: auto;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      margin-bottom: 24px;
     }
+    .table-wrap::-webkit-scrollbar { height: 4px; }
+    .table-wrap::-webkit-scrollbar-thumb { background: var(--gold-600); border-radius: 2px; }
+    table {
+      width: 100%; border-collapse: collapse;
+      font-size: 13px;
+    }
+    thead th {
+      background: rgba(200,150,62,0.1);
+      color: var(--gold-400);
+      font-size: 10px; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 0.08em;
+      padding: 12px 14px; text-align: left;
+      border-bottom: 1px solid var(--border);
+      white-space: nowrap;
+    }
+    tbody tr {
+      border-bottom: 1px solid rgba(200,150,62,0.07);
+      transition: background 0.15s;
+    }
+    tbody tr:last-child { border-bottom: none; }
+    tbody tr:hover { background: rgba(200,150,62,0.04); }
+    tbody td {
+      padding: 10px 14px; vertical-align: middle;
+      color: var(--text); white-space: nowrap;
+    }
+    .td-num { font-weight: 700; color: var(--muted); font-size: 12px; }
+    .td-score {
+      font-weight: 700; font-size: 14px;
+      color: var(--gold-400);
+    }
+    .td-score.hi { color: var(--green-lt); }
+    .td-score.lo { color: #e07070; }
+    .row-top1 { background: rgba(42,122,75,0.06) !important; }
+    .row-bot1 { background: rgba(201,64,64,0.06) !important; }
+    .badge-fmt {
+      display: inline-block;
+      font-size: 10px; font-weight: 600;
+      padding: 2px 8px; border-radius: 4px;
+      text-transform: uppercase; letter-spacing: 0.05em;
+    }
+    .fmt-reel     { background: rgba(131,58,180,0.2); color: #b97de8; }
+    .fmt-carrossel{ background: rgba(252,176,69,0.2);  color: #f0b84a; }
+    .fmt-foto     { background: rgba(30,144,255,0.2);  color: #5aaaf5; }
+    .badge-conta {
+      font-size: 10px; font-weight: 600; color: var(--muted);
+    }
+    .badge-conta.habite { color: #7eb8f5; }
 
-    .pos-block { background: rgba(42,122,75,0.10); border: 1px solid rgba(42,122,75,0.30); border-radius: 14px; padding: 22px 24px; }
-    .gap-block { background: rgba(224,82,82,0.08); border: 1px solid rgba(224,82,82,0.25); border-radius: 14px; padding: 22px 24px; }
-    .block-label { font-size: 0.72rem; letter-spacing: 0.12em; text-transform: uppercase; font-weight: 700; margin-bottom: 12px; }
-    .pos-block .block-label { color: #3aaf65; }
-    .gap-block .block-label { color: #e05252; }
-    .block-text { font-size: 0.87rem; color: #b0a898; line-height: 1.7; }
+    /* rank medal */
+    .medal { font-size: 13px; margin-right: 4px; }
 
-    /* ── CARDS DE POST ── */
-    .post-cards { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 14px; margin-bottom: 28px; }
+    /* ── MIX FORMATOS ─────────────────────────── */
+    .mix-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 14px; margin-bottom: 28px;
+    }
+    .mix-card {
+      background: var(--card-solid);
+      border: 1px solid var(--border);
+      border-radius: 14px; padding: 22px 20px;
+      transition: border-color 0.2s;
+    }
+    .mix-card:hover { border-color: rgba(232,180,74,0.35); }
+    .mix-fmt { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); margin-bottom: 8px; }
+    .mix-pct { font-size: 2rem; font-weight: 800; font-family: 'Playfair Display', serif; }
+    .mix-bar-wrap { height: 6px; background: rgba(255,255,255,0.07); border-radius: 3px; margin: 10px 0 6px; }
+    .mix-bar { height: 100%; border-radius: 3px; }
+    .mix-bar.reel  { background: linear-gradient(90deg,#833ab4,#fd1d1d); }
+    .mix-bar.carr  { background: linear-gradient(90deg,#c8963e,#f5d580); }
+    .mix-bar.foto  { background: linear-gradient(90deg,#1e90ff,#5aaaf5); }
+    .mix-meta { font-size: 12px; color: var(--muted); }
 
-    .post-card { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 18px 20px; backdrop-filter: blur(6px); }
+    /* ── TENDÊNCIA ─────────────────────────────── */
+    .trend-block {
+      background: var(--card-solid);
+      border: 1px solid var(--border);
+      border-radius: 14px; padding: 28px;
+      margin-bottom: 24px;
+    }
+    .trend-block p { font-size: 14px; color: var(--text); line-height: 1.8; margin-bottom: 12px; }
+    .trend-block p:last-child { margin-bottom: 0; }
+    .trend-block strong { color: var(--gold-400); }
+    .timeline {
+      display: flex; gap: 0; margin: 28px 0 4px;
+      overflow-x: auto; padding-bottom: 8px;
+    }
+    .timeline::-webkit-scrollbar { height: 3px; }
+    .tl-item {
+      flex: 0 0 auto; min-width: 110px;
+      display: flex; flex-direction: column; align-items: center;
+      position: relative;
+    }
+    .tl-item:not(:last-child)::after {
+      content: '';
+      position: absolute;
+      top: 18px; left: 55%; width: calc(100% - 10px);
+      height: 1px; background: var(--border);
+    }
+    .tl-dot {
+      width: 36px; height: 36px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 11px; font-weight: 700; z-index: 1;
+      border: 2px solid transparent;
+    }
+    .tl-dot.high   { background: rgba(42,122,75,0.25); border-color: var(--green-lt); color: var(--green-lt); }
+    .tl-dot.medium { background: rgba(200,150,62,0.2); border-color: var(--gold-500); color: var(--gold-400); }
+    .tl-dot.low    { background: rgba(201,64,64,0.2);  border-color: #e07070; color: #e07070; }
+    .tl-label { font-size: 10px; color: var(--muted); margin-top: 8px; text-align: center; letter-spacing: 0.04em; }
+    .tl-score { font-size: 11px; font-weight: 600; color: var(--text); }
 
-    .post-card-type { display: inline-block; background: rgba(200,150,62,0.12); color: var(--gold-400); border: 1px solid rgba(200,150,62,0.3); border-radius: 999px; padding: 2px 10px; font-size: 0.7rem; font-weight: 600; letter-spacing: 0.05em; margin-bottom: 10px; }
-    .post-card-type.collab { background: rgba(42,122,75,0.12); color: #3aaf65; border-color: rgba(42,122,75,0.3); }
-    .post-card-type.carousel { background: rgba(100,120,200,0.12); color: #8090e0; border-color: rgba(100,120,200,0.3); }
+    /* ── PADRÕES CARDS ──────────────────────────── */
+    .pattern-list { display: flex; flex-direction: column; gap: 16px; }
+    .pattern-card {
+      background: var(--card-solid);
+      border: 1px solid var(--border);
+      border-radius: 14px; padding: 22px 24px;
+      display: grid; grid-template-columns: auto 1fr;
+      gap: 20px; align-items: start;
+      transition: border-color 0.2s;
+    }
+    .pattern-card:hover { border-color: rgba(232,180,74,0.35); }
+    .pattern-score-box {
+      min-width: 72px; text-align: center;
+      background: rgba(200,150,62,0.1);
+      border: 1px solid rgba(200,150,62,0.25);
+      border-radius: 10px; padding: 12px 10px;
+    }
+    .pattern-score-num {
+      font-size: 1.6rem; font-weight: 800;
+      font-family: 'Playfair Display', serif;
+      color: var(--gold-400); line-height: 1;
+    }
+    .pattern-score-lbl { font-size: 9px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); margin-top: 3px; }
+    .pattern-card.bad .pattern-score-box { background: rgba(201,64,64,0.1); border-color: rgba(201,64,64,0.25); }
+    .pattern-card.bad .pattern-score-num { color: #e07070; }
+    .pattern-title { font-size: 15px; font-weight: 600; color: var(--text); margin-bottom: 6px; }
+    .pattern-date  { font-size: 11px; color: var(--muted); font-weight: 500; margin-bottom: 10px; }
+    .pattern-body  { font-size: 13px; color: var(--muted); line-height: 1.75; }
+    .pattern-body strong { color: var(--text); }
 
-    .post-card-name { font-size: 0.88rem; font-weight: 600; color: var(--text); margin-bottom: 6px; line-height: 1.4; }
-    .post-card-date { font-size: 0.75rem; color: var(--text-muted); margin-bottom: 14px; }
-    .post-card-stats { display: flex; gap: 18px; }
-    .stat-item { display: flex; flex-direction: column; gap: 2px; }
-    .stat-num { font-family: 'Playfair Display', serif; font-size: 1.3rem; font-weight: 700; color: var(--gold-400); line-height: 1; }
-    .stat-label { font-size: 0.68rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.07em; }
+    /* ── AUDIÊNCIA ──────────────────────────────── */
+    .audience-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 14px; margin-bottom: 24px;
+    }
+    .audience-card {
+      background: var(--card-solid);
+      border: 1px solid var(--border);
+      border-radius: 14px; padding: 20px;
+    }
+    .audience-card-title {
+      font-size: 11px; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 0.08em;
+      color: var(--gold-500); margin-bottom: 12px;
+    }
+    .audience-card ul { list-style: none; }
+    .audience-card ul li {
+      font-size: 13px; color: var(--muted);
+      padding: 5px 0; border-bottom: 1px solid rgba(255,255,255,0.04);
+      line-height: 1.5;
+    }
+    .audience-card ul li:last-child { border-bottom: none; }
+    .audience-card ul li::before { content: '—'; color: var(--gold-600); margin-right: 8px; }
+    .audience-insight {
+      background: rgba(200,150,62,0.06);
+      border: 1px solid rgba(200,150,62,0.2);
+      border-radius: 14px; padding: 22px 24px;
+      font-size: 14px; line-height: 1.8; color: var(--text);
+    }
+    .audience-insight strong { color: var(--gold-400); }
 
-    /* ── ENGAJAMENTO RESUMO ── */
-    .eng-summary { display: flex; gap: 16px; flex-wrap: wrap; margin-bottom: 20px; }
-    .eng-badge { background: rgba(200,150,62,0.10); border: 1px solid rgba(200,150,62,0.28); border-radius: 12px; padding: 14px 22px; flex: 1; min-width: 180px; text-align: center; }
-    .eng-badge-val { font-family: 'Playfair Display', serif; font-size: 1.8rem; font-weight: 700; color: var(--gold-400); }
-    .eng-badge-val.green { color: #3aaf65; }
-    .eng-badge-label { font-size: 0.78rem; color: var(--text-muted); margin-top: 4px; line-height: 1.4; }
+    /* ── INSIGHTS ───────────────────────────────── */
+    .insights-list { display: flex; flex-direction: column; gap: 12px; }
+    .insight-item {
+      background: var(--card-solid);
+      border: 1px solid var(--border);
+      border-radius: 12px; padding: 18px 22px;
+      display: flex; gap: 16px; align-items: flex-start;
+      transition: border-color 0.2s;
+    }
+    .insight-item:hover { border-color: rgba(232,180,74,0.3); }
+    .insight-num {
+      width: 32px; height: 32px; border-radius: 8px;
+      background: linear-gradient(135deg, #c8963e, #e8b44a);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 13px; font-weight: 800; color: #0d1b2a;
+      flex-shrink: 0;
+    }
+    .insight-text { font-size: 14px; line-height: 1.75; color: var(--text); }
+    .insight-text strong { color: var(--gold-300); }
 
-    /* ── HASHTAG PILLS ── */
-    .hashtag-pills { display: flex; flex-wrap: wrap; gap: 8px; margin: 16px 0; }
-    .hashtag-pill { background: rgba(200,150,62,0.10); border: 1px solid rgba(200,150,62,0.28); color: var(--gold-400); border-radius: 999px; padding: 5px 13px; font-size: 0.8rem; font-weight: 500; letter-spacing: 0.02em; }
-    .hashtag-pill.juventude { background: rgba(42,122,75,0.10); border-color: rgba(42,122,75,0.3); color: #3aaf65; }
+    /* ── RECOMENDAÇÕES ──────────────────────────── */
+    .recs-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 16px;
+    }
+    .rec-card {
+      background: var(--card-solid);
+      border: 1px solid var(--border);
+      border-radius: 14px; padding: 22px;
+      display: flex; flex-direction: column; gap: 12px;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+    .rec-card:hover { border-color: rgba(232,180,74,0.35); transform: translateY(-2px); }
+    .rec-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; }
+    .rec-num {
+      width: 28px; height: 28px; border-radius: 7px;
+      background: rgba(200,150,62,0.15);
+      color: var(--gold-400); font-size: 12px; font-weight: 700;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+    .rec-impact {
+      font-size: 9px; font-weight: 800;
+      text-transform: uppercase; letter-spacing: 0.1em;
+      padding: 3px 8px; border-radius: 4px;
+    }
+    .rec-impact.alto   { background: rgba(42,122,75,0.2);  color: var(--green-lt); }
+    .rec-impact.medio  { background: rgba(200,150,62,0.2); color: var(--gold-400); }
+    .rec-title { font-size: 14px; font-weight: 600; color: var(--text); flex: 1; }
+    .rec-body  { font-size: 13px; color: var(--muted); line-height: 1.7; }
+    .rec-body strong { color: var(--text); }
 
-    /* ── PONTOS FORTES ── */
-    .strength-list { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 14px; }
-    .strength-item { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 18px 20px; display: flex; gap: 14px; align-items: flex-start; backdrop-filter: blur(6px); }
-    .strength-icon { width: 36px; height: 36px; border-radius: 8px; background: rgba(200,150,62,0.12); border: 1px solid rgba(200,150,62,0.28); display: flex; align-items: center; justify-content: center; flex-shrink: 0; color: var(--gold-400); }
-    .strength-title { font-size: 0.85rem; font-weight: 700; color: var(--text); margin-bottom: 4px; }
-    .strength-desc { font-size: 0.82rem; color: #a09888; line-height: 1.6; }
+    /* ── QUICK WINS ─────────────────────────────── */
+    .qw-list { display: flex; flex-direction: column; gap: 14px; }
+    .qw-item {
+      background: var(--card-solid);
+      border: 1px solid var(--border);
+      border-radius: 14px; padding: 20px 24px;
+      display: flex; gap: 18px; align-items: flex-start;
+      transition: border-color 0.2s;
+    }
+    .qw-item:hover { border-color: rgba(232,180,74,0.35); }
+    .qw-badge {
+      flex-shrink: 0; min-width: 90px;
+      background: rgba(200,150,62,0.1);
+      border: 1px solid rgba(200,150,62,0.25);
+      border-radius: 8px; padding: 8px 10px;
+      text-align: center;
+    }
+    .qw-when { font-size: 9px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); margin-bottom: 2px; }
+    .qw-time { font-size: 12px; font-weight: 700; color: var(--gold-400); }
+    .qw-title { font-size: 14px; font-weight: 600; color: var(--text); margin-bottom: 6px; }
+    .qw-body  { font-size: 13px; color: var(--muted); line-height: 1.7; }
+    .qw-body strong { color: var(--text); }
 
-    /* ── RECOMENDAÇÕES ── */
-    .rec-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 16px; }
-    .rec-card { background: var(--card); border: 1px solid var(--border); border-radius: 14px; padding: 22px 24px; backdrop-filter: blur(6px); transition: border-color 0.2s, box-shadow 0.2s; cursor: default; }
-    .rec-card:hover { border-color: rgba(200,150,62,0.40); box-shadow: 0 4px 24px rgba(200,150,62,0.08); }
-    .rec-card-icon { width: 40px; height: 40px; border-radius: 10px; background: rgba(200,150,62,0.10); border: 1px solid rgba(200,150,62,0.25); display: flex; align-items: center; justify-content: center; color: var(--gold-400); margin-bottom: 14px; }
-    .rec-card-title { font-family: 'Playfair Display', serif; font-size: 1.05rem; font-weight: 700; color: var(--text); margin-bottom: 10px; }
-    .rec-card-text { font-size: 0.85rem; color: #a09888; line-height: 1.7; }
-    .rec-card-text strong { color: var(--gold-400); font-weight: 600; }
+    /* ── SCORECARD ──────────────────────────────── */
+    .score-list {
+      background: var(--card-solid);
+      border: 1px solid var(--border);
+      border-radius: 14px; overflow: hidden;
+      margin-bottom: 24px;
+    }
+    .score-row {
+      display: grid;
+      grid-template-columns: 1fr 2fr auto;
+      align-items: center;
+      gap: 16px; padding: 14px 22px;
+      border-bottom: 1px solid rgba(200,150,62,0.07);
+    }
+    .score-row:last-child { border-bottom: none; }
+    .score-row-label { font-size: 13px; color: var(--text); font-weight: 500; }
+    .score-bar-wrap  { height: 6px; background: rgba(255,255,255,0.07); border-radius: 3px; }
+    .score-bar {
+      height: 100%; border-radius: 3px;
+      background: linear-gradient(90deg, var(--gold-600), var(--gold-400));
+      transition: width 0.6s ease;
+    }
+    .score-val { font-size: 12px; font-weight: 700; color: var(--gold-400); white-space: nowrap; }
+    .score-stars { display: flex; gap: 2px; }
+    .star     { color: var(--gold-400); font-size: 13px; }
+    .star.off { color: rgba(200,150,62,0.2); }
+    .final-score {
+      background: rgba(200,150,62,0.07);
+      border: 1px solid rgba(200,150,62,0.2);
+      border-radius: 14px; padding: 36px 28px;
+      text-align: center;
+    }
+    .final-num {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(3rem, 8vw, 5rem); font-weight: 800;
+      line-height: 1;
+    }
+    .final-stars { font-size: 1.5rem; letter-spacing: 4px; margin: 8px 0 16px; color: var(--gold-400); }
+    .final-note  { font-size: 14px; color: var(--muted); max-width: 560px; margin: 0 auto; line-height: 1.75; }
+    .final-note strong { color: var(--gold-400); }
 
-    /* ── SCORE SUMMARY ── */
-    .score-rows { display: flex; flex-direction: column; gap: 14px; }
-    .score-row { display: flex; align-items: center; gap: 16px; }
-    .score-row-label { font-size: 0.88rem; color: var(--text); width: 200px; flex-shrink: 0; }
-    .score-bar-wrap { flex: 1; height: 8px; background: rgba(255,255,255,0.06); border-radius: 999px; overflow: hidden; }
-    .score-bar { height: 100%; border-radius: 999px; }
-    .score-bar.s5 { background: linear-gradient(90deg, #2a7a4b, #3aaf65); }
-    .score-bar.s4 { background: linear-gradient(90deg, #c8963e, #e8b44a); }
-    .score-bar.s3 { background: linear-gradient(90deg, #e8923e, #e8b44a); }
-    .score-bar.s2 { background: linear-gradient(90deg, #e05252, #e87070); }
-    .score-row-stars { display: flex; gap: 3px; flex-shrink: 0; width: 100px; justify-content: flex-end; }
-    .star { font-size: 0.9rem; color: var(--gold-400); }
-    .star.empty { color: rgba(255,255,255,0.15); }
-    .score-row-num { font-size: 0.78rem; color: var(--text-muted); width: 32px; text-align: right; flex-shrink: 0; }
+    /* ── FOOTER ─────────────────────────────────── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 32px 24px;
+      text-align: center;
+      font-size: 12px; color: var(--muted);
+      line-height: 2;
+    }
+    footer span { color: var(--gold-500); font-weight: 500; }
 
-    /* ── BLOCO GERAL FINAL ── */
-    .overall-block { background: linear-gradient(135deg, rgba(200,150,62,0.12) 0%, rgba(27,42,59,0.6) 100%); border: 1px solid rgba(200,150,62,0.35); border-radius: 18px; padding: 36px; text-align: center; margin-top: 36px; }
-    .overall-block .big-score { font-family: 'Playfair Display', serif; font-size: 3rem; font-weight: 800; line-height: 1; margin-bottom: 6px; }
-    .overall-block .score-stars { font-size: 1.4rem; color: var(--gold-400); letter-spacing: 4px; margin-bottom: 14px; }
-    .overall-block p { font-size: 0.9rem; color: #a09888; max-width: 600px; margin: 0 auto; line-height: 1.7; }
-
-    /* ── NOTA INLINE ── */
-    .inline-note { background: rgba(200,150,62,0.07); border-left: 3px solid var(--gold-500); border-radius: 0 8px 8px 0; padding: 14px 18px; font-size: 0.87rem; color: #b8a888; line-height: 1.65; margin: 20px 0; }
-
-    /* ── FREQUÊNCIA ── */
-    .freq-bar { display: flex; align-items: center; gap: 14px; margin: 16px 0; }
-    .freq-label { font-size: 0.82rem; color: var(--text-muted); width: 170px; flex-shrink: 0; }
-    .freq-track { flex: 1; height: 10px; background: rgba(255,255,255,0.06); border-radius: 999px; overflow: hidden; }
-    .freq-fill { height: 100%; border-radius: 999px; }
-    .freq-fill.atual { width: 33%; background: linear-gradient(90deg, #c8963e, #e8b44a); }
-    .freq-fill.ideal { width: 80%; background: linear-gradient(90deg, #2a7a4b, #3aaf65); }
-
-    /* ── HIGHLIGHT ── */
-    .hl { color: var(--gold-400); font-weight: 600; }
-    .hl-green { color: #3aaf65; font-weight: 600; }
-    .hl-red { color: #e07070; font-weight: 600; }
-    code { background: rgba(255,255,255,0.06); padding: 1px 6px; border-radius: 4px; font-size: 0.85em; }
-
-    /* ── FOOTER ── */
-    footer { text-align: center; padding: 40px 24px; border-top: 1px solid var(--border); color: var(--text-muted); font-size: 0.8rem; }
-    footer span { color: var(--gold-500); }
+    /* ── RESPONSIVE ─────────────────────────────── */
+    @media (max-width: 600px) {
+      .metrics-row { grid-template-columns: 1fr 1fr; }
+      .score-row { grid-template-columns: 1fr auto; }
+      .score-bar-wrap { display: none; }
+      .pattern-card { grid-template-columns: 1fr; }
+      .pattern-score-box { width: fit-content; display: flex; align-items: center; gap: 8px; }
+      .qw-item { flex-direction: column; }
+    }
   </style>
 </head>
 <body>
 
-  <!-- ══════════════════════════════════════
-       CAPA / HERO
-  ══════════════════════════════════════ -->
-  <section class="cover">
-    <svg class="cross-deco top-right" viewBox="0 0 320 320" fill="none" aria-hidden="true">
-      <rect x="130" y="0" width="60" height="320" rx="8" fill="#e8b44a"/>
-      <rect x="0" y="100" width="320" height="60" rx="8" fill="#e8b44a"/>
+<!-- ══ COVER ══════════════════════════════════════════════ -->
+<section class="cover" aria-labelledby="cover-title">
+
+  <div class="cross-bg tr" aria-hidden="true">
+    <svg viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <rect x="85" y="10" width="30" height="180" rx="6" fill="#e8b44a"/>
+      <rect x="10" y="65" width="180" height="30" rx="6" fill="#e8b44a"/>
     </svg>
-    <svg class="cross-deco bottom-left" viewBox="0 0 400 400" fill="none" aria-hidden="true">
-      <rect x="165" y="0" width="70" height="400" rx="8" fill="#e8b44a"/>
-      <rect x="0" y="130" width="400" height="70" rx="8" fill="#e8b44a"/>
+  </div>
+  <div class="cross-bg bl" aria-hidden="true">
+    <svg viewBox="0 0 200 200" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <rect x="85" y="10" width="30" height="180" rx="6" fill="#e8b44a"/>
+      <rect x="10" y="65" width="180" height="30" rx="6" fill="#e8b44a"/>
     </svg>
+  </div>
 
-    <div class="cover-inner">
-      <div class="badge">
-        <span class="badge-dot" aria-hidden="true"></span>
-        Auditoria de Conteúdo · Instagram · 08/04/2025
-      </div>
-
-      <h1 class="hero-title grad-text">Manual de Boas Práticas</h1>
-
-      <p class="hero-subtitle">
-        Análise de desempenho para <span>@batista.de.pinheiros</span> · 1ª Igreja Batista em Pinheiros
-      </p>
-
-      <div class="score-circle-wrap">
-        <div class="score-circle" role="img" aria-label="Nota geral: 3,5 de 5">
-          <span class="score-num">3,5</span>
-          <span class="score-denom">/ 5</span>
-        </div>
-        <span class="score-label">Nota Geral</span>
-      </div>
-
-      <div class="quick-metrics" role="list">
-        <div class="qm-card" role="listitem">
-          <div class="qm-value">193</div>
-          <div class="qm-label">Publicações</div>
-        </div>
-        <div class="qm-card" role="listitem">
-          <div class="qm-value">1.807</div>
-          <div class="qm-label">Seguidores</div>
-        </div>
-        <div class="qm-card" role="listitem">
-          <div class="qm-value">67</div>
-          <div class="qm-label">Seguindo</div>
-        </div>
-        <div class="qm-card" role="listitem">
-          <div class="qm-value">~4,0%</div>
-          <div class="qm-label">Engajamento</div>
-        </div>
-        <div class="qm-card" role="listitem" style="border-color: rgba(200,150,62,0.40); background: rgba(200,150,62,0.10);">
-          <div class="qm-value">7</div>
-          <div class="qm-label">Posts Analisados</div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ══════════════════════════════════════
-       SEÇÃO 1 — VISÃO GERAL DO PERFIL
-  ══════════════════════════════════════ -->
-  <section class="section" aria-labelledby="s1-title">
-    <p class="section-number">01</p>
-    <div class="divider" aria-hidden="true"></div>
-    <h2 class="section-title" id="s1-title">Visão Geral do Perfil</h2>
-
-    <table class="audit-table" aria-label="Dados do perfil">
-      <thead>
-        <tr>
-          <th scope="col">Métrica</th>
-          <th scope="col">Valor</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr><td>Usuário</td><td class="hl">@batista.de.pinheiros</td></tr>
-        <tr><td>Nome</td><td>1ª Igreja Batista em Pinheiros</td></tr>
-        <tr><td>Categoria</td><td>Igreja Evangélica</td></tr>
-        <tr><td>Publicações</td><td>193</td></tr>
-        <tr><td>Seguidores</td><td>1.807</td></tr>
-        <tr><td>Seguindo</td><td>67</td></tr>
-        <tr><td>Proporção Seguidores/Seguindo</td><td>27:1 &nbsp;<span class="tag-saudavel">saudável</span></td></tr>
-        <tr><td>Link externo</td><td>Página do Facebook (1ª Igreja Batista em Pinheiros)</td></tr>
-      </tbody>
-    </table>
-
-    <div class="assessment-block">
-      <h4>Avaliação da Bio</h4>
-      <p>
-        A bio é funcional e informativa — lista claramente os horários de culto (domingo às 11h e 19h), Escola Bíblica Dominical (domingo às 10h), o endereço físico com referência útil à estação de metrô Pinheiros e disponibilidade de estacionamento. No entanto, <span class="hl-red">falta um link de URL</span> para site, WhatsApp ou Linktree onde visitantes possam tomar uma próxima ação (contato, participar de um grupo, doação). O link para o Facebook está presente, mas pode não ser o CTA mais eficaz para o público mais jovem.
-      </p>
+  <div class="cover-inner">
+    <div class="cover-badge">
+      <span class="dot"></span>
+      Auditoria Instagram · Abril 2026
     </div>
 
-    <div class="assessment-block">
-      <h4>Foto de Perfil</h4>
-      <p>
-        O logotipo é limpo e legível — o escudo verde com "Primeira Igreja Batista de Pinheiros" é reconhecível e profissional.
-      </p>
-    </div>
-  </section>
+    <h1 id="cover-title">
+      <span class="grad-text">@batista.de.pinheiros</span>
+    </h1>
+    <p class="cover-sub">
+      <strong>1ª Igreja Batista em Pinheiros</strong> · São Paulo, SP
+    </p>
 
-  <!-- ══════════════════════════════════════
-       SEÇÃO 2 — ESTRATÉGIA DE CONTEÚDO
-  ══════════════════════════════════════ -->
-  <section class="section" aria-labelledby="s2-title">
-    <p class="section-number">02</p>
-    <div class="divider" aria-hidden="true"></div>
-    <h2 class="section-title" id="s2-title">Estratégia de Conteúdo</h2>
-
-    <div class="inline-note">
-      O perfil usa quase exclusivamente <strong style="color:#e8b44a">Reels</strong> (vídeos curtos). Nos 7 posts mais recentes analisados, <strong style="color:#e8b44a">6 foram Reels</strong> e 1 foi um Carrossel (post com múltiplas fotos do aniversário da igreja). Não houve posts estáticos de imagem única nos conteúdos recentes, o que está alinhado com a preferência atual do algoritmo do Instagram por vídeo.
-    </div>
-
-    <p class="section-number" style="margin-bottom:16px;">Pilares de Conteúdo Observados</p>
-    <div class="pillar-grid">
-      <div class="pillar-card">
-        <div class="pillar-card-title">Momentos de Louvor</div>
-        <p>Reels que capturam os cultos de domingo, com músicas de louvor, cenas da congregação e legendas com versículos. Este é o tipo de conteúdo dominante.</p>
+    <div class="metrics-row" role="list" aria-label="Métricas principais">
+      <div class="metric-card" role="listitem">
+        <div class="metric-label">Seguidores</div>
+        <div class="metric-value grad-text">1.814</div>
+        <div class="metric-sub">perfil ativo</div>
       </div>
-      <div class="pillar-card">
-        <div class="pillar-card-title">Comunicados e Eventos</div>
-        <p>Reels gráficos promovendo eventos específicos (ex: o Musical de Páscoa <em>"A Cruz: Espetáculo da Vida"</em>).</p>
+      <div class="metric-card" role="listitem">
+        <div class="metric-label">Posts totais</div>
+        <div class="metric-value grad-text">194</div>
+        <div class="metric-sub">publicados</div>
       </div>
-      <div class="pillar-card">
-        <div class="pillar-card-title">Destaque dos Ministérios</div>
-        <p>Grupo de jovens (via colaboração com @habitejuventude), celebração do Dia da Mulher.</p>
+      <div class="metric-card" role="listitem">
+        <div class="metric-label">Posts analisados</div>
+        <div class="metric-value grad-text">30</div>
+        <div class="metric-sub">set/2025 – abr/2026</div>
       </div>
-      <div class="pillar-card">
-        <div class="pillar-card-title">Datas Comemorativas</div>
-        <p>Carrossel do 76º aniversário da igreja.</p>
+      <div class="metric-card" role="listitem">
+        <div class="metric-label">Score médio</div>
+        <div class="metric-value grad-text">91,1</div>
+        <div class="metric-sub">curtidas + coments×3</div>
       </div>
     </div>
 
-    <div class="two-col">
-      <div class="pos-block">
-        <div class="block-label">Pontos Positivos</div>
-        <p class="block-text">
-          Os pilares de conteúdo são coerentes e bem alinhados com a identidade da igreja. As legendas consistentemente incluem um versículo bíblico relevante, o que reforça o tom espiritual e oferece valor devocional além do visual. O estilo de escrita é caloroso e acessível.
-        </p>
-      </div>
-      <div class="gap-block">
-        <div class="block-label">Lacunas</div>
-        <p class="block-text">
-          Há pouca variedade de conteúdo além dos cultos. Tipos de conteúdo que poderiam diversificar e ampliar o perfil: clipes de ensino pastoral ou devocionais, bastidores dos ministérios, depoimentos, conteúdo de alcance comunitário, formatos de perguntas e respostas, e séries devocionais sazonais.
-        </p>
-      </div>
+    <div class="cover-meta">
+      <span>12 de abril de 2026</span> · 30 posts analisados individualmente ·
+      Período: <span>17 set 2025 – 11 abr 2026</span>
     </div>
-  </section>
+  </div>
+</section>
 
-  <!-- ══════════════════════════════════════
-       SEÇÃO 3 — MÉTRICAS DE ENGAJAMENTO
-  ══════════════════════════════════════ -->
-  <section class="section" aria-labelledby="s3-title">
-    <p class="section-number">03</p>
-    <div class="divider" aria-hidden="true"></div>
-    <h2 class="section-title" id="s3-title">Métricas de Engajamento</h2>
+<!-- ══ NAV ════════════════════════════════════════════════ -->
+<nav class="nav" aria-label="Seções da auditoria">
+  <div class="nav-inner">
+    <a href="#diagnostico">Diagnóstico</a>
+    <a href="#tabela">30 Posts</a>
+    <a href="#rankings">Rankings</a>
+    <a href="#formatos">Formatos</a>
+    <a href="#tendencia">Tendência</a>
+    <a href="#funcionou">Funcionou</a>
+    <a href="#audiencia">Audiência</a>
+    <a href="#naofuncionou">Não Funcionou</a>
+    <a href="#insights">Insights</a>
+    <a href="#recomendacoes">Recomendações</a>
+    <a href="#quickwins">Quick Wins</a>
+    <a href="#pontuacao">Pontuação</a>
+  </div>
+</nav>
 
-    <div class="eng-summary">
-      <div class="eng-badge">
-        <div class="eng-badge-val">~73</div>
-        <div class="eng-badge-label">Média de curtidas por post (amostra)</div>
-      </div>
-      <div class="eng-badge">
-        <div class="eng-badge-val green">~4,0%</div>
-        <div class="eng-badge-label">Taxa de engajamento estimada<br/>(acima do benchmark de 1–3%)</div>
-      </div>
-    </div>
+<main>
 
-    <p class="section-number" style="margin-bottom:16px;">7 Posts Analisados</p>
+  <!-- ══ 01 · DIAGNÓSTICO ══════════════════════════════════ -->
+  <section class="section" id="diagnostico" aria-labelledby="tit-diagnostico">
+    <p class="section-eyebrow">01 · Diagnóstico</p>
+    <h2 class="section-title" id="tit-diagnostico">Diagnóstico do Perfil</h2>
+    <p class="section-desc">Avaliação de bio, grid, destaques e presença geral da conta</p>
+    <div class="divider"></div>
 
-    <div class="post-cards">
-      <div class="post-card">
-        <div class="post-card-type">Reel</div>
-        <div class="post-card-name">Promo Musical de Páscoa ("A Cruz")</div>
-        <div class="post-card-date">3 de abr</div>
-        <div class="post-card-stats">
-          <div class="stat-item"><span class="stat-num">95</span><span class="stat-label">Curtidas</span></div>
-          <div class="stat-item"><span class="stat-num">4</span><span class="stat-label">Comentários</span></div>
-        </div>
-      </div>
-      <div class="post-card">
-        <div class="post-card-type collab">Reel (collab)</div>
-        <div class="post-card-name">Jovens no Parque</div>
-        <div class="post-card-date">3 de abr</div>
-        <div class="post-card-stats">
-          <div class="stat-item"><span class="stat-num">58</span><span class="stat-label">Curtidas</span></div>
-          <div class="stat-item"><span class="stat-num">2+</span><span class="stat-label">Comentários</span></div>
-        </div>
-      </div>
-      <div class="post-card">
-        <div class="post-card-type carousel">Carrossel</div>
-        <div class="post-card-name">76º Aniversário da Igreja</div>
-        <div class="post-card-date">26 de mar</div>
-        <div class="post-card-stats">
-          <div class="stat-item"><span class="stat-num">85</span><span class="stat-label">Curtidas</span></div>
-          <div class="stat-item"><span class="stat-num">—</span><span class="stat-label">Comentários</span></div>
-        </div>
-      </div>
-      <div class="post-card">
-        <div class="post-card-type">Reel</div>
-        <div class="post-card-name">Culto de Domingo</div>
-        <div class="post-card-date">18 de mar</div>
-        <div class="post-card-stats">
-          <div class="stat-item"><span class="stat-num">76</span><span class="stat-label">Curtidas</span></div>
-          <div class="stat-item"><span class="stat-num">2</span><span class="stat-label">Comentários</span></div>
-        </div>
-      </div>
-      <div class="post-card">
-        <div class="post-card-type">Reel</div>
-        <div class="post-card-name">Dia da Mulher</div>
-        <div class="post-card-date">12 de mar</div>
-        <div class="post-card-stats">
-          <div class="stat-item"><span class="stat-num">59</span><span class="stat-label">Curtidas</span></div>
-          <div class="stat-item"><span class="stat-num">—</span><span class="stat-label">Comentários</span></div>
-        </div>
-      </div>
-      <div class="post-card">
-        <div class="post-card-type">Reel</div>
-        <div class="post-card-name">Culto de Domingo</div>
-        <div class="post-card-date">4 de mar</div>
-        <div class="post-card-stats">
-          <div class="stat-item"><span class="stat-num">65</span><span class="stat-label">Curtidas</span></div>
-          <div class="stat-item"><span class="stat-num">3</span><span class="stat-label">Comentários</span></div>
-        </div>
-      </div>
-      <div class="post-card">
-        <div class="post-card-type">Reel</div>
-        <div class="post-card-name">Celebração 22/02</div>
-        <div class="post-card-date">25 de fev</div>
-        <div class="post-card-stats">
-          <div class="stat-item"><span class="stat-num">72</span><span class="stat-label">Curtidas</span></div>
-          <div class="stat-item"><span class="stat-num">—</span><span class="stat-label">Comentários</span></div>
-        </div>
-      </div>
+    <div class="overview-block" role="region" aria-label="Visão geral do perfil">
+      A <strong>Primeira Igreja Batista de Pinheiros</strong> é um perfil institucional/religioso com 1.814 seguidores e 194 posts, produzindo conteúdo quase exclusivamente em formato Reel (28 dos 30 posts). O perfil tem presença estável e consistente, mas apresenta <strong>engajamento modesto e em declínio</strong>: posts de out/2025 geraram scores significativamente maiores que os de mar/abr 2026. A linha editorial é coerente — louvor, culto, eventos e comunhão — mas <strong>repetitiva demais</strong>. O maior problema estratégico não está na qualidade do conteúdo, mas na <strong>ausência quase total de elementos de conversão</strong>: sem destaques, sem Linktree, sem CTAs nas legendas e com hashtags genéricas e inconsistentes.
     </div>
 
-    <div class="assessment-block">
-      <h4>Observação sobre Comentários</h4>
-      <p>
-        Os comentários são <span class="hl-red">baixos</span> em relação às curtidas. A maioria dos posts recebe 2–4 comentários, sugerindo que os seguidores consomem o conteúdo de forma passiva, sem ser estimulados a interagir. Este é um <span class="hl">importante alavancador de crescimento</span>.
-      </p>
-    </div>
-  </section>
+    <div class="diag-grid" role="list" aria-label="Itens do diagnóstico">
 
-  <!-- ══════════════════════════════════════
-       SEÇÃO 4 — ESTRATÉGIA DE HASHTAGS
-  ══════════════════════════════════════ -->
-  <section class="section" aria-labelledby="s4-title">
-    <p class="section-number">04</p>
-    <div class="divider" aria-hidden="true"></div>
-    <h2 class="section-title" id="s4-title">Estratégia de Hashtags</h2>
-
-    <p style="font-size:0.82rem;color:var(--text-muted);margin-bottom:12px;">Hashtags em uso — Posts gerais:</p>
-    <div class="hashtag-pills" role="list" aria-label="Hashtags usadas nos posts gerais">
-      <span class="hashtag-pill" role="listitem">#batistadepinheiros</span>
-      <span class="hashtag-pill" role="listitem">#cultodominical</span>
-      <span class="hashtag-pill" role="listitem">#igrejabatista</span>
-      <span class="hashtag-pill" role="listitem">#igreja</span>
-    </div>
-
-    <p style="font-size:0.82rem;color:var(--text-muted);margin-bottom:12px;margin-top:20px;">Hashtags adicionais — Posts de Juventude:</p>
-    <div class="hashtag-pills" role="list" aria-label="Hashtags dos posts de juventude">
-      <span class="hashtag-pill juventude" role="listitem">#HabiteJuventude</span>
-      <span class="hashtag-pill juventude" role="listitem">#JuventudeBatista</span>
-      <span class="hashtag-pill juventude" role="listitem">#juventudecristã</span>
-    </div>
-
-    <div class="assessment-block" style="margin-top:24px;">
-      <h4>Problemas Identificados</h4>
-      <p>
-        Apenas <span class="hl-red">4–7 hashtags</span> são usadas por post, bem abaixo das <span class="hl">10–15 recomendadas</span> para descoberta orgânica. Todas são de marca ou categoria — não há <strong style="color:#e8b44a">hashtags de localização</strong> (ex: <code>#igrejasaopaulo</code> <code>#Pinheiros</code> <code>#SP</code>) nem <strong style="color:#e8b44a">hashtags temáticas ou devocionais</strong> (ex: <code>#fé</code> <code>#devocional</code> <code>#palavradeDeus</code>) que poderiam atrair novos públicos fora dos seguidores atuais.
-      </p>
-    </div>
-  </section>
-
-  <!-- ══════════════════════════════════════
-       SEÇÃO 5 — FREQUÊNCIA DE PUBLICAÇÃO
-  ══════════════════════════════════════ -->
-  <section class="section" aria-labelledby="s5-title">
-    <p class="section-number">05</p>
-    <div class="divider" aria-hidden="true"></div>
-    <h2 class="section-title" id="s5-title">Frequência de Publicação</h2>
-
-    <div class="freq-bar" role="group" aria-label="Frequência atual de postagem">
-      <span class="freq-label">Atual (1–2x por semana)</span>
-      <div class="freq-track" role="progressbar" aria-valuenow="33" aria-valuemin="0" aria-valuemax="100">
-        <div class="freq-fill atual"></div>
-      </div>
-    </div>
-    <div class="freq-bar" role="group" aria-label="Frequência ideal de postagem">
-      <span class="freq-label">Ideal (3–5x por semana)</span>
-      <div class="freq-track" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100">
-        <div class="freq-fill ideal"></div>
-      </div>
-    </div>
-
-    <div class="inline-note" style="margin-top:20px;">
-      Com base nas datas dos posts, o perfil publica aproximadamente <strong style="color:#e8b44a">1–2 vezes por semana</strong>, o que é adequado mas está no limite inferior para crescimento. A frequência ideal para um perfil de igreja em busca de crescimento seria <strong style="color:#3aaf65">3–5 vezes por semana</strong>, com mix de Reels, Stories (não auditados aqui) e posts estáticos.
-    </div>
-  </section>
-
-  <!-- ══════════════════════════════════════
-       SEÇÃO 6 — PONTOS FORTES
-  ══════════════════════════════════════ -->
-  <section class="section" aria-labelledby="s6-title">
-    <p class="section-number">06</p>
-    <div class="divider" aria-hidden="true"></div>
-    <h2 class="section-title" id="s6-title">Pontos Fortes</h2>
-
-    <div class="strength-list">
-      <div class="strength-item">
-        <div class="strength-icon" aria-hidden="true">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+      <div class="diag-card" role="listitem">
+        <div class="diag-icon warn" aria-label="Atenção">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
         </div>
         <div>
-          <div class="strength-title">Conteúdo Visual Autêntico</div>
-          <p class="strength-desc">Fotos e vídeos genuínos da congregação criam calor e senso de comunidade, muito mais eficazes do que imagens de banco de fotos.</p>
+          <div class="diag-label">Bio</div>
+          <div class="diag-text">Parcialmente estratégica</div>
+          <div class="diag-note">Horários e endereço estão, mas falta propósito emocional. CTA ausente. Link aponta para Facebook — oportunidade perdida.</div>
         </div>
       </div>
-      <div class="strength-item">
-        <div class="strength-icon" aria-hidden="true">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+
+      <div class="diag-card" role="listitem">
+        <div class="diag-icon bad" aria-label="Problema">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>
         </div>
         <div>
-          <div class="strength-title">Voz Teológica Consistente</div>
-          <p class="strength-desc">Cada legenda remete às Escrituras, o que reforça a missão e dá peso espiritual ao conteúdo.</p>
+          <div class="diag-label">Link na Bio</div>
+          <div class="diag-text">Link direto para Facebook</div>
+          <div class="diag-note">Direcionar para outra rede social é oportunidade perdida. Sem Linktree, inscrições ou formulário de visita.</div>
         </div>
       </div>
-      <div class="strength-item">
-        <div class="strength-icon" aria-hidden="true">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+
+      <div class="diag-card" role="listitem">
+        <div class="diag-icon warn" aria-label="Atenção">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
         </div>
         <div>
-          <div class="strength-title">Taxa de Engajamento Elevada</div>
-          <p class="strength-desc">Engajamento acima de 4% é excelente para um perfil deste tamanho, indicando uma comunidade fiel e genuinamente engajada.</p>
+          <div class="diag-label">Grid Visual</div>
+          <div class="diag-text">Identidade irregular</div>
+          <div class="diag-note">Sem paleta, tipografia ou template padronizado. Reels de culto ao vivo com estética variável. Thumbnails sem identidade.</div>
         </div>
       </div>
-      <div class="strength-item">
-        <div class="strength-icon" aria-hidden="true">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/></svg>
+
+      <div class="diag-card" role="listitem">
+        <div class="diag-icon bad" aria-label="Problema crítico">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>
         </div>
         <div>
-          <div class="strength-title">Foco em Reels</div>
-          <p class="strength-desc">Alinhamento inteligente com o algoritmo do Instagram, maximizando o potencial de alcance orgânico.</p>
+          <div class="diag-label">Destaques de Stories</div>
+          <div class="diag-text">Perfil sem destaques</div>
+          <div class="diag-note">Lacuna estratégica crítica. Novo visitante não encontra nenhum atalho para entender a comunidade. Vitrine permanente vazia.</div>
         </div>
       </div>
-      <div class="strength-item">
-        <div class="strength-icon" aria-hidden="true">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+
+      <div class="diag-card" role="listitem">
+        <div class="diag-icon bad" aria-label="Problema">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>
         </div>
         <div>
-          <div class="strength-title">Colaboração com Ministérios</div>
-          <p class="strength-desc">O post em collab com @habitejuventude é uma ótima prática que amplia o alcance e destaca a diversidade dos ministérios.</p>
+          <div class="diag-label">CTAs nas Legendas</div>
+          <div class="diag-text">Zero CTAs em 30 posts</div>
+          <div class="diag-note">Nenhuma legenda termina com pergunta ou convite explícito à interação. Causa direta do baixo volume de comentários.</div>
         </div>
       </div>
+
+      <div class="diag-card" role="listitem">
+        <div class="diag-icon ok" aria-label="Positivo">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>
+        </div>
+        <div>
+          <div class="diag-label">Frequência</div>
+          <div class="diag-text">Consistente (~1x/semana)</div>
+          <div class="diag-note">Publicação semanal constante ao longo de 7 meses. A queda de engajamento não é por inatividade, mas por repetição de estratégia.</div>
+        </div>
+      </div>
+
+      <div class="diag-card" role="listitem">
+        <div class="diag-icon warn" aria-label="Atenção">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+        </div>
+        <div>
+          <div class="diag-label">Hashtags</div>
+          <div class="diag-text">Inconsistente (0–9 por post)</div>
+          <div class="diag-note">Varia de 0 a 9 sem padrão. Posts sem hashtags e posts com genéricas demais. Sem estratégia de nicho definida.</div>
+        </div>
+      </div>
+
+      <div class="diag-card" role="listitem">
+        <div class="diag-icon bad" aria-label="Problema">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>
+        </div>
+        <div>
+          <div class="diag-label">Resposta a Comentários</div>
+          <div class="diag-text">Raramente / nunca</div>
+          <div class="diag-note">Em nenhum dos 30 posts foi observada resposta da conta. Relacionamento desperdiçado e sinal negativo para o algoritmo.</div>
+        </div>
+      </div>
+
     </div>
   </section>
 
-  <!-- ══════════════════════════════════════
-       SEÇÃO 7 — RECOMENDAÇÕES
-  ══════════════════════════════════════ -->
-  <section class="section" aria-labelledby="s7-title">
-    <p class="section-number">07</p>
-    <div class="divider" aria-hidden="true"></div>
-    <h2 class="section-title" id="s7-title">Recomendações</h2>
+  <!-- ══ 02 · TABELA 30 POSTS ══════════════════════════════ -->
+  <section class="section" id="tabela" aria-labelledby="tit-tabela">
+    <p class="section-eyebrow">02 · Dados Completos</p>
+    <h2 class="section-title" id="tit-tabela">Tabela de Coleta — 30 Posts</h2>
+    <p class="section-desc">Todos os posts analisados individualmente · Score = Curtidas + (Comentários × 3) · * Comentários do Facebook incluídos</p>
+    <div class="divider"></div>
 
-    <div class="rec-grid">
-      <div class="rec-card">
-        <div class="rec-card-icon" aria-hidden="true">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-        </div>
-        <div class="rec-card-title">Bio e Perfil</div>
-        <p class="rec-card-text">
-          Adicione um link — idealmente um <strong>Linktree</strong> ou <strong>link direto para o WhatsApp</strong> — para que visitantes possam tomar uma ação imediata (visitar a igreja, contato com a liderança, participar de um grupo). Considere incluir uma linha de CTA clara na bio como <em>"Venha nos conhecer 👇."</em>
-        </p>
-      </div>
-
-      <div class="rec-card">
-        <div class="rec-card-icon" aria-hidden="true">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
-        </div>
-        <div class="rec-card-title">Mix de Conteúdo</div>
-        <p class="rec-card-text">
-          Introduza pelo menos <strong>2–3 novos tipos de conteúdo</strong>: vídeos curtos de reflexão pastoral (30–60s com o pastor compartilhando um pensamento devocional), depoimentos de membros (mesmo 15 segundos) e apresentações dos ministérios (EBD, equipe de louvor, etc.). Isso atrai visitantes que ainda não se sentem prontos para comparecer pessoalmente.
-        </p>
-      </div>
-
-      <div class="rec-card">
-        <div class="rec-card-icon" aria-hidden="true">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></svg>
-        </div>
-        <div class="rec-card-title">Hashtags</div>
-        <p class="rec-card-text">
-          Expanda para <strong>12–15 hashtags por post</strong>. Inclua hashtags locais como <strong>#igrejasaopaulo</strong>, <strong>#Pinheiros</strong>, <strong>#igrejaemSP</strong> e temáticas/devocionais como <strong>#palavradeDeus</strong>, <strong>#devocional</strong>, <strong>#fécristã</strong>. Esta é uma das mudanças mais fáceis e de maior impacto para implementar imediatamente.
-        </p>
-      </div>
-
-      <div class="rec-card">
-        <div class="rec-card-icon" aria-hidden="true">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
-        </div>
-        <div class="rec-card-title">CTA nas Legendas</div>
-        <p class="rec-card-text">
-          Encerre cada legenda com uma pergunta ou CTA para estimular comentários — por exemplo: <em>"Como Deus tem te lembrado da Sua presença essa semana? Conta pra gente nos comentários 💬"</em>. Isso pode aumentar significativamente os comentários e impulsionar a distribuição algorítmica.
-        </p>
-      </div>
-
-      <div class="rec-card">
-        <div class="rec-card-icon" aria-hidden="true">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
-        </div>
-        <div class="rec-card-title">Stories</div>
-        <p class="rec-card-text">
-          Os Stories não foram auditados, mas são fundamentais — eles garantem <strong>visibilidade diária</strong> e mantêm a comunidade engajada entre os posts. O perfil deve publicar Stories diários com: comunicados, bastidores, enquetes, versículo do dia e lembretes sobre horários de culto.
-        </p>
-      </div>
-
-      <div class="rec-card">
-        <div class="rec-card-icon" aria-hidden="true">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
-        </div>
-        <div class="rec-card-title">Frequência de Publicação</div>
-        <p class="rec-card-text">
-          Busque <strong>3–4 posts por semana</strong>. Uma agenda editorial simples poderia ser: <em>Segunda</em> — Reel devocional, <em>Quarta</em> — destaque de ministério ou comunicado, <em>Sábado</em> — prévia do culto, <em>Domingo</em> — resumo do culto.
-        </p>
-      </div>
-
-      <div class="rec-card">
-        <div class="rec-card-icon" aria-hidden="true">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
-        </div>
-        <div class="rec-card-title">Presença Multiplataforma</div>
-        <p class="rec-card-text">
-          A página do Facebook está vinculada, mas não há URL de site. Uma landing page simples (até mesmo via <strong>Neon ou Linktree</strong>) reunindo horários, inscrição em eventos e contato pelo WhatsApp reduziria a fricção para novos visitantes que descobrem a igreja pelo Instagram.
-        </p>
-      </div>
+    <div class="table-wrap" role="region" aria-label="Tabela de posts" tabindex="0">
+      <table>
+        <thead>
+          <tr>
+            <th>#</th>
+            <th>Data</th>
+            <th>Conta</th>
+            <th>Formato</th>
+            <th>Curtidas</th>
+            <th>Coments</th>
+            <th>Score</th>
+            <th>Hashtags</th>
+            <th>Tema</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td class="td-num">1</td><td>08/04/26</td><td><span class="badge-conta habite">@habitejuventude</span></td><td><span class="badge-fmt fmt-foto">Foto</span></td><td>22</td><td>3</td><td class="td-score lo">31</td><td>4</td><td>Habite Celebração / Retiro 2026</td></tr>
+          <tr><td class="td-num">2</td><td>01/04/26</td><td><span class="badge-conta">@batista.de.pinheiros</span></td><td><span class="badge-fmt fmt-reel">Reel</span></td><td>95</td><td>4</td><td class="td-score">107</td><td>0</td><td>Convite Musical de Páscoa</td></tr>
+          <tr><td class="td-num">3</td><td>01/04/26</td><td><span class="badge-conta habite">@habitejuventude</span></td><td><span class="badge-fmt fmt-reel">Reel</span></td><td>59</td><td>2</td><td class="td-score">65</td><td>4</td><td>PG no parque / jovens</td></tr>
+          <tr><td class="td-num">4</td><td>26/03/26</td><td><span class="badge-conta">@batista.de.pinheiros</span></td><td><span class="badge-fmt fmt-carrossel">Carrossel</span></td><td>85</td><td>2</td><td class="td-score">91</td><td>1</td><td>76 anos da igreja</td></tr>
+          <tr><td class="td-num">5</td><td>18/03/26</td><td><span class="badge-conta">@batista.de.pinheiros</span></td><td><span class="badge-fmt fmt-reel">Reel</span></td><td>76</td><td>2</td><td class="td-score">82</td><td>4</td><td>Adoração / Salmos 34</td></tr>
+          <tr><td class="td-num">6</td><td>12/03/26</td><td><span class="badge-conta">@batista.de.pinheiros</span></td><td><span class="badge-fmt fmt-reel">Reel</span></td><td>59</td><td>0</td><td class="td-score">59</td><td>0</td><td>Dia das Mulheres / Prov 31</td></tr>
+          <tr><td class="td-num">7</td><td>04/03/26</td><td><span class="badge-conta">@batista.de.pinheiros</span></td><td><span class="badge-fmt fmt-reel">Reel</span></td><td>65</td><td>3</td><td class="td-score">74</td><td>4</td><td>Culto / "Não há nada melhor"</td></tr>
+          <tr><td class="td-num">8</td><td>25/02/26</td><td><span class="badge-conta">@batista.de.pinheiros</span></td><td><span class="badge-fmt fmt-reel">Reel</span></td><td>72</td><td>0</td><td class="td-score">72</td><td>0</td><td>Unidade em Cristo / João 17</td></tr>
+          <tr><td class="td-num">9</td><td>20/02/26</td><td><span class="badge-conta">@batista.de.pinheiros</span></td><td><span class="badge-fmt fmt-reel">Reel</span></td><td>48</td><td>23*</td><td class="td-score">117</td><td>0</td><td>Santa Ceia / 1Co 11:26</td></tr>
+          <tr><td class="td-num">10</td><td>18/02/26</td><td><span class="badge-conta habite">@habitejuventude</span></td><td><span class="badge-fmt fmt-reel">Reel</span></td><td>53</td><td>3</td><td class="td-score">62</td><td>5</td><td>AcampaDentro / Salmos 119</td></tr>
+          <tr><td class="td-num">11</td><td>05/02/26</td><td><span class="badge-conta">@batista.de.pinheiros</span></td><td><span class="badge-fmt fmt-reel">Reel</span></td><td>77</td><td>10*</td><td class="td-score">107</td><td>0</td><td>Culto dominical / Ef 4:15</td></tr>
+          <tr><td class="td-num">12</td><td>28/01/26</td><td><span class="badge-conta">@batista.de.pinheiros</span></td><td><span class="badge-fmt fmt-reel">Reel</span></td><td>79</td><td>10*</td><td class="td-score">109</td><td>6</td><td>Devoção matinal / 2Tim 1:12</td></tr>
+          <tr><td class="td-num">13</td><td>21/01/26</td><td><span class="badge-conta">@batista.de.pinheiros</span></td><td><span class="badge-fmt fmt-reel">Reel</span></td><td>52</td><td>2</td><td class="td-score">58</td><td>6</td><td>Santa Ceia / início 2026</td></tr>
+          <tr><td class="td-num">14</td><td>28/12/25</td><td><span class="badge-conta">@batista.de.pinheiros</span></td><td><span class="badge-fmt fmt-reel">Reel</span></td><td>60</td><td>2</td><td class="td-score">66</td><td>6</td><td>Natallegria / Jerusa Liasch</td></tr>
+          <tr><td class="td-num">15</td><td>24/12/25</td><td><span class="badge-conta">@batista.de.pinheiros</span></td><td><span class="badge-fmt fmt-reel">Reel</span></td><td>91</td><td>2</td><td class="td-score">97</td><td>8</td><td>Musical de Natal / Feliz Natal</td></tr>
+          <tr><td class="td-num">16</td><td>18/12/25</td><td><span class="badge-conta">@batista.de.pinheiros</span></td><td><span class="badge-fmt fmt-reel">Reel</span></td><td>141</td><td>3</td><td class="td-score hi">150</td><td>5</td><td>Paulo Rogério / Natallegria</td></tr>
+          <tr><td class="td-num">17</td><td>12/12/25</td><td><span class="badge-conta">@batista.de.pinheiros</span></td><td><span class="badge-fmt fmt-reel">Reel</span></td><td>30</td><td>0</td><td class="td-score lo">30</td><td>1</td><td>Anúncio participação Natallegria</td></tr>
+          <tr><td class="td-num">18</td><td>05/12/25</td><td><span class="badge-conta">@batista.de.pinheiros</span></td><td><span class="badge-fmt fmt-reel">Reel</span></td><td>40</td><td>0</td><td class="td-score lo">40</td><td>0</td><td>Programação Natallegria (início)</td></tr>
+          <tr><td class="td-num">19</td><td>04/12/25</td><td><span class="badge-conta">@batista.de.pinheiros</span></td><td><span class="badge-fmt fmt-reel">Reel</span></td><td>71</td><td>1</td><td class="td-score">74</td><td>6</td><td>Comunhão como corpo / 1Co 12</td></tr>
+          <tr><td class="td-num">20</td><td>27/11/25</td><td><span class="badge-conta">@batista.de.pinheiros</span></td><td><span class="badge-fmt fmt-reel">Reel</span></td><td>108</td><td>4</td><td class="td-score hi">120</td><td>8</td><td>AcampaDentro liderança / Mt 18</td></tr>
+          <tr><td class="td-num">21</td><td>19/11/25</td><td><span class="badge-conta">@batista.de.pinheiros</span></td><td><span class="badge-fmt fmt-reel">Reel</span></td><td>76</td><td>6</td><td class="td-score">94</td><td>4</td><td>Daycamp família / Sl 133</td></tr>
+          <tr><td class="td-num">22</td><td>05/11/25</td><td><span class="badge-conta">@batista.de.pinheiros</span></td><td><span class="badge-fmt fmt-reel">Reel</span></td><td>103</td><td>3</td><td class="td-score hi">112</td><td>7</td><td>Seguir Cristo / Mc 8:34</td></tr>
+          <tr><td class="td-num">23</td><td>29/10/25</td><td><span class="badge-conta">@batista.de.pinheiros</span></td><td><span class="badge-fmt fmt-reel">Reel</span></td><td>99</td><td>0</td><td class="td-score">99</td><td>6</td><td>Fé e presença de Jesus / Mc 6</td></tr>
+          <tr><td class="td-num">24</td><td>23/10/25</td><td><span class="badge-conta">@batista.de.pinheiros</span></td><td><span class="badge-fmt fmt-reel">Reel</span></td><td>86</td><td>3</td><td class="td-score">95</td><td>7</td><td>Mulheres no parque / Prov 31</td></tr>
+          <tr><td class="td-num">25</td><td>22/10/25</td><td><span class="badge-conta">@batista.de.pinheiros</span></td><td><span class="badge-fmt fmt-reel">Reel</span></td><td>65</td><td>3</td><td class="td-score">74</td><td>6</td><td>Dia dos Professores / Prov 22</td></tr>
+          <tr><td class="td-num">26</td><td>15/10/25</td><td><span class="badge-conta">@batista.de.pinheiros</span></td><td><span class="badge-fmt fmt-reel">Reel</span></td><td>105</td><td>2</td><td class="td-score hi">111</td><td>9</td><td>Dia das Crianças / Mc 10:14</td></tr>
+          <tr class="row-top1"><td class="td-num">27</td><td>08/10/25</td><td><span class="badge-conta">@batista.de.pinheiros</span></td><td><span class="badge-fmt fmt-reel">Reel</span></td><td>156</td><td>6</td><td class="td-score hi">174</td><td>6</td><td>Culto Jesus Servo / Mc 10:45</td></tr>
+          <tr><td class="td-num">28</td><td>02/10/25</td><td><span class="badge-conta">@batista.de.pinheiros</span></td><td><span class="badge-fmt fmt-reel">Reel</span></td><td>107</td><td>11</td><td class="td-score hi">140</td><td>6</td><td>Batismo / Mc 16:16</td></tr>
+          <tr><td class="td-num">29</td><td>24/09/25</td><td><span class="badge-conta">@batista.de.pinheiros</span></td><td><span class="badge-fmt fmt-reel">Reel</span></td><td>40</td><td>2</td><td class="td-score lo">46</td><td>5</td><td>Santa Ceia / Fl 2:9</td></tr>
+          <tr><td class="td-num">30</td><td>17/09/25</td><td><span class="badge-conta">@batista.de.pinheiros</span></td><td><span class="badge-fmt fmt-reel">Reel</span></td><td>66</td><td>1</td><td class="td-score">69</td><td>5</td><td>Nome de Jesus / Fl 2:9-10</td></tr>
+        </tbody>
+      </table>
     </div>
   </section>
 
-  <!-- ══════════════════════════════════════
-       SEÇÃO 8 — PONTUAÇÃO GERAL
-  ══════════════════════════════════════ -->
-  <section class="section" aria-labelledby="s8-title">
-    <p class="section-number">08</p>
-    <div class="divider" aria-hidden="true"></div>
-    <h2 class="section-title" id="s8-title">Pontuação Geral</h2>
+  <!-- ══ 03 · RANKINGS ════════════════════════════════════ -->
+  <section class="section" id="rankings" aria-labelledby="tit-rankings">
+    <p class="section-eyebrow">03 · Rankings</p>
+    <h2 class="section-title" id="tit-rankings">Ranking de Engajamento</h2>
+    <p class="section-desc">Top 10 e Bottom 10 posts ordenados por Score</p>
+    <div class="divider"></div>
 
-    <div class="score-rows" role="list" aria-label="Pontuações por área">
+    <p class="section-eyebrow" style="margin-bottom:12px;">Top 10 — Maior Engajamento</p>
+    <div class="table-wrap" role="region" aria-label="Top 10 posts" tabindex="0" style="margin-bottom:32px;">
+      <table>
+        <thead>
+          <tr>
+            <th>Rank</th>
+            <th>Post #</th>
+            <th>Data</th>
+            <th>Formato</th>
+            <th>Score</th>
+            <th>Curtidas</th>
+            <th>Comentários</th>
+            <th>Tema</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="row-top1"><td><span class="medal">🥇</span>1</td><td class="td-num">27</td><td>08/10/25</td><td><span class="badge-fmt fmt-reel">Reel</span></td><td class="td-score hi">174</td><td>156</td><td>6</td><td>Culto dominical / Jesus Servo</td></tr>
+          <tr><td>2</td><td class="td-num">16</td><td>18/12/25</td><td><span class="badge-fmt fmt-reel">Reel</span></td><td class="td-score hi">150</td><td>141</td><td>3</td><td>Paulo Rogério / Natallegria</td></tr>
+          <tr><td>3</td><td class="td-num">28</td><td>02/10/25</td><td><span class="badge-fmt fmt-reel">Reel</span></td><td class="td-score hi">140</td><td>107</td><td>11</td><td>Batismo / Mc 16:16</td></tr>
+          <tr><td>4</td><td class="td-num">20</td><td>27/11/25</td><td><span class="badge-fmt fmt-reel">Reel</span></td><td class="td-score hi">120</td><td>108</td><td>4</td><td>AcampaDentro liderança</td></tr>
+          <tr><td>5</td><td class="td-num">9</td><td>20/02/26</td><td><span class="badge-fmt fmt-reel">Reel</span></td><td class="td-score">117*</td><td>48</td><td>23</td><td>Santa Ceia / 1Co 11:26</td></tr>
+          <tr><td>6</td><td class="td-num">22</td><td>05/11/25</td><td><span class="badge-fmt fmt-reel">Reel</span></td><td class="td-score">112</td><td>103</td><td>3</td><td>Seguir Cristo / Mc 8</td></tr>
+          <tr><td>7</td><td class="td-num">26</td><td>15/10/25</td><td><span class="badge-fmt fmt-reel">Reel</span></td><td class="td-score">111</td><td>105</td><td>2</td><td>Dia das Crianças</td></tr>
+          <tr><td>8</td><td class="td-num">12</td><td>28/01/26</td><td><span class="badge-fmt fmt-reel">Reel</span></td><td class="td-score">109</td><td>79</td><td>10</td><td>Devoção matinal / 2Tm 1:12</td></tr>
+          <tr><td>9</td><td class="td-num">2</td><td>01/04/26</td><td><span class="badge-fmt fmt-reel">Reel</span></td><td class="td-score">107</td><td>95</td><td>4</td><td>Convite Musical de Páscoa</td></tr>
+          <tr><td>10</td><td class="td-num">11</td><td>05/02/26</td><td><span class="badge-fmt fmt-reel">Reel</span></td><td class="td-score">107</td><td>77</td><td>10</td><td>Culto dominical / Ef 4:15</td></tr>
+        </tbody>
+      </table>
+    </div>
 
-      <div class="score-row" role="listitem">
-        <span class="score-row-label">Completude do perfil</span>
-        <div class="score-bar-wrap"><div class="score-bar s4" style="width:80%"></div></div>
-        <div class="score-row-stars" aria-label="4 de 5 estrelas">
-          <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star empty">★</span>
+    <p class="section-eyebrow" style="margin-bottom:12px;">Bottom 10 — Menor Engajamento</p>
+    <div class="table-wrap" role="region" aria-label="Bottom 10 posts" tabindex="0">
+      <table>
+        <thead>
+          <tr>
+            <th>Rank</th>
+            <th>Post #</th>
+            <th>Data</th>
+            <th>Formato</th>
+            <th>Score</th>
+            <th>Curtidas</th>
+            <th>Comentários</th>
+            <th>Tema</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="row-bot1"><td>30</td><td class="td-num">17</td><td>12/12/25</td><td><span class="badge-fmt fmt-reel">Reel</span></td><td class="td-score lo">30</td><td>30</td><td>0</td><td>Anúncio participação especial</td></tr>
+          <tr><td>29</td><td class="td-num">1</td><td>08/04/26</td><td><span class="badge-fmt fmt-foto">Foto</span></td><td class="td-score lo">31</td><td>22</td><td>3</td><td>Habite Celebração / Retiro</td></tr>
+          <tr><td>28</td><td class="td-num">18</td><td>05/12/25</td><td><span class="badge-fmt fmt-reel">Reel</span></td><td class="td-score lo">40</td><td>40</td><td>0</td><td>Natallegria começa / programação</td></tr>
+          <tr><td>27</td><td class="td-num">29</td><td>24/09/25</td><td><span class="badge-fmt fmt-reel">Reel</span></td><td class="td-score lo">46</td><td>40</td><td>2</td><td>Santa Ceia / Fl 2:9</td></tr>
+          <tr><td>26</td><td class="td-num">13</td><td>21/01/26</td><td><span class="badge-fmt fmt-reel">Reel</span></td><td class="td-score lo">58</td><td>52</td><td>2</td><td>Santa Ceia / início 2026</td></tr>
+          <tr><td>25</td><td class="td-num">6</td><td>12/03/26</td><td><span class="badge-fmt fmt-reel">Reel</span></td><td class="td-score lo">59</td><td>59</td><td>0</td><td>Dia das Mulheres</td></tr>
+          <tr><td>24</td><td class="td-num">10</td><td>18/02/26</td><td><span class="badge-fmt fmt-reel">Reel</span></td><td class="td-score lo">62</td><td>53</td><td>3</td><td>AcampaDentro juventude</td></tr>
+          <tr><td>23</td><td class="td-num">3</td><td>01/04/26</td><td><span class="badge-fmt fmt-reel">Reel</span></td><td class="td-score lo">65</td><td>59</td><td>2</td><td>PG no parque (jovens)</td></tr>
+          <tr><td>22</td><td class="td-num">14</td><td>28/12/25</td><td><span class="badge-fmt fmt-reel">Reel</span></td><td class="td-score lo">66</td><td>60</td><td>2</td><td>Natallegria / Jerusa Liasch</td></tr>
+          <tr><td>21</td><td class="td-num">30</td><td>17/09/25</td><td><span class="badge-fmt fmt-reel">Reel</span></td><td class="td-score lo">69</td><td>66</td><td>1</td><td>Nome de Jesus</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <!-- ══ 04 · MIX DE FORMATOS ══════════════════════════════ -->
+  <section class="section" id="formatos" aria-labelledby="tit-formatos">
+    <p class="section-eyebrow">04 · Mix de Formatos</p>
+    <h2 class="section-title" id="tit-formatos">Análise de Formatos</h2>
+    <p class="section-desc">Distribuição e performance por tipo de publicação</p>
+    <div class="divider"></div>
+
+    <div class="mix-grid" role="list" aria-label="Mix de formatos">
+      <div class="mix-card" role="listitem">
+        <div class="mix-fmt">Reel</div>
+        <div class="mix-pct grad-text">93,3%</div>
+        <div class="mix-bar-wrap"><div class="mix-bar reel" style="width:93.3%"></div></div>
+        <div class="mix-meta">28 posts · Score médio: 91,3</div>
+      </div>
+      <div class="mix-card" role="listitem">
+        <div class="mix-fmt">Carrossel</div>
+        <div class="mix-pct" style="color:var(--gold-400)">3,3%</div>
+        <div class="mix-bar-wrap"><div class="mix-bar carr" style="width:3.3%"></div></div>
+        <div class="mix-meta">1 post · Score: 91,0</div>
+      </div>
+      <div class="mix-card" role="listitem">
+        <div class="mix-fmt">Foto</div>
+        <div class="mix-pct" style="color:#5aaaf5">3,3%</div>
+        <div class="mix-bar-wrap"><div class="mix-bar foto" style="width:3.3%"></div></div>
+        <div class="mix-meta">1 post · Score: 31,0</div>
+      </div>
+    </div>
+
+    <div class="overview-block">
+      O perfil é quase um <strong>canal de Reels puro</strong>. O único carrossel (76 anos da igreja) teve desempenho médio alinhado à média dos Reels (91,0), o que sugere que o formato carrossel tem <strong>potencial não explorado</strong> — especialmente para conteúdo reflexivo, bíblico ou de apresentação da comunidade. Não há texto estático, Stories com destaques nem conteúdo gerado pelo usuário.
+    </div>
+  </section>
+
+  <!-- ══ 05 · TENDÊNCIA ════════════════════════════════════ -->
+  <section class="section" id="tendencia" aria-labelledby="tit-tendencia">
+    <p class="section-eyebrow">05 · Tendência</p>
+    <h2 class="section-title" id="tit-tendencia">Tendência de Engajamento</h2>
+    <p class="section-desc">Evolução do score médio ao longo dos 7 meses analisados</p>
+    <div class="divider"></div>
+
+    <div class="trend-block">
+      <div class="timeline" role="list" aria-label="Linha do tempo de engajamento">
+        <div class="tl-item" role="listitem">
+          <div class="tl-dot high" aria-label="Engajamento alto">~120</div>
+          <div class="tl-label">Set–Out<br>2025</div>
+          <div class="tl-score">Pico histórico</div>
         </div>
-        <span class="score-row-num">4/5</span>
+        <div class="tl-item" role="listitem">
+          <div class="tl-dot high" aria-label="Engajamento alto">~110</div>
+          <div class="tl-label">Nov<br>2025</div>
+          <div class="tl-score">AcampaDentro</div>
+        </div>
+        <div class="tl-item" role="listitem">
+          <div class="tl-dot medium" aria-label="Engajamento médio">~75</div>
+          <div class="tl-label">Dez<br>2025</div>
+          <div class="tl-score">Natallegria</div>
+        </div>
+        <div class="tl-item" role="listitem">
+          <div class="tl-dot medium" aria-label="Engajamento médio">~82</div>
+          <div class="tl-label">Jan<br>2026</div>
+          <div class="tl-score">Queda virada</div>
+        </div>
+        <div class="tl-item" role="listitem">
+          <div class="tl-dot low" aria-label="Engajamento baixo">~75</div>
+          <div class="tl-label">Fev<br>2026</div>
+          <div class="tl-score">Queda</div>
+        </div>
+        <div class="tl-item" role="listitem">
+          <div class="tl-dot low" aria-label="Engajamento baixo">~72</div>
+          <div class="tl-label">Mar<br>2026</div>
+          <div class="tl-score">Mínimo</div>
+        </div>
+        <div class="tl-item" role="listitem">
+          <div class="tl-dot medium" aria-label="Engajamento médio">~89</div>
+          <div class="tl-label">Abr<br>2026</div>
+          <div class="tl-score">Páscoa</div>
+        </div>
       </div>
 
-      <div class="score-row" role="listitem">
-        <span class="score-row-label">Qualidade do conteúdo</span>
-        <div class="score-bar-wrap"><div class="score-bar s4" style="width:80%"></div></div>
-        <div class="score-row-stars" aria-label="4 de 5 estrelas">
-          <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star empty">★</span>
+      <p>Entre setembro e outubro de 2025, o perfil registrou seus <strong>maiores scores</strong>: o reel do batismo (140) e o culto "Jesus Servo" (174) são os picos absolutos da amostra. Novembro também foi forte com o AcampaDentro (120) e "Seguir Cristo" (112).</p>
+      <p>O <strong>Natallegria</strong> criou um pico isolado em dezembro: o reel com Paulo Rogério alcançou 141 curtidas (score 150), o maior número de curtidas do período. Porém, os posts de anúncio que precederam o evento (posts 17 e 18) foram os piores da série — o perfil <strong>sabe celebrar mas não sabe criar antecipação</strong>.</p>
+      <p>A virada de ano (jan/2026) e os meses seguintes mostram <strong>queda sistemática</strong>. Os posts de fev–abr têm em média scores muito abaixo de out–nov/2025. A frequência permaneceu constante, afastando a hipótese de queda por inatividade. A causa mais provável: <strong>repetição de formato e tom sem renovação de estratégia</strong>.</p>
+    </div>
+  </section>
+
+  <!-- ══ 06 · O QUE FUNCIONOU ══════════════════════════════ -->
+  <section class="section" id="funcionou" aria-labelledby="tit-funcionou">
+    <p class="section-eyebrow">06 · Padrões Positivos</p>
+    <h2 class="section-title" id="tit-funcionou">O Que Está Funcionando</h2>
+    <p class="section-desc">Top 5 posts e os padrões que explicam o alto desempenho</p>
+    <div class="divider"></div>
+
+    <div class="pattern-list" role="list" aria-label="Padrões de sucesso">
+
+      <div class="pattern-card" role="listitem">
+        <div class="pattern-score-box" aria-label="Score 174">
+          <div class="pattern-score-num">174</div>
+          <div class="pattern-score-lbl">Score</div>
         </div>
-        <span class="score-row-num">4/5</span>
+        <div>
+          <div class="pattern-title">Culto dominical "Jesus Servo" · Post #27</div>
+          <div class="pattern-date">08 de outubro de 2025 · Reel · Mc 10:45 · Davi Sacer</div>
+          <div class="pattern-body">O maior score do período. A legenda conecta uma cena de culto real com uma <strong>mensagem teológica clara sobre servir</strong>. A combinação imagens vivas + versículo preciso + música reconhecível gerou seis comentários emocionados — incluindo pessoas fora da congregação ("Lindos, saudades"). O diferencial foi o versículo de Marcos 10:45: uma mensagem sobre serviço com <strong>identificação imediata em qualquer cristão</strong>, não apenas nos membros.</div>
+        </div>
       </div>
 
-      <div class="score-row" role="listitem">
-        <span class="score-row-label">Variedade de conteúdo</span>
-        <div class="score-bar-wrap"><div class="score-bar s3" style="width:60%"></div></div>
-        <div class="score-row-stars" aria-label="3 de 5 estrelas">
-          <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star empty">★</span><span class="star empty">★</span>
+      <div class="pattern-card" role="listitem">
+        <div class="pattern-score-box" aria-label="Score 150">
+          <div class="pattern-score-num">150</div>
+          <div class="pattern-score-lbl">Score</div>
         </div>
-        <span class="score-row-num">3/5</span>
+        <div>
+          <div class="pattern-title">Paulo Rogério no Natallegria · Post #16</div>
+          <div class="pattern-date">18 de dezembro de 2025 · Reel · 141 curtidas</div>
+          <div class="pattern-body">Único post a ultrapassar 140 curtidas. A presença de um <strong>artista cristão reconhecido funcionou como extensão de alcance orgânico</strong> — os seguidores de Paulo Rogério trouxeram tráfego externo. É o único post onde o conteúdo transcende o círculo fechado da congregação. Prova que <strong>parcerias com figuras externas amplificam o alcance de forma desproporcional</strong>.</div>
+        </div>
       </div>
 
-      <div class="score-row" role="listitem">
-        <span class="score-row-label">Taxa de engajamento</span>
-        <div class="score-bar-wrap"><div class="score-bar s5" style="width:100%"></div></div>
-        <div class="score-row-stars" aria-label="5 de 5 estrelas">
-          <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span>
+      <div class="pattern-card" role="listitem">
+        <div class="pattern-score-box" aria-label="Score 140">
+          <div class="pattern-score-num">140</div>
+          <div class="pattern-score-lbl">Score</div>
         </div>
-        <span class="score-row-num">5/5</span>
+        <div>
+          <div class="pattern-title">Batismo · Post #28</div>
+          <div class="pattern-date">02 de outubro de 2025 · Reel · 11 comentários</div>
+          <div class="pattern-body">O evento de maior apelo emocional da amostra. Onze comentários no Instagram (vs. média de 2-3), com depoimentos de familiares dos batizados, membros e pessoas de outras cidades ("Próximo ano estarei aí"). <strong>Batismos geram a combinação perfeita de emoção + marco de vida + celebração coletiva</strong>. O perfil subestima esse potencial — foi postado uma única vez em 7 meses.</div>
+        </div>
       </div>
 
-      <div class="score-row" role="listitem">
-        <span class="score-row-label">Estratégia de hashtags</span>
-        <div class="score-bar-wrap"><div class="score-bar s2" style="width:40%"></div></div>
-        <div class="score-row-stars" aria-label="2 de 5 estrelas">
-          <span class="star">★</span><span class="star">★</span><span class="star empty">★</span><span class="star empty">★</span><span class="star empty">★</span>
+      <div class="pattern-card" role="listitem">
+        <div class="pattern-score-box" aria-label="Score 120">
+          <div class="pattern-score-num">120</div>
+          <div class="pattern-score-lbl">Score</div>
         </div>
-        <span class="score-row-num">2/5</span>
+        <div>
+          <div class="pattern-title">AcampaDentro Liderança · Post #20</div>
+          <div class="pattern-date">27 de novembro de 2025 · Reel · Mt 18:20</div>
+          <div class="pattern-body"><strong>Eventos fora do culto dominical performam acima da média</strong>. O AcampaDentro criou um contexto de "experiência especial" que o culto regular não consegue replicar. A legenda usou Mateus 18:20 de forma precisa e contextualizada com o evento. Quatro comentários com engajamento emocional alto.</div>
+        </div>
       </div>
 
-      <div class="score-row" role="listitem">
-        <span class="score-row-label">Frequência de publicação</span>
-        <div class="score-bar-wrap"><div class="score-bar s3" style="width:60%"></div></div>
-        <div class="score-row-stars" aria-label="3 de 5 estrelas">
-          <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star empty">★</span><span class="star empty">★</span>
+      <div class="pattern-card" role="listitem">
+        <div class="pattern-score-box" aria-label="Score 117">
+          <div class="pattern-score-num">117</div>
+          <div class="pattern-score-lbl">Score*</div>
         </div>
-        <span class="score-row-num">3/5</span>
-      </div>
-
-      <div class="score-row" role="listitem">
-        <span class="score-row-label">Interação com comunidade</span>
-        <div class="score-bar-wrap"><div class="score-bar s2" style="width:40%"></div></div>
-        <div class="score-row-stars" aria-label="2 de 5 estrelas">
-          <span class="star">★</span><span class="star">★</span><span class="star empty">★</span><span class="star empty">★</span><span class="star empty">★</span>
+        <div>
+          <div class="pattern-title">Santa Ceia / Facebook crosspost · Post #9</div>
+          <div class="pattern-date">20 de fevereiro de 2026 · Reel · 23 comentários do Facebook</div>
+          <div class="pattern-body">Ponto fora da curva: <strong>23 comentários do Facebook via integração cruzada</strong>. No Instagram, praticamente zero interação. Isso revela que <strong>a base mais ativa da igreja ainda está no Facebook</strong> — uma descoberta importante para a estratégia de distribuição. O conteúdo atual está otimizado para a audiência mais velha do Facebook, não para o Instagram.</div>
         </div>
-        <span class="score-row-num">2/5</span>
       </div>
 
     </div>
+  </section>
 
-    <div class="overall-block" role="region" aria-label="Nota geral final">
-      <div class="big-score grad-text">3,5 / 5</div>
-      <div class="score-stars" aria-label="3 estrelas e meia de 5">★★★½☆</div>
-      <p>
-        O perfil tem uma base sólida e autêntica, com excelente engajamento de uma audiência fiel. As maiores oportunidades ainda inexploradas estão na <strong style="color:#e8b44a">otimização de hashtags</strong>, no <strong style="color:#e8b44a">uso de CTAs para gerar comentários</strong>, na <strong style="color:#e8b44a">diversificação de conteúdo</strong> e em uma presença consistente nos <strong style="color:#e8b44a">Stories</strong> — nenhuma delas exige recursos significativos para ser implementada.
+  <!-- ══ 07 · AUDIÊNCIA ════════════════════════════════════ -->
+  <section class="section" id="audiencia" aria-labelledby="tit-audiencia">
+    <p class="section-eyebrow">07 · Audiência</p>
+    <h2 class="section-title" id="tit-audiencia">O Que a Audiência Está Dizendo</h2>
+    <p class="section-desc">Análise dos comentários e comportamento da base nos top posts</p>
+    <div class="divider"></div>
+
+    <div class="audience-grid" role="list" aria-label="Análise de audiência">
+      <div class="audience-card" role="listitem">
+        <div class="audience-card-title">Tipos de Comentário Predominantes</div>
+        <ul>
+          <li>Elogios emocionais com emojis religiosos</li>
+          <li>Declarações de fé e testemunhos pessoais</li>
+          <li>Familiares de batizados expressando orgulho</li>
+          <li>Ex-membros manifestando saudade</li>
+          <li>Membros ativos celebrando momentos coletivos</li>
+        </ul>
+      </div>
+      <div class="audience-card" role="listitem">
+        <div class="audience-card-title">Padrões Recorrentes</div>
+        <ul>
+          <li>"meu filho Celso" — familiares de batizados</li>
+          <li>"saudades" — ex-membros ou de outras cidades</li>
+          <li>"glórias a Deus" — membros ativos</li>
+          <li>@mefvida aparece repetidamente como voz ativa</li>
+          <li>@falagabis (verificada) comenta em vários posts</li>
+        </ul>
+      </div>
+      <div class="audience-card" role="listitem">
+        <div class="audience-card-title">Perguntas da Audiência</div>
+        <ul>
+          <li>Nenhuma pergunta direta identificada nos comentários</li>
+          <li>A audiência celebra, mas não pergunta</li>
+          <li>Questões práticas (horários, como participar) não aparecem</li>
+          <li>Sinal de que o perfil não cria espaço para diálogo</li>
+        </ul>
+      </div>
+      <div class="audience-card" role="listitem">
+        <div class="audience-card-title">Críticas e Interação da Conta</div>
+        <ul>
+          <li>Nenhuma crítica encontrada nos 30 posts</li>
+          <li>Perfil atrai exclusivamente público já convertido</li>
+          <li>A conta raramente ou nunca responde comentários</li>
+          <li>Oportunidade desperdiçada de construir relacionamento</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="audience-insight" role="region" aria-label="Insight principal da audiência">
+      A comunidade tem um <strong>núcleo ativo e fiel</strong> que comenta com genuinidade e afeto, mas é pequeno. Os elogios e emojis religiosos indicam alta identificação emocional com a instituição, mas <strong>baixa predisposição para engajamento conversacional</strong> — provavelmente porque as legendas nunca fazem perguntas. Há também um grupo silencioso de ex-membros e pessoas de outras cidades que demonstra afeto (saudades, emoção por batismos) e que poderia ser convertido em <strong>audiência digital mais ativa</strong> se o conteúdo fosse além do registro de eventos.
+    </div>
+  </section>
+
+  <!-- ══ 08 · O QUE NÃO FUNCIONOU ═════════════════════════ -->
+  <section class="section" id="naofuncionou" aria-labelledby="tit-naofuncionou">
+    <p class="section-eyebrow">08 · Padrões Negativos</p>
+    <h2 class="section-title" id="tit-naofuncionou">O Que Não Está Funcionando</h2>
+    <p class="section-desc">Bottom 5 padrões e os motivos do baixo desempenho</p>
+    <div class="divider"></div>
+
+    <div class="pattern-list" role="list" aria-label="Padrões de baixo desempenho">
+
+      <div class="pattern-card bad" role="listitem">
+        <div class="pattern-score-box" aria-label="Score 30">
+          <div class="pattern-score-num">30</div>
+          <div class="pattern-score-lbl">Score</div>
+        </div>
+        <div>
+          <div class="pattern-title">Anúncio de participação especial no Natallegria · Post #17</div>
+          <div class="pattern-date">12 de dezembro de 2025 · Reel · 0 comentários</div>
+          <div class="pattern-body">O pior post de todo o período. A legenda é mínima ("E com muita alegria, anunciamos…") sem descrição do artista ou contexto suficiente. Zero comentários. <strong>Posts de anúncio sem identidade visual atraente e sem CTA forte não funcionam</strong> — o Instagram não é cartaz de evento.</div>
+        </div>
+      </div>
+
+      <div class="pattern-card bad" role="listitem">
+        <div class="pattern-score-box" aria-label="Score 40">
+          <div class="pattern-score-num">40</div>
+          <div class="pattern-score-lbl">Score</div>
+        </div>
+        <div>
+          <div class="pattern-title">Programação do Natallegria · Post #18</div>
+          <div class="pattern-date">05 de dezembro de 2025 · Reel · 0 comentários</div>
+          <div class="pattern-body">Mesmo problema do Post #17: <strong>antecipação de evento sem engajamento emocional</strong> na legenda, sem mostrar o porquê de comparecer, sem CTA para confirmar presença. Zero comentários. O perfil sabe celebrar eventos mas não sabe <strong>criar expectativa</strong> antes deles.</div>
+        </div>
+      </div>
+
+      <div class="pattern-card bad" role="listitem">
+        <div class="pattern-score-box" aria-label="Score 46">
+          <div class="pattern-score-num">46</div>
+          <div class="pattern-score-lbl">Score</div>
+        </div>
+        <div>
+          <div class="pattern-title">Santa Ceia · Post #29</div>
+          <div class="pattern-date">24 de setembro de 2025 · Reel · Fl 2:9</div>
+          <div class="pattern-body">Legenda curta, sem versículo expandido, sem contextualização da experiência. O tema é recorrente — <strong>Santa Ceia aparece 3 vezes na amostra</strong> — e a repetição sem variação de abordagem produz fadiga. A audiência já viu esta mensagem antes e não tem razão para parar o scroll.</div>
+        </div>
+      </div>
+
+      <div class="pattern-card bad" role="listitem">
+        <div class="pattern-score-box" aria-label="Score 31">
+          <div class="pattern-score-num">31</div>
+          <div class="pattern-score-lbl">Score</div>
+        </div>
+        <div>
+          <div class="pattern-title">Habite Celebração / Retiro 2026 · Post #1</div>
+          <div class="pattern-date">08 de abril de 2026 · @habitejuventude · Foto</div>
+          <div class="pattern-body">Post de @habitejuventude marcado no perfil da Batista. Não foi produzido pela conta — é <strong>conteúdo de terceiro com audiência própria e menor sobreposição</strong> com os seguidores da Batista. O alcance do Habite Juventude não se transfere automaticamente para a conta da Batista.</div>
+        </div>
+      </div>
+
+      <div class="pattern-card bad" role="listitem">
+        <div class="pattern-score-box" aria-label="Score 58">
+          <div class="pattern-score-num">58</div>
+          <div class="pattern-score-lbl">Score</div>
+        </div>
+        <div>
+          <div class="pattern-title">Santa Ceia / início de 2026 · Post #13</div>
+          <div class="pattern-date">21 de janeiro de 2026 · Reel · 1Co 11:26</div>
+          <div class="pattern-body">Terceira aparição de "Santa Ceia" nos 30 posts, com <strong>legenda quase idêntica às anteriores</strong> (mesma citação de 1 Coríntios 11:26). A audiência já viu esta mensagem antes — a repetição sem nova perspectiva <strong>elimina o motivo de parar o scroll</strong>.</div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ══ 09 · INSIGHTS ═════════════════════════════════════ -->
+  <section class="section" id="insights" aria-labelledby="tit-insights">
+    <p class="section-eyebrow">09 · Insights</p>
+    <h2 class="section-title" id="tit-insights">Principais Insights</h2>
+    <p class="section-desc">7 descobertas fundamentais desta análise</p>
+    <div class="divider"></div>
+
+    <div class="insights-list" role="list" aria-label="Principais insights">
+
+      <div class="insight-item" role="listitem">
+        <div class="insight-num" aria-hidden="true">1</div>
+        <div class="insight-text"><strong>O Reel é o único formato usado, mas sem variação interna de estilo.</strong> 93% dos posts são Reels, porém com abordagem idêntica — cenas de culto ao vivo com legenda reflexiva. Não há Reels educativos, entrevistas, bastidores ou formatos de "conversa" que gerem comentários orgânicos no Instagram.</div>
+      </div>
+
+      <div class="insight-item" role="listitem">
+        <div class="insight-num" aria-hidden="true">2</div>
+        <div class="insight-text"><strong>Eventos especiais performam muito acima do culto regular.</strong> Batismos, Natallegria com artistas, Daycamp e AcampaDentro têm scores sistematicamente maiores (média ~130) vs. cultos dominicais regulares (média ~75). O perfil poderia dobrar a frequência de posts de eventos e reduzir a de cultos genéricos.</div>
+      </div>
+
+      <div class="insight-item" role="listitem">
+        <div class="insight-num" aria-hidden="true">3</div>
+        <div class="insight-text"><strong>Parceria com artistas externos é o principal amplificador de alcance.</strong> O único post com mais de 140 curtidas foi o que contou com Paulo Rogério. Posts com artistas ou figuras reconhecidas atraem audiência nova — os demais circulam dentro do mesmo círculo fechado.</div>
+      </div>
+
+      <div class="insight-item" role="listitem">
+        <div class="insight-num" aria-hidden="true">4</div>
+        <div class="insight-text"><strong>A base ativa do Facebook é maior e mais comentarista.</strong> Posts integrados ao Facebook recebem 8-23 comentários de lá, enquanto o Instagram gera 0-3 na mesma publicação. O conteúdo atual está otimizado para a audiência mais velha do Facebook, não para o Instagram.</div>
+      </div>
+
+      <div class="insight-item" role="listitem">
+        <div class="insight-num" aria-hidden="true">5</div>
+        <div class="insight-text"><strong>Nenhuma legenda usa CTA ou pergunta para estimular comentários.</strong> Em 30 posts analisados, zero legendas terminam com uma pergunta ou convite explícito à interação. Isso é a causa mais direta do volume baixo de comentários orgânicos no Instagram.</div>
+      </div>
+
+      <div class="insight-item" role="listitem">
+        <div class="insight-num" aria-hidden="true">6</div>
+        <div class="insight-text"><strong>A repetição temática gera fadiga.</strong> Santa Ceia aparece 3 vezes com o mesmo arco narrativo. Culto dominical genérico aparece +15 vezes (cena de culto → citação bíblica → hashtags). A audiência não é surpreendida e o algoritmo não tem sinal de que o conteúdo gera conversas novas.</div>
+      </div>
+
+      <div class="insight-item" role="listitem">
+        <div class="insight-num" aria-hidden="true">7</div>
+        <div class="insight-text"><strong>Sem destaques e sem link funcional, o perfil desperdiça 100% do tráfego de visitantes.</strong> Qualquer pessoa que chega ao perfil (pelo Reels Explorer, convite, busca) não encontra nenhum ponto de entrada — sem salas abertas, sem inscrição, sem história da igreja. A taxa de conversão de visitante → seguidor deve ser muito baixa.</div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ══ 10 · RECOMENDAÇÕES ═══════════════════════════════ -->
+  <section class="section" id="recomendacoes" aria-labelledby="tit-recomendacoes">
+    <p class="section-eyebrow">10 · Recomendações</p>
+    <h2 class="section-title" id="tit-recomendacoes">Recomendações Práticas</h2>
+    <p class="section-desc">8 ações ordenadas por impacto para os próximos 30–60 dias</p>
+    <div class="divider"></div>
+
+    <div class="recs-grid" role="list" aria-label="Recomendações práticas">
+
+      <div class="rec-card" role="listitem">
+        <div class="rec-top">
+          <div class="rec-num" aria-hidden="true">01</div>
+          <div style="flex:1">
+            <div class="rec-title">Criar Destaques de Stories imediatamente</div>
+          </div>
+          <span class="rec-impact alto" aria-label="Impacto alto">Alto</span>
+        </div>
+        <div class="rec-body">Criar pelo menos 5 destaques: <strong>"Quem Somos"</strong>, <strong>"Cultos"</strong> (horários e endereço), <strong>"Eventos"</strong> (Retiro 2026), <strong>"Jovens"</strong> (Habite Juventude), e <strong>"Como Visitar"</strong>. Isso transforma o perfil de vitrine de registros para porta de entrada real.</div>
+      </div>
+
+      <div class="rec-card" role="listitem">
+        <div class="rec-top">
+          <div class="rec-num" aria-hidden="true">02</div>
+          <div style="flex:1">
+            <div class="rec-title">Adicionar Linktree à bio com 4 links prioritários</div>
+          </div>
+          <span class="rec-impact alto" aria-label="Impacto alto">Alto</span>
+        </div>
+        <div class="rec-body">Criar Linktree com: <strong>(1)</strong> Inscrição Retiro 2026, <strong>(2)</strong> Como chegar + horários dos cultos, <strong>(3)</strong> Canal do YouTube ou transmissões ao vivo, <strong>(4)</strong> WhatsApp da secretaria. Substituir o link do Facebook por este Linktree.</div>
+      </div>
+
+      <div class="rec-card" role="listitem">
+        <div class="rec-top">
+          <div class="rec-num" aria-hidden="true">03</div>
+          <div style="flex:1">
+            <div class="rec-title">Terminar toda legenda com pergunta ou CTA</div>
+          </div>
+          <span class="rec-impact alto" aria-label="Impacto alto">Alto</span>
+        </div>
+        <div class="rec-body">Exemplos: <strong>"Qual versículo tem sustentado você nessa semana?"</strong>, <strong>"Marca alguém que precisa ouvir isso"</strong>, <strong>"Deixa um ❤ se você também já sentiu a presença de Deus assim"</strong>. Implementar nos próximos 8 posts.</div>
+      </div>
+
+      <div class="rec-card" role="listitem">
+        <div class="rec-top">
+          <div class="rec-num" aria-hidden="true">04</div>
+          <div style="flex:1">
+            <div class="rec-title">Criar capa/thumbnail padronizado para todos os Reels</div>
+          </div>
+          <span class="rec-impact alto" aria-label="Impacto alto">Alto</span>
+        </div>
+        <div class="rec-body">Template simples: <strong>logotipo da Batista</strong> em um canto + faixa de cor na parte inferior com tema e versículo central. Melhora o CTR, cria identidade no grid e sinaliza profissionalismo. Ferramentas: <strong>Canva</strong> (gratuito) + preset de cor institucional.</div>
+      </div>
+
+      <div class="rec-card" role="listitem">
+        <div class="rec-top">
+          <div class="rec-num" aria-hidden="true">05</div>
+          <div style="flex:1">
+            <div class="rec-title">Publicar toda quinta-feira e domingo</div>
+          </div>
+          <span class="rec-impact medio" aria-label="Impacto médio-alto">Médio-Alto</span>
+        </div>
+        <div class="rec-body"><strong>Domingo:</strong> Reel do culto do dia. <strong>Quinta-feira:</strong> Reel de natureza diferente — devocional pessoal, bastidores de evento, entrevista com membro ou anúncio de programação semanal. A segunda postagem semanal aumenta presença sem sobrecarregar a produção.</div>
+      </div>
+
+      <div class="rec-card" role="listitem">
+        <div class="rec-top">
+          <div class="rec-num" aria-hidden="true">06</div>
+          <div style="flex:1">
+            <div class="rec-title">Produzir ao menos 1 Reel de batismo ou evento especial por mês</div>
+          </div>
+          <span class="rec-impact alto" aria-label="Impacto alto">Alto</span>
+        </div>
+        <div class="rec-body">Os dados são claros: batismos e eventos especiais têm score <strong>~80% acima</strong> dos cultos regulares. Planejar a cobertura do batismo do próximo trimestre como <strong>evento de conteúdo</strong> (múltiplos posts), não como registro único.</div>
+      </div>
+
+      <div class="rec-card" role="listitem">
+        <div class="rec-top">
+          <div class="rec-num" aria-hidden="true">07</div>
+          <div style="flex:1">
+            <div class="rec-title">Responder 100% dos comentários em 24 horas</div>
+          </div>
+          <span class="rec-impact medio" aria-label="Impacto médio">Médio</span>
+        </div>
+        <div class="rec-body">Mesmo com uma resposta simples, a conta sinaliza ao algoritmo que o post gera <strong>conversa bilateral</strong>. Designar uma pessoa responsável para monitorar comentários <strong>toda segunda e quinta-feira</strong>.</div>
+      </div>
+
+      <div class="rec-card" role="listitem">
+        <div class="rec-top">
+          <div class="rec-num" aria-hidden="true">08</div>
+          <div style="flex:1">
+            <div class="rec-title">Criar ao menos 2 carrosséis por mês com conteúdo devocional</div>
+          </div>
+          <span class="rec-impact medio" aria-label="Impacto médio">Médio</span>
+        </div>
+        <div class="rec-body">Carrossel tem potencial de <strong>"salvar para ler depois"</strong> — sinal forte de qualidade para o algoritmo. Sugestões: <em>"5 versículos sobre esperança"</em>, <em>"Como é a EBD aqui?"</em>, <em>"A história de 76 anos em imagens"</em>. O único carrossel do período teve score compatível com os melhores Reels.</div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ══ 11 · QUICK WINS ═══════════════════════════════════ -->
+  <section class="section" id="quickwins" aria-labelledby="tit-quickwins">
+    <p class="section-eyebrow">11 · Quick Wins</p>
+    <h2 class="section-title" id="tit-quickwins">Próximos 14 Dias</h2>
+    <p class="section-desc">4 ações de alto impacto para implementar imediatamente</p>
+    <div class="divider"></div>
+
+    <div class="qw-list" role="list" aria-label="Quick wins">
+
+      <div class="qw-item" role="listitem">
+        <div class="qw-badge">
+          <div class="qw-when">Quando</div>
+          <div class="qw-time">Hoje mesmo</div>
+        </div>
+        <div>
+          <div class="qw-title">Criar 5 Destaques de Stories com conteúdo já existente</div>
+          <div class="qw-body">Não precisam ser perfeitos — a <strong>presença deles já muda a percepção do perfil</strong> para novos visitantes. Use stories antigos, fotos e vídeos guardados. Crie: Quem Somos · Cultos · Eventos · Jovens · Como Visitar.</div>
+        </div>
+      </div>
+
+      <div class="qw-item" role="listitem">
+        <div class="qw-badge">
+          <div class="qw-when">Quando</div>
+          <div class="qw-time">Esta semana</div>
+        </div>
+        <div>
+          <div class="qw-title">Substituir link do Facebook por Linktree com 4 links prioritários</div>
+          <div class="qw-body">Adicionar na bio: <strong>"Uma comunidade de fé no coração de Pinheiros. Venha nos visitar"</strong> e o CTA <strong>"Inscreva-se para o Retiro 2026 ↓"</strong>. O Linktree deve ter inscrição do retiro, horários, YouTube e WhatsApp da secretaria.</div>
+        </div>
+      </div>
+
+      <div class="qw-item" role="listitem">
+        <div class="qw-badge">
+          <div class="qw-when">Quando</div>
+          <div class="qw-time">Próximo post</div>
+        </div>
+        <div>
+          <div class="qw-title">Encerrar a legenda com uma pergunta direta e responder todos os comentários</div>
+          <div class="qw-body">Exemplo: <strong>"Qual promessa de Deus tem te sustentado este mês? Conta nos comentários"</strong>. Depois, responder todos os comentários que chegarem. Esse único gesto já sinaliza ao algoritmo que o post gera conversa bilateral.</div>
+        </div>
+      </div>
+
+      <div class="qw-item" role="listitem">
+        <div class="qw-badge">
+          <div class="qw-when">Quando</div>
+          <div class="qw-time">14 dias</div>
+        </div>
+        <div>
+          <div class="qw-title">Criar carrossel "O que esperar do Retiro 2026"</div>
+          <div class="qw-body">Use o post do Retiro (divulgado pelo Habite Juventude) como gancho para um <strong>carrossel próprio da conta Batista</strong> com programação, versículo central e CTA de inscrição. Este post pode alcançar os melhores números do mês se tiver legenda engajante e thumbnail atraente.</div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ══ 12 · PONTUAÇÃO ════════════════════════════════════ -->
+  <section class="section" id="pontuacao" aria-labelledby="tit-pontuacao">
+    <p class="section-eyebrow">12 · Pontuação</p>
+    <h2 class="section-title" id="tit-pontuacao">Avaliação Geral</h2>
+    <p class="section-desc">Scorecard por dimensão estratégica · escala de 1 a 5</p>
+    <div class="divider"></div>
+
+    <div class="score-list" role="list" aria-label="Scorecard por dimensão">
+      <div class="score-row" role="listitem">
+        <div class="score-row-label">Bio e Link</div>
+        <div class="score-bar-wrap"><div class="score-bar" style="width:40%" aria-hidden="true"></div></div>
+        <div class="score-val" aria-label="2 de 5">2/5</div>
+      </div>
+      <div class="score-row" role="listitem">
+        <div class="score-row-label">Grid Visual</div>
+        <div class="score-bar-wrap"><div class="score-bar" style="width:40%" aria-hidden="true"></div></div>
+        <div class="score-val" aria-label="2 de 5">2/5</div>
+      </div>
+      <div class="score-row" role="listitem">
+        <div class="score-row-label">Stories e Destaques</div>
+        <div class="score-bar-wrap"><div class="score-bar" style="width:20%" aria-hidden="true"></div></div>
+        <div class="score-val" aria-label="1 de 5">1/5</div>
+      </div>
+      <div class="score-row" role="listitem">
+        <div class="score-row-label">Mix de Formatos</div>
+        <div class="score-bar-wrap"><div class="score-bar" style="width:40%" aria-hidden="true"></div></div>
+        <div class="score-val" aria-label="2 de 5">2/5</div>
+      </div>
+      <div class="score-row" role="listitem">
+        <div class="score-row-label">CTAs e Legendas</div>
+        <div class="score-bar-wrap"><div class="score-bar" style="width:20%" aria-hidden="true"></div></div>
+        <div class="score-val" aria-label="1 de 5">1/5</div>
+      </div>
+      <div class="score-row" role="listitem">
+        <div class="score-row-label">Estratégia de Hashtags</div>
+        <div class="score-bar-wrap"><div class="score-bar" style="width:40%" aria-hidden="true"></div></div>
+        <div class="score-val" aria-label="2 de 5">2/5</div>
+      </div>
+      <div class="score-row" role="listitem">
+        <div class="score-row-label">Frequência de Publicação</div>
+        <div class="score-bar-wrap"><div class="score-bar" style="width:60%" aria-hidden="true"></div></div>
+        <div class="score-val" aria-label="3 de 5">3/5</div>
+      </div>
+      <div class="score-row" role="listitem">
+        <div class="score-row-label">Interação com Comunidade</div>
+        <div class="score-bar-wrap"><div class="score-bar" style="width:20%" aria-hidden="true"></div></div>
+        <div class="score-val" aria-label="1 de 5">1/5</div>
+      </div>
+    </div>
+
+    <div class="final-score" role="region" aria-label="Nota final">
+      <div class="final-num grad-text">3,0 / 5</div>
+      <div class="final-stars" aria-label="3 estrelas de 5">★★★☆☆</div>
+      <p class="final-note">
+        O perfil tem uma <strong>base sólida e uma comunidade genuinamente fiel</strong>, com conteúdo autêntico e presença consistente. As maiores oportunidades ainda inexploradas estão na <strong>criação de destaques</strong>, no uso de <strong>CTAs que gerem comentários</strong>, na <strong>diversificação de formatos</strong> e na <strong>otimização do link na bio</strong> — nenhuma delas exige recursos significativos para ser implementada. Com pequenas mudanças de estrutura, o perfil tem potencial real de dobrar o engajamento médio em 60 dias.
       </p>
     </div>
   </section>
 
-  <!-- ══════════════════════════════════════
-       RODAPÉ
-  ══════════════════════════════════════ -->
-  <footer>
-    <p>Auditoria gerada em <span>08/04/2025</span> · <span>@batista.de.pinheiros</span> · 1ª Igreja Batista em Pinheiros</p>
-  </footer>
+</main>
+
+<!-- ══ FOOTER ══════════════════════════════════════════════ -->
+<footer>
+  <p>Auditoria gerada em <span>12 de abril de 2026</span> · <span>@batista.de.pinheiros</span> · 1ª Igreja Batista em Pinheiros</p>
+  <p>30 posts analisados individualmente · Período: <span>17 set 2025 – 11 abr 2026</span></p>
+</footer>
 
 </body>
 </html>
