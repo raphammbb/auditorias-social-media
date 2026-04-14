@@ -1,0 +1,1406 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Auditoria Instagram — @gio.eloyalves</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;0,9..40,800;1,9..40,400&family=DM+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --rose-1: #C4607E;
+      --rose-2: #E8A0B4;
+      --nude-1: #C9956A;
+      --grad: linear-gradient(135deg, #C4607E, #E8A0B4, #C9956A);
+      --grad-soft: linear-gradient(135deg, rgba(196,96,126,0.8), rgba(232,160,180,0.7), rgba(201,149,106,0.7));
+      --bg: #0d080a;
+      --bg2: #120b0e;
+      --bg3: #1a1014;
+      --card: #1e1218;
+      --border: rgba(255,255,255,0.07);
+      --border-rose: rgba(196,96,126,0.25);
+      --text: #f4eff1;
+      --muted: #9a8690;
+      --gold: #e8c87a;
+      --silver: #b0b8c4;
+      --bronze: #cc8a5a;
+      --green: #5ec98a;
+      --red: #e05d6b;
+      --yellow: #e8a830;
+      --pink: #e080a8;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      font-size: 16px;
+    }
+
+    .grad-text {
+      background: var(--grad);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    /* ── COVER ── */
+    .cover {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 60px 24px;
+      overflow: hidden;
+    }
+
+    .cover::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 80% 70% at 50% 50%, rgba(196,96,126,0.16) 0%, rgba(232,160,180,0.08) 50%, transparent 100%);
+      pointer-events: none;
+    }
+
+    .cover-glow {
+      position: absolute;
+      width: 700px;
+      height: 700px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(196,96,126,0.1) 0%, transparent 70%);
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      animation: pulse 8s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 0.5; transform: translate(-50%, -50%) scale(1); }
+      50% { opacity: 1; transform: translate(-50%, -50%) scale(1.1); }
+    }
+
+    .nail-accent {
+      position: absolute;
+      top: 60px;
+      right: 80px;
+      font-size: 5rem;
+      opacity: 0.06;
+      pointer-events: none;
+    }
+    .nail-accent-2 {
+      position: absolute;
+      bottom: 80px;
+      left: 60px;
+      font-size: 4rem;
+      opacity: 0.05;
+      pointer-events: none;
+    }
+
+    .ig-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 100px;
+      padding: 8px 20px;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--muted);
+      margin-bottom: 28px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .ig-dot {
+      width: 8px; height: 8px;
+      border-radius: 50%;
+      background: var(--grad);
+      flex-shrink: 0;
+    }
+
+    .cover h1 {
+      font-size: clamp(2.4rem, 6vw, 4.2rem);
+      font-weight: 800;
+      line-height: 1.08;
+      letter-spacing: -0.03em;
+      margin-bottom: 16px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .cover-handle {
+      font-size: clamp(1rem, 2.5vw, 1.3rem);
+      font-weight: 300;
+      color: var(--muted);
+      margin-bottom: 48px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .cover-handle span { font-weight: 600; color: var(--text); }
+
+    .alert-banner {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: rgba(232,168,48,0.1);
+      border: 1px solid rgba(232,168,48,0.25);
+      border-radius: 10px;
+      padding: 10px 18px;
+      font-size: 13px;
+      color: var(--yellow);
+      margin-bottom: 36px;
+      position: relative;
+      z-index: 1;
+      max-width: 560px;
+      text-align: left;
+    }
+
+    .metrics-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 16px;
+      max-width: 680px;
+      width: 100%;
+      position: relative;
+      z-index: 1;
+    }
+
+    .metric-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 20px 16px;
+      transition: border-color 0.2s;
+    }
+
+    .metric-card:hover { border-color: var(--border-rose); }
+
+    .metric-label {
+      font-size: 11px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--muted);
+      margin-bottom: 8px;
+    }
+
+    .metric-value {
+      font-family: 'DM Mono', monospace;
+      font-size: 1.6rem;
+      font-weight: 600;
+      line-height: 1;
+    }
+
+    .metric-sub {
+      font-size: 12px;
+      color: var(--muted);
+      margin-top: 4px;
+    }
+
+    /* ── NAV ── */
+    .toc {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(13,8,10,0.88);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--border);
+      padding: 0 24px;
+      overflow-x: auto;
+    }
+
+    .toc-inner {
+      display: flex;
+      gap: 0;
+      max-width: 960px;
+      margin: 0 auto;
+      white-space: nowrap;
+    }
+
+    .toc a {
+      display: inline-block;
+      padding: 14px 16px;
+      font-size: 12px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--muted);
+      text-decoration: none;
+      border-bottom: 2px solid transparent;
+      transition: color 0.2s, border-color 0.2s;
+    }
+
+    .toc a:hover { color: var(--text); border-bottom-color: var(--rose-1); }
+
+    /* ── MAIN ── */
+    main { max-width: 960px; margin: 0 auto; padding: 0 24px 80px; }
+
+    /* ── SECTIONS ── */
+    .section { padding-top: 72px; }
+
+    .section-header {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 32px;
+    }
+
+    .section-num {
+      width: 42px; height: 42px;
+      border-radius: 10px;
+      background: var(--grad);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'DM Mono', monospace;
+      font-size: 14px;
+      font-weight: 600;
+      color: white;
+      flex-shrink: 0;
+    }
+
+    .section-title {
+      font-size: clamp(1.4rem, 4vw, 1.9rem);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+    }
+
+    .section-desc {
+      color: var(--muted);
+      font-size: 14px;
+      margin-top: 2px;
+    }
+
+    .divider {
+      height: 1px;
+      background: var(--border);
+      margin: 0 0 32px;
+    }
+
+    /* ── OVERVIEW BOX ── */
+    .overview-box {
+      background: var(--card);
+      border: 1px solid var(--border-rose);
+      border-radius: 16px;
+      padding: 28px 32px;
+      font-size: 15px;
+      line-height: 1.75;
+      color: rgba(244,239,241,0.85);
+      margin-bottom: 32px;
+    }
+
+    /* ── DIAGNOSIS ── */
+    .diagnosis-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+
+    @media (max-width: 600px) { .diagnosis-grid { grid-template-columns: 1fr; } }
+
+    .diag-item {
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 16px 20px;
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+    }
+
+    .diag-icon {
+      width: 36px; height: 36px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .diag-icon.ok { background: rgba(94,201,138,0.12); color: var(--green); }
+    .diag-icon.warn { background: rgba(232,168,48,0.12); color: var(--yellow); }
+    .diag-icon.bad { background: rgba(224,93,107,0.12); color: var(--red); }
+
+    .diag-label { font-size: 11px; color: var(--muted); font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 3px; }
+    .diag-text { font-size: 14px; font-weight: 500; line-height: 1.4; }
+
+    /* ── BIO BLOCK ── */
+    .bio-code {
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 20px 24px;
+      font-family: 'DM Mono', monospace;
+      font-size: 13px;
+      line-height: 1.8;
+      color: var(--muted);
+      margin-bottom: 20px;
+    }
+
+    .bio-code .handle { color: var(--pink); }
+
+    .bio-eval-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 12px;
+    }
+
+    .bio-eval-item {
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 14px 18px;
+    }
+
+    .bio-eval-label {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+      color: var(--muted);
+      margin-bottom: 4px;
+    }
+
+    .bio-eval-val {
+      font-size: 14px;
+      font-weight: 500;
+    }
+
+    .bio-eval-val.bad { color: var(--red); }
+    .bio-eval-val.warn { color: var(--yellow); }
+    .bio-eval-val.ok { color: var(--green); }
+
+    .improve-box {
+      background: rgba(196,96,126,0.07);
+      border: 1px solid rgba(196,96,126,0.2);
+      border-radius: 12px;
+      padding: 16px 20px;
+      margin-top: 16px;
+      font-size: 14px;
+      line-height: 1.6;
+      color: rgba(244,239,241,0.8);
+    }
+
+    .improve-box strong { color: var(--rose-2); }
+
+    /* ── TABLE ── */
+    .table-wrap {
+      overflow-x: auto;
+      border-radius: 16px;
+      border: 1px solid var(--border);
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 14px;
+    }
+
+    thead tr { background: linear-gradient(135deg, rgba(196,96,126,0.4), rgba(232,160,180,0.3), rgba(201,149,106,0.3)); }
+
+    thead th {
+      padding: 14px 16px;
+      text-align: left;
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: rgba(255,255,255,0.7);
+      white-space: nowrap;
+    }
+
+    tbody tr { border-top: 1px solid var(--border); transition: background 0.15s; }
+    tbody tr:hover { background: rgba(255,255,255,0.025); }
+    tbody tr.top-row { background: rgba(196,96,126,0.05); }
+    tbody tr.low-row { background: rgba(224,93,107,0.04); }
+
+    td { padding: 13px 16px; vertical-align: middle; }
+
+    .rank-badge {
+      width: 28px; height: 28px;
+      border-radius: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'DM Mono', monospace;
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .rank-1 { background: rgba(232,200,122,0.2); color: var(--gold); border: 1px solid rgba(232,200,122,0.4); }
+    .rank-2 { background: rgba(176,184,196,0.2); color: var(--silver); border: 1px solid rgba(176,184,196,0.4); }
+    .rank-3 { background: rgba(204,138,90,0.2); color: var(--bronze); border: 1px solid rgba(204,138,90,0.4); }
+    .rank-other { background: rgba(255,255,255,0.05); color: var(--muted); border: 1px solid var(--border); }
+
+    .format-badge {
+      display: inline-block;
+      padding: 3px 8px;
+      border-radius: 6px;
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    .fmt-carrossel { background: rgba(196,96,126,0.2); color: #e8a0b8; }
+    .fmt-foto { background: rgba(94,201,138,0.14); color: #7dd8a8; }
+    .fmt-reel { background: rgba(224,93,107,0.14); color: #e88090; }
+
+    .score-cell { font-family: 'DM Mono', monospace; font-weight: 600; font-size: 15px; }
+    .score-high { color: var(--gold); }
+    .score-mid { color: var(--green); }
+    .score-low { color: var(--muted); }
+
+    .formula {
+      background: var(--bg3);
+      border: 1px solid var(--border-rose);
+      border-radius: 16px;
+      padding: 28px 24px;
+      text-align: center;
+      margin-top: 24px;
+    }
+
+    .formula-label {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--muted);
+      margin-bottom: 16px;
+    }
+
+    .formula-eq {
+      font-family: 'DM Mono', monospace;
+      font-size: clamp(0.85rem, 2vw, 1rem);
+      font-weight: 500;
+      color: var(--text);
+      line-height: 1.8;
+    }
+
+    .formula-result {
+      display: inline-block;
+      margin-top: 14px;
+      font-family: 'DM Mono', monospace;
+      font-size: 1.5rem;
+      font-weight: 700;
+      background: var(--grad);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    /* ── ANALYSIS CARDS ── */
+    .analysis-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 16px;
+    }
+
+    .post-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 22px;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+
+    .post-card.good { border-color: rgba(94,201,138,0.15); }
+    .post-card.good:hover { border-color: rgba(94,201,138,0.4); transform: translateY(-2px); }
+    .post-card.bad { border-color: rgba(224,93,107,0.1); }
+    .post-card.bad:hover { border-color: rgba(224,93,107,0.35); transform: translateY(-2px); }
+
+    .post-card-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 14px;
+    }
+
+    .post-pos {
+      font-family: 'DM Mono', monospace;
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .post-score { font-family: 'DM Mono', monospace; font-size: 1.3rem; font-weight: 700; }
+    .post-score.good-score { color: var(--green); }
+    .post-score.bad-score { color: var(--red); }
+
+    .post-title { font-size: 15px; font-weight: 600; margin-bottom: 8px; line-height: 1.4; }
+
+    .post-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 14px;
+    }
+
+    .post-meta-item { font-size: 12px; color: var(--muted); display: flex; align-items: center; gap: 4px; }
+
+    .post-insight {
+      font-size: 13px;
+      color: var(--muted);
+      border-top: 1px solid var(--border);
+      padding-top: 12px;
+      line-height: 1.55;
+    }
+
+    .post-insight strong { color: var(--text); }
+
+    /* ── DESTAQUES ── */
+    .highlights-table-wrap {
+      overflow-x: auto;
+      border-radius: 14px;
+      border: 1px solid var(--border);
+      margin-bottom: 16px;
+    }
+
+    /* ── AUDIENCE ── */
+    .audience-block {
+      background: var(--card);
+      border: 1px solid var(--border-rose);
+      border-radius: 16px;
+      padding: 28px 32px;
+    }
+
+    .audience-row {
+      display: grid;
+      grid-template-columns: 180px 1fr;
+      gap: 16px;
+      padding: 14px 0;
+      border-bottom: 1px solid var(--border);
+      font-size: 14px;
+      align-items: start;
+    }
+
+    .audience-row:last-child { border-bottom: none; }
+    .audience-key { font-weight: 600; color: var(--muted); font-size: 13px; text-transform: uppercase; letter-spacing: 0.04em; }
+    .audience-val { line-height: 1.5; }
+
+    @media (max-width: 600px) {
+      .audience-row { grid-template-columns: 1fr; gap: 4px; }
+    }
+
+    /* ── INSIGHTS ── */
+    .insights-list { display: flex; flex-direction: column; gap: 12px; }
+
+    .insight-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 18px 22px;
+      transition: border-color 0.2s;
+    }
+
+    .insight-item:hover { border-color: var(--border-rose); }
+
+    .insight-icon {
+      width: 36px; height: 36px;
+      border-radius: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      background: var(--grad);
+    }
+
+    .insight-text { font-size: 15px; font-weight: 500; line-height: 1.55; }
+    .insight-text strong { color: var(--rose-2); }
+
+    /* ── RECS ── */
+    .recs-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 16px;
+    }
+
+    .rec-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 22px;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+
+    .rec-card:hover { border-color: var(--border-rose); transform: translateY(-2px); }
+
+    .rec-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 14px;
+    }
+
+    .rec-num {
+      width: 32px; height: 32px;
+      border-radius: 8px;
+      background: var(--grad);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: 'DM Mono', monospace;
+      font-size: 13px;
+      font-weight: 700;
+      color: white;
+      flex-shrink: 0;
+    }
+
+    .rec-impact {
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      padding: 3px 9px;
+      border-radius: 20px;
+    }
+
+    .impact-high { background: rgba(224,93,107,0.15); color: var(--red); }
+    .impact-med { background: rgba(232,168,48,0.15); color: var(--yellow); }
+
+    .rec-title { font-size: 15px; font-weight: 700; margin-bottom: 8px; }
+    .rec-desc { font-size: 13px; color: var(--muted); line-height: 1.6; }
+
+    /* ── ACTION PLAN ── */
+    .actions-list { display: flex; flex-direction: column; gap: 16px; }
+
+    .action-item {
+      display: grid;
+      grid-template-columns: 50px 1fr;
+      gap: 16px;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 22px;
+      transition: border-color 0.2s;
+      align-items: start;
+    }
+
+    .action-item:hover { border-color: rgba(232,200,122,0.3); }
+
+    .action-num {
+      width: 50px; height: 50px;
+      border-radius: 12px;
+      background: rgba(232,200,122,0.1);
+      border: 1px solid rgba(232,200,122,0.25);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.4rem;
+    }
+
+    .action-tag {
+      display: inline-block;
+      padding: 3px 10px;
+      border-radius: 20px;
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      background: rgba(232,200,122,0.12);
+      color: var(--gold);
+      margin-bottom: 8px;
+    }
+
+    .action-title { font-size: 16px; font-weight: 700; margin-bottom: 8px; }
+    .action-desc { font-size: 14px; color: var(--muted); line-height: 1.55; }
+
+    .action-example {
+      margin-top: 12px;
+      padding: 12px 16px;
+      background: var(--bg3);
+      border-radius: 10px;
+      border-left: 3px solid rgba(196,96,126,0.4);
+      font-size: 13px;
+      font-style: italic;
+      color: rgba(244,239,241,0.65);
+      line-height: 1.55;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      text-align: center;
+      padding: 48px 24px;
+      border-top: 1px solid var(--border);
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    footer .footer-logo {
+      font-size: 18px;
+      font-weight: 700;
+      margin-bottom: 6px;
+      background: var(--grad);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .icon-sm { width: 16px; height: 16px; }
+    .icon-md { width: 20px; height: 20px; }
+
+    @media print {
+      .toc { display: none; }
+      .cover { min-height: auto; padding: 40px 24px; }
+      .cover::before, .cover-glow { display: none; }
+      .section { padding-top: 48px; }
+    }
+
+    ::-webkit-scrollbar { width: 6px; height: 6px; }
+    ::-webkit-scrollbar-track { background: var(--bg); }
+    ::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 3px; }
+    ::-webkit-scrollbar-thumb:hover { background: rgba(255,255,255,0.2); }
+  </style>
+</head>
+<body>
+
+<!-- COVER -->
+<section class="cover">
+  <div class="cover-glow" aria-hidden="true"></div>
+  <div class="nail-accent" aria-hidden="true">💅</div>
+  <div class="nail-accent-2" aria-hidden="true">✨</div>
+
+  <div class="ig-badge">
+    <div class="ig-dot" aria-hidden="true"></div>
+    Auditoria de Conteúdo · Instagram · 14/04/2026
+  </div>
+
+  <h1>
+    <span class="grad-text">Auditoria</span><br />
+    <span class="grad-text">Instagram</span>
+  </h1>
+
+  <p class="cover-handle">
+    Análise de desempenho para <span>@gio.eloyalves</span> · Giovanna Alves · Nail Designer
+  </p>
+
+  <div class="alert-banner" role="note">
+    <svg class="icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+    <span>Amostra reduzida (7 posts) — use como primeira impressão, não como diagnóstico definitivo.</span>
+  </div>
+
+  <div class="metrics-grid" role="list" aria-label="Principais métricas">
+    <div class="metric-card" role="listitem">
+      <div class="metric-label">Data</div>
+      <div class="metric-value grad-text">14/04</div>
+      <div class="metric-sub">2026</div>
+    </div>
+    <div class="metric-card" role="listitem">
+      <div class="metric-label">Posts Analisados</div>
+      <div class="metric-value grad-text">7</div>
+      <div class="metric-sub">mais recentes</div>
+    </div>
+    <div class="metric-card" role="listitem">
+      <div class="metric-label">Seguidores</div>
+      <div class="metric-value grad-text">1.224</div>
+      <div class="metric-sub">conta pessoal</div>
+    </div>
+    <div class="metric-card" role="listitem">
+      <div class="metric-label">Top Score</div>
+      <div class="metric-value grad-text">111</div>
+      <div class="metric-sub">melhor post</div>
+    </div>
+  </div>
+</section>
+
+<!-- NAV -->
+<nav class="toc" aria-label="Seções do relatório">
+  <div class="toc-inner">
+    <a href="#visao-geral">Visão Geral</a>
+    <a href="#bio">Bio & Link</a>
+    <a href="#grid">Grid Visual</a>
+    <a href="#destaques">Destaques</a>
+    <a href="#dados">Ranking</a>
+    <a href="#funcionou">O que Funcionou</a>
+    <a href="#audiencia">Audiência</a>
+    <a href="#nao-funcionou">O que Falhou</a>
+    <a href="#insights">Insights</a>
+    <a href="#recomendacoes">Recomendações</a>
+    <a href="#plano">Quick Wins</a>
+  </div>
+</nav>
+
+<!-- MAIN -->
+<main>
+
+  <!-- 01: VISÃO GERAL -->
+  <section class="section" id="visao-geral" aria-labelledby="tit-visao">
+    <div class="section-header">
+      <div class="section-num" aria-hidden="true">01</div>
+      <div>
+        <h2 class="section-title" id="tit-visao">Visão Geral</h2>
+        <p class="section-desc">Diagnóstico inicial do perfil @gio.eloyalves</p>
+      </div>
+    </div>
+    <div class="divider" aria-hidden="true"></div>
+
+    <div class="overview-box">
+      O perfil de Giovanna Alves é o de uma pessoa real compartilhando sua vida, sem intenção estratégica clara de nicho ou audiência-alvo definida. Há uma mistura confusa de identidades: nail designer profissional, devocional cristão, vida de casal, maternidade e bastidores de trabalho, sem linha editorial que organize isso. O engajamento é consistentemente baixo-médio para 1.224 seguidores, com posts pessoais performando visivelmente melhor que conteúdo profissional — sinal de que <strong>a audiência segue a Gio, não o trabalho dela.</strong>
+    </div>
+
+    <div class="diagnosis-grid">
+      <div class="diag-item">
+        <div class="diag-icon warn" aria-label="Atenção">
+          <svg class="icon-md" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        </div>
+        <div>
+          <div class="diag-label">1.224 Seguidores</div>
+          <div class="diag-text">Base pequena com engajamento pessoal consistente para o tamanho</div>
+        </div>
+      </div>
+      <div class="diag-item">
+        <div class="diag-icon bad" aria-label="Negativo">
+          <svg class="icon-md" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>
+        </div>
+        <div>
+          <div class="diag-label">Identidade indefinida</div>
+          <div class="diag-text">4 nichos convivem sem hierarquia: nail, fé, casal e maternidade</div>
+        </div>
+      </div>
+      <div class="diag-item">
+        <div class="diag-icon bad" aria-label="Negativo">
+          <svg class="icon-md" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+        </div>
+        <div>
+          <div class="diag-label">Conteúdo profissional fraco</div>
+          <div class="diag-text">Posts de nail design estão entre os piores engajamentos do período</div>
+        </div>
+      </div>
+      <div class="diag-item">
+        <div class="diag-icon bad" aria-label="Negativo">
+          <svg class="icon-md" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+        </div>
+        <div>
+          <div class="diag-label">Zero respostas nos comentários</div>
+          <div class="diag-text">Nenhuma resposta identificada nos 7 posts analisados</div>
+        </div>
+      </div>
+      <div class="diag-item">
+        <div class="diag-icon ok" aria-label="Positivo">
+          <svg class="icon-md" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22,4 12,14.01 9,11.01"/></svg>
+        </div>
+        <div>
+          <div class="diag-label">Conteúdo pessoal engaja</div>
+          <div class="diag-text">Casal e maternidade geram engajamento espontâneo e genuíno</div>
+        </div>
+      </div>
+      <div class="diag-item">
+        <div class="diag-icon warn" aria-label="Atenção">
+          <svg class="icon-md" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+        </div>
+        <div>
+          <div class="diag-label">Link da bio desperdiçado</div>
+          <div class="diag-text">Aponta para o Threads, não para o serviço de nail</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 02: BIO & LINK -->
+  <section class="section" id="bio" aria-labelledby="tit-bio">
+    <div class="section-header">
+      <div class="section-num" aria-hidden="true">02</div>
+      <div>
+        <h2 class="section-title" id="tit-bio">Bio & Link</h2>
+        <p class="section-desc">Primeira impressão que o perfil causa em novos visitantes</p>
+      </div>
+    </div>
+    <div class="divider" aria-hidden="true"></div>
+
+    <div class="bio-code" aria-label="Texto atual da bio">
+      <div>. São Paulo - 🇧🇷</div>
+      <div>. Casada: <span class="handle">@sal.rdgo</span></div>
+      <div>. .✨🎨 <span class="handle">@eloyatelie</span></div>
+      <div>. 💅Nail Desingner <span class="handle">@giovannaeloystudio</span></div>
+    </div>
+
+    <div class="bio-eval-grid">
+      <div class="bio-eval-item">
+        <div class="bio-eval-label">Avaliação geral</div>
+        <div class="bio-eval-val bad">Vaga</div>
+      </div>
+      <div class="bio-eval-item">
+        <div class="bio-eval-label">CTA na bio</div>
+        <div class="bio-eval-val bad">Ausente</div>
+      </div>
+      <div class="bio-eval-item">
+        <div class="bio-eval-label">Palavras-chave</div>
+        <div class="bio-eval-val warn">Parcial</div>
+      </div>
+      <div class="bio-eval-item">
+        <div class="bio-eval-label">Link presente</div>
+        <div class="bio-eval-val warn">Sim (Threads)</div>
+      </div>
+      <div class="bio-eval-item">
+        <div class="bio-eval-label">Destino do link</div>
+        <div class="bio-eval-val bad">Incoerente</div>
+      </div>
+      <div class="bio-eval-item">
+        <div class="bio-eval-label">Erro de grafia</div>
+        <div class="bio-eval-val bad">"Desingner"</div>
+      </div>
+    </div>
+
+    <div class="improve-box">
+      <strong>O que melhorar:</strong> Substituir o link do Threads por um link de agendamento ou portfólio de nail design (<strong>@giovannaeloystudio</strong>), corrigir o erro de grafia em "Nail Designer" e reescrever a bio com uma frase clara de posicionamento — ex: <em>"Nail Designer em SP | Agendamentos: [link]"</em>. A bio atual apresenta quatro linhas de informação desconexas sem hierarquia ou propósito claro: o visitante sai sem entender o que Gio faz.
+    </div>
+  </section>
+
+  <!-- 03: GRID VISUAL -->
+  <section class="section" id="grid" aria-labelledby="tit-grid">
+    <div class="section-header">
+      <div class="section-num" aria-hidden="true">03</div>
+      <div>
+        <h2 class="section-title" id="tit-grid">Grid Visual</h2>
+        <p class="section-desc">Análise da identidade visual e consistência estética do feed</p>
+      </div>
+    </div>
+    <div class="divider" aria-hidden="true"></div>
+
+    <div class="diagnosis-grid">
+      <div class="diag-item">
+        <div class="diag-icon bad" aria-label="Negativo">
+          <svg class="icon-md" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+        </div>
+        <div>
+          <div class="diag-label">Identidade visual</div>
+          <div class="diag-text">Irregular — sem paleta, estilo fotográfico ou estética consistente</div>
+        </div>
+      </div>
+      <div class="diag-item">
+        <div class="diag-icon warn" aria-label="Atenção">
+          <svg class="icon-md" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" aria-hidden="true"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+        </div>
+        <div>
+          <div class="diag-label">Convida a seguir?</div>
+          <div class="diag-text">Parcialmente — boa qualidade fotográfica isolada, mas sem fio condutor</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="improve-box" style="margin-top: 16px;">
+      Posts de nail art convivem com selfies espontâneas, fotos de culto religioso, imagens de criança ao ar livre e bastidores de produção fotográfica — sem ritmo visual, curadoria ou intenção. O grid parece o de alguém que usa o Instagram como álbum pessoal. Há pelo menos um ensaio profissional de referência que eleva a qualidade, mas não é suficiente para transmitir identidade ao visitante novo.
+    </div>
+  </section>
+
+  <!-- 04: DESTAQUES -->
+  <section class="section" id="destaques" aria-labelledby="tit-destaques">
+    <div class="section-header">
+      <div class="section-num" aria-hidden="true">04</div>
+      <div>
+        <h2 class="section-title" id="tit-destaques">Destaques de Stories</h2>
+        <p class="section-desc">Análise dos highlights fixos no perfil</p>
+      </div>
+    </div>
+    <div class="divider" aria-hidden="true"></div>
+
+    <div class="highlights-table-wrap">
+      <table aria-label="Análise dos destaques de stories">
+        <thead>
+          <tr>
+            <th>Nome</th>
+            <th>Slides</th>
+            <th>Tema</th>
+            <th>CTA</th>
+            <th>Qualidade Visual</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>💅 nails</strong></td>
+            <td>~15</td>
+            <td>Nail art / unhas</td>
+            <td><span style="color:var(--red);font-weight:600;">Nenhum</span></td>
+            <td><span style="color:var(--yellow);">Irregular</span></td>
+            <td><span style="color:var(--muted);">Parcialmente atualizado</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="improve-box">
+      O único destaque existente (<strong>"nails"</strong>) tem conteúdo relevante para o nicho, mas está mal organizado — mistura reposts de @_encanto_salao com conteúdos próprios sem identidade visual ou CTA. A ausência de outros destaques (vida pessoal, bastidores, fé, "sobre mim") deixa o perfil sem apresentação estruturada para novos visitantes. Os slides variam entre 2 e 14 semanas de idade.
+    </div>
+  </section>
+
+  <!-- 05: RANKING -->
+  <section class="section" id="dados" aria-labelledby="tit-dados">
+    <div class="section-header">
+      <div class="section-num" aria-hidden="true">05</div>
+      <div>
+        <h2 class="section-title" id="tit-dados">Ranking de Engajamento</h2>
+        <p class="section-desc">7 posts ordenados por score · Score = Curtidas + (Comentários × 3)</p>
+      </div>
+    </div>
+    <div class="divider" aria-hidden="true"></div>
+
+    <div class="table-wrap">
+      <table aria-label="Ranking dos 7 posts por score de engajamento">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Formato</th>
+            <th scope="col">Tema</th>
+            <th scope="col">Curtidas</th>
+            <th scope="col">Comentários</th>
+            <th scope="col">Score</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="top-row">
+            <td><span class="rank-badge rank-1" aria-label="1º lugar">1</span></td>
+            <td><span class="format-badge fmt-foto">Foto</span></td>
+            <td>Vida de casal / romântico</td>
+            <td>93</td>
+            <td>6</td>
+            <td class="score-cell score-high">111</td>
+          </tr>
+          <tr class="top-row">
+            <td><span class="rank-badge rank-2" aria-label="2º lugar">2</span></td>
+            <td><span class="format-badge fmt-carrossel">Carrossel</span></td>
+            <td>Maternidade / filha</td>
+            <td>71</td>
+            <td>10</td>
+            <td class="score-cell score-high">101</td>
+          </tr>
+          <tr class="top-row">
+            <td><span class="rank-badge rank-3" aria-label="3º lugar">3</span></td>
+            <td><span class="format-badge fmt-reel">Reel</span></td>
+            <td>Cuidados com cabelo / salão</td>
+            <td>59</td>
+            <td>11</td>
+            <td class="score-cell score-mid">92</td>
+          </tr>
+          <tr>
+            <td><span class="rank-badge rank-other">4</span></td>
+            <td><span class="format-badge fmt-reel">Reel</span></td>
+            <td>Fé / culto / adoração</td>
+            <td>65</td>
+            <td>3</td>
+            <td class="score-cell score-mid">74</td>
+          </tr>
+          <tr>
+            <td><span class="rank-badge rank-other">5</span></td>
+            <td><span class="format-badge fmt-carrossel">Carrossel</span></td>
+            <td>Bastidores de produção fotográfica</td>
+            <td>54</td>
+            <td>4</td>
+            <td class="score-cell score-low">66</td>
+          </tr>
+          <tr class="low-row">
+            <td><span class="rank-badge rank-other">6</span></td>
+            <td><span class="format-badge fmt-foto">Foto (collab)</span></td>
+            <td>Fé / camiseta religiosa <span style="color:var(--muted);font-size:12px;">@ahl_br</span></td>
+            <td>19</td>
+            <td>0</td>
+            <td class="score-cell score-low">19</td>
+          </tr>
+          <tr class="low-row">
+            <td><span class="rank-badge rank-other">7</span></td>
+            <td><span class="format-badge fmt-reel">Reel (collab)</span></td>
+            <td>Nail art / unhas borboleta <span style="color:var(--muted);font-size:12px;">@giovannaeloystudio</span></td>
+            <td>18</td>
+            <td>0</td>
+            <td class="score-cell score-low">18</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="formula" role="region" aria-label="Padrão de sucesso identificado">
+      <div class="formula-label">Padrão que funciona neste perfil</div>
+      <div class="formula-eq">
+        Rosto reconhecível (Gio) + Conexão emocional + Legenda curta e pessoal<br/>
+        <span style="color:var(--muted);font-size:0.9em;">vs.</span><br/>
+        Conteúdo técnico de nail sem a Gio presente = baixíssimo engajamento
+      </div>
+      <div class="formula-result">Pessoas engajam com a Gio, não com as unhas</div>
+    </div>
+  </section>
+
+  <!-- 06: O QUE FUNCIONOU -->
+  <section class="section" id="funcionou" aria-labelledby="tit-funcionou">
+    <div class="section-header">
+      <div class="section-num" aria-hidden="true">06</div>
+      <div>
+        <h2 class="section-title" id="tit-funcionou">O que Funcionou</h2>
+        <p class="section-desc">Top 2 padrões com maior score de engajamento</p>
+      </div>
+    </div>
+    <div class="divider" aria-hidden="true"></div>
+
+    <div class="analysis-grid">
+      <div class="post-card good">
+        <div class="post-card-top">
+          <div>
+            <div class="post-pos">🥇 Post 6 · Score #1</div>
+          </div>
+          <div class="post-score good-score">111</div>
+        </div>
+        <div class="post-title">"Eu e você, até a eternidade."</div>
+        <div class="post-meta">
+          <span class="post-meta-item"><span class="format-badge fmt-foto">Foto</span></span>
+          <span class="post-meta-item">❤️ 93 curtidas</span>
+          <span class="post-meta-item">💬 6 comentários</span>
+        </div>
+        <div class="post-insight">
+          Selfie espontânea do casal no carro, legenda de <strong>6 palavras</strong>. Não há hashtag, CTA ou esforço de produção — e é exatamente isso que o tornou o melhor post. A audiência responde ao <strong>vínculo humano</strong>: rosto reconhecível, conexão emocional imediata, legenda que funciona como uma declaração. Quem segue a Gio desde o início sabe quem é o casal e reage à narrativa.
+        </div>
+      </div>
+
+      <div class="post-card good">
+        <div class="post-card-top">
+          <div>
+            <div class="post-pos">🥈 Post 4 · Score #2</div>
+          </div>
+          <div class="post-score good-score">101</div>
+        </div>
+        <div class="post-title">"Minha florzinha 🌻"</div>
+        <div class="post-meta">
+          <span class="post-meta-item"><span class="format-badge fmt-carrossel">Carrossel</span></span>
+          <span class="post-meta-item">❤️ 71 curtidas</span>
+          <span class="post-meta-item">💬 10 comentários</span>
+        </div>
+        <div class="post-insight">
+          Maior número de comentários dos 7 posts — a filha <strong>gera conversa</strong>. Todos os comentários foram elogios carinhosos e afirmações de amor. O carrossel funcionou pela combinação de múltiplas imagens de qualidade num contexto emocional já acolhido pela audiência. Legenda curtíssima e afetiva.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 07: AUDIÊNCIA -->
+  <section class="section" id="audiencia" aria-labelledby="tit-audiencia">
+    <div class="section-header">
+      <div class="section-num" aria-hidden="true">07</div>
+      <div>
+        <h2 class="section-title" id="tit-audiencia">O que a Audiência Está Dizendo</h2>
+        <p class="section-desc">Análise dos comentários do melhor post (Post 6 — casal)</p>
+      </div>
+    </div>
+    <div class="divider" aria-hidden="true"></div>
+
+    <div class="audience-block">
+      <div class="audience-row">
+        <div class="audience-key">Tipos predominantes</div>
+        <div class="audience-val">Elogios e afirmações de afeto — emojis de coração, aplausos, comparação cultural ("Lampião e Maria Bonita"), declaração do próprio marido ("Te amo ❤️").</div>
+      </div>
+      <div class="audience-row">
+        <div class="audience-key">Perguntas da audiência</div>
+        <div class="audience-val" style="color:var(--muted);">Nenhuma — 100% reação emocional positiva, sem perguntas ou curiosidades.</div>
+      </div>
+      <div class="audience-row">
+        <div class="audience-key">O perfil responde?</div>
+        <div class="audience-val" style="color:var(--red);font-weight:600;">Raramente — nenhuma resposta identificada nos 6 comentários visíveis, nem para o marido.</div>
+      </div>
+      <div class="audience-row">
+        <div class="audience-key">Insight central</div>
+        <div class="audience-val">A audiência enxerga o casal como uma narrativa bonita e responde com afeto genuíno, mas não há diálogo real. O perfil funciona como <strong>transmissão</strong>, não como <strong>conversa</strong> — e isso limita crescimento orgânico.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 08: O QUE NÃO FUNCIONOU -->
+  <section class="section" id="nao-funcionou" aria-labelledby="tit-nao">
+    <div class="section-header">
+      <div class="section-num" aria-hidden="true">08</div>
+      <div>
+        <h2 class="section-title" id="tit-nao">O que Não Funcionou</h2>
+        <p class="section-desc">Bottom 2 padrões com menor score de engajamento</p>
+      </div>
+    </div>
+    <div class="divider" aria-hidden="true"></div>
+
+    <div class="analysis-grid">
+      <div class="post-card bad">
+        <div class="post-card-top">
+          <div>
+            <div class="post-pos">⚠️ Post 3 · Score #7 (último)</div>
+          </div>
+          <div class="post-score bad-score">18</div>
+        </div>
+        <div class="post-title">Reel de nail art borboleta</div>
+        <div class="post-meta">
+          <span class="post-meta-item"><span class="format-badge fmt-reel">Reel (collab)</span></span>
+          <span class="post-meta-item">❤️ 18 curtidas</span>
+          <span class="post-meta-item">💬 0 comentários</span>
+        </div>
+        <div class="post-insight">
+          O post mais alinhado ao nicho profissional performou pior de todos. <strong>O problema central:</strong> conteúdo de nail design sem a Gio presente — técnico, impessoal, com legenda genérica e apenas 2 hashtags. A audiência veio pela Gio, não pelas unhas.
+        </div>
+      </div>
+
+      <div class="post-card bad">
+        <div class="post-card-top">
+          <div>
+            <div class="post-pos">⚠️ Post 1 · Score #6</div>
+          </div>
+          <div class="post-score bad-score">19</div>
+        </div>
+        <div class="post-title">Collab foto camiseta religiosa (@ahl_br)</div>
+        <div class="post-meta">
+          <span class="post-meta-item"><span class="format-badge fmt-foto">Foto (collab)</span></span>
+          <span class="post-meta-item">❤️ 19 curtidas</span>
+          <span class="post-meta-item">💬 0 comentários</span>
+        </div>
+        <div class="post-insight">
+          Gio aparece de costas, a legenda é de outra pessoa, o assunto é da marca parceira. <strong>Gio não tem voz própria no post.</strong> Nenhum elemento conecta com a audiência dela. Collab sem contexto pessoal = post sem tração.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 09: INSIGHTS -->
+  <section class="section" id="insights" aria-labelledby="tit-insights">
+    <div class="section-header">
+      <div class="section-num" aria-hidden="true">09</div>
+      <div>
+        <h2 class="section-title" id="tit-insights">Principais Insights</h2>
+        <p class="section-desc">O que os dados revelam sobre a dinâmica deste perfil</p>
+      </div>
+    </div>
+    <div class="divider" aria-hidden="true"></div>
+
+    <div class="insights-list">
+      <div class="insight-item">
+        <div class="insight-icon" aria-hidden="true">
+          <svg class="icon-md" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+        </div>
+        <div class="insight-text">
+          <strong>A audiência é fã da Gio pessoa, não da Gio profissional.</strong> Os 2 posts com maior score são de vida pessoal (casal + filha). Os 2 com menor score são os de nail design. Isso é uma tensão real: o perfil declara uma identidade profissional que a audiência atual não consome.
+        </div>
+      </div>
+      <div class="insight-item">
+        <div class="insight-icon" aria-hidden="true">
+          <svg class="icon-md" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+        </div>
+        <div class="insight-text">
+          <strong>Legendas curtíssimas e pessoais superam produções mais elaboradas.</strong> "Eu e você, até a eternidade." (6 palavras) bateu reel com legenda média e CTA de salão. A audiência não precisa de texto longo para engajar — precisa de <strong>emoção concentrada</strong>.
+        </div>
+      </div>
+      <div class="insight-item">
+        <div class="insight-icon" aria-hidden="true">
+          <svg class="icon-md" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        </div>
+        <div class="insight-text">
+          <strong>O perfil não tem rotina de resposta aos comentários.</strong> Para um perfil pequeno (1,2k), esse é um erro evitável com alto custo de relacionamento. Respostas aumentam o tempo de sessão, fortalecem vínculos e melhoram o sinal de relevância para o algoritmo.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 10: RECOMENDAÇÕES -->
+  <section class="section" id="recomendacoes" aria-labelledby="tit-recs">
+    <div class="section-header">
+      <div class="section-num" aria-hidden="true">10</div>
+      <div>
+        <h2 class="section-title" id="tit-recs">Recomendações Práticas</h2>
+        <p class="section-desc">Ações ordenadas por impacto e facilidade de execução</p>
+      </div>
+    </div>
+    <div class="divider" aria-hidden="true"></div>
+
+    <div class="recs-grid">
+      <div class="rec-card">
+        <div class="rec-header">
+          <div class="rec-num">1</div>
+          <span class="rec-impact impact-high">Impacto Alto · Urgente</span>
+        </div>
+        <div class="rec-title">Definir: perfil pessoal ou profissional?</div>
+        <div class="rec-desc">O maior problema não é execução, é identidade. Nail design, fé, casal e maternidade convivem sem hierarquia. Se o objetivo é atrair clientes, o perfil precisa de pelo menos 60% de conteúdo de nail — e os posts pessoais funcionam como humanização, não como foco. Se for pessoal, abandone a identidade profissional na bio.</div>
+      </div>
+
+      <div class="rec-card">
+        <div class="rec-header">
+          <div class="rec-num">2</div>
+          <span class="rec-impact impact-high">Impacto Alto · Fácil</span>
+        </div>
+        <div class="rec-title">Trocar o link da bio por link funcional de nail</div>
+        <div class="rec-desc">O link atual vai para o Threads — um perfil pessoal sem CTA. Isso desperdiça 100% dos visitantes que chegam por busca ou indicação. Um link de agendamento, WhatsApp ou linktree com portfólio + contato pode gerar retorno imediato com zero esforço de conteúdo.</div>
+      </div>
+
+      <div class="rec-card">
+        <div class="rec-header">
+          <div class="rec-num">3</div>
+          <span class="rec-impact impact-med">Impacto Médio · Fácil</span>
+        </div>
+        <div class="rec-title">Criar o hábito de responder comentários em 24h</div>
+        <div class="rec-desc">Com 1,2k seguidores e em média 4 a 11 comentários por post, responder cada comentário é viável em minutos. Para perfil pequeno, essa é a alavanca mais barata de fidelização. Comece pelo Post 6 (casal) — o marido comentou e não recebeu resposta pública.</div>
+      </div>
+
+      <div class="rec-card">
+        <div class="rec-header">
+          <div class="rec-num">4</div>
+          <span class="rec-impact impact-med">Impacto Médio · Médio Prazo</span>
+        </div>
+        <div class="rec-title">Humanizar o conteúdo de nail com a Gio no centro</div>
+        <div class="rec-desc">O reel de unhas borboleta performou mal porque não tinha a Gio nele — era técnico e impessoal. A solução não é abandonar o nail, é humanizá-lo: mostrar a Gio fazendo, falando sobre a cliente, contando a história da arte. O conteúdo profissional que funciona em perfis pequenos carrega a personalidade do criador.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 11: QUICK WINS -->
+  <section class="section" id="plano" aria-labelledby="tit-plano">
+    <div class="section-header">
+      <div class="section-num" aria-hidden="true">11</div>
+      <div>
+        <h2 class="section-title" id="tit-plano">Quick Wins</h2>
+        <p class="section-desc">O que fazer nos próximos 5 dias para gerar impacto imediato</p>
+      </div>
+    </div>
+    <div class="divider" aria-hidden="true"></div>
+
+    <div class="actions-list">
+      <div class="action-item">
+        <div class="action-num">💬</div>
+        <div>
+          <div class="action-tag">Ação 1 · Hoje</div>
+          <div class="action-title">Responder todos os comentários dos 7 posts analisados</div>
+          <div class="action-desc">São poucos comentários — o impacto no relacionamento com a audiência atual é imediato e o sinal para o algoritmo é positivo. Comece pelo Post 6 (casal): o marido comentou "Te amo ❤️" e Gio não respondeu publicamente.</div>
+          <div class="action-example">"Te amo mais ainda 🥺❤️" — resposta simples, mas humaniza o perfil e mostra presença para quem visitar depois.</div>
+        </div>
+      </div>
+
+      <div class="action-item">
+        <div class="action-num">💅</div>
+        <div>
+          <div class="action-tag">Ação 2 · Nos próximos 5 dias</div>
+          <div class="action-title">Publicar um post ou story de nail art com narração pessoal</div>
+          <div class="action-desc">Não técnico — pessoal. Mostrar o processo de uma nail art contando a história da cliente ou da inspiração, com a Gio na narrativa. Isso testa se a audiência atual responde a conteúdo de nail quando tem a Gio no centro, antes de qualquer mudança estrutural no perfil.</div>
+          <div class="action-example">"Essa cliente chegou com referência de borboleta e eu precisei estudar 3 horas antes de começar..." — o produto aparece, mas a Gio lidera.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">Agência Logos</div>
+  <p>Auditoria gerada em 14 de abril de 2026 · @gio.eloyalves · Giovanna Alves</p>
+  <p style="margin-top:6px;font-size:12px;opacity:0.5;">Este relatório é de uso exclusivo do cliente. Análise baseada em 7 posts públicos mais recentes.</p>
+</footer>
+
+</body>
+</html>
